@@ -42,7 +42,7 @@ class BasicConfig extends ConfigForm
         return [
             'sys_site_name' => '网站名称',
             'sys_site_description' => '网站描述',
-            'sys_site_url' => '网站Url',
+            //'sys_site_url' => '网站Url',
             'sys_site_email' => '站点Email',
            
           
