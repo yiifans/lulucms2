@@ -216,7 +216,7 @@ INSERT INTO `lulu_config` (`id`, `value`) VALUES
 ('sys_seo_title', 'seo标题'),
 ('sys_site_description', '个人博客(yii2)'),
 ('sys_site_email', ''),
-('sys_site_name', 'LuLu Blog'),
+('sys_site_name', 'LuLu CMS'),
 ('sys_site_theme', 'blank'),
 ('sys_site_url', ''),
 ('sys_stat', 'bb'),
