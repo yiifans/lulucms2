@@ -1,0 +1,4 @@
+
+
+.file-box{ position:relative;} 
+.file{ position:absolute; top:0; left:504px; filter:alpha(opacity:0);opacity: 0;width:60px;height:34px;}

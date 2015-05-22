@@ -1,0 +1,147 @@
+html,
+body {
+    height: 100%;
+}
+
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+
+.wrap > .container {
+    padding: 70px 15px 20px;
+}
+
+.footer {
+    height: 60px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: transparent;
+}
+
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
+}
+
+a.asc:after {
+    content: /*"\e113"*/ "\e151";
+}
+
+a.desc:after {
+    content: /*"\e114"*/ "\e152";
+}
+
+.sort-numerical a.asc:after {
+    content: "\e153";
+}
+
+.sort-numerical a.desc:after {
+    content: "\e154";
+}
+
+.sort-ordinal a.asc:after {
+    content: "\e155";
+}
+
+.sort-ordinal a.desc:after {
+    content: "\e156";
+}
+
+.grid-view th {
+    white-space: nowrap;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+
+.lighter{font-weight:lighter}
+.bolder{font-weight:bolder}
+
+.inline{display:inline-block!important}
+.block{display:block!important}
+
+.center,.align-center{text-align:center!important}
+.align-left{text-align:left!important}
+.align-right{text-align:right!important}
+
+.middle,.align-middle{vertical-align:middle!important}
+.align-top{vertical-align:top!important}
+.align-bottom{vertical-align:bottom!important}
+
+.position-relative{position:relative}
+.position-absolute{position:absolute}
+
+.line-height-normal{line-height:normal!important}
+.line-height-1{line-height:1!important}
+
+.width-auto{width:auto!important}
+.height-auto{height:auto!important}
+
+.no-padding{padding:0!important}
+.no-padding-bottom{padding-bottom:0!important}
+.no-padding-top{padding-top:0!important}
+.no-padding-left{padding-left:0!important}
+.no-padding-right{padding-right:0!important}
+
+.no-margin{margin:0!important}
+.no-margin-bottom{margin-bottom:0!important}
+.no-margin-top{margin-top:0!important}
+.no-margin-left{margin-left:0!important}
+.no-margin-right{margin-right:0!important}
+
+.no-border{border:0}
+.no-border-bottom{border-bottom:0}
+.no-border-top{border-top:0}
+.no-border-left{border-left:none}
+.no-border-right{border-right:0}
+
+.no-underline{text-decoration:none!important}
+.no-hover-underline:hover{text-decoration:none!important}
+.no-shadow,.no-box-shadow{-webkit-box-shadow:none!important;box-shadow:none!important}
+.no-text-shadow{text-shadow:none!important}
+
+.overflow-hidden{overflow:hidden!important}
+.overflow-auto{overflow:auto!important}
+.overflow-scroll{overflow:scroll!important}
+.overflow-visible{overflow:visible!important}
+
+.hr{display:block;height:0;overflow:hidden;font-size:0;border-top:1px solid #e3e3e3;margin:12px 0}
+.hr-double{height:3px;border-top:1px solid #e3e3e3;border-bottom:1px solid #e3e3e3}
+.hr.dotted,.hr-dotted{border-top-style:dotted}
+.hr-double.dotted{border-bottom-style:dotted}
