@@ -105,7 +105,7 @@ use yii\helpers\Url;
         <div class="mod">
             <div class="mod-logo">
                 
-                <h1>LuLu Blog</h1>
+                <h1>LuLu CMS</h1>
             </div>
 
             <div class="mod-message">
@@ -329,7 +329,7 @@ use yii\helpers\Url;
     </div>
 
     <div class="aw-footer">
-        <p>Copyright &copy; 2015 - Powered By <a href="http://www.yiifans.com/" target="blank">LuLu Blog 3.1.2</a></p>
+        <p>Copyright &copy; 2015 - Powered By <a href="http://www.yiifans.com/" target="blank">LuLu CMS</a></p>
     </div>
 
     <!-- DO NOT REMOVE -->
