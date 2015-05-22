@@ -28,7 +28,7 @@ phpunit.phar
 
 /backend/runtime
 /frontend/runtime
-/static/assets
+#/static/assets
 
 lulucms2.phpproj
 lulucms2.sln
