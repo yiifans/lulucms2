@@ -4,7 +4,7 @@ $params = [
     'supportEmail' => 'support@example.com',
     'user.passwordResetTokenExpire' => 3600,
     'homeTheme'=>'bifenxiang',
-    'adminTheme'=>'weicenter2',
+    'adminTheme'=>'weicenter',
 
 ];
 /* $params = array_merge(
