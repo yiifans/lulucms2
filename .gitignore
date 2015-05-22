@@ -26,7 +26,10 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 
-/runtime
-/backend/runtime
-/frontend/runtime
-/static/assets
+/backend/runtime/
+/frontend/runtime/
+/static/assets/
+
+lulucms2.phpproj
+lulucms2.sln
+lulucms2.v12.suo
