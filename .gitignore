@@ -30,3 +30,8 @@ phpunit.phar
 /frontend/runtime
 /static/assets
 
+lulucms2.phpproj
+lulucms2.sln
+lulucms2.v12.suo
+yii
+yii.bat
