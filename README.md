@@ -1,2 +1,2 @@
 # lulucms2
-powerfull and modularity CMS
+powerful and modularity CMS.based on Yii2
