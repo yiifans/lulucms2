@@ -86,15 +86,15 @@ use yii\helpers\Url;
 
                     <ul class="dropdown-menu pull-right mod-user">
                         <li>
-                            <a href="<?php echo LuLu::getAlias('@web');?>"><i class="icon icon-home"></i>首页</a>
+                            <a href="<?php echo LuLu::getAlias('@web');?>" target="_blank"><i class="icon icon-home"></i>首页</a>
                         </li>
 
                         <li>
-                            <a href="<?php echo LuLu::getAlias('@web');?>"><i class="icon icon-ul"></i>概述</a>
+                            <?php echo Html::a('<i class="icon icon-ul"></i>概述',['/site/welcome'],['target'=>'mainFrame'])?>
                         </li>
 
                         <li>
-                            <a href="<?php echo LuLu::getAlias('@web');?>"><i class="icon icon-logout"></i>退出</a>
+                            <?php echo Html::a('<i class="icon icon-logout"></i>退出',['/site/logout'],['target'=>'mainFrame'])?>
                         </li>
                     </ul>
                 </li>
