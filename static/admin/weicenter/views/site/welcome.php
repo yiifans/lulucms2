@@ -31,7 +31,7 @@ $this->title = 'My Yii Application';
                             </tr>
                             <tr>
                                 <td><?php echo 'MySQL 版本'; ?></td>
-                                <td><?php  echo mysql_get_server_info(); ?></td>
+                                <td><?php echo Yii::$app->db->pdo->getAttribute(PDO::ATTR_CLIENT_VERSION); ?></td>
                             </tr>
                         </tbody>
                     </table>

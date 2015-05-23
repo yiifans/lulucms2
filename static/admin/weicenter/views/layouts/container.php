@@ -107,38 +107,18 @@ use yii\helpers\Url;
                 
                 <h1>LuLu CMS</h1>
             </div>
-
-            <div class="mod-message">
-                <div class="message">
-                    <a class="btn btn-sm" href="<?php echo LuLu::getAlias('@web');?>" target="_blank" title="首页">
-                        <i class="icon icon-home"></i>
-                    </a>
-
-                    <a class="btn btn-sm" href="<?php echo LuLu::getAlias('@web/admin.php');?>" title="概述">
-                        <i class="icon icon-ul"></i>
-                    </a>
-
-                    <a class="btn btn-sm" href="<?php echo LuLu::getAlias('@web');?>" title="退出">
-                        <i class="icon icon-logout"></i>
-                    </a>
-                </div>
-            </div>
-
             <ul class="mod-bar">
-                <input type="hidden" id="hide_values" value="0" />
                 <li>
-                    <a href="<?php echo LuLu::getAlias('@web');?>" class=" icon icon-home">
-                        <span>概述</span>
-                    </a>
+                    <?php echo Html::a('<span>概述</span>',['/site/welcome'],['target'=>'mainFrame','class'=>'icon icon-home active'])?>
                 </li>
                 <li>
-                    <a href="javascript:;" class=" icon icon-setting active" data="icon">
+                    <a href="javascript:;" class=" icon icon-setting " data="icon">
                         <span>全局设置</span>
                     </a>
 
-                    <ul>
+                    <ul class="hide">
                         <li>
-                            <?php echo Html::a('<span>站点信息</span>',['/system/setting/basic'],['class'=>'active','target'=>'mainFrame'])?>
+                            <?php echo Html::a('<span>站点信息</span>',['/system/setting/basic'],['target'=>'mainFrame'])?>
                         </li>
                         <li>
                             <?php echo Html::a('<span>注册与访问控</span>',['/system/setting/access'],['target'=>'mainFrame'])?>
@@ -149,11 +129,6 @@ use yii\helpers\Url;
                         <li>
                             <?php echo Html::a('<span>邮件设置</span>',['/system/setting/email'],['target'=>'mainFrame'])?>
                         </li>
-                        <!-- 
-                        <li>
-                            <?php echo Html::a('<span>评论设置</span>',['/#'],['target'=>'mainFrame'])?>
-                        </li>
-                         -->
                         <li>
                             <?php echo Html::a('<span>模块管理</span>',['/modularity'],['target'=>'mainFrame'])?>
                         </li>

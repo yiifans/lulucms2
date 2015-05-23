@@ -3,6 +3,8 @@ use yii\helpers\Html;
 use source\LuLu;
 use source\libs\Common;
 use source\core\widgets\ActiveForm;
+use source\models\Takonomy;
+use source\models\Content;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Content */
@@ -14,6 +16,7 @@ $filedOptions = [
 		'class' => 'control-label'
 	]
 ];
+
 
 $takonomy = $this->getConfigValue('post_takonomy');
 $takonomies = Takonomy::getArrayTree($takonomy);
