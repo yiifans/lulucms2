@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 05 月 22 日 11:16
+-- 生成日期: 2015 年 05 月 23 日 12:00
 -- 服务器版本: 5.6.12-log
 -- PHP 版本: 5.4.16
 
@@ -28,6 +28,7 @@ USE `lulucms2`;
 -- 表的结构 `lulu_auth_assignment`
 --
 
+DROP TABLE IF EXISTS `lulu_auth_assignment`;
 CREATE TABLE IF NOT EXISTS `lulu_auth_assignment` (
   `user` varchar(64) NOT NULL,
   `role` varchar(64) NOT NULL,
@@ -49,6 +50,7 @@ INSERT INTO `lulu_auth_assignment` (`user`, `role`, `created_at`, `note`) VALUES
 -- 表的结构 `lulu_auth_category`
 --
 
+DROP TABLE IF EXISTS `lulu_auth_category`;
 CREATE TABLE IF NOT EXISTS `lulu_auth_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
@@ -75,6 +77,7 @@ INSERT INTO `lulu_auth_category` (`id`, `name`, `type`, `sort_num`, `note`) VALU
 -- 表的结构 `lulu_auth_permission`
 --
 
+DROP TABLE IF EXISTS `lulu_auth_permission`;
 CREATE TABLE IF NOT EXISTS `lulu_auth_permission` (
   `key` varchar(64) NOT NULL,
   `category_id` int(11) NOT NULL,
@@ -106,6 +109,7 @@ INSERT INTO `lulu_auth_permission` (`key`, `category_id`, `name`, `form`, `optio
 -- 表的结构 `lulu_auth_relation`
 --
 
+DROP TABLE IF EXISTS `lulu_auth_relation`;
 CREATE TABLE IF NOT EXISTS `lulu_auth_relation` (
   `role` varchar(64) NOT NULL,
   `permission` varchar(64) NOT NULL,
@@ -142,6 +146,7 @@ INSERT INTO `lulu_auth_relation` (`role`, `permission`, `value`) VALUES
 -- 表的结构 `lulu_auth_role`
 --
 
+DROP TABLE IF EXISTS `lulu_auth_role`;
 CREATE TABLE IF NOT EXISTS `lulu_auth_role` (
   `key` varchar(64) NOT NULL,
   `category_id` int(11) NOT NULL,
@@ -167,6 +172,7 @@ INSERT INTO `lulu_auth_role` (`key`, `category_id`, `name`, `created_at`, `updat
 -- 表的结构 `lulu_comment`
 --
 
+DROP TABLE IF EXISTS `lulu_comment`;
 CREATE TABLE IF NOT EXISTS `lulu_comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `reply_ids` varchar(128) DEFAULT NULL,
@@ -189,6 +195,7 @@ CREATE TABLE IF NOT EXISTS `lulu_comment` (
 -- 表的结构 `lulu_config`
 --
 
+DROP TABLE IF EXISTS `lulu_config`;
 CREATE TABLE IF NOT EXISTS `lulu_config` (
   `id` varchar(64) NOT NULL,
   `value` text NOT NULL,
@@ -201,6 +208,7 @@ CREATE TABLE IF NOT EXISTS `lulu_config` (
 --
 
 INSERT INTO `lulu_config` (`id`, `value`) VALUES
+('page_takonomy', 'page'),
 ('post_takonomy', 'post'),
 ('sys_allow_register', '0'),
 ('sys_datetime_date_format', ''),
@@ -233,6 +241,7 @@ INSERT INTO `lulu_config` (`id`, `value`) VALUES
 -- 表的结构 `lulu_content`
 --
 
+DROP TABLE IF EXISTS `lulu_content`;
 CREATE TABLE IF NOT EXISTS `lulu_content` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `takonomy_id` int(11) DEFAULT NULL,
@@ -298,6 +307,7 @@ INSERT INTO `lulu_content` (`id`, `takonomy_id`, `user_id`, `user_name`, `last_u
 -- 表的结构 `lulu_content_page`
 --
 
+DROP TABLE IF EXISTS `lulu_content_page`;
 CREATE TABLE IF NOT EXISTS `lulu_content_page` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content_id` int(11) NOT NULL,
@@ -318,6 +328,7 @@ INSERT INTO `lulu_content_page` (`id`, `content_id`, `body`) VALUES
 -- 表的结构 `lulu_content_post`
 --
 
+DROP TABLE IF EXISTS `lulu_content_post`;
 CREATE TABLE IF NOT EXISTS `lulu_content_post` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content_id` int(11) NOT NULL,
@@ -346,6 +357,7 @@ INSERT INTO `lulu_content_post` (`id`, `content_id`, `body`) VALUES
 -- 表的结构 `lulu_menu`
 --
 
+DROP TABLE IF EXISTS `lulu_menu`;
 CREATE TABLE IF NOT EXISTS `lulu_menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) NOT NULL,
@@ -380,6 +392,7 @@ INSERT INTO `lulu_menu` (`id`, `parent_id`, `category_id`, `name`, `url`, `targe
 -- 表的结构 `lulu_menu_category`
 --
 
+DROP TABLE IF EXISTS `lulu_menu_category`;
 CREATE TABLE IF NOT EXISTS `lulu_menu_category` (
   `id` varchar(64) NOT NULL,
   `name` varchar(64) NOT NULL,
@@ -404,6 +417,7 @@ INSERT INTO `lulu_menu_category` (`id`, `name`, `description`) VALUES
 -- 表的结构 `lulu_modularity`
 --
 
+DROP TABLE IF EXISTS `lulu_modularity`;
 CREATE TABLE IF NOT EXISTS `lulu_modularity` (
   `id` varchar(64) NOT NULL,
   `is_system` tinyint(1) NOT NULL DEFAULT '0',
@@ -418,12 +432,14 @@ CREATE TABLE IF NOT EXISTS `lulu_modularity` (
 --
 
 INSERT INTO `lulu_modularity` (`id`, `is_system`, `is_content`, `enable_admin`, `enable_home`) VALUES
+('dsf', 0, 0, 1, 0),
 ('menu', 0, 0, 1, 1),
 ('modularity', 0, 0, 1, 1),
 ('page', 0, 0, 1, 1),
 ('post', 0, 0, 1, 1),
 ('system', 0, 0, 1, 1),
-('takonomy', 0, 0, 1, 1);
+('takonomy', 0, 0, 1, 1),
+('yy-y', 0, 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -431,6 +447,7 @@ INSERT INTO `lulu_modularity` (`id`, `is_system`, `is_content`, `enable_admin`, 
 -- 表的结构 `lulu_takonomy`
 --
 
+DROP TABLE IF EXISTS `lulu_takonomy`;
 CREATE TABLE IF NOT EXISTS `lulu_takonomy` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) NOT NULL,
@@ -472,6 +489,7 @@ INSERT INTO `lulu_takonomy` (`id`, `parent_id`, `category_id`, `name`, `url_alia
 -- 表的结构 `lulu_takonomy_category`
 --
 
+DROP TABLE IF EXISTS `lulu_takonomy_category`;
 CREATE TABLE IF NOT EXISTS `lulu_takonomy_category` (
   `id` varchar(64) NOT NULL,
   `name` varchar(64) NOT NULL,
@@ -497,6 +515,7 @@ INSERT INTO `lulu_takonomy_category` (`id`, `name`, `description`) VALUES
 -- 表的结构 `lulu_takonomy_content`
 --
 
+DROP TABLE IF EXISTS `lulu_takonomy_content`;
 CREATE TABLE IF NOT EXISTS `lulu_takonomy_content` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `takonomy_id` int(11) NOT NULL,
@@ -510,6 +529,7 @@ CREATE TABLE IF NOT EXISTS `lulu_takonomy_content` (
 -- 表的结构 `lulu_user`
 --
 
+DROP TABLE IF EXISTS `lulu_user`;
 CREATE TABLE IF NOT EXISTS `lulu_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
