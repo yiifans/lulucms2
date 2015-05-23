@@ -36,7 +36,7 @@ $themeUrl= Resource::getThemeUrl();
             <div class="yusi-logo" style="font-size: 40px;margin-top:15px;">
                 <a href="/">
                     
-                    LuLu Blog
+                    <?php echo $this->getConfigValue('sys_site_name')?>
                 </a>
 				
             </div>
