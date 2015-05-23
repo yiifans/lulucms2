@@ -121,7 +121,7 @@ use yii\helpers\Url;
                             <?php echo Html::a('<span>站点信息</span>',['/system/setting/basic'],['target'=>'mainFrame'])?>
                         </li>
                         <li>
-                            <?php echo Html::a('<span>注册与访问控</span>',['/system/setting/access'],['target'=>'mainFrame'])?>
+                            <?php echo Html::a('<span>注册与访问</span>',['/system/setting/access'],['target'=>'mainFrame'])?>
                         </li>
                         <li>
                             <?php echo Html::a('<span>时间设置</span>',['/system/setting/datetime'],['target'=>'mainFrame'])?>

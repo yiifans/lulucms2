@@ -4,8 +4,6 @@ use yii\widgets\ActiveForm;
 use source\models\Content;
 use source\models\Takonomy;
 use source\libs\Common;
-use source\models\Takonomy;
-use source\models\Content;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Content */
@@ -79,7 +77,7 @@ $form = ActiveForm::begin([
 		    <?= $form->field($model, 'is_sticky')->checkbox([],false)?>
 		   
 	
-	        <?= $form->field($model, 'takonomy_id')->dropDownList($options,['prompt'=>'请选择'])?>
+	        <?= $form->field($model, 'takonomy_id')->dropDownList($options,['prompt'=>'请选择','options'=>['encodeSpaces'=>true]])?>
 	
 		    <?= $form->field($model, 'template')->textInput(['maxlength' => 64])?>
 		     <?= $form->field($model, 'comment_count')->textInput()?>
