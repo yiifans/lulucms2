@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="mod-head">
                         <h3>
                             <span class="pull-left"><?= $this->title ?></span>
-            
+                            <span class="pull-right"><?= Html::a('新建模块', ['/gii/default/view','id'=>'extmodule'], ['class' => 'btn btn-xs btn-primary mod-site-save','target'=>'_blank']) ?></span>
                              
                         </h3>
                     </div>

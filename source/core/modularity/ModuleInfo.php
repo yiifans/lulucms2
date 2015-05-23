@@ -6,6 +6,8 @@ use yii\base\Object;
 class ModuleInfo extends Object
 {
 
+    public $id;
+    
     public $name;
 
     public $version;
@@ -18,10 +20,17 @@ class ModuleInfo extends Object
 
     public $author_url;
 
-    public $is_system;
+    public $is_system=false;
 
     public $is_content;
 
+    public function getDir()
+    {
+        $fullClass = self::className();
+        $a = explode('\\', $fullClass);
+        return $a[2];
+    }
+    
     public function install()
     {
     }

@@ -17,9 +17,9 @@ class BaseApplication extends \yii\web\Application
         foreach ($this->activeModules as $m)
         {
             $moduleId = $m['id'];
-            
+            $moduleDir = $m['instance']->getDir();
             $this->setModule($moduleId, [
-                'class' => 'source\modules\\' . $moduleId . '\\' . $module
+                'class' => 'source\modules\\' . $moduleDir . '\\' . $module
             ]);
         }
     }

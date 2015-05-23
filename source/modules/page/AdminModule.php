@@ -11,7 +11,7 @@ class AdminModule extends \source\core\modularity\BaseBackModule
         return [
             ['新建',['/page/default/create']],
             ['所有页面',['/page']],
-            //['设置',['/page/setting']],
+            ['设置',['/page/setting']],
         ];
     }
 }

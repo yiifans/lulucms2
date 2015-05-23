@@ -1,9 +1,8 @@
 <?php
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use source\models\Content;
-use source\models\Takonomy;
+use source\LuLu;
 use source\libs\Common;
+use source\core\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Content */
@@ -14,8 +13,8 @@ $filedOptions = [
 	'labelOptions' => [
 		'class' => 'control-label'
 	]
-]
-;
+];
+
 $takonomy = $this->getConfigValue('post_takonomy');
 $takonomies = Takonomy::getArrayTree($takonomy);
 $options = Common::buildTreeOptions($takonomies, $model->takonomy_id);

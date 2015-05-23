@@ -1,8 +1,8 @@
 <?php
-namespace source\modules\post\admin;
+namespace source\modules\page\admin;
 
 use backend\controllers\BaseSettingController;
-use source\modules\post\models\Setting;
+use source\modules\page\models\Setting;
 
 class SettingController extends BaseSettingController
 {
@@ -10,6 +10,7 @@ class SettingController extends BaseSettingController
     public function actionIndex()
     {
         $model = new Setting();
+        //$model = new Setting();
         
         return $this->doConfig($model);
     }

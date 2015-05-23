@@ -93,7 +93,7 @@ class ModuleManager extends BaseComponent
                 
                 if ($moduleDir = @ dir($modulePath))
                 {
-                    $moduleInfo = str_replace(' ', '', ucwords(implode(' ', explode('-', $moduleFile))));
+                    $moduleClassName = ucwords($moduleFile);
                     
                     $class=null;
                     $instance = null;
@@ -107,9 +107,9 @@ class ModuleManager extends BaseComponent
                         {
                             continue;
                         }
-                        if ($item === $moduleInfo . 'Module.php')
+                        if ($item === $moduleClassName . 'ModuleInfo.php')
                         {
-                            $class = 'source\modules\\' . $moduleFile . '\\' . $moduleInfo . 'Module';
+                            $class = 'source\modules\\' . $moduleFile . '\\' . $moduleClassName . 'ModuleInfo';
                         }
                         if ($item === 'AdminModule.php')
                         {
@@ -139,7 +139,7 @@ class ModuleManager extends BaseComponent
                     if($instance!==null)
                     {
                         $ret[$moduleFile] = [
-                            'id' => $moduleFile,
+                            'id' => $instance->id,
                             'class' => $class,
                             'instance' => $instance,
                             'can_install' => true,

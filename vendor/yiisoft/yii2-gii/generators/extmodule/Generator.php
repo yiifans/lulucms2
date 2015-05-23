@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\gii\generators\module;
+namespace yii\gii\generators\extmodule;
 
 use yii\gii\CodeFile;
 use yii\helpers\Html;
@@ -23,7 +23,7 @@ use yii\helpers\StringHelper;
  */
 class Generator extends \yii\gii\Generator
 {
-    public $moduleClass;
+    public $moduleDir;
     public $moduleID;
 
 
@@ -32,7 +32,7 @@ class Generator extends \yii\gii\Generator
      */
     public function getName()
     {
-        return 'Module Generator';
+        return 'Ext Module Generator';
     }
 
     /**
@@ -49,11 +49,10 @@ class Generator extends \yii\gii\Generator
     public function rules()
     {
         return array_merge(parent::rules(), [
-            [['moduleID', 'moduleClass'], 'filter', 'filter' => 'trim'],
-            [['moduleID', 'moduleClass'], 'required'],
+            [['moduleID','moduleDir'], 'filter', 'filter' => 'trim'],
+            [['moduleDir'], 'required'],
+            [['moduleDir'], 'match', 'pattern' => '/^[\w]+$/', 'message' => 'Only word characters'],
             [['moduleID'], 'match', 'pattern' => '/^[\w\\-]+$/', 'message' => 'Only word characters and dashes are allowed.'],
-            [['moduleClass'], 'match', 'pattern' => '/^[\w\\\\]*$/', 'message' => 'Only word characters and backslashes are allowed.'],
-            [['moduleClass'], 'validateModuleClass'],
         ]);
     }
 
@@ -64,7 +63,7 @@ class Generator extends \yii\gii\Generator
     {
         return [
             'moduleID' => 'Module ID',
-            'moduleClass' => 'Module Class',
+            'moduleDir' => 'Module Dir',
         ];
     }
 
@@ -75,7 +74,7 @@ class Generator extends \yii\gii\Generator
     {
         return [
             'moduleID' => 'This refers to the ID of the module, e.g., <code>admin</code>.',
-            'moduleClass' => 'This is the fully qualified class name of the module, e.g., <code>app\modules\admin\Module</code>.',
+            'moduleDir' => 'moduleDir <code>admin</code>.',
         ];
     }
 
@@ -94,16 +93,7 @@ class Generator extends \yii\gii\Generator
 <p>The module has been generated successfully.</p>
 <p>To access the module, you need to add this to your application configuration:</p>
 EOD;
-        $code = <<<EOD
-<?php
-    ......
-    'modules' => [
-        '{$this->moduleID}' => [
-            'class' => '{$this->moduleClass}',
-        ],
-    ],
-    ......
-EOD;
+        $code = '';
 
         return $output . '<pre>' . highlight_string($code, true) . '</pre>';
     }
@@ -113,6 +103,7 @@ EOD;
      */
     public function requiredTemplates()
     {
+        return [];
         return ['module.php', 'controller.php', 'view.php'];
     }
 
@@ -123,41 +114,99 @@ EOD;
     {
         $files = [];
         $modulePath = $this->getModulePath();
-        $files[] = new CodeFile(
-            $modulePath . '/' . StringHelper::basename($this->moduleClass) . '.php',
-            $this->render("module.php")
-        );
-        $files[] = new CodeFile(
-            $modulePath . '/controllers/DefaultController.php',
-            $this->render("controller.php")
-        );
-        $files[] = new CodeFile(
-            $modulePath . '/views/default/index.php',
-            $this->render("view.php")
-        );
-
+       
+        $files=array_merge($files,$this->generateInfo($modulePath));
+        $files=array_merge($files,$this->generateAdmin($modulePath));
+        $files=array_merge($files,$this->generateHome($modulePath));
+        $files=array_merge($files,$this->generateSetting($modulePath));
+        
         return $files;
     }
-
+   
+    
+    private function generateInfo($modulePath)
+    {
+        $files[] = new CodeFile(
+            $modulePath . '/'.$this->getModuleClassName().'ModuleInfo.php',
+            $this->render("module-info.php")
+        );
+        return $files;
+    }
+    private function generateAdmin($modulePath)
+    {
+    	$files[] = new CodeFile(
+    			$modulePath . '/AdminModule.php',
+    			$this->render("admin-module.php")
+    	);
+    	$files[] = new CodeFile(
+    			$modulePath . '/admin/DefaultController.php',
+    			$this->render("admin-controller.php")
+    	);
+    	$files[] = new CodeFile(
+    			$modulePath . '/admin/views/default/index.php',
+    			$this->render("admin-view.php")
+    	);
+    	return $files;
+    }
+    private function generateHome($modulePath)
+    {
+        $files[] = new CodeFile(
+            $modulePath . '/HomeModule.php',
+            $this->render("home-module.php")
+        );
+        $files[] = new CodeFile(
+            $modulePath . '/home/DefaultController.php',
+            $this->render("home-controller.php")
+        );
+        $files[] = new CodeFile(
+            $modulePath . '/home/views/default/index.php',
+            $this->render("home-view.php")
+        );
+        return $files;
+    }
+    
+    private function generateSetting($modulePath)
+    {
+        $files[] = new CodeFile(
+            $modulePath . '/models/Setting.php',
+            $this->render("setting-model.php")
+        );
+        $files[] = new CodeFile(
+            $modulePath . '/admin/SettingController.php',
+            $this->render("setting-controller.php")
+        );
+        $files[] = new CodeFile(
+            $modulePath . '/admin/views/setting/index.php',
+            $this->render("setting-view.php")
+        );
+        return $files;
+    }
+    
     /**
      * Validates [[moduleClass]] to make sure it is a fully qualified class name.
      */
     public function validateModuleClass()
     {
-        if (strpos($this->moduleClass, '\\') === false || Yii::getAlias('@' . str_replace('\\', '/', $this->moduleClass), false) === false) {
-            $this->addError('moduleClass', 'Module class must be properly namespaced.');
-        }
-        if (empty($this->moduleClass) || substr_compare($this->moduleClass, '\\', -1, 1) === 0) {
-            $this->addError('moduleClass', 'Module class name must not be empty. Please enter a fully qualified class name. e.g. "app\\modules\\admin\\Module".');
-        }
+        
     }
 
-    /**
-     * @return boolean the directory that contains the module class
-     */
+    public function getModuleClassName()
+    {
+        return ucwords($this->moduleDir);
+    }
+    
+    public function getModuleId()
+    {
+       if(empty($this->moduleID))
+       {
+           return $this->moduleDir;
+       }
+       return $this->moduleID;
+    }
+    
     public function getModulePath()
     {
-        return Yii::getAlias('@' . str_replace('\\', '/', substr($this->moduleClass, 0, strrpos($this->moduleClass, '\\'))));
+        return Yii::getAlias('@source').'\modules\\'.$this->moduleDir;
     }
 
     /**
