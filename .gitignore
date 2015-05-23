@@ -26,8 +26,8 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 
-#/backend/runtime
-#/frontend/runtime
+/backend/runtime
+/frontend/runtime
 /static/assets
 
 lulucms2.phpproj
