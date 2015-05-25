@@ -116,6 +116,7 @@ EOD;
         $modulePath = $this->getModulePath();
        
         $files=array_merge($files,$this->generateInfo($modulePath));
+        $files=array_merge($files,$this->generateService($modulePath));
         $files=array_merge($files,$this->generateAdmin($modulePath));
         $files=array_merge($files,$this->generateHome($modulePath));
         $files=array_merge($files,$this->generateSetting($modulePath));
@@ -127,8 +128,16 @@ EOD;
     private function generateInfo($modulePath)
     {
         $files[] = new CodeFile(
-            $modulePath . '/'.$this->getModuleClassName().'ModuleInfo.php',
+            $modulePath . '/'.$this->getModuleClassName().'Info.php',
             $this->render("module-info.php")
+        );
+        return $files;
+    }
+    private function generateService($modulePath)
+    {
+        $files[] = new CodeFile(
+            $modulePath . '/'.$this->getModuleClassName().'Service.php',
+            $this->render("service.php")
         );
         return $files;
     }

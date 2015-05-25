@@ -15,6 +15,13 @@ use source\LuLu;
 
 class BaseBackController extends BaseController
 {
+    public $modularityService ;
+    
+    public function init()
+    {
+        parent::init();
+        $this->modularityService = LuLu::getService('modularityService');
+    }
 
     public function reloadAdmin()
     {

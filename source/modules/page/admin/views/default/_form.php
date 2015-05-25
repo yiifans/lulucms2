@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use source\core\widgets\ActiveForm;
 use source\models\Content;
 use source\models\Takonomy;
 use source\libs\Common;

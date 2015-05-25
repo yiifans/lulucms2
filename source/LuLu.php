@@ -3,6 +3,8 @@ namespace source;
 
 use yii\helpers\VarDumper;
 use yii\data\Pagination;
+use source\core\modularity\ModuleService;
+use yii\base\InvalidParamException;
 
 class LuLu extends \Yii
 {
@@ -167,7 +169,7 @@ class LuLu extends \Yii
     public static function info($var, $category = 'application')
     {
         $dump = VarDumper::dumpAsString($var);
-        self::info($dump, $category);
+        parent::info($dump, $category);
     }
 
     public static function getUser()
@@ -288,5 +290,15 @@ class LuLu extends \Yii
         $ret[$pagesLable] = $pages;
 		
 		return $ret;
+	}
+	
+	public static function getService($id)
+	{
+        $component = self::$app->get($id,true);
+	    if( $component instanceof ModuleService)
+	    {
+	        return  $component;
+	    }
+	    InvalidParamException("get service:$id");
 	}
 }

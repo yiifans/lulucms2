@@ -8,7 +8,6 @@ use source\models\Takonomy;
 $this->title = 'list';
 
 
-$takonomies = Takonomy::getArrayTree($this->getConfigValue('page_takonomy'));
 $themeUrl= Resource::getThemeUrl();
 ?>
 
@@ -22,21 +21,11 @@ $themeUrl= Resource::getThemeUrl();
             </div>
         </div>
         <aside class="sidebar">
-          
-            <div class="widget d_postlist">
-            	<div class="title"><h2>分类</h2></div>
-            	<ul>
-            		<li><?php echo Html::a('所有',['/post'])?></li>
-            		<?php foreach ($takonomies as $takonomy):?>
-            		<li><?php echo Html::a($takonomy['name'],['/post/default/list','takonomy'=>$takonomy['id']])?></li>
-            		<?php endforeach;?>
-            	</ul>
-            	
-            </div>
+            <?php echo $this->render(Resource::getThemePath('/views/_inc/takonomy'),['takonomyId'=>'page_takonomy']);?>   
             <div class="widget d_postlist">
                 <div class="title"><h2>热评文章</h2></div>
                 <ul>
-                	<?php echo $this->render(Resource::getThemePath('/views/_inc/post_list_widget'),['orderBy'=>'comment_count desc','limit'=>3]);?>
+                	<?php echo $this->render(Resource::getThemePath('/views/_inc/content_list'),['orderBy'=>'comment_count desc','limit'=>3]);?>
                 </ul>
             </div>
             <div class="widget ds-widget-recent-visitors">

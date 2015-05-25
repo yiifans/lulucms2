@@ -9,7 +9,7 @@ namespace source\modules\<?= $generator->moduleDir?>;
 
 use source\LuLu;
 
-class <?= $generator->getModuleClassName()?>ModuleInfo extends \source\core\modularity\ModuleInfo
+class <?= $generator->getModuleClassName()?>Info extends \source\core\modularity\ModuleInfo
 {
 
     public function init()

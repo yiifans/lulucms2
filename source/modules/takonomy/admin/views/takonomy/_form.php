@@ -1,10 +1,11 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+
 use source\models\Takonomy;
 use source\helpers\StringHelper;
 use source\libs\Common;
+use source\core\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Takonomy */
@@ -17,6 +18,7 @@ $category=$model->category_id;
 $takonomies = Takonomy::getArrayTree($category);
 
 $options = Common::buildTreeOptionsForSelf($takonomies, $model);
+
 
 ?>
 

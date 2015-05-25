@@ -74,7 +74,7 @@ $themeUrl= Resource::getThemeUrl();
     <footer class="footer">
         <div class="footer-inner">
             <div class="copyright pull-left">
-                <a href="<?php echo LuLu::getAlias('@web')?>" >LuLu Blog</a> 保留一切权利 ·   © 2011-2015
+                <a href="<?php echo LuLu::getAlias('@web')?>" >LuLu CMS</a> 保留一切权利 ·   © 2011-2015
             </div>
             <div class="trackcode pull-right">
               

@@ -24,13 +24,6 @@ class ModuleInfo extends Object
 
     public $is_content;
 
-    public function getDir()
-    {
-        $fullClass = self::className();
-        $a = explode('\\', $fullClass);
-        return $a[2];
-    }
-    
     public function install()
     {
     }

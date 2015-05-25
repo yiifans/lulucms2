@@ -24,8 +24,7 @@ class DefaultController extends BaseBackController
 
     public function actionIndex()
     {
-        $moduleManager = LuLu::$app->moduleManager;
-        $modules = $moduleManager->loadModules();
+        $modules = $this->modularityService->getAllModules();
         return $this->render('index', [
             'modules' => $modules
         ]);
@@ -39,8 +38,7 @@ class DefaultController extends BaseBackController
         $model->enable_home = 0;
         $model->save();
         
-        $moduleManager = LuLu::$app->moduleManager;
-        $modules = $moduleManager->loadModules();
+        $modules = $this->modularityService->getAllModules();
         if (isset($modules[$id]) && $modules[$id]['instance'] !== null)
         {
             $modules[$id]['instance']->install();
@@ -54,8 +52,7 @@ class DefaultController extends BaseBackController
     {
         Modularity::deleteAll(['id' => $id ]);
         
-        $moduleManager = LuLu::$app->moduleManager;
-        $modules = $moduleManager->loadModules();
+        $modules = $this->modularityService->getAllModules();
         if (isset($modules[$id]) && $modules[$id]['instance'] !== null)
         {
             $modules[$id]['instance']->uninstall();
@@ -71,8 +68,7 @@ class DefaultController extends BaseBackController
         $field = $is_admin === null ? 'enable_home' : 'enable_admin';
         Modularity::updateAll([$field => 1], ['id' => $id ]);
         
-        $moduleManager = LuLu::$app->moduleManager;
-        $modules = $moduleManager->loadModules();
+        $modules = $this->modularityService->getAllModules();
         if (isset($modules[$id]) && $modules[$id]['instance'] !== null)
         {
             if ($is_admin === null)
@@ -98,8 +94,7 @@ class DefaultController extends BaseBackController
         $field = $is_admin === null ? 'enable_home' : 'enable_admin';
         Modularity::updateAll([$field => 0], ['id' => $id ]);
         
-        $moduleManager = LuLu::$app->moduleManager;
-        $modules = $moduleManager->loadModules();
+        $modules = $this->modularityService->getAllModules();
         if (isset($modules[$id]) && $modules[$id]['instance'] !== null)
         {
             if ($is_admin === null)

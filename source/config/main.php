@@ -16,8 +16,8 @@ return [
 	      	//'linkAssets' => true,
 	      	// ...
 	   ],
-        'moduleManager' => [
-            'class' => 'source\modules\modularity\ModuleManager',
+        'modularityService' => [
+            'class' => 'source\modules\modularity\ModularitySerivce',
         ],
     ],
 ];

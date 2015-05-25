@@ -14,8 +14,6 @@ use source\helpers\TimeHelper;
 $this->title = $model['title'];
 
 
-$takonomies = Takonomy::getArrayTree($this->getConfigValue('page_takonomy'));
-
 ?>
 
 
@@ -66,16 +64,7 @@ $takonomies = Takonomy::getArrayTree($this->getConfigValue('page_takonomy'));
         </div>
         <aside class="sidebar">
            
-            <div class="widget d_postlist">
-            	<div class="title"><h2>分类</h2></div>
-            	<ul>
-            		<li><?php echo Html::a('所有',['/post'])?></li>
-            		<?php foreach ($takonomies as $takonomy):?>
-            		<li><?php echo Html::a($takonomy['name'],['/post','takonomy'=>$takonomy['id']])?></li>
-            		<?php endforeach;?>
-            	</ul>
-            	
-            </div>
+            <?php echo $this->render(Resource::getThemePath('/views/_inc/takonomy'),['takonomyId'=>'page_takonomy']);?>   
             <div class="widget d_postlist">
                 <div class="title"><h2>为您推荐</h2></div>
                 <ul>

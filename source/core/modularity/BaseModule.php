@@ -1,6 +1,7 @@
 <?php
 namespace source\core\modularity;
 
+use source\LuLu;
 class BaseModule extends \source\core\base\BaseModule
 {
 
@@ -14,9 +15,15 @@ class BaseModule extends \source\core\base\BaseModule
 
     public $status;
 
+    public $modularityService;
+    
+    public $moduleInfo;
+    
     public function init()
     {
         parent::init();
+        
+        $this->modularityService=LuLu::getService('modularityService');
     }
 	
 	public function getMenus()

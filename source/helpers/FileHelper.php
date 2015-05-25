@@ -1,9 +1,10 @@
 <?php
-namespace lulu\helpers;
+namespace yii\helpers;
 
-use components\LuLu;
 
-class FileHelper
+
+use source\LuLu;
+class FileHelper extends \yii\helpers\BaseFileHelper
 {
 
     public static function buildPath($pathes, $withStart = false, $withEnd = false)

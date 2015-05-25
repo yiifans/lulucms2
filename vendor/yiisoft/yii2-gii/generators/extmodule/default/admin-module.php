@@ -17,6 +17,7 @@ use source\LuLu;
 
 class AdminModule extends \source\core\modularity\BaseBackModule
 {
+
     public $controllerNamespace = 'source\modules\<?= $generator->moduleDir?>\admin';
 
     public function init()

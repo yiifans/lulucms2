@@ -666,7 +666,7 @@ a {
 }
 
 .sidebar {
-    float: left;
+    float: right;
     margin-left: -300px;
     width: 300px;
     position: relative;

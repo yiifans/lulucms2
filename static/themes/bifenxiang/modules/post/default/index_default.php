@@ -8,7 +8,6 @@ use source\models\Takonomy;
 $this->title = 'list';
 
 
-$takonomies = Takonomy::getArrayTree('post');
 $themeUrl= Resource::getThemeUrl();
 ?>
 
@@ -22,17 +21,7 @@ $themeUrl= Resource::getThemeUrl();
             </div>
         </div>
         <aside class="sidebar">
-          
-            <div class="widget d_postlist">
-            	<div class="title"><h2>分类</h2></div>
-            	<ul>
-            		<li><?php echo Html::a('所有',['/post'])?></li>
-            		<?php foreach ($takonomies as $takonomy):?>
-            		<li><?php echo Html::a($takonomy['name'],['/post/default/list','takonomy'=>$takonomy['id']])?></li>
-            		<?php endforeach;?>
-            	</ul>
-            	
-            </div>
+            <?php echo $this->render(Resource::getThemePath('/views/_inc/takonomy'),['takonomyId'=>'post_takonomy']);?>   
             <div class="widget d_postlist">
                 <div class="title"><h2>热评文章</h2></div>
                 <ul>
