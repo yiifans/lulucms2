@@ -23,13 +23,13 @@ class BaseController extends Controller
 // 	                ],
 // 	            ],
 // 	        ],
-	        'verbs' => [
-	            'class' => VerbFilter::className(),
-	            'actions' => [
-	                'logout' => ['post'],
-	                'delete'=> ['post'],
-	            ],
-	        ],
+// 	        'verbs' => [
+// 	            'class' => VerbFilter::className(),
+// 	            'actions' => [
+// 	                'logout' => ['post'],
+// 	                'delete'=> ['post'],
+// 	            ],
+// 	        ],
 	    ];
 	}
 
@@ -41,7 +41,11 @@ class BaseController extends Controller
             ], 
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction', 
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null
+                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+                'height'=>'40',
+                'width'=>'100',
+                'minLength'=>3,
+                'maxLength'=>5,
             ]
         ];
     }

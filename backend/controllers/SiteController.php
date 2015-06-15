@@ -4,8 +4,10 @@ namespace backend\controllers;
 use yii\web\Controller;
 use source\LuLu;
 use yii\helpers\Url;
+use source\models\User;
+use source\core\back\BaseBackController;
 
-class SiteController extends Controller
+class SiteController extends BaseBackController
 {
 
     public function actionIndex()
@@ -18,15 +20,30 @@ class SiteController extends Controller
     {
         return $this->render('welcome');
     }
-    
+
     public function actionLogout()
     {
-        //logout
+        LuLu::$app->user->logout();
+        return $this->redirect([
+            'index'
+        ]);
+    }
+
+    public function actionLogin()
+    {
+        if (! LuLu::$app->user->isGuest)
+        {
+            return $this->goHome();
+        }
         
-        //redirect to home
-        $url = LuLu::getAlias('@web');
-        exit('<script>top.location.href="'.$url.'"</script>');
-        
-        //return $this->redirect(LuLu::getAlias('@web'));
+        $this->layout = false;
+        $model = new \source\models\LoginForm();
+        if ($model->load(LuLu::$app->request->post()) && $model->login())
+        {
+            return $this->goBack();
+        }
+        return $this->render('login', [
+            'model' => $model
+        ]);
     }
 }

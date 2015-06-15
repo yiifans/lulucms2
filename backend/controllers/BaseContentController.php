@@ -9,6 +9,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use source\libs\Common;
 use source\helpers\StringHelper;
+use source\LuLu;
 
 abstract class BaseContentController extends BaseBackController
 {
@@ -64,7 +65,7 @@ abstract class BaseContentController extends BaseBackController
     public function actionCreate()
     {
         $model = new Content();
-        $model->user_id = 1;
+        $model->user_id = LuLu::$app->user->identity->id;
         $model->content_type = $this->content_type;
         $model->loadDefaultValues();
         

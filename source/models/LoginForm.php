@@ -13,8 +13,9 @@ class LoginForm extends Model
     public $username;
     public $password;
     public $rememberMe = true;
-
-    private $_user = false;
+    public $verifyCode;
+    
+    private $_user = null;
 
 
     /**
@@ -29,9 +30,21 @@ class LoginForm extends Model
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
+            ['verifyCode', 'captcha'],
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            
+            'username' => '用户名',
+            'password' => '密码',
+            'verifyCode' => '验证码',
+    
+        ];
+    }
+    
     /**
      * Validates the password.
      * This method serves as the inline validation for password.
@@ -43,10 +56,17 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+            if($user===null)
+            {
+                $this->addError('username', 'Incorrect username.');
             }
+            else
+            {
+                if (!$user->validatePassword($this->password,$user->password_hash)) {
+                    $this->addError($attribute, 'Incorrect password.');
+                }
+            }
+            
         }
     }
 
@@ -63,6 +83,7 @@ class LoginForm extends Model
         }
     }
 
+    
     /**
      * Finds user by [[username]]
      *
@@ -70,7 +91,7 @@ class LoginForm extends Model
      */
     public function getUser()
     {
-        if ($this->_user === false) {
+        if ($this->_user === false||$this->_user===null) {
             $this->_user = User::findByUsername($this->username);
         }
 

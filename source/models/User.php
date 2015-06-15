@@ -68,6 +68,10 @@ class User extends \source\core\base\BaseActiveRecord  implements \yii\web\Ident
         ];
     }
     
+    public static function findByUsername($username)
+    {
+        return self::findOne(['username'=>$username]);
+    }
     
     public static function findIdentity($id)
     {
@@ -76,12 +80,6 @@ class User extends \source\core\base\BaseActiveRecord  implements \yii\web\Ident
     
     public static function findIdentityByAccessToken($token, $type = null)
     {
-    	foreach (self::$users as $user) {
-    		if ($user['accessToken'] === $token) {
-    			return new static($user);
-    		}
-    	}
-    
     	return null;
     }
     
@@ -105,6 +103,7 @@ class User extends \source\core\base\BaseActiveRecord  implements \yii\web\Ident
     	return Yii::$app->security->validatePassword($password, $password_hash);
     }
     
+   
    
     public function login()
     {
