@@ -84,13 +84,14 @@ $this->title = $this->getConfigValue('sys_site_name');
                         <li>
                             <?php echo Html::a('内容',['/page'],['data-menu'=>'module','target'=>'mainFrame'])?>
                         </li>
+                        <!--
                         <li>
                             <?php echo Html::a('用户',['/user'],['data-menu'=>'user','target'=>'mainFrame'])?>
                         </li>
                         <li>
                             <?php echo Html::a('工具',['/tool'],['data-menu'=>'tool','target'=>'mainFrame'])?>
                         </li>
-
+                        -->
                     </ul>
                 </div>
 
@@ -125,7 +126,7 @@ $this->title = $this->getConfigValue('sys_site_name');
                             <?php echo Html::a('<span>站点信息</span>',['/system/setting/basic'],['class'=>'active','target'=>'mainFrame'])?>
                         </li>
                         <li>
-                            <?php echo Html::a('<span>注册与访问控</span>',['/system/setting/access'],['target'=>'mainFrame'])?>
+                            <?php echo Html::a('<span>注册与访问控制</span>',['/system/setting/access'],['target'=>'mainFrame'])?>
                         </li>
                         <li>
                             <?php echo Html::a('<span>时间设置</span>',['/system/setting/datetime'],['target'=>'mainFrame'])?>
