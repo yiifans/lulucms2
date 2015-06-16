@@ -66,6 +66,7 @@ abstract class BaseContentController extends BaseBackController
     {
         $model = new Content();
         $model->user_id = LuLu::$app->user->identity->id;
+        $model->user_name = LuLu::$app->user->identity->username;
         $model->content_type = $this->content_type;
         $model->loadDefaultValues();
         
