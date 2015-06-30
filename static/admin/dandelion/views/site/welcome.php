@@ -23,7 +23,7 @@ $this->title='系统信息';
                             </tr>
                             <tr>
                                 <td><?php echo 'Yii交流社区'; ?></td>
-                                <td><?php  echo Html::a('Yii交流社区',['http://www.yiifans.com']) ?></td>
+                                <td><a href="http://www.yiifans.com" target="_blank"> Yii交流社区</a></td>
                             </tr>                            
                         </tbody>
                     </table>
