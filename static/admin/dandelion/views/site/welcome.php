@@ -19,7 +19,7 @@ $this->title='系统信息';
                             </tr>
                             <tr>
                                 <td><?php echo 'MySQL 版本'; ?></td>
-                                <td><?php  echo mysql_get_server_info(); ?></td>
+                                <td><?php echo Yii::$app->db->pdo->getAttribute(PDO::ATTR_SERVER_VERSION); ?></td>
                             </tr>
                             <tr>
                                 <td><?php echo 'Yii交流社区'; ?></td>
