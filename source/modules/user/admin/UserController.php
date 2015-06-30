@@ -5,14 +5,14 @@ namespace backend\controllers;
 use Yii;
 use source\models\User;
 use source\models\search\UserSearch;
-use source\core\back\BaseBackController;
+use source\core\back\BackController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * UserController implements the CRUD actions for User model.
  */
-class UserController extends BaseBackController
+class UserController extends BackController
 {
     public function behaviors()
     {

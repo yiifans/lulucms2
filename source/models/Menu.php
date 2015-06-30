@@ -3,6 +3,8 @@
 namespace source\models;
 
 use Yii;
+use source\libs\TreeHelper;
+use source\libs\Constants;
 
 /**
  * This is the model class for table "lulu_menu".
@@ -15,7 +17,7 @@ use Yii;
  * @property string $target
  * @property string $description
  * @property string $thumb
- * @property integer $enabled
+ * @property integer $status
  * @property integer $sort_num
  */
 class Menu extends \source\core\base\BaseActiveRecord
@@ -35,7 +37,7 @@ class Menu extends \source\core\base\BaseActiveRecord
     {
         return [
             [['parent_id', 'category_id', 'name', 'url'], 'required'],
-            [['parent_id', 'enabled', 'sort_num'], 'integer'],
+            [['parent_id', 'status', 'sort_num'], 'integer'],
             [['name', 'target', 'category_id'], 'string', 'max' => 64],
             [['url', 'description', 'thumb'], 'string', 'max' => 512]
         ];
@@ -53,34 +55,73 @@ class Menu extends \source\core\base\BaseActiveRecord
             'name' => '名称',
             'url' => '链接地址',
             'target' => '打开方式',
+            'targetText' => '打开方式',
             'description' => '描述',
             'thumb' => '图片',
-            'enabled' => '状态',
+            'status' => '状态',
+            'statusText' => '状态',
             'sort_num' => '排序',
         ];
     }
     
-    private $_level;
+    public function getStatusText()
+    {
+        return Constants::getStatusItems($this->status);
+    }
+    public function getTargetText()
+    {
+        return Constants::getTargetItems($this->target);
+    }
     
+    private $_level;
     public function getLevel()
     {
-    	return $this->_level;
+        return $this->_level;
     }
-    
     public function setLevel($value)
     {
-    	$this->_level = $value;
+        $this->_level = $value;
     }
-    
     
     public function getLevelName()
     {
-    	return str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $this->level).$this->name;
+        return str_repeat(Constants::TabSize, $this->level).$this->name;
+    }
+    
+    private $_parentIds;
+    public function getParentIds()
+    {
+        if($this->_parentIds===null)
+        {
+            $this->_parentIds=TreeHelper::getParentIds(Menu::className(), $this->parent_id);
+        }
+        return $this->_parentIds;
+    }
+    
+    private $_childrenIds;
+    public function getChildrenIds()
+    {
+        if($this->_childrenIds===null)
+        {
+            $this->_childrenIds= TreeHelper::getChildrenIds(Menu::className(), $this->id);
+        }
+        return $this->_childrenIds;
+    }
+    
+    public static function getChildren($category,$parentId,$status=null)
+    {
+        $where = ['category_id'=>$category,'parent_id'=>$parentId];
+        if($status!=null)
+        {
+            $where['status']=$status;
+        }
+        $items = self::findAll($where,'sort_num desc');
+        return $items;
     }
     
     private static function getArrayTreeInternal($category, $parentId = 0, $level = 0)
     {
-    	$items = self::findAll(['category_id'=>$category,'parent_id'=>$parentId],'sort_num desc');
+    	$items = self::getChildren($category,$parentId);
     	 
     	$dataList=[];
     	foreach ($items as $item)
@@ -97,5 +138,36 @@ class Menu extends \source\core\base\BaseActiveRecord
     public static function getArrayTree($category)
     {
     	return self::getArrayTreeInternal($category,0,0);
+    }
+    
+    public static function getMenuHtmlInternal($category,$items)
+    {
+        $html='';
+        foreach ($items as $menu)
+        {
+            $html .= '<li id="menu-item-'.$menu['id'].'" class="menu-item menu-item-type-'.$category.' menu-item-'.$menu['id'].'"><a href="'.$menu['url'].'" target="'.$menu['target'].'">'.$menu['name'].'</a>';
+            $children = self::getChildren($category,$menu['id'],1);
+            if(count($children)>0)
+            {
+                $html.='<ul class="children-menus menu-children-'.$menu['id'].'">';
+                $html.=self::getMenuHtmlInternal($category, $children);
+                $html.='</ul>';
+            }
+            $html.='</li>';
+        }
+   	    return $html;
+    }
+    
+    public static function getMenuHtml($category,$parentId)
+    {
+        $items = self::getChildren($category,$parentId,1);
+        return self::getMenuHtmlInternal($category, $items);
+    }
+    
+    public function beforeDelete()
+    {
+        $childrenIds = $this->getChildrenIds();
+        self::deleteAll(['id'=>$childrenIds]);
+        return true;
     }
 }

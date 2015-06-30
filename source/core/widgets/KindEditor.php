@@ -5,7 +5,7 @@ namespace source\core\widgets;
 use yii\base\Widget;
 use yii\web\View;
 use components\Core;
-use source\core\base\BaseWidget;
+
 
 class KindEditor extends BaseWidget
 {

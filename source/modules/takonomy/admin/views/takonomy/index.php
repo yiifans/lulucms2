@@ -1,38 +1,35 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use source\core\grid\GridView;
 use source\LuLu;
 use source\core\lib\Common;
 use source\models\Takonomy;
 use source\models\TakonomyCategory;
+use source\libs\Constants;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\TakonomySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title='分类项';
+
 $category=LuLu::getGetValue('category');
 $categoryModel = TakonomyCategory::findOne(['id'=>$category]);
+
+$this->title=$categoryModel['name'];
 $this->addBreadcrumbs([
 		['分类管理',['/takonomy']],
 		$categoryModel['name'],
 ]);
 
 ?>
-                <div class="mod">
-                    <div class="mod-head">
-                        <h3>
-                            <span class="pull-left"><?= $categoryModel['name']?></span>
-            
-                             
-                            <span class="pull-right"><?= Html::a('新建', ['create','category'=>$category], ['class' => 'btn btn-xs btn-primary mod-site-save']) ?></span>
-                            <span class="pull-right"><?= Html::a('返回', ['/takonomy/takonomy-category/index'], ['class' => 'btn btn-xs btn-primary mod-site-save']) ?></span>
-                             
-                        </h3>
-                    </div>
-                    <div class="tab-content mod-content">
-   
+<?php $this->toolbars([
+    Html::a('返回', ['/takonomy/takonomy-category/index'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
+    Html::a('新建', ['create','category'=>$category], ['class' => 'btn btn-xs btn-primary mod-site-save']),
+]);?>
+
+
+ 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
@@ -43,7 +40,7 @@ $this->addBreadcrumbs([
 				'attribute'=>'name',
 				'format'=>'html',
 				 'value'=>function ($model,$key,$index,$column){
-						return str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $model->level).Html::a($model->name,['takonomy/update','id'=>$model->id]);
+						return str_repeat(Constants::TabSize, $model->level).Html::a($model->name,['takonomy/update','id'=>$model->id]);
 				    }
 			],
            
@@ -56,16 +53,11 @@ $this->addBreadcrumbs([
             ],
             [
                 'attribute'=>'sort_num',
-                'headerOptions'=>['width'=>'120px']
+                'headerOptions'=>['width'=>'80px']
             ],
             ['class' => 'source\core\grid\ActionColumn',
 				'queryParams'=>['view'=>['category'=>$category]]
-],
+            ],
         ],
     ]); ?>
 
-
-                    </div>
-                    
-                   
-                </div>

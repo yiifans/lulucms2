@@ -1,0 +1,180 @@
+/*
+ * Dandelion Admin v1.0 - Wizard Navigation Stylesheet
+ *
+ * This file is part of Dandelion Admin, an Admin template build for sale at ThemeForest.
+ * For questions, suggestions or support request, please mail me at maimairel@yahoo.com
+ *
+ * Development Started:
+ * March 25, 2012
+ *
+ *
+ */
+ 
+/* (1) Wizard Clearfix
+================================================== */
+
+.da-wizard-nav ul:after {
+	clear: both;
+	content: ' ';
+	display: block;
+	font-size: 0;
+	line-height: 0;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+* html .da-wizard-nav ul  {
+	height: 1%;
+}
+
+/* (2) Wizard Navigation
+================================================== */
+
+.da-wizard-nav
+{
+	display:block;
+	clear:both;
+	margin:0 16px;
+	position:relative;
+	padding:16px 0;
+}
+
+.da-wizard-nav ul, 
+.da-wizard-nav ul li
+{
+	margin:0;
+	list-style:none;
+}
+
+.da-wizard-nav ul
+{
+	position:relative;
+}
+
+.da-wizard-nav ul li
+{
+	display:block;
+	z-index:25;
+	position:relative;
+	float:left;
+
+	background:url(../../images/wizard-nav.png) no-repeat right center;
+	
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-khtml-box-sizing: border-box;	
+}
+
+.da-wizard-nav ul li span, 
+.da-wizard-nav ul li a
+{
+	position:relative;
+	text-align:center;
+	display:block;
+	width:32px;
+	height:32px;
+	line-height:32px;
+	margin:4px 0;
+	float:right;
+	color:#545454;
+	z-index:20;
+	text-shadow:1px 1px 0 #ffffff;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+.da-wizard-nav ul li.active span, 
+.da-wizard-nav ul li.active a
+{
+	text-indent:-9999px;
+	background:url(../../images/icons/color/asterisk_orange.png) no-repeat center center;
+}
+
+.da-wizard-nav ul li.done span, 
+.da-wizard-nav ul li.done a
+{
+	text-indent:-9999px;
+	background:url(../../images/icons/color/accept.png) no-repeat center center;
+}
+
+.da-wizard-nav ul li span img, 
+.da-wizard-nav ul li a img
+{
+	max-width:16px;
+	max-height:16px;
+	margin:8px;
+}
+
+.da-wizard-nav ul li.done span.da-wizard-label, 
+.da-wizard-nav ul li.active span.da-wizard-label
+{
+	color:#444444;
+}
+
+.da-wizard-nav ul li.active span.da-wizard-label
+{
+	font-weight:bold;
+}
+
+.da-wizard-nav ul li span.da-wizard-label
+{
+	display:block;
+	margin:0;
+	line-height:16px;
+	clear:both;
+	width:auto;
+	height:auto;
+	color:#868686;
+	font-weight:normal;
+	margin-bottom:-16px;
+	background:none !important;
+	
+	text-align:right;
+	white-space: nowrap;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.da-wizard-nav .da-wizard-progress
+{
+	position:absolute;
+	left:0;
+	top:0; bottom:0;
+	margin:16px 0;
+	z-index:15;
+}
+
+.da-wizard-nav .da-wizard-progress, 
+.da-wizard-nav.green .da-wizard-progress
+{
+	background-color:#cef576;
+}
+
+.da-wizard-nav.red .da-wizard-progress
+{
+	background-color:#e67474;
+}
+
+.da-wizard-nav.blue .da-wizard-progress
+{
+	background-color:#85b8e6;
+}
+
+/* (3) Wizard Form
+================================================== */
+
+.da-wizard-form fieldset
+{
+	border-top:0;
+	border-bottom:1px solid #d3d3d3;
+}
+
+.da-wizard-form
+{
+	margin-top:16px;
+	border-top:1px solid #d3d3d3;
+}

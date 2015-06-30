@@ -1,7 +1,7 @@
 <?php
 namespace source\modules\page;
 
-class HomeModule extends \source\core\modularity\BaseFrontModule
+class HomeModule extends \source\core\modularity\FrontModule
 {
 
     public $controllerNamespace = 'source\modules\page\home';

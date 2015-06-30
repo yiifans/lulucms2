@@ -13,7 +13,7 @@ namespace source\modules\<?= $generator->moduleDir?>\admin;;
 
 use source\LuLu;
 
-class DefaultController extends \source\core\back\BaseBackController
+class DefaultController extends \source\core\back\BackController
 {
     public function actionIndex()
     {

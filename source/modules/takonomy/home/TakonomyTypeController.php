@@ -8,12 +8,12 @@ use source\models\search\TakonomyTypeSearch;
 use source\core\base\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use source\core\front\BaseFrontController;
+use source\core\front\FrontController;
 
 /**
  * TakonomyTypeController implements the CRUD actions for TakonomyType model.
  */
-class TakonomyTypeController extends BaseFrontController
+class TakonomyTypeController extends FrontController
 {
     public function behaviors()
     {

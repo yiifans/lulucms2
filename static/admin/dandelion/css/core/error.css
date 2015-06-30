@@ -1,0 +1,141 @@
+/*
+ * Dandelion Admin v1.0 - Error Stylesheet
+ *
+ * This file is part of Dandelion Admin, an Admin template build for sale at ThemeForest.
+ * For questions, suggestions or support request, please mail me at maimairel@yahoo.com
+ *
+ * Development Started:
+ * March 25, 2012
+ *
+ * ===============================================
+ * Table of Contents
+ * ===============================================
+ *
+ * 1. Error Wrapper
+ * 2. Error Heading
+ * 3. Error Code
+ * 4. Error Typopgraphy
+ *
+ */
+
+/* (1) Error Wrapper
+================================================== */
+
+div#da-error-wrapper
+{
+	width:320px;
+	padding:30px 0;
+	margin:auto;
+	position:relative;
+}
+
+/* (2) Error Heading
+================================================== */
+
+div#da-error-wrapper .da-error-heading
+{
+	color:#e15656;
+	text-align:center;
+	font-size:24px;
+	
+	font-family:Georgia, "Times New Roman", Times, serif;
+}
+
+/* (3) Error Code
+================================================== */
+
+@-webkit-keyframes error-swing
+{
+	0% {
+		-webkit-transform:rotate(1deg);
+	}
+	
+	100% {
+		-webkit-transform:rotate(-2deg);
+	}
+}
+
+@-moz-keyframes error-swing
+{
+	0% {
+		-moz-transform:rotate(1deg);
+	}
+	
+	100% {
+		-moz-transform:rotate(-2deg);
+	}
+}
+
+@keyframes error-swing
+{
+	0% {
+		transform:rotate(1deg);
+	}
+	
+	100% {
+		transform:rotate(-2deg);
+	}
+}
+
+div#da-error-wrapper #da-error-code
+{
+	width:285px;
+	height:170px;
+	padding:127px 16px 0 16px;
+	position:relative;
+	margin:auto;
+	margin-bottom:20px;
+	z-index:5;
+	line-height:1;
+	font-size:32px;
+	text-align:center;
+	background:url(../../images/error-hanger.png) no-repeat center center;
+	
+	-webkit-transform-origin:center top;
+	-moz-transform-origin:center top;
+	transform-origin:center top;
+		
+	-webkit-animation:error-swing infinite 2s ease-in-out alternate;
+	-moz-animation:error-swing infinite 2s ease-in-out alternate;
+	animation:error-swing infinite 2s ease-in-out alternate;
+}
+
+div#da-error-wrapper #da-error-code span
+{
+	font-size:96px;
+	display:block;
+}
+
+div#da-error-wrapper #da-error-pin
+{
+	width:38px; height:38px;
+	display:block;
+	margin:auto;
+	margin-bottom:-27px;
+	z-index:10;
+	position:relative;
+	background:url(../../images/error-pin.png) no-repeat center center;
+}
+
+/* (4) Error Typopgraphy
+================================================== */
+
+div#da-error-wrapper p
+{
+	text-align:center;
+	font-size:14px;
+}
+
+div#da-error-wrapper p a
+{
+	color:#ffffff;
+	background:#a6d037;
+	text-decoration:none;
+	padding:1px 6px;
+	display:inline-block;
+	
+	-webkit-border-radius:4px;
+	-o-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px;
+}

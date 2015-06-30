@@ -5,14 +5,14 @@ use yii\web\Controller;
 use source\LuLu;
 use yii\helpers\Url;
 use source\models\User;
-use source\core\back\BaseBackController;
+use source\core\back\BackController;
 
-class SiteController extends BaseBackController
+class SiteController extends BackController
 {
 
     public function actionIndex()
     {
-        $this->layout = 'container';
+        
         return $this->render('index');
     }
 

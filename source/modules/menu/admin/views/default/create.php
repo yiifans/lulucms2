@@ -18,11 +18,7 @@ $this->addBreadcrumbs([
 		$this->title,
 		]);
 ?>
-<div class="menu-create">
 
-
-    <?= $this->render('_form', [
+<?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
-</div>

@@ -14,10 +14,6 @@ $this->addBreadcrumbs([
 
 
 ?>
-<div class="takonomy-category-update">
-
-    <?= $this->render('_form', [
+ <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
-</div>

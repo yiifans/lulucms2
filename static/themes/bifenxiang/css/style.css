@@ -1701,29 +1701,33 @@ button.btn, input[type="submit"].btn {
         z-index: 2;
     }
 
-    .navbar .nav li:hover > ul {
+    .navbar .nav li:hover > .children-menus {
         display: block;
     }
 
-    .navbar .nav > li > ul > li > ul {
-        padding-bottom: 10px;
-        text-align: left;
-        position: absolute;
-        left: 100%;
+    .navbar .nav  .children-menus {
+        white-space:nowrap;
+        position:absolute;
         min-width: 120px;
-        z-index: 10;
-        display: none;
-        font-size: 12px;
+       
+        display:none;
     }
-
-    .navbar .nav > li > ul > li {
+    .navbar .nav ul .children-menus {
+        
+        left:100%;
+        top:-1px;
+        z-index: 10;
+        box-shadow: 0 1px 7px rgba(0,0,0,0.3);
+    }
+    .navbar .nav .children-menus li {
         float: none;
         margin: 0;
         position: relative;
-        background-color: #445552;
+        background-color:#323231;
+        border-top:1px solid #222;
+        border-bottom:1px solid #444;
     }
-
-        .navbar .nav > li > ul > li > a, .navbar .nav > li > ul > li > ul > li > a {
+    .navbar .nav .children-menus a {
             float: none;
             display: block;
             *min-width: 100px;
@@ -1732,21 +1736,6 @@ button.btn, input[type="submit"].btn {
             color: #fff;
         }
 
-            .navbar .nav > li > ul > li > a:hover, .navbar .nav li li.current-menu-item a {
-                color: #fff;
-            }
-
-    .navbar .nav li li a:hover, .navbar .nav li li.current-menu-item a {
-        background-color: #576663;
-    }
-
-    .navbar .nav li li a:hover, .navbar .nav li li.current-page-ancestor a {
-        background-color: #576663;
-    }
-
-    .navbar .nav li:hover a, .navbar .nav li.current-menu-item a, .navbar .nav li.current-menu-parent a, .navbar .nav li.current_page_item a, .navbar .nav li.current-post-ancestor a {
-        background-color: #16a085;
-    }
 
 .sub-menu {
     min-width: 130px;

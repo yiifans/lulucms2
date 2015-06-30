@@ -14,10 +14,7 @@ $this->addBreadcrumbs([
 		]);
 
 ?>
-<div class="menu-category-create">
 
-    <?= $this->render('_form', [
+ <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
-</div>

@@ -1,0 +1,115 @@
+/*
+ * Dandelion Admin v1.0 - Typography Stylesheet
+ *
+ * This file is part of Dandelion Admin, an Admin template build for sale at ThemeForest.
+ * For questions, suggestions or support request, please mail me at maimairel@yahoo.com
+ *
+ * Development Started:
+ * March 25, 2012
+ *
+ * ===============================================
+ * Table of Contents
+ * ===============================================
+ *
+ * 1. Basic HTML
+ * 2. Headings
+ * 3. Blockquote
+ * 4. Spacings
+ *
+ */
+
+/* (1) Basic HTML
+================================================== */
+
+pre,
+code {
+  font-family:"Courier New", Courier, monospace;
+}
+
+hr {
+  border: 0 #ccc solid;
+  border-top-width: 1px;
+  clear: both;
+  height: 0;
+}
+
+/* (2) Headings
+================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight:normal;
+}
+
+h1 {
+  font-size: 21px;
+}
+
+h2 {
+  font-size: 19px;
+}
+
+h3 {
+  font-size: 17px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 15px;
+}
+
+h6 {
+  font-size: 14px;
+}
+
+/* (3) Blockquote
+================================================== */
+
+blockquote
+{
+	border-left:4px solid #A6D037;
+	font-size:14px;
+	padding:10px;
+	font-style:italic;
+}
+
+/* (4) Spacing
+================================================== */
+
+ol {
+  list-style: decimal;
+}
+
+ul {
+  list-style: disc;
+}
+
+li {
+  margin-left: 30px;
+}
+
+pre li, 
+code li {
+	margin-left:0;
+}
+
+p,
+dl,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol,
+ul,
+pre,
+table,
+address,
+fieldset, 
+figure {
+  margin-bottom: 20px;
+}

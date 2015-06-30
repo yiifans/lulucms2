@@ -1,0 +1,195 @@
+/*
+ * Dandelion Admin v1.0 - Form Elements Stylesheet
+ *
+ * This file is part of Dandelion Admin, an Admin template build for sale at ThemeForest.
+ * For questions, suggestions or support request, please mail me at maimairel@yahoo.com
+ *
+ * Development Started:
+ * March 25, 2012
+ *
+ * ===============================================
+ * Table of Contents
+ * ===============================================
+ *
+ * 1. Input, select, textarea and customfile
+ * 2. Customfile
+ * 3. ui-slider
+ * 4. ui-progressbar
+ * 5. Chosen
+ *
+ */
+
+/* (1) Input, select, textarea and customfile
+================================================== */
+
+form.da-form input
+{
+	outline:none;
+}
+
+form.da-form input[type="text"], 
+form.da-form input[type="password"], 
+form.da-form select, 
+form.da-form textarea, 
+form.da-form .customfile
+{
+	background-color:#fcfcfc;
+	border:1px solid #d1d1d1;
+	padding:6px;
+	outline:none;
+	width:100%;
+	margin:0;
+	color:#444444;
+	font-size:1em;
+	
+	-webkit-border-radius:2px;
+	-o-border-radius:2px;
+	-moz-border-radius:2px;
+	border-radius:2px;
+	
+	-webkit-box-sizing:border-box;
+	-o-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+	
+	-webkit-box-shadow:0 1px 0 rgba(255, 255, 255, 1), inset 0 1px 1px rgba(0, 0, 0, 0.04);
+	-moz-box-shadow:0 1px 0 rgba(255, 255, 255, 1), inset 0 1px 1px rgba(0, 0, 0, 0.04);
+	-o-box-shadow:0 1px 0 rgba(255, 255, 255, 1), inset 0 1px 1px rgba(0, 0, 0, 0.04);
+	box-shadow:0 1px 0 rgba(255, 255, 255, 1), inset 0 1px 1px rgba(0, 0, 0, 0.04);
+
+	-webkit-transition: background 150ms linear;
+	-moz-transition: background 150ms linear;
+	-ms-transition: background 150ms linear;
+	-o-transition: background 150ms linear;
+	transition: background 150ms linear;
+}
+
+form.da-form input[type="text"]:focus, 
+form.da-form input[type="password"]:focus, 
+form.da-form select:focus, 
+form.da-form textarea:focus
+{
+	border-color:#bbc1c9;
+	background-color:#ffffff;
+}
+
+form.da-form input[type="text"].error, 
+form.da-form input[type="password"].error, 
+form.da-form select.error, 
+form.da-form textarea.error
+{
+	border-color:#e48c85;
+}
+
+form.da-form input[type="text"]:disabled, 
+form.da-form input[type="password"]:disabled, 
+form.da-form select:disabled, 
+form.da-form textarea:disabled
+{
+	background:#f0f0f0;
+}
+
+form.da-form textarea
+{
+	height:10em;
+	margin:2px 0;
+	resize:none;
+}
+
+/* (2) Customfile
+================================================== */
+
+.customfile-input
+{
+	position: absolute;
+	height: 100px;
+	cursor:pointer;
+	background: transparent;
+	border: 0;
+	opacity: 0;
+	-moz-opacity: 0;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+	z-index: 999999;
+}
+
+form.da-form .customfile
+{
+	position:relative;
+	overflow:hidden; 
+}
+
+.customfile-disabled
+{
+	opacity: .5;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+	cursor: default;
+}
+
+.customfile-feedback
+{
+	line-height:15px;
+	display:block;
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+
+.customfile-button
+{
+	outline:none;
+	float:right;
+	line-height:15px;
+	padding:6px 10px;
+	margin:-7px -7px -7px 0;
+	cursor:pointer;
+	z-index:9999;
+	
+	background:#f3f3f3 url(../../images/button-gradient.png) repeat-x left bottom;
+	border:1px solid #d1d1d1;
+	
+	-webkit-border-radius:0 2px 2px 0;
+	-o-border-radius:0 2px 2px 0;
+	-moz-border-radius:0 2px 2px 0;
+	border-radius:0 2px 2px 0;
+	
+	-webkit-box-shadow:inset 0 1px 1px rgba(255, 255, 255, 0.6);
+	-o-box-shadow:inset 0 1px 1px rgba(255, 255, 255, 0.6);
+	-moz-box-shadow:inset 0 1px 1px rgba(255, 255, 255, 0.6);
+	box-shadow:inset 0 1px 1px rgba(255, 255, 255, 0.6);
+}
+
+.customfile:not(.customfile-disabled):active .customfile-button
+{
+	background-image:none;
+	
+	-webkit-box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.1);
+	-o-box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.1);
+	box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* (3) ui-slider
+================================================== */
+
+form.da-form .da-form-row .ui-slider { margin-top:12px; margin-bottom:24px;  }
+
+/* (4) ui-progressbar
+================================================== */
+
+form.da-form .da-form-row .ui-progressbar { margin-top:7px; margin-bottom:24px;  }
+
+/* (5) Chosen
+================================================== */
+
+form.da-form .da-form-row .chzn-container-multi .chzn-choices .search-field input
+{
+	-webkit-border-radius:0;
+	-moz-border-radius:0;
+	-o-border-radius:0;
+	border-radius:0;
+	
+	-webkit-box-sizing:content-box;
+	-moz-box-sizing:content-box;
+	-o-box-sizing:content-box;
+	box-sizing:content-box;
+}

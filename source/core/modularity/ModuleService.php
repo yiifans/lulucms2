@@ -4,7 +4,7 @@ namespace source\core\modularity;
 use yii\base\Object;
 use source\core\base\BaseComponent;
 
-class ModuleService extends BaseComponent
+class ModuleService extends BaseComponent implements IModuleService
 {
 
     public $id;

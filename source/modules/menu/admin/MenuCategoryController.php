@@ -5,27 +5,16 @@ namespace source\modules\menu\admin;
 use Yii;
 use source\models\MenuCategory;
 use source\models\search\MenuCategorySearch;
-use source\core\back\BaseBackController;
+use source\core\back\BackController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * MenuCategoryController implements the CRUD actions for MenuCategory model.
  */
-class MenuCategoryController extends BaseBackController
+class MenuCategoryController extends BackController
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
-
+   
     /**
      * Lists all MenuCategory models.
      * @return mixed

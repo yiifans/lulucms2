@@ -4,8 +4,8 @@ namespace source\modules\takonomy;
 
 
 
-use source\core\modularity\BaseBackModule;
-class AdminModule extends BaseBackModule
+use source\core\modularity\BackModule;
+class AdminModule extends BackModule
 {
     public $controllerNamespace = 'source\modules\takonomy\admin';
 

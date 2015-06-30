@@ -1,0 +1,597 @@
+/*
+ * Dandelion Admin v1.0 - Form Structure Stylesheet
+ *
+ * This file is part of Dandelion Admin, an Admin template build for sale at ThemeForest.
+ * For questions, suggestions or support request, please mail me at maimairel@yahoo.com
+ *
+ * Development Started:
+ * March 25, 2012
+ *
+ * ===============================================
+ * Table of Contents
+ * ===============================================
+ *
+ *  1. Clearfix
+ *  2. Form Row
+ *  3. Button Row
+ *  4. Form Column
+ *  5. Form List
+ *  6. Form Labels
+ *  7. Form Fieldset
+ *  8. Inline Form Message
+ *  9. Inline Form Note
+ * 10. Form Item
+ * 11. Form Layouts
+ * 12. Media Queries
+ *
+ */
+
+/* (1) Form Clearfix
+================================================== */
+
+form.da-form .da-button-row:after, 
+form.da-form .da-form-row:after, 
+form.da-form:after, 
+form.da-form-item:after, 
+.da-form ul.da-form-list:after {
+	clear: both;
+	content: ' ';
+	display: block;
+	font-size: 0;
+	line-height: 0;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+* html .da-button-row, 
+* html .da-form-row, 
+* html .da-form, 
+* html .da-form-item, 
+* html .da-form ul.da-form-list  {
+	height: 1%;
+}
+
+
+/* (2) Form Row
+================================================== */
+
+.da-form .da-form-row
+{
+	padding:23px 16px;
+	display:block;
+	border-bottom:1px solid #d3d3d3;
+}
+
+.da-form .da-form-row:last-child
+{
+	border-bottom:0;
+}
+
+
+/* (3) Button Row
+================================================== */
+
+.da-form .da-button-row
+{
+	background-color:#F2F0F0;
+	border-top:1px solid #d3d3d3;
+	margin:0; padding:16px;
+	margin-top:-1px;
+	text-align:right;
+	
+	/* CSS 3 */
+	
+	-webkit-border-radius:0 0 4px 4px;
+	-o-border-radius:0 0 4px 4px;
+	-moz-border-radius:0 0 4px 4px;
+	border-radius:0 0 4px 4px;
+	
+	-webkit-box-shadow:inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+/* (4) Form Column
+================================================== */
+
+form.da-form .da-form-col-1-8 label, 
+form.da-form .da-form-col-2-8 label, 
+form.da-form .da-form-col-3-8 label, 
+form.da-form .da-form-col-4-8 label, 
+form.da-form .da-form-col-5-8 label, 
+form.da-form .da-form-col-6-8 label, 
+form.da-form .da-form-col-7-8 label, 
+form.da-form .da-form-col-8-8 label
+{
+	white-space: nowrap;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+form.da-form .da-form-col-1-8, 
+form.da-form .da-form-col-2-8, 
+form.da-form .da-form-col-3-8, 
+form.da-form .da-form-col-4-8, 
+form.da-form .da-form-col-5-8, 
+form.da-form .da-form-col-6-8, 
+form.da-form .da-form-col-7-8, 
+form.da-form .da-form-col-8-8
+{
+	float:left;
+	padding:0 1%;
+
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-khtml-box-sizing: border-box;
+}
+
+form.da-form .da-form-col-1-8.alpha, 
+form.da-form .da-form-col-2-8.alpha, 
+form.da-form .da-form-col-3-8.alpha, 
+form.da-form .da-form-col-4-8.alpha, 
+form.da-form .da-form-col-5-8.alpha, 
+form.da-form .da-form-col-6-8.alpha, 
+form.da-form .da-form-col-7-8.alpha, 
+form.da-form .da-form-col-8-8.alpha
+{
+	padding-left:0;
+	clear:left;
+}
+
+form.da-form .da-form-col-1-8.omega, 
+form.da-form .da-form-col-2-8.omega, 
+form.da-form .da-form-col-3-8.omega, 
+form.da-form .da-form-col-4-8.omega, 
+form.da-form .da-form-col-5-8.omega, 
+form.da-form .da-form-col-6-8.omega, 
+form.da-form .da-form-col-7-8.omega, 
+form.da-form .da-form-col-8-8.omega
+{
+	padding-right:0;
+	clear:right;
+}
+
+form.da-form .da-form-col-1-8
+{
+	width:12.5%;
+}
+
+form.da-form .da-form-col-2-8
+{
+	width:25%;
+}
+
+form.da-form .da-form-col-3-8
+{
+	width:37.5%;
+}
+
+form.da-form .da-form-col-4-8
+{
+	width:50%;
+}
+
+form.da-form .da-form-col-5-8
+{
+	width:62.5%;
+}
+
+form.da-form .da-form-col-6-8
+{
+	width:75%;
+}
+
+form.da-form .da-form-col-7-8
+{
+	width:87.5%;
+}
+
+form.da-form .da-form-col-8-8
+{
+	width:100%;
+}
+
+form.da-form .da-form-col-1 label, 
+form.da-form .da-form-col-2 label, 
+form.da-form .da-form-col-3 label, 
+form.da-form .da-form-col-4 label, 
+form.da-form .da-form-col-5 label, 
+form.da-form .da-form-col-6 label, 
+form.da-form .da-form-col-7 label, 
+form.da-form .da-form-col-8 label,
+form.da-form .da-form-col-9 label,
+form.da-form .da-form-col-10 label,
+form.da-form .da-form-col-11 label,
+form.da-form .da-form-col-12 label
+{
+	white-space: nowrap;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+form.da-form .da-form-col-1, 
+form.da-form .da-form-col-2, 
+form.da-form .da-form-col-3, 
+form.da-form .da-form-col-4, 
+form.da-form .da-form-col-5, 
+form.da-form .da-form-col-6, 
+form.da-form .da-form-col-7, 
+form.da-form .da-form-col-8,
+form.da-form .da-form-col-9,
+form.da-form .da-form-col-10,
+form.da-form .da-form-col-11,
+form.da-form .da-form-col-12
+{
+	float:left;
+	padding:0 1%;
+
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-khtml-box-sizing: border-box;
+}
+
+form.da-form .da-form-col-1.alpha, 
+form.da-form .da-form-col-2.alpha, 
+form.da-form .da-form-col-3.alpha, 
+form.da-form .da-form-col-4.alpha, 
+form.da-form .da-form-col-5.alpha, 
+form.da-form .da-form-col-6.alpha, 
+form.da-form .da-form-col-7.alpha, 
+form.da-form .da-form-col-8.alpha,
+form.da-form .da-form-col-9.alpha,
+form.da-form .da-form-col-10.alpha,
+form.da-form .da-form-col-11.alpha,
+form.da-form .da-form-col-12.alpha
+{
+	padding-left:0;
+	clear:left;
+}
+
+form.da-form .da-form-col-1.omega, 
+form.da-form .da-form-col-2.omega, 
+form.da-form .da-form-col-3.omega, 
+form.da-form .da-form-col-4.omega, 
+form.da-form .da-form-col-5.omega, 
+form.da-form .da-form-col-6.omega, 
+form.da-form .da-form-col-7.omega, 
+form.da-form .da-form-col-8.omega,
+form.da-form .da-form-col-9.omega,
+form.da-form .da-form-col-10.omega,
+form.da-form .da-form-col-11.omega,
+form.da-form .da-form-col-12.omega
+{
+	padding-right:0;
+	clear:right;
+}
+
+form.da-form .da-form-col-1{width:8.33%;}
+form.da-form .da-form-col-2{width:16.67%;}
+form.da-form .da-form-col-3{width:25.00%;}
+form.da-form .da-form-col-4{width:33.33%;}
+form.da-form .da-form-col-5{width:41.67%;}
+form.da-form .da-form-col-6{width:50.00%;}
+form.da-form .da-form-col-7{width:58.33%;}
+form.da-form .da-form-col-8{width:66.67%;}
+form.da-form .da-form-col-9{width:75.00%;}
+form.da-form .da-form-col-10{width:83.33%;}
+form.da-form .da-form-col-11{width:91.67%;}
+form.da-form .da-form-col-12{width:100%;}
+
+
+/* (5) Form List
+================================================== */
+
+.da-form ul.da-form-list
+{
+	display:block;
+	width:100% !important;
+}
+
+.da-form ul.da-form-list.inline
+{
+	margin-bottom:0;
+}
+
+.da-form ul.da-form-list, 
+.da-form ul.da-form-list li
+{
+	margin:0;
+	line-height:normal;
+	list-style:none;
+}
+
+.da-form ul.da-form-list
+{
+	margin-bottom:4px;
+}
+
+.da-form ul.da-form-list li
+{
+	margin-bottom:4px;
+}
+
+.da-form ul.da-form-list li:last-child
+{
+	margin:0;
+}
+
+.da-form ul.da-form-list.inline li
+{
+	float:left;
+	margin:5px 10px 0 0;
+}
+
+.da-form ul.da-form-list li input, 
+.da-form ul.da-form-list li label
+{
+	float:none !important;
+	padding:0;
+	margin:0 2px 0 0;
+	width:auto !important;
+	display:inline !important;
+	vertical-align:middle !important;
+}
+
+/* (6) Form Labels
+================================================== */
+
+.da-form label
+{
+	cursor:pointer;
+	display:block;
+}
+
+.da-form label .required
+{
+	color:#ff0000;
+}
+
+/* (7) Form Fieldset
+================================================== */
+
+.da-form fieldset
+{
+	margin-bottom:0;
+	border-top:1px solid #d3d3d3;
+}
+
+.da-form fieldset legend
+{
+	padding:4px 6px;
+	margin:0 10px;
+	background-color:#fafafa;
+	border:1px solid #d3d3d3;
+}
+
+/* (8) Inline Form Message
+================================================== */
+
+.da-form .da-form-item .errorMessage, 
+.da-form .da-form-item label.error
+{
+	display:block;
+	color:#d44d24;
+	font-size:11px;
+	width:100% !important;
+	margin-top:1px;
+	padding:0 !important;
+}
+
+/* (9) Inline Form Note
+================================================== */
+
+.da-form .da-form-item .formNote
+{
+	display:block;
+	color:#555555;
+	font-size:11px;
+	margin-bottom:1px;
+	font-style:italic;
+	margin-top:-17px;
+	text-align:right;
+	
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+
+.da-form .da-form-item a.formNote
+{
+	color:#73991F;
+}
+
+.da-form .da-form-item .formNote.left
+{
+	text-align:left;
+}
+
+
+/* (10) Form Item
+================================================== */
+
+.da-form .da-form-row .da-form-item
+{
+	position:relative;
+}
+
+.da-form .da-form-row .da-form-item > *, 
+.da-form .da-form-row .da-form-item.default > *
+{
+	width:70%;
+}
+
+.da-form .da-form-row .da-form-item.small > *
+{
+	width:35%;
+}
+
+.da-form .da-form-row .da-form-item.large > *
+{
+	width:100%;
+}
+
+.da-form .da-form-row .da-form-item > input[type="checkbox"], 
+.da-form .da-form-row .da-form-item.default > input[type="checkbox"],
+.da-form .da-form-row .da-form-item.small > input[type="checkbox"],
+.da-form .da-form-row .da-form-item.large > input[type="checkbox"],
+.da-form .da-form-row .da-form-item > input[type="radio"], 
+.da-form .da-form-row .da-form-item.default > input[type="radio"],
+.da-form .da-form-row .da-form-item.small > input[type="radio"],
+.da-form .da-form-row .da-form-item.large > input[type="radio"]
+{
+	width:auto;
+}
+
+/* (11) Form Layouts
+================================================== */
+
+	/* (11.1) Inline Form Layout
+	================================================== */
+
+	.da-form .da-form-row, 
+	.da-form .da-form-inline .da-form-row, 
+	.da-form .da-form-row.da-form-inline
+	{
+		width:100%;
+		
+		/* CSS 3 */
+		
+		-webkit-box-sizing:border-box;
+		-o-box-sizing:border-box;
+		-moz-box-sizing:border-box;
+		box-sizing:border-box;
+	}
+	
+	.da-form .da-form-row label, 
+	.da-form .da-form-inline .da-form-row label, 
+	.da-form .da-form-row.da-form-inline label
+	{
+		float:left;
+		width:120px;
+		padding:6px 0;
+	}
+	
+	.da-form .da-form-row .da-form-item, 
+	.da-form .da-form-inline .da-form-row .da-form-item, 
+	.da-form .da-form-row.da-form-inline .da-form-item
+	{
+		margin-left:136px;
+	}
+
+	/* (11.2) Block Form Layout
+	================================================== */
+
+	.da-form .da-form-block .da-form-row, 
+	.da-form .da-form-row.da-form-block
+	{
+		width:100%;
+		
+		/* CSS 3 */
+		
+		-webkit-box-sizing:border-box;
+		-o-box-sizing:border-box;
+		-moz-box-sizing:border-box;
+		box-sizing:border-box;
+	}
+	
+	.da-form .da-form-block .da-form-row label, 
+	.da-form .da-form-row.da-form-block label
+	{
+		float:none;
+		width:auto;
+		display:block;
+		padding:0 0 6px 0;
+	}
+	
+	.da-form .da-form-block .da-form-row .da-form-item, 
+	.da-form .da-form-row.da-form-block .da-form-item
+	{
+		margin:0;
+		display:block;
+	}
+
+/* (12) Media Queries
+================================================== */
+
+	/* (12.1) Smaller than 1024px
+	 *
+	 * 1. Prevent inline forms, force block layout
+	 * 2. Align form notes to the left, and remove top negative margin
+	 *
+	================================================== */
+	
+	@media only screen and (max-width: 1023px)
+	{
+	}
+	
+	/* (12.2) Larger than 480px and smaller than 1024px
+	 *
+	 *
+	================================================== */
+	
+	@media only screen and (min-width: 481px) and (max-width: 1023px)
+	{
+	}
+
+	/* (12.3) iPad Portrait, Galaxy Tab Portrait
+	 *
+	 *
+	================================================== */
+	
+	@media only screen and (max-width: 768px)
+	{
+		.da-form .da-form-row label, 
+		.da-form .da-form-inline .da-form-row label, 
+		.da-form .da-form-row.da-form-inline label
+		{
+			clear:both;
+			float:none;
+			width:auto;
+			padding:0 0 6px 0;
+		}
+		
+		.da-form .da-form-row .da-form-item, 
+		.da-form .da-form-inline .da-form-row .da-form-item, 
+		.da-form .da-form-row.da-form-inline .da-form-item
+		{
+			clear:both;
+			float:none;
+			margin:0;
+		}
+		
+		.da-form .da-form-item .formNote
+		{
+			text-align:left;
+			margin-top:auto;
+		}
+	}
+	
+	/* (12.4) iPhone, Android, full mobile site
+	 *
+	 *
+	================================================== */
+
+	@media only screen and (max-width: 480px)
+	{
+		.da-form .da-form-row
+		{
+			padding:12px;
+		}
+		
+		.da-form .da-button-row
+		{
+			padding:8px;
+		}
+		
+		.da-form .da-form-item .errorMessage, 
+		.da-form .da-form-item label.error
+		{
+			margin:1px 0 0 0;
+		}
+	}
+	

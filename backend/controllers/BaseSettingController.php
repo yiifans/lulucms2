@@ -4,11 +4,11 @@ namespace backend\controllers;
 use Yii;
 use source\models\Config;
 use source\models\search\ConfigSearch;
-use source\core\back\BaseBackController;
+use source\core\back\BackController;
 use yii\base\InvalidParamException;
 use source\models\ConfigForm;
 
-abstract class BaseSettingController extends BaseBackController
+abstract class BaseSettingController extends BackController
 {
 
     public function doConfig($model, $view = null)

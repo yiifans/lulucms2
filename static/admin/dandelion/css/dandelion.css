@@ -1,0 +1,28 @@
+/*
+ * Dandelion Admin v1.0 - Main Stylesheet
+ *
+ * This file is part of Dandelion Admin, an Admin template build for sale at ThemeForest.
+ * For questions, suggestions or support request, please mail me at maimairel@yahoo.com
+ *
+ * Development Started:
+ * March 25, 2012
+ *
+ */
+
+@import url("core/typography.css");
+@import url("core/core.css");
+@import url("core/panel.css");
+@import url("core/form-structure.css");
+@import url("core/form-elements.css");
+@import url("core/form-message.css");
+@import url("core/button.css");
+@import url("core/table.css");
+@import url("core/plugins.css");
+@import url("core/gallery.css");
+@import url("core/statistic.css");
+@import url("core/panel-toolbar.css");
+@import url("core/wizard.css");
+@import url("core/error.css");
+
+/* Customizer stylesheet, remove if not needed */
+@import url("core/customizer.css");

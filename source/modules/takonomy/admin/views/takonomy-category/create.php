@@ -14,11 +14,6 @@ $this->addBreadcrumbs([
 
 
 ?>
-<div class="takonomy-category-create">
-
-
-    <?= $this->render('_form', [
+ <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
-</div>

@@ -5,14 +5,14 @@ namespace source\modules\takonomy\admin;
 use Yii;
 use source\models\TakonomyType;
 use source\models\search\TakonomyTypeSearch;
-use source\core\back\BaseBackController;
+use source\core\back\BackController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * TakonomyTypeController implements the CRUD actions for TakonomyType model.
  */
-class TakonomyTypeController extends BaseBackController
+class TakonomyTypeController extends BackController
 {
     public function behaviors()
     {

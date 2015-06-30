@@ -30,7 +30,7 @@ return [
             'errorAction' => 'site/error',
         ],
         'view' => [
-	        'class' => 'source\core\front\BaseFrontView',
+	        'class' => 'source\core\front\FrontView',
         ],
         
     ],

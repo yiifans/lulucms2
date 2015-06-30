@@ -13,46 +13,49 @@ $this->title = '模块管理';
 $this->params['breadcrumbs'][] = $this->title;
 
 
+$css=<<<CSS
+table.da-table tr td.da-icon-column {
+text-align: center;
+width: 120px;
+}
+table.da-table tr td.da-icon-column a{margin-right:5px;}
+CSS;
+$this->registerCss($css);
+
 ?>
 
+<?php $this->toolbars([
+    Html::a('新建模块', ['/gii/default/view','id'=>'extmodule'], ['class' => 'btn btn-xs btn-primary mod-site-save','target'=>'_blank']),
+]);?>
 
-                <div class="mod">
-                    <div class="mod-head">
-                        <h3>
-                            <span class="pull-left"><?= $this->title ?></span>
-                            <span class="pull-right"><?= Html::a('新建模块', ['/gii/default/view','id'=>'extmodule'], ['class' => 'btn btn-xs btn-primary mod-site-save','target'=>'_blank']) ?></span>
-                             
-                        </h3>
-                    </div>
-                    <div class="tab-content mod-content">
-    <div id="w0" class="grid-view">
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th width="120px">标识</th>
-                    <th width="120px">名称</th>
-                    <th>描述</th>
-                    <th width="200px">&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody>
-            
-                <?php foreach ($modules as $module): ?>
-                    <?php if($module['instance']===null):?>
-                    
-                    <tr data-key="<?php echo $module['id']?>">
-                        <td><?php echo $module['id']?></td>
-                        <td></td>
-                        <td>error</td>
-                        <td></td>
-                    </tr>
-                    <?php else:?>
-                    <tr data-key="<?php echo $module['id']?>">
-                        <td><?php echo $module['id']?></td>
-                        <td><?php echo $module['instance']->name?></td>
-                        <td><?php echo $module['instance']->description?></td>
-                        <td>
-                            <?php 
+<table class="da-table">
+    <thead>
+        <tr>
+            <th>标识</th>
+            <th>名称</th>
+            <th>描述</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <?php $index=-1;
+              foreach ($modules as $module): 
+                  $index+=1;
+                  ?>
+
+        <tr data-key="<?php echo $module['id']?>" class="<?if($index%2===0){echo 'odd';}else{echo 'even';}?>">
+           
+            <td><?php echo $module['id']?></td>
+        <?php if($module['instance']===null):?>
+            <td></td>
+            <td>error</td>
+            <td class="da-icon-column"></td>
+        <?php else:?>
+            <td><?php echo $module['instance']->name?></td>
+            <td><?php echo $module['instance']->description?></td>
+            <td class="da-icon-column">
+                <?php 
                                 if($module['instance']->is_system)
                                 {
                                     echo '系统内置';
@@ -77,34 +80,26 @@ $this->params['breadcrumbs'][] = $this->title;
                                     {
                                         if($module['can_active_home'])
                                         {
-                                            echo '<span>|</span>';
                                             echo Html::a('启用前台',['active','id'=>$module['id']]);
                                         }
                                         else
                                         {
-                                            echo '<span>|</span>';
                                             echo Html::a('关闭前台',['deactive','id'=>$module['id']]);
                                         }
                                     }
                                     
                                     if($module['can_uninstall'])
                                     {
-                                        echo '<span>|</span>';
                                         echo Html::a('卸载',['uninstall','id'=>$module['id']]);
                                     }
                                 }
                                 
                                 
                              ?>
-                        </td>
-                    </tr>                
-                    <?php endif;?>
-                
-                <?php endforeach;?>
-            </tbody>
-        </table>
-    </div>
-                    </div>
-                    
-                   
-                </div>
+            </td>
+        <?php endif;?>
+        </tr>
+        <?php endforeach;?>
+
+    </tbody>
+</table>

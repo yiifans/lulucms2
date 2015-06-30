@@ -12,6 +12,10 @@ use yii\base\Model;
 use yii\web\View;
 use source\models\Config;
 use source\libs\Common;
+use source\core\widgets\LoopData;
+use source\libs\Resource;
+use source\core\widgets\LinkPager;
+use source\libs\DataSource;
 
 class BaseView extends View
 {
@@ -51,6 +55,45 @@ class BaseView extends View
 		}
 	}
 
+	public function getThemeUrl($url)
+	{
+	    $themeUrl = Resource::getThemeUrl($url);
+	    return $themeUrl;
+	}
+	
+	public function getDataSource($where=null,$orderBy=null,$limit=10,$options=[])
+	{
+	    $datas = DataSource::getContents($where,$orderBy,$limit,$options);
+	    return $datas;
+	}
+	
+	public function linkPager($pager)
+	{
+	    echo LinkPager::widget(['pagination' => $pager,]);
+	}
+	
+	public function loopData($dataSource,$item,$appendOptions=[])
+	{
+	    $options=[];
+	    $options['dataSource']=$dataSource;
+	    $options['item']=Resource::getThemePath($item);
+	    
+	    echo LoopData::widget($options);
+	}
+	
+	public function beginLoopData($dataSource,$item,$appendOptions=[])
+	{
+	    $options=[];
+	    $options['dataSource']=$dataSource;
+	    $options['item']=Resource::getThemePath($item);
+	    
+	    return LoopData::begin($options);
+	}
+	public function endLoopData()
+	{
+	    LoopData::end();
+	}
+	
     public function getConfig($id)
     {
         return Common::getConfig($id);
@@ -60,4 +103,5 @@ class BaseView extends View
     {
         return Common::getConfigValue($id);
     }
+    
 }

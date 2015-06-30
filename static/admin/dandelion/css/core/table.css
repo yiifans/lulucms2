@@ -1,0 +1,343 @@
+/*
+ * Dandelion Admin v1.0 - Table Stylesheet
+ *
+ * This file is part of Dandelion Admin, an Admin template build for sale at ThemeForest.
+ * For questions, suggestions or support request, please mail me at maimairel@yahoo.com
+ *
+ * Development Started:
+ * March 25, 2012
+ *
+ * ===============================================
+ * Table of Contents
+ * ===============================================
+ *
+ * 1. General Table Styling
+ * 2. Detail View Table
+ * 3. Data Table Styling
+ *
+ */
+
+/* (1) General Table Styling
+================================================== */
+
+table.da-table
+{
+	width:100%;
+	margin:0;
+	clear:both;
+}
+
+table.da-table tr td, 
+table.da-table tr th
+{
+	vertical-align:middle;
+}
+
+table.da-table thead tr
+{
+	background:#eeeeee url(../../images/default-header.png) repeat-x left top;
+}
+
+table.da-table tr th
+{
+	padding:11px 20px;
+	border-bottom:1px solid #cacaca;
+	border-right:1px solid #cacaca;
+	
+	-moz-box-shadow:inset 1px 0 0 0 #f8f8f8;
+	-webkit-box-shadow:inset 1px 0 0 0 #f8f8f8;
+	-khtml-box-shadow:inset 1px 0 0 0 #f8f8f8;
+	box-shadow:inset 1px 0 0 0 #f8f8f8;
+}
+
+table.da-table thead tr
+{	
+	-moz-box-shadow:inset 0 1px 0 0 #ffffff;
+	-webkit-box-shadow:inset 0 1px 0 0 #ffffff;
+	-khtml-box-shadow:inset 0 1px 0 0 #ffffff;
+	box-shadow:inset 0 1px 0 0 #ffffff;
+}
+
+table.da-table tr th:last-child
+{
+	border-right:none;
+}
+
+table.da-table tr td
+{
+	border-bottom:1px solid #dcdcdc;
+	border-right:1px solid #e0e0e0;
+	padding:7px 20px;
+}
+
+table.da-table tr td:last-child
+{
+	border-right:none;
+}
+
+table.da-table tr:last-child td
+{
+	border-bottom:none;
+}
+
+table.da-table tr td.da-icon-column
+{
+	text-align: center;
+	width:80px;
+}
+
+table.da-table tr td.da-icon-column img
+{
+	margin:0 2px;
+}
+
+table.da-table tr.odd
+{
+	background-color:#f4f4f4;
+}
+
+table.da-table tr.even
+{
+	background-color:#fcfcfc;
+}
+
+/* (2) Detail View Table
+================================================== */
+
+table.da-table.da-detail-view tbody th
+{
+	width:120px;
+	background:url(../../images/default-header.png) repeat-x left bottom;
+}
+
+table.da-table.da-detail-view tbody tr:last-child th
+{
+	border-bottom:0;
+}
+
+table.da-table.da-detail-view .null
+{
+	color:#F2618C;
+}
+
+/* (3) Data Table Styling
+================================================== */
+
+.dataTables_wrapper
+{
+	background-color:#fcfcfc;
+}
+
+.dataTables_wrapper .dataTables_length, 
+.dataTables_wrapper .dataTables_filter, 
+.dataTables_wrapper .dataTables_info, 
+.dataTables_wrapper .dataTables_paginate
+{
+	display:inline-block;
+	padding:10px;
+}
+
+.dataTables_wrapper .dataTables_paginate
+{
+	padding:0;
+}
+
+.dataTables_wrapper .dataTables_filter, 
+.dataTables_wrapper .dataTables_paginate
+{
+	float:right;
+}
+
+.dataTables_wrapper .da-table
+{
+	border-top:1px solid #cacaca;
+}
+
+.dataTables_wrapper .da-table tr:last-child td
+{
+	border-bottom:1px solid #cacaca;
+}
+
+.dataTables_wrapper input[type="text"], 
+.dataTables_wrapper select
+{
+	background-color:#fcfcfc;
+	border:1px solid #d1d1d1;
+	padding:3px;
+	outline:none;
+	
+	/* CSS 3 */
+	
+	-webkit-border-radius:2px;
+	-o-border-radius:2px;
+	-moz-border-radius:2px;
+	border-radius:2px;
+	
+	-webkit-box-sizing:border-box;
+	-o-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+
+	-webkit-transition: background 150ms linear;
+	-moz-transition: background 150ms linear;
+	-ms-transition: background 150ms linear;
+	-o-transition: background 150ms linear;
+	transition: background 150ms linear;
+}
+
+.dataTables_wrapper input[type="text"]:focus, 
+.dataTables_wrapper select:focus
+{
+	border-color:#bbc1c9;
+	background-color:#ffffff;
+}
+
+.dataTables_wrapper .dataTables_paginate
+{
+	padding:9px 8px;
+}
+
+.dataTables_wrapper .dataTables_paginate.paging_two_button .paginate_disabled_previous, 
+.dataTables_wrapper .dataTables_paginate.paging_two_button .paginate_disabled_next, 
+.dataTables_wrapper .dataTables_paginate.paging_two_button .paginate_enabled_previous, 
+.dataTables_wrapper .dataTables_paginate.paging_two_button .paginate_enabled_next, 
+.dataTables_wrapper .dataTables_paginate.paging_full_numbers .paginate_button, 
+.dataTables_wrapper .dataTables_paginate.paging_full_numbers .paginate_active
+{
+	display:inline-block;
+	background-color:#f3f3f3;
+	cursor:pointer;
+	line-height:1;
+	outline:none;
+	border:1px solid #b1b1b1;
+
+	text-align:center;
+	margin-left:6px;
+	background-repeat:no-repeat;
+	background-position:center center;
+	
+	/* CSS 3 */
+	
+	-webkit-border-radius:2px;
+	-o-border-radius:2px;
+	-moz-border-radius:2px;
+	border-radius:2px;
+	
+	-webkit-box-shadow:0 1px 1px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+	-o-box-shadow:0 1px 1px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+	-moz-box-shadow:0 1px 1px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+	box-shadow:0 1px 1px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+}
+
+.dataTables_wrapper .dataTables_paginate.paging_two_button .paginate_disabled_previous, 
+.dataTables_wrapper .dataTables_paginate.paging_two_button .paginate_disabled_next, 
+.dataTables_wrapper .dataTables_paginate.paging_two_button .paginate_enabled_previous, 
+.dataTables_wrapper .dataTables_paginate.paging_two_button .paginate_enabled_next
+{
+	width:20px;
+	height:20px;
+	text-indent:-9999px;
+}
+
+.dataTables_wrapper .dataTables_paginate.paging_full_numbers .paginate_button, 
+.dataTables_wrapper .dataTables_paginate.paging_full_numbers .paginate_active
+{
+	width:auto;
+	padding:4px 7px;
+	font-size:11px;
+	line-height:1;
+	color:#444444;
+}
+
+.dataTables_wrapper .dataTables_paginate.paging_full_numbers .paginate_button:hover, 
+.dataTables_wrapper .dataTables_paginate.paging_full_numbers .paginate_active:hover
+{
+	text-decoration:none;
+}
+
+.dataTables_wrapper .dataTables_paginate.paging_two_button .paginate_disabled_next, 
+.dataTables_wrapper .dataTables_paginate.paging_two_button .paginate_enabled_next
+{
+	background-image:url(../../images/dt-arrow-right.png);
+}
+
+.dataTables_wrapper .dataTables_paginate.paging_two_button .paginate_disabled_previous, 
+.dataTables_wrapper .dataTables_paginate.paging_two_button .paginate_enabled_previous
+{
+	background-image:url(../../images/dt-arrow-left.png);
+}
+
+.dataTables_wrapper .dataTables_paginate.paging_two_button .paginate_disabled_next, 
+.dataTables_wrapper .dataTables_paginate.paging_two_button .paginate_disabled_previous, 
+.dataTables_wrapper .dataTables_paginate.paging_full_numbers .paginate_button.paginate_button_disabled
+{
+	background-color:#fefefe;
+	border-color:#e0e0e0;
+	cursor:default;
+	color:#cccccc;
+	
+	-webkit-box-shadow:inset 0 1px 1px rgba(255, 255, 255, 0.5);
+	-o-box-shadow:inset 0 1px 1px rgba(255, 255, 255, 0.5);
+	-moz-box-shadow:inset 0 1px 1px rgba(255, 255, 255, 0.5);
+	box-shadow:inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.dataTables_wrapper .dataTables_paginate.paging_two_button .paginate_enabled_previous:active, 
+.dataTables_wrapper .dataTables_paginate.paging_two_button .paginate_enabled_next:active, 
+.dataTables_wrapper .dataTables_paginate.paging_full_numbers .paginate_button:not(.paginate_button_disabled):active, 
+.dataTables_wrapper .dataTables_paginate.paging_full_numbers .paginate_active:not(.paginate_button_disabled):active
+{
+	background-color:#efefef;
+	
+	-webkit-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1);
+	-o-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1);
+	box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.dataTables_wrapper .dataTables_paginate.paging_full_numbers .paginate_active:not(.paginate_button_disabled):active
+{
+	background-color:#a9ca60;
+}
+
+.dataTables_wrapper .dataTables_paginate.paging_full_numbers .paginate_active
+{
+	background-color:#aed063;
+	border-color:#a4b970;
+	color:#374b0b;
+}
+
+.dataTables_wrapper table thead th.sorting_asc, 
+.dataTables_wrapper table thead th.sorting_desc, 
+.dataTables_wrapper table thead th.sorting
+{
+	background-position:right center;
+	background-repeat:no-repeat;
+	cursor:pointer;
+	padding-right:19px;
+}
+
+.dataTables_wrapper table thead th.sorting
+{
+	background-image:url(../../images/sort.png);
+}
+
+.dataTables_wrapper table thead th.sorting_asc
+{
+	background-image:url(../../images/sort_asc.png);
+}
+
+.dataTables_wrapper table thead th.sorting_desc
+{
+	background-image:url(../../images/sort_desc.png);
+}
+
+.dataTables_wrapper table tr.odd td.sorting_1
+{
+	background-color:#f0f0f0; 
+}
+
+.dataTables_wrapper table tr.even td.sorting_1
+{
+	background-color:#f8f8f8;
+}

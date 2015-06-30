@@ -8,13 +8,13 @@ use yii\filters\VerbFilter;
 use source\models\LoginForm;
 use source\models\ContactForm;
 use source\models\Post;
-use source\core\front\BaseFrontController;
+use source\core\front\FrontController;
 use source\models\User;
 use source\models\Content;
 use source\LuLu;
 use yii\data\ActiveDataProvider;
 
-class SiteController extends BaseFrontController
+class SiteController extends FrontController
 {
 
     public function actionIndex()

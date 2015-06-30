@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use source\core\grid\GridView;
 use source\LuLu;
 use source\models\Content;
 
@@ -15,17 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-            <div class="mod">
-                <div class="mod-head">
-                    <h3>
-                        <span class="pull-left"><?= Html::encode($this->title) ?></span>
-        
-                        <span class="pull-right"><?= Html::a('新建', ['create'], ['class' => 'btn btn-xs btn-primary mod-site-save']) ?></span>
-                    </h3>
-                </div>
-                
-                <div class="tab-content mod-content">
-                
+<?php $this->toolbars([
+    Html::a('新建', ['create'], ['class' => 'btn btn-xs btn-primary mod-site-save'])
+]);?>
+
+     
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
@@ -79,13 +73,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'source\core\grid\ActionColumn'],
         ],
     ]); ?>                
-                </div>
-                <!-- 
-                <div class="tab-content mod-content mod-one-btn">
-                    <div class="center-block">
-                        <input type="button" value="保存设置" class="btn btn-primary" onclick="AWS.ajax_post($('#settings_form'));" />
-                    </div>
-                </div>
-                 -->
-            </div>
+             
            

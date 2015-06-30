@@ -10,11 +10,7 @@ $this->title = '修改文章';
 $this->params['breadcrumbs'][] = ['label' => '文章管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="content-update">
-
     <?= $this->render('_form', [
         'model' => $model,
         'bodyModel'=>$bodyModel,
     ]) ?>
-
-</div>

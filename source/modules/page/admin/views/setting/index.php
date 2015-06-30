@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use source\core\widgets\ActiveForm;
 use source\models\config\BasicConfig;
 use source\libs\Common;
 use source\helpers\ArrayHelper;
@@ -21,22 +21,8 @@ $this->addBreadcrumbs([
 
                 
                 <?php $form = ActiveForm::begin(); ?>
-                <div class="mod">
-                    <div class="mod-head">
-                        <h3>
-                            <span class="pull-left"><?= $this->title ?></span>
-                        </h3>
-                    </div>
-                    <div class="tab-content mod-content">
                     <?= $form->field($model, 'page_takonomy')->dropDownList(ArrayHelper::map($categories, 'id', 'name')) ?>
                    
-                    </div>
-                    
-                    <div class="tab-content mod-content mod-one-btn">
-                        <div class="center-block">
-                            <button type="submit"  class="btn btn-primary" >保存设置</button>
-                        </div>
-                    </div>
-                </div>
+                    <?= $form->defaultButtons() ?>
                 <?php ActiveForm::end(); ?>
            

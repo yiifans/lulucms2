@@ -1,0 +1,132 @@
+/*
+ * jQuery UI Slider 1.8.18
+ *
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Slider#theming
+ */
+
+.ui-slider
+{
+	position:relative;
+	text-align:left;
+	border:0 !important;
+}
+
+.ui-slider .ui-slider-handle
+{
+	position:absolute;
+	z-index:2;
+	width:24px;
+	height:24px;
+	cursor:default;
+	cursor:pointer;
+	background:url(../images/ui-slider-handle.png) no-repeat center center !important;
+	border:0 !important;
+	outline:none;
+}
+
+.ui-slider .ui-slider-range
+{
+	position:absolute;
+	z-index:1;
+	font-size:.7em;
+	display:block;
+	border:0;
+	background-position:0 0;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+}
+
+.ui-slider.green .ui-slider-range, 
+.ui-slider .ui-slider-range
+{
+	background-color:#84af22;
+}
+
+.ui-slider.red .ui-slider-range
+{
+	background-color:#E15656;
+}
+
+.ui-slider.blue .ui-slider-range
+{
+	background-color:#61A4E4;
+}
+
+.ui-slider.orange .ui-slider-range
+{
+	background-color:#FAB341;
+}
+
+.ui-slider-horizontal
+{
+	height:6px;
+	background:url(../images/ui-slider-bg-h.png) repeat-x !important;
+}
+
+.ui-slider-horizontal .ui-slider-handle
+{
+	top:-8px;
+	margin-left:-12px;
+}
+
+.ui-slider-horizontal .ui-slider-range
+{
+	top:0;
+	height:100%;
+	background-image:url(../images/ui-slider-range-h.png);
+	background-repeat:repeat-x;
+}
+
+.ui-slider-horizontal .ui-slider-range-min
+{
+	left:0;
+}
+
+.ui-slider-horizontal .ui-slider-range-max
+{
+	right:0;
+}
+
+.ui-slider-vertical
+{
+	width:6px;
+	height:120px;
+	background:url(../images/ui-slider-bg-v.png) repeat-y !important;
+}
+
+.ui-slider-vertical
+{
+	-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.45);
+	-moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.45);
+	box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.45);
+}
+
+.ui-slider-vertical .ui-slider-handle
+{
+	left:-9px;
+	margin-left:0;
+	margin-bottom:-12px;
+}
+
+.ui-slider-vertical .ui-slider-range
+{
+	left:0;
+	width:100%;
+	background-image:url(../images/ui-slider-range-v.png);
+	background-repeat:repeat-y;
+}
+
+.ui-slider-vertical .ui-slider-range-min
+{
+	bottom:0;
+}
+
+.ui-slider-vertical .ui-slider-range-max
+{
+	top:0;
+}

@@ -8,15 +8,11 @@ class LoopData extends BaseWidget
 
     public $dataSource;
 
+    public $rowParam='row';
+    
     public $item = 'item';
 
-    public $header = null;
-
-    public $footer = null;
-
     public $itemsTag = '{items}';
-
-    public $itemsContainer = null;
 
     public $length = 0;
 
@@ -35,17 +31,7 @@ class LoopData extends BaseWidget
     public function run()
     {
         $container = trim(ob_get_clean());
-        
-        if ($this->itemsContainer !== null && empty($this->itemsContainer))
-        {
-            $container = $this->itemsContainer;
-        }
-        
-        if ($this->header !== null)
-        {
-            echo $this->header;
-        }
-        
+       
         $ret = '';
         
         if (! empty($this->item))
@@ -59,10 +45,8 @@ class LoopData extends BaseWidget
             {
                 $itemTemplate = '@app/widgets/views/loop-data/' . $this->item;
             }
-            if (! strpos($itemTemplate, '.php'))
-            {
-                $itemTemplate .= '.php';
-            }
+            $itemTemplate = $this->item;
+            
             $count = count($this->dataSource);
             
             $index = - 1;
@@ -94,27 +78,22 @@ class LoopData extends BaseWidget
                 }
                 
                 $this->params['id'] = $id;
-                $this->params['row'] = $row;
+                $this->params[$this->rowParam] = $row;
                 $this->params['index'] = $index;
                 $this->params['isFirst'] = $isFirst;
                 $this->params['isLast'] = $isLast;
                 
-                $ret .= $this->renderFile($itemTemplate, $this->params);
+                $ret .= $this->render($itemTemplate, $this->params);
             }
         }
         
-        if ($container == null || empty($container))
+        if (empty($container))
         {
             echo $ret;
         }
         else
         {
             echo str_replace($this->itemsTag, $ret, $container);
-        }
-        
-        if ($this->footer !== null)
-        {
-            echo $this->footer;
         }
     }
 }

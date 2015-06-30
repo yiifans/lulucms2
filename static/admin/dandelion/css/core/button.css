@@ -1,0 +1,263 @@
+/*
+ * Dandelion Admin v1.0 - Button Stylesheet
+ *
+ * This file is part of Dandelion Admin, an Admin template build for sale at ThemeForest.
+ * For questions, suggestions or support request, please mail me at maimairel@yahoo.com
+ *
+ * Development Started:
+ * March 25, 2012
+ *
+ * ===============================================
+ * Table of Contents
+ * ===============================================
+ *
+ * 1. Padding reset for Firefox
+ * 2. General Button Styling
+ * 3. Blue Button Style
+ * 4. Green Button Style
+ * 5. Red Button Style
+ * 6. Pink Button Style
+ * 7. Gray Button Style
+ * 8. Orange Button Style
+ *
+ */
+
+/* (1) Padding reset for Firefox
+================================================== */
+
+::-moz-focus-inner
+{
+    border:0;
+    padding:0;
+	margin:0;
+}
+
+/* (2) General Button Styling
+================================================== */
+
+.da-button
+{
+	display:inline-block;
+	border:none;
+	outline:none;
+	
+	font:12px/17px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+	
+	padding:4px 12px;
+	margin:0;
+	width:auto;
+	
+	cursor:pointer;
+	text-decoration:none;
+	
+	zoom:1;
+	overflow:hidden;
+	*overflow:visible;
+	
+	color:#ffffff;
+	border:1px solid;
+	text-shadow:1px 1px rgba(0, 0, 0, 0.35);
+	
+	-webkit-border-radius:2px;
+	-o-border-radius:2px;
+	-moz-border-radius:2px;
+	border-radius:2px;
+	
+	-webkit-appearance:none;
+	-webkit-box-shadow:0 1px 1px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+	-o-box-shadow:0 1px 1px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+	-moz-box-shadow:0 1px 1px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+	box-shadow:0 1px 1px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+	
+	-webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+}
+
+.da-button.left
+{
+	float:left;
+}
+
+.da-button.small
+{
+	padding:2px 8px;
+}
+
+.da-button.large
+{
+	padding:6px 16px;
+}
+
+.da-button:active
+{
+	background-image:none !important;
+	
+	/* CSS 3 */
+	
+	-webkit-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 1);
+	-moz-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 1);
+	-o-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 1);
+	box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+.da-button:disabled
+{
+	background-image:none;
+	
+	-webkit-box-shadow:none;
+	-o-box-shadow:none;
+	-moz-box-shadow:none;
+	box-shadow:none;
+	
+	color:#dadada;
+	background-color:#f8f8f8;
+	border-color:#dddddd;
+	cursor:default;
+}
+
+.da-button img
+{
+	margin:0 2px;
+	max-width:16px;
+	max-height:16px;
+}
+
+/* (3) Blue Button Style
+================================================== */
+
+.da-button.blue
+{
+	background-color:rgb(97,164,228);
+	background-image: linear-gradient(bottom, rgb(97,164,228) 0%, rgb(120,180,236) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(97,164,228) 0%, rgb(120,180,236) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(97,164,228) 0%, rgb(120,180,236) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(97,164,228) 0%, rgb(120,180,236) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(97,164,228) 0%, rgb(120,180,236) 100%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, rgb(97,164,228)),
+		color-stop(1, rgb(120,180,236))
+	);
+
+	border-color:#21629c;
+}
+
+/* (4) Green Button Style
+================================================== */
+
+.da-button, 
+.da-button.green
+{
+	background-color:rgb(167,208,55);
+	background-image: linear-gradient(bottom, rgb(167,208,55) 0%, rgb(200,227,66) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(167,208,55) 0%, rgb(200,227,66) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(167,208,55) 0%, rgb(200,227,66) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(167,208,55) 0%, rgb(200,227,66) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(167,208,55) 0%, rgb(200,227,66) 100%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, rgb(167,208,55)),
+		color-stop(1, rgb(200,227,66))
+	);
+	
+	border-color:#779625;
+}
+
+/* (5) Red Button Style
+================================================== */
+
+.da-button.red
+{
+	background-color:rgb(225,86,86);
+	background-image: linear-gradient(bottom, rgb(225,86,86) 0%, rgb(247,114,114) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(225,86,86) 0%, rgb(247,114,114) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(225,86,86) 0%, rgb(247,114,114) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(225,86,86) 0%, rgb(247,114,114) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(225,86,86) 0%, rgb(247,114,114) 100%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, rgb(225,86,86)),
+		color-stop(1, rgb(247,114,114))
+	);
+
+	border-color:#bb2929;
+}
+
+/* (6) Pink Button Style
+================================================== */
+
+.da-button.pink
+{
+	background-color:rgb(234,121,155);
+	background-image: linear-gradient(bottom, rgb(234,121,155) 0%, rgb(238,163,188) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(234,121,155) 0%, rgb(238,163,188) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(234,121,155) 0%, rgb(238,163,188) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(234,121,155) 0%, rgb(238,163,188) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(234,121,155) 0%, rgb(238,163,188) 100%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, rgb(234,121,155)),
+		color-stop(1, rgb(238,163,188))
+	);
+
+	border-color:#b04264;
+}
+
+/* (7) Gray Button Style
+================================================== */
+
+.da-button.gray
+{
+	background-color:rgb(227,227,227);
+	background-image: linear-gradient(bottom, rgb(227,227,227) 0%, rgb(249,249,249) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(227,227,227) 0%, rgb(249,249,249) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(227,227,227) 0%, rgb(249,249,249) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(227,227,227) 0%, rgb(249,249,249) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(227,227,227) 0%, rgb(249,249,249) 100%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, rgb(227,227,227)),
+		color-stop(1, rgb(249,249,249))
+	);
+	
+	color:#666666;
+	text-shadow:1px 1px rgba(0, 0, 0, 0.1);
+	border-color:#9e9e9e;
+}
+
+/* (8) Orange Button Style
+================================================== */
+
+.da-button.orange
+{
+	background-color:rgb(250,179,65);
+	background-image: linear-gradient(bottom, rgb(250,179,65) 0%, rgb(255,203,114) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(250,179,65) 0%, rgb(255,203,114) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(250,179,65) 0%, rgb(255,203,114) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(250,179,65) 0%, rgb(255,203,114) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(250,179,65) 0%, rgb(255,203,114) 100%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, rgb(250,179,65)),
+		color-stop(1, rgb(255,203,114))
+	);
+
+	border-color:#cc731e;
+}

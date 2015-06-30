@@ -15,7 +15,7 @@ namespace source\modules\<?= $generator->moduleDir?>;
 
 use source\LuLu;
 
-class AdminModule extends \source\core\modularity\BaseBackModule
+class AdminModule extends \source\core\modularity\BackModule
 {
 
     public $controllerNamespace = 'source\modules\<?= $generator->moduleDir?>\admin';

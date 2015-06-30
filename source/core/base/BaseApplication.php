@@ -28,10 +28,9 @@ class BaseApplication extends \yii\web\Application
             
             
             $serviceFile= LuLu::getAlias('@source').'\modules\\' .$moduleDir.'\\'.$ModuleClassName.'Service.php';
-            
             if(FileHelper::exist($serviceFile))
             {
-                $serviceClass = 'source\modules\\' .$moduleDir.'\\'.$ModuleClassName.'Service.php';
+                $serviceClass = 'source\modules\\' .$moduleDir.'\\'.$ModuleClassName.'Service';
                 $serviceInstance = new $serviceClass();
                 $this->set($serviceInstance->getServiceId(), $serviceInstance);
             }

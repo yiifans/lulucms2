@@ -1,0 +1,8 @@
+.prettyprint ol.linenums {
+	list-style: decimal inside; /* ie does not support outside */
+	padding: 3px 10px;
+}
+.prettyprint ol.linenums li {
+	padding-left: 0px;
+	border:none;
+}

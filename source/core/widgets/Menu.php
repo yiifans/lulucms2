@@ -4,7 +4,7 @@ namespace source\core\widgets;
 
 use Yii;
 use yii\helpers\Html;
-use source\core\base\BaseWidget;
+
 use source\models\Menu;
 
 class Menu extends BaseWidget

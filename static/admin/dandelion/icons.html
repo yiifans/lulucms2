@@ -1,0 +1,616 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- Viewport metatags -->
+<meta name="HandheldFriendly" content="true" />
+<meta name="MobileOptimized" content="320" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<!-- iOS webapp metatags -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+<!-- iOS webapp icons -->
+<link rel="apple-touch-icon" href="touch-icon-iphone.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="touch-icon-ipad.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="touch-icon-retina.png" />
+
+<!-- CSS Reset -->
+<link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+<!--  Fluid Grid System -->
+<link rel="stylesheet" type="text/css" href="css/fluid.css" media="screen" />
+<!-- Theme Stylesheet -->
+<link rel="stylesheet" type="text/css" href="css/dandelion.theme.css" media="screen" />
+<!--  Main Stylesheet -->
+<link rel="stylesheet" type="text/css" href="css/dandelion.css" media="screen" />
+<!-- Demo Stylesheet -->
+<link rel="stylesheet" type="text/css" href="css/demo.css" media="screen" />
+
+<!-- jQuery JavaScript File -->
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+
+<!-- jQuery-UI JavaScript Files -->
+<script type="text/javascript" src="jui/js/jquery-ui-1.8.20.min.js"></script>
+<script type="text/javascript" src="jui/js/jquery.ui.timepicker.min.js"></script>
+<script type="text/javascript" src="jui/js/jquery.ui.touch-punch.min.js"></script>
+<link rel="stylesheet" type="text/css" href="jui/css/jquery.ui.all.css" media="screen" />
+
+<!-- Plugin Files -->
+
+<!-- FileInput Plugin -->
+<script type="text/javascript" src="js/jquery.fileinput.js"></script>
+<!-- Placeholder Plugin -->
+<script type="text/javascript" src="js/jquery.placeholder.js"></script>
+<!-- Mousewheel Plugin -->
+<script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
+<!-- Scrollbar Plugin -->
+<script type="text/javascript" src="js/jquery.tinyscrollbar.min.js"></script>
+<!-- Tooltips Plugin -->
+<script type="text/javascript" src="plugins/tipsy/jquery.tipsy-min.js"></script>
+<link rel="stylesheet" href="plugins/tipsy/tipsy.css" />
+
+<!-- Demo JavaScript Files -->
+<script type="text/javascript" src="js/demo/demo.icons.js"></script>
+
+<!-- Core JavaScript Files -->
+<script type="text/javascript" src="js/core/dandelion.core.js"></script>
+
+<!-- Customizer JavaScript File (remove if not needed) -->
+<script type="text/javascript" src="js/core/dandelion.customizer.js"></script>
+
+<title>Dandelion Admin - Icons</title>
+
+</head>
+
+<body>
+
+	<!-- Dandelion Customizer (remove if not needed) -->
+    <div id="da-customizer">
+    	<div id="da-customizer-content">
+        	<ul>
+            	<li>
+                	<span class="da-customizer-title">Background Pattern</span>
+                    <span id="da-customizer-body-bg"></span>
+                </li>
+                <li>
+                	<span>Header Pattern</span>
+                    <span id="da-customizer-header-bg"></span>
+                </li>
+                <li>
+                	<span>
+                    	Layout
+                        <span title="This functionality can only provide you the CSS for background and header patterns. Instructions to switch between fixed or fluid layout can be found in the documentation." class="da-tooltip-w da-customizer-tooltip">
+                    		[?]
+                        </span>
+                    </span>
+                    <ul id="da-customizer-layouts" class="clearfix">
+                    	<li>
+                        	<input type="radio" id="da-customizer-fluid" name="da-layout" checked="checked" />
+                        	<label for="da-customizer-fluid">Fluid</label>
+                        </li>
+                    	<li>
+                        	<input type="radio" id="da-customizer-fixed" name="da-layout" />
+                            <label for="da-customizer-fixed">Fixed</label>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div id="da-customizer-button">
+            	<button class="da-button red">Get CSS</button>
+            </div>
+        </div>
+        <span id="da-customizer-pulldown"></span>
+    </div>
+    
+	<!-- Main Wrapper. Set this to 'fixed' for fixed layout and 'fluid' for fluid layout' -->
+	<div id="da-wrapper" class="fluid">
+    
+        <!-- Header -->
+        <div id="da-header">
+        
+        	<div id="da-header-top">
+                
+                <!-- Container -->
+                <div class="da-container clearfix">
+                    
+                    <!-- Logo Container. All images put here will be vertically centere -->
+                    <div id="da-logo-wrap">
+                        <div id="da-logo">
+                            <div id="da-logo-img">
+                                <a href="dashboard.html">
+                                    <img src="images/logo.png" alt="Dandelion Admin" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Header Toolbar Menu -->
+                    <!-- Header Toolbar Menu -->
+                    <div id="da-header-toolbar" class="clearfix">
+                        <div id="da-user-profile">
+                            <div id="da-user-avatar">
+                                <img src="images/pp.jpg" alt="" />
+                            </div>
+                            <div id="da-user-info">
+                                John Doe
+                                <span class="da-user-title">Creative Director</span>
+                            </div>
+                            <ul class="da-header-dropdown">
+                                <li class="da-dropdown-caret">
+                                    <span class="caret-outer"></span>
+                                    <span class="caret-inner"></span>
+                                </li>
+                                <li class="da-dropdown-divider"></li>
+                                <li><a href="dashboard.html">Dashboard</a></li>
+                                <li class="da-dropdown-divider"></li>
+                                <li><a href="#">Profile</a></li>
+                                <li><a href="#">Settings</a></li>
+                                <li><a href="#">Change Password</a></li>
+                            </ul>
+                        </div>
+                        <div id="da-header-button-container">
+                        	<ul>
+                            	<li class="da-header-button notif">
+                                	<span class="da-button-count">32</span>
+                                	<a href="#">Notifications</a>
+                                    <ul class="da-header-dropdown">
+                                        <li class="da-dropdown-caret">
+                                            <span class="caret-outer"></span>
+                                            <span class="caret-inner"></span>
+                                        </li>
+                                        <li>
+                                        	<span class="da-dropdown-sub-title">Notifications</span>
+                                        	<ul class="da-dropdown-sub">
+                                                <li class="unread">
+                                                    <a href="#">
+                                                        <span class="message">
+                                                            Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
+                                                        </span>
+                                                        <span class="time">
+                                                            January 21, 2012
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="unread">
+                                                    <a href="#">
+                                                        <span class="message">
+                                                            Lorem ipsum dolor sit amet
+                                                        </span>
+                                                        <span class="time">
+                                                            January 21, 2012
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="read">
+                                                    <a href="#">
+                                                        <span class="message">
+                                                            Lorem ipsum dolor sit amet
+                                                        </span>
+                                                        <span class="time">
+                                                            January 21, 2012
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="read">
+                                                    <a href="#">
+                                                        <span class="message">
+                                                            Lorem ipsum dolor sit amet
+                                                        </span>
+                                                        <span class="time">
+                                                            January 21, 2012
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <a class="da-dropdown-sub-footer">
+                                            	View all notifications
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            	<li class="da-header-button message">
+                                	<span class="da-button-count">5</span>
+                                	<a href="#">Messages</a>
+                                    <ul class="da-header-dropdown">
+                                        <li class="da-dropdown-caret">
+                                            <span class="caret-outer"></span>
+                                            <span class="caret-inner"></span>
+                                        </li>
+                                        <li>
+                                        	<span class="da-dropdown-sub-title">Messages</span>
+                                        	<ul class="da-dropdown-sub">
+                                                <li class="unread">
+                                                    <a href="#">
+                                                        <span class="message">
+                                                            Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
+                                                        </span>
+                                                        <span class="time">
+                                                            January 21, 2012
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="unread">
+                                                    <a href="#">
+                                                        <span class="message">
+                                                            Lorem ipsum dolor sit amet
+                                                        </span>
+                                                        <span class="time">
+                                                            January 21, 2012
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="read">
+                                                    <a href="#">
+                                                        <span class="message">
+                                                            Lorem ipsum dolor sit amet
+                                                        </span>
+                                                        <span class="time">
+                                                            January 21, 2012
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="read">
+                                                    <a href="#">
+                                                        <span class="message">
+                                                            Lorem ipsum dolor sit amet
+                                                        </span>
+                                                        <span class="time">
+                                                            January 21, 2012
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <a class="da-dropdown-sub-footer">
+                                            	View all messages
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            	<li class="da-header-button logout">
+                                	<a href="index.html">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                                    
+                </div>
+            </div>
+            
+            <div id="da-header-bottom">
+                <!-- Container -->
+                <div class="da-container clearfix">
+                
+                	<div id="da-search">
+                    	<form>
+                        	<input type="text" placeholder="Search..." />
+                        </form>
+                    </div>
+                	
+                    <!-- Breadcrumbs -->
+                    <div id="da-breadcrumb">
+                        <ul>
+                            <li><a href="dashboard.html"><img src="images/icons/black/16/home.png" alt="Home" />Dashboard</a></li>
+                            <li class="active"><span>Icons</span></li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    
+        <!-- Content -->
+        <div id="da-content">
+            
+            <!-- Container -->
+            <div class="da-container clearfix">
+            
+                <!-- Sidebar -->
+                <div id="da-sidebar-separator"></div>
+                <div id="da-sidebar">
+                
+                    <!-- Main Navigation -->
+                    <div id="da-main-nav" class="da-button-container">
+                        <ul>
+                            <li>
+                            	<a href="dashboard.html">
+                                	<!-- Icon Container -->
+                                	<span class="da-nav-icon">
+                                    	<img src="images/icons/black/32/home.png" alt="Dashboard" />
+                                    </span>
+                                	Dashboard
+                                </a>
+                            </li>
+                            <li>
+                            	<a href="#">
+                                	<!-- Nav Notification -->
+                                    <span class="da-nav-count">32</span>
+                                	<!-- Icon Container -->
+                                	<span class="da-nav-icon">
+                                    	<img src="images/icons/black/32/graph.png" alt="Charts" />
+                                    </span>
+                                	Statistics and Charts
+                                </a>
+                                <ul class="closed">
+                                	<li><a href="statistic.html">Statistic Widgets</a></li>
+                                	<li><a href="charts.html">Chart Gallery</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                            	<a href="calendar.html">
+                                	<!-- Icon Container -->
+                                	<span class="da-nav-icon">
+                                    	<img src="images/icons/black/32/day_calendar.png" alt="Calendar" />
+                                    </span>
+                                	Calendar
+                                </a>
+                            </li>
+                            <li>
+                            	<a href="file.html">
+                                	<!-- Icon Container -->
+                                	<span class="da-nav-icon">
+                                    	<img src="images/icons/black/32/file_cabinet.png" alt="File Handling" />
+                                    </span>
+                                	File Handling
+                                </a>
+                            </li>
+                            <li>
+                            	<a href="table.html">
+                                	<!-- Icon Container -->
+                                	<span class="da-nav-icon">
+                                    	<img src="images/icons/black/32/table_1.png" alt="Table" />
+                                    </span>
+                                	Table
+                                </a>
+                            </li>
+                            <li>
+                            	<a href="#">
+                                	<!-- Icon Container -->
+                                	<span class="da-nav-icon">
+                                    	<img src="images/icons/black/32/create_write.png" alt="Form" />
+                                    </span>
+                                	Form
+                                </a>
+                                <ul>
+                                	<li><a href="form-layouts.html">Layouts</a></li>
+                                	<li><a href="form-elements.html">Elements</a></li>
+                                	<li><a href="form-validation.html">Validation</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                            	<a href="ui.html">
+                                	<!-- Icon Container -->
+                                	<span class="da-nav-icon">
+                                    	<img src="images/icons/black/32/settings.png" alt="" />
+                                    </span>
+                                    UI Elements
+                                </a>
+                            </li>
+                            <li>
+                            	<a href="widgets.html">
+                                	<!-- Icon Container -->
+                                	<span class="da-nav-icon">
+                                    	<img src="images/icons/black/32/cog_4.png" alt="Widgets" />
+                                    </span>
+                                    Widgets
+                                </a>
+                            </li>
+                            <li>
+                            	<a href="#">
+                                	<!-- Icon Container -->
+                                	<span class="da-nav-icon">
+                                    	<img src="images/icons/black/32/word_documents_1.png" alt="Layout and Typography" />
+                                    </span>
+                                    Layout and Typography
+                                </a>
+                                <ul class="closed">
+                                	<li><a href="grids.html">Grids and Panels</a></li>
+                                	<li><a href="typography.html">Typography</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                            	<a href="gallery.html">
+                                	<!-- Icon Container -->
+                                	<span class="da-nav-icon">
+                                    	<img src="images/icons/black/32/images_2.png" alt="Gallery" />
+                                    </span>
+                                    Gallery
+                                </a>
+                            </li>
+                            <li>
+                            	<a href="error.html">
+                                	<!-- Icon Container -->
+                                	<span class="da-nav-icon">
+                                    	<img src="images/icons/black/32/alert.png" alt="Error Pages" />
+                                    </span>
+                                    Error Page (404)
+                                </a>
+                            </li>
+                            <li class="active">
+                            	<a href="icons.html">
+                                	<!-- Icon Container -->
+                                	<span class="da-nav-icon">
+                                    	<img src="images/icons/black/32/pacman.png" alt="Icons" />
+                                    </span>
+                                    Icons
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                
+                <!-- Main Content Wrapper -->
+                <div id="da-content-wrap" class="clearfix">
+                
+                	<!-- Content Area -->
+                	<div id="da-content-area">
+                        
+                        <div class="grid_4">
+                            <div id="da-icon-tab">
+                                <ul>
+                                    <li><a href="#color-icon">Color Icons</a></li>
+                                    <li><a href="#white-icon">White Icons</a></li>
+                                    <li><a href="#black-icon">Black Icons</a></li>
+                                </ul>
+                                <div id="color-icon">
+                                	<h2>16 x 16 (Led Icons)</h2>
+                                	<ul class="da-icon-list clearfix">
+                                        <li><span><img src="images/icons/color/text_subscript.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/ticket.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/timeline_marker.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/traffic.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/transmit.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/trophy.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/trophy_bronze.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/trophy_silver.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/ui_combo_box.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/ui_saccordion.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/ui_slider_1.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/ui_slider_2.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/ui_tab_bottom.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/ui_tab_content.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/ui_tab_disable.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/ui_tab_side.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/ui_text_field_hidden.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/ui_text_field_password.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/umbrella.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/user.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/user_black_female.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/user_business.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/user_business_boss.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/user_female.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/user_silhouette.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/user_thief.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/user_thief_baldie.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/vcard.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/vector.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/wait.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/wall.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/wall_break.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/wall_brick.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/wall_disable.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/wand.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/weather_clouds.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/weather_cloudy.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/weather_lightning.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/weather_rain.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/color/weather_snow.png" alt="" /></span></li>
+                                    </ul>
+                                    <p>and 473 more...</p>
+                                </div>
+                                <div id="white-icon">
+                                	<h2>16 x 16 (Iconsweets)</h2>
+                                	<ul class="da-icon-list black clearfix">
+                                        <li><span><img src="images/icons/white/16/tree.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/trolly.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/truck.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/tumbler.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/twitter.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/twitter_2.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/twitter_t_small.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/t_shirt.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/umbrella.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/under_construction.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/unfavorite_small.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/unlocked.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/unlock_unlocked_small.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/upload.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/user.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/users.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/users_2.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/user_2.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/user_comment.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/v_card_small.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/vault.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/vimeo.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/vimeo_2.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/v_card.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/white/16/v_card_2.png" alt="" /></span></li>
+                                    </ul>
+                                    <p>and 328 more...</p>
+                                    
+                                	<h2>32 x 32 (Iconsweets)</h2>
+                                	<ul class="da-icon-list black clearfix">
+                                    	<li><span><img src="images/icons/white/32/abacus.png" alt="" /></span></li>
+                                    	<li><span><img src="images/icons/white/32/acces_denied_sign.png" alt="" /></span></li>
+                                    	<li><span><img src="images/icons/white/32/address_book.png" alt="" /></span></li>
+                                    	<li><span><img src="images/icons/white/32/cash_register.png" alt="" /></span></li>
+                                    	<li><span><img src="images/icons/white/32/admin_user.png" alt="" /></span></li>
+                                    	<li><span><img src="images/icons/white/32/admin_user_2.png" alt="" /></span></li>
+                                    	<li><span><img src="images/icons/white/32/airplane.png" alt="" /></span></li>
+                                    	<li><span><img src="images/icons/white/32/alarm_bell.png" alt="" /></span></li>
+                                    	<li><span><img src="images/icons/white/32/alert_2.png" alt="" /></span></li>
+                                    	<li><span><img src="images/icons/white/32/box_outgoing.png" alt="" /></span></li>
+                                    </ul>
+                                    <p>and 451 more...</p>
+                                </div>
+                                <div id="black-icon">
+                                	<h2>16 x 16 (Iconsweets)</h2>
+                                	<ul class="da-icon-list clearfix">
+                                        <li><span><img src="images/icons/black/16/tree.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/trolly.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/truck.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/tumbler.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/twitter.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/twitter_2.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/twitter_t_small.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/t_shirt.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/umbrella.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/under_construction.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/unfavorite_small.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/unlocked.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/unlock_unlocked_small.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/upload.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/user.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/users.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/users_2.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/user_2.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/user_comment.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/v_card_small.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/vault.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/vimeo.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/vimeo_2.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/v_card.png" alt="" /></span></li>
+                                        <li><span><img src="images/icons/black/16/v_card_2.png" alt="" /></span></li>
+                                    </ul>
+                                    <p>and 328 more...</p>
+                                    
+                                	<h2>32 x 32 (Iconsweets)</h2>
+                                	<ul class="da-icon-list clearfix">
+                                    	<li><span><img src="images/icons/black/32/abacus.png" alt="" /></span></li>
+                                    	<li><span><img src="images/icons/black/32/acces_denied_sign.png" alt="" /></span></li>
+                                    	<li><span><img src="images/icons/black/32/address_book.png" alt="" /></span></li>
+                                    	<li><span><img src="images/icons/black/32/cash_register.png" alt="" /></span></li>
+                                    	<li><span><img src="images/icons/black/32/admin_user.png" alt="" /></span></li>
+                                    	<li><span><img src="images/icons/black/32/admin_user_2.png" alt="" /></span></li>
+                                    	<li><span><img src="images/icons/black/32/airplane.png" alt="" /></span></li>
+                                    	<li><span><img src="images/icons/black/32/alarm_bell.png" alt="" /></span></li>
+                                    	<li><span><img src="images/icons/black/32/alert_2.png" alt="" /></span></li>
+                                    	<li><span><img src="images/icons/black/32/box_outgoing.png" alt="" /></span></li>
+                                    </ul>
+                                    <p>and 451 more...</p>
+                                </div>
+                            </div>
+                        </div>
+                                                
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        <!-- Footer -->
+        <div id="da-footer">
+        	<div class="da-container clearfix">
+            	<p>Copyright 2012. Dandelion Admin. All Rights Reserved.
+            </div>
+        </div>
+        
+    </div>
+    
+</body>
+</html>

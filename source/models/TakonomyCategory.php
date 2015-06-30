@@ -45,4 +45,10 @@ class TakonomyCategory extends \source\core\base\BaseActiveRecord
             'description' => '描述',
         ];
     }
+    
+    public function beforeDelete()
+    {
+        Takonomy::deleteAll(['category_id'=>$this->id]);
+        return true;
+    }
 }

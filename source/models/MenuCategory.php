@@ -45,4 +45,10 @@ class MenuCategory extends \source\core\base\BaseActiveRecord
             'description' => '描述',
         ];
     }
+    
+    public function beforeDelete()
+    {
+        Menu::deleteAll(['category_id'=>$this->id]);
+        return true;
+    }
 }

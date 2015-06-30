@@ -1,0 +1,116 @@
+/*
+ * Dandelion Admin v1.0 - Form Message Stylesheet
+ *
+ * This file is part of Dandelion Admin, an Admin template build for sale at ThemeForest.
+ * For questions, suggestions or support request, please mail me at maimairel@yahoo.com
+ *
+ * Development Started:
+ * March 25, 2012
+ *
+ * ===============================================
+ * Table of Contents
+ * ===============================================
+ *
+ * 1. General Message Styling
+ * 2. Error Message Styling
+ * 3. Success Message Styling
+ * 4. Warning Message Styling
+ * 5. Info Message Styling
+ *
+ */
+
+/* (1) General Message Styling
+================================================== */
+
+.da-message
+{	
+	font-size:12px;
+	border-bottom:1px solid #d2d2d2;
+	padding:15px 8px 15px 45px;
+	position:relative;
+	vertical-align:middle;
+	cursor:pointer;
+	
+	background-color:#f8f8f8;
+	background-position:12px 12px;
+	background-repeat:no-repeat;
+}
+
+.da-message p, 
+.da-message ul, 
+.da-message ol
+{
+	margin:0;
+}
+
+.da-message ul li, 
+.da-message ol li
+{
+	list-style-position:inside;
+	list-style-type:inherit;
+	margin:0;
+}
+
+/* (2) Error Message Styling
+================================================== */
+
+.da-message.error
+{
+	background-color:#ffcbca;
+	background-image:url(../../images/message-error.png);
+	border-color:#eb979b;
+	color:#9b4449;
+}
+
+.da-message.error .da-message-close
+{
+	background-position:right bottom;
+}
+
+/* (3) Success Message Styling
+================================================== */
+
+.da-message.success
+{
+	background-color:#e1f1c0;
+	background-image:url(../../images/message-success.png);
+	border-color:#b5d56d;
+	color:#62a426;
+}
+
+.da-message.success .da-message-close
+{
+	background-position:left bottom;
+}
+
+/* (4) Warning Message Styling
+================================================== */
+
+.da-message.warning
+{
+	background-color:#fef0b1;
+	background-image:url(../../images/message-warning.png);
+	border-color:#ddca76;
+	color:#a98b15;
+}
+
+.da-message.warning .da-message-close
+{
+	background-position:right top;
+}
+
+/* (5) Info Message Styling
+================================================== */
+
+.da-message.info
+{
+	background-color:#bce5f7;
+	background-image:url(../../images/message-info.png);
+	border-color:#a6d3e8;
+	color:#11689E;
+}
+
+.da-message.info .da-message-close
+{
+	background-position:left top;
+}

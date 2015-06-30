@@ -5,7 +5,7 @@ namespace source\modules\menu\admin;
 use Yii;
 use source\models\Menu;
 use source\models\search\MenuSearch;
-use source\core\back\BaseBackController;
+use source\core\back\BackController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use source\LuLu;
@@ -14,7 +14,7 @@ use yii\data\ArrayDataProvider;
 /**
  * DefaultController implements the CRUD actions for Menu model.
  */
-class DefaultController extends BaseBackController
+class DefaultController extends BackController
 {
     public function behaviors()
     {
@@ -69,8 +69,8 @@ class DefaultController extends BaseBackController
         $model = new Menu();
         $model->category_id=$category;
         $model->target='_self';
-        $model->enabled=1;
-        $model->sort_num=10;
+        $model->status=1;
+        $model->sort_num=100;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'category' =>$category]);
@@ -111,6 +111,7 @@ class DefaultController extends BaseBackController
     {
         $model = $this->findModel($id);
         $model->delete();
+        
         $category=$model->category_id;
 
         return $this->redirect(['index','category'=>$category]);

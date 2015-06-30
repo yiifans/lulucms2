@@ -8,7 +8,7 @@
 namespace source\core\widgets;
 
 
-use source\core\base\IBaseWidget;
+
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 

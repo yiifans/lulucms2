@@ -17,10 +17,7 @@ $this->addBreadcrumbs([
 		]);
 
 ?>
-<div class="menu-update">
 
-    <?= $this->render('_form', [
+<?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
-</div>

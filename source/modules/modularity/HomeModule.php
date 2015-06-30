@@ -2,7 +2,7 @@
 
 namespace source\modules\modularity;
 
-class HomeModule extends \source\core\modularity\BaseFrontModule
+class HomeModule extends \source\core\modularity\FrontModule
 {
     public $controllerNamespace = 'source\modules\modularity\home';
 

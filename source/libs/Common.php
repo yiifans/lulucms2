@@ -32,56 +32,7 @@ class Common
 		
 	}
 	
-	public static function buildTreeOptionsForSelf($treeArray,$model=null)
-	{
-		$options = '<option value="0">根节点</option>';
-		
-		$found=false;;
-		
-		foreach($treeArray as $row)
-		{
-			$theId = intval($row['id']);
-			$style = '';
-		
-			if($model!=null)
-			{
-				if($model['parent_id'] == $theId)
-				{
-					$style = ' selected';
-				}
-				if($model['id']===$theId)
-				{
-					$model['level']=intval($row['level']);
-					$found=true;
-					continue;
-				}
-				if($found)
-				{
-					if(intval($row['level'])>$model['level'])
-					{
-						continue;
-					}
-					else
-					{
-						$found=false;
-					}
-				}
-			}
-			
-			$options .= '<option value="' . $row['id'] . '"' . $style . '>' . str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$row['level']) . $row['name'] . '</option>';
-		}
-		return $options;
-	}
 	
-	public static function buildTreeOptions($treeArray)
-	{
-	    $options=[];
-	    foreach($treeArray as $row)
-	    {
-	        $options[$row['id']]=str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$row['level']) . $row['name'];
-	    }
-	    return $options;
-	}
 	
 	public static function getTakonomyCategories()
 	{

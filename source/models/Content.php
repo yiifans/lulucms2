@@ -3,13 +3,16 @@
 namespace source\models;
 
 use Yii;
-use source\helpers\TimeHelper;
+use source\helpers\DateTimeHelper;
 use source\core\behaviors\DefaultValueBehavior;
 use source\helpers\StringHelper;
 use yii\db\Query;
 use yii\db\yii\db;
 use source\modules\post\models\ContentPost;
 use source\libs\Common;
+use yii\helpers\Url;
+use source\libs\Constants;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "lulu_content".
@@ -32,9 +35,9 @@ use source\libs\Common;
  * @property integer $agree_count
  * @property integer $against_count
  * 
- * @property integer $is_sticky
- * @property integer $is_recommend
- * @property integer $is_headline
+ * @property integer $recommend
+ * @property integer $headline
+ * @property integer $sticky
  * @property integer $flag
  * 
  * @property integer $allow_comment
@@ -52,64 +55,32 @@ use source\libs\Common;
  * @property string $seo_description
  * 
  * @property string $title
+ * @property string $sub_title
+ * @property string $url_alias
  * @property string $summary
  * @property string $thumb
- * @property string $url_alias
+ * @property string $thumbs
  */
 class Content extends \source\core\base\BaseActiveRecord
 {
-    const VISIBILITY_PUBLIC='1';
-    const VISIBILITY_HIDDEN='2';
-    const VISIBILITY_PASSWORD='3';
-    const VISIBILITY_PRIVATE='4';
-    
-    const STATUS_PUBLISH='1';
-    const STATUS_DRAFT='2';
-    const STATUS_PENDING='3';
-    
-    public static function getVisibilityItems($v=null)
-    {
-        $items = [
-            self::VISIBILITY_PUBLIC => '公开',
-            self::VISIBILITY_HIDDEN => '回复可见',
-            self::VISIBILITY_PASSWORD => '密码保护',
-            self::VISIBILITY_PRIVATE => '私有'
-        ];
-        if($v!==null)
-        {
-            if(isset($items[$v]))
-            {
-                return $items[$v];
-            }
-            return 'unknown visibility value:'.$v;
-        }
-        return $items;
-    }
-    
-    public static function getStatusItems($v=null)
-    {
-        $items = [
-            self::STATUS_PUBLISH => '发布',
-            self::STATUS_DRAFT => '草稿',
-            self::STATUS_PENDING => '等待审核'
-        ];
-        if($v!==null)
-        {
-            if(isset($items[$v]))
-            {
-                return $items[$v];
-            }
-            return 'unknown visibility value:'.$v;
-        }
-        return $items;
-    }
    
-    
     public function getCreatedAt()
     {
-        return TimeHelper::formatTime($this->created_at);
+        return DateTimeHelper::formatTime($this->created_at);
+    }
+    public function getStatusText()
+    {
+        return Constants::getStatusItemsForContent($this->status);
+    }
+    public function getUserText()
+    {
+        return Html::a($this->user_name,['/user']);
     }
     
+    public function getUrl()
+    {
+        return Url::to(['/'.$this->content_type.'/default/detail','id'=>$this->id]);
+    }
     public function beforeSave($insert)
     {
         $uploadedFile = Common::uploadFile('Content[thumb]');
@@ -197,11 +168,12 @@ class Content extends \source\core\base\BaseActiveRecord
     public function rules()
     {
         return [
-            [['takonomy_id', 'user_id', 'last_user_id', 'created_at', 'updated_at', 'focus_count', 'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count', 'is_sticky', 'is_recommend', 'is_headline', 'flag', 'allow_comment', 'sort_num', 'visibility', 'status'], 'integer'],
+            [['takonomy_id', 'user_id', 'last_user_id', 'created_at', 'updated_at', 'focus_count', 'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count', 'sticky', 'recommend', 'headline', 'flag', 'allow_comment', 'sort_num', 'visibility', 'status'], 'integer'],
             [['content_type', 'title'], 'required'],
             [['user_name', 'last_user_name', 'password', 'template', 'content_type'], 'string', 'max' => 64],
-            [['seo_title', 'seo_keywords', 'seo_description', 'title', 'thumb', 'url_alias'], 'string', 'max' => 256],
-            [['summary'], 'string', 'max' => 512]
+            [['seo_title', 'seo_keywords', 'seo_description', 'title','sub_title', 'url_alias','redirect_url', 'thumb'], 'string', 'max' => 256],
+            [['summary'], 'string', 'max' => 512],
+            [['thumbs'], 'string', 'max' => 1024]
         ];
     }
 
@@ -212,9 +184,10 @@ class Content extends \source\core\base\BaseActiveRecord
     {
         return [
             'id' => 'ID',
-            'takonomy_id' => '主分类',
+            'takonomy_id' => '分类',
             'user_id' => '用户ID',
-            'user_name' => 'User Name',
+            'user_name' => '用户名',
+            'userText'=>'用户名',
             'last_user_id' => 'Last User ID',
             'last_user_name' => 'Last User Name',
             'created_at' => '添加时间',
@@ -225,9 +198,9 @@ class Content extends \source\core\base\BaseActiveRecord
             'comment_count' => '评论数',
             'agree_count' => '赞成数',
             'against_count' => '反对数',
-            'is_sticky' => '置顶',
-            'is_recommend' => '推荐',
-            'is_headline' => '头条',
+            'recommend' => '推荐',
+            'headline' => '头条',
+            'sticky' => '置顶',
             'flag' => '标签',
             'allow_comment' => '允许评论',
             'password' => '密码',
@@ -235,14 +208,19 @@ class Content extends \source\core\base\BaseActiveRecord
             'sort_num' => '排序',
             'visibility' => '可见',
             'status' => '状态',
+            'statusText' => '状态',
             'content_type' => '内容类型',
             'seo_title' => '标题',
             'seo_keywords' => '关键字',
             'seo_description' => '描述',
             'title' => '标题',
+            'sub_title' => '副标题',
+            'url_alias' => '别名',
+            'redirect_url' => '转向Url',
             'summary' => '简介',
             'thumb' => '缩略图',
-            'url_alias' => '别名',
+            'thumbs' => '缩略图集',
+            
         ];
     }
 }

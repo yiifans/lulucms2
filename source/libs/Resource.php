@@ -83,8 +83,19 @@ class Resource
 
     public static function registerAdmin($url)
     {
-        $url = self::getAdminUrl($url);
-        self::registerFile($url);
+        if(is_array($url))
+        {
+            foreach($url as $u)
+            {
+                $u = self::getAdminUrl($u);
+                self::registerFile($u);
+            }
+        }
+        else
+        {
+            $url = self::getAdminUrl($url);
+            self::registerFile($url);
+        }
     }
 
     public static function getThemePath($path = null)

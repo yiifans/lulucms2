@@ -41,7 +41,7 @@ class BaseController extends Controller
             ], 
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction', 
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+                //'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
                 'height'=>'40',
                 'width'=>'100',
                 'minLength'=>3,

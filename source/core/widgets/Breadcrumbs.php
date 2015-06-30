@@ -5,7 +5,7 @@ namespace source\core\widgets;
 
 use Yii;
 use yii\helpers\Html;
-use source\core\base\IBaseWidget;
+
 
 class Breadcrumbs extends \yii\widgets\Breadcrumbs implements IBaseWidget
 {

@@ -3,6 +3,8 @@
 namespace source\models;
 
 use Yii;
+use source\libs\TreeHelper;
+use source\libs\Constants;
 
 /**
  * This is the model class for table "{{%takonomy}}".
@@ -70,22 +72,40 @@ class Takonomy extends \source\core\base\BaseActiveRecord
     }
     
     private $_level;
-    
     public function getLevel()
     {
     	return $this->_level;
     }
-    
     public function setLevel($value)
     {
     	$this->_level = $value;
     }
     
-  
     public function getLevelName()
     {
-    	return str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $this->level).$this->name;
+    	return str_repeat(Constants::TabSize, $this->level).$this->name;
     }
+    
+    private $_parentIds;
+    public function getParentIds()
+    {
+        if($this->_parentIds===null)
+        {
+            $this->_parentIds=TreeHelper::getParentIds(Menu::className(), $this->parent_id);
+        }
+        return $this->_parentIds;
+    }
+    
+    private $_childrenIds;
+    public function getChildrenIds()
+    {
+        if($this->_childrenIds===null)
+        {
+            $this->_childrenIds= TreeHelper::getChildrenIds(Menu::className(), $this->id);
+        }
+        return $this->_childrenIds;
+    }
+    
     
     private static function getArrayTreeInternal($category, $parentId = 0, $level = 0)
     {
@@ -106,5 +126,12 @@ class Takonomy extends \source\core\base\BaseActiveRecord
     public static function getArrayTree($category)
     {
     	return self::getArrayTreeInternal($category,0,0);
+    }
+    
+    public function beforeDelete()
+    {
+        $childrenIds = $this->getChildrenIds();
+        self::deleteAll(['id'=>$childrenIds]);
+        return true;
     }
 }

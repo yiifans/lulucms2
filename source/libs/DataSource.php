@@ -1,6 +1,6 @@
 <?php
 
-namespace common\includes;
+namespace source\libs;
 
 use components\LuLu;
 use yii\base\Object;
@@ -10,19 +10,57 @@ use common\models\Fragment2Data;
 use common\models\Fragment3Data;
 use common\models\Fragment;
 use common\models\Page;
+use source\models\Content;
 
-class DataSource extends Object
+class DataSource
 {
 
-	public static function queryAll($sql)
-	{
-		return LuLu::queryAll($sql);
-	}
-
-	public static function queryOne($sql)
-	{
-		return LuLu::queryOne($sql);
-	}
+    public static function getContents($where=null,$orderBy=null,$limit=10,$options=[])
+    {
+        $query = Content::find();
+        if(!empty($where))
+        {
+            $query->andWhere($where);
+        }
+        if(isset($options['is_pic']))
+        {
+            $query->andWhere(['!=','thumb','']);
+        }
+        if(isset($options['content_type']))
+        {
+            $type = null;
+            if(is_string($options['content_type']))
+            {
+                $type = $options['content_type'];
+            }
+            else 
+            {
+                $moduleId = LuLu::$app->controller->module->id;
+                if( $moduleId!=='app-frontend')
+                {
+                    $type = $moduleId;
+                }
+            }
+            if(!empty($type))
+            {
+                $query->andWhere(['=','content_type',$type]);
+            }
+        }
+        if(empty($orderBy))
+        {
+            $orderBy = 'created_at desc';
+            
+        }
+        $query->orderBy($orderBy);
+     
+        if($limit>0)
+        {
+            $query->limit($limit);
+        }
+      
+        return $query->all();
+    }
+	
 	
 	/*
 	 * $channelsIds = 1 or '1,3,4'

@@ -12,7 +12,7 @@ use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\bootstrap\Dropdown;
-use source\core\base\IBaseWidget;
+
 
 class Tabs extends \yii\bootstrap\Tabs implements IBaseWidget
 {

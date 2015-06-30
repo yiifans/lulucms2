@@ -97,7 +97,7 @@ class LuLu extends \Yii
     {
         $app = self::getApp();
         $view = $app->getView();
-        if (array_key_exists($key, $view->params[$key]))
+        if (array_key_exists($key, $view->params))
         {
             return $view->params[$key];
         }

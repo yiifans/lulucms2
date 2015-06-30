@@ -9,6 +9,7 @@ use yii\helpers\Html;
 use yii\base\Model;
 use yii\web\JsExpression;
 use yii\helpers\Url;
+use source\libs\Resource;
 
 /**
  * ActiveField represents a form input field within an [[ActiveForm]].
@@ -35,7 +36,7 @@ class ActionColumn extends \yii\grid\ActionColumn
         {
             $this->buttons['view'] = function ($url, $model, $key, $index, $this)
             {
-                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
+                return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/magnifier.png">', $url, [
                     'title' => Yii::t('yii', 'View'), 
                     'data-pjax' => '0'
                 ]);
@@ -45,7 +46,7 @@ class ActionColumn extends \yii\grid\ActionColumn
         {
             $this->buttons['update'] = function ($url, $model, $key, $index, $this)
             {
-                return Html::a('<span class="icon icon-edit md-tip"></span>', $url, [
+                return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/pencil.png">', $url, [
                     'title' => Yii::t('yii', 'Update'), 
                     'data-pjax' => '0'
                 ]);
@@ -55,7 +56,7 @@ class ActionColumn extends \yii\grid\ActionColumn
         {
             $this->buttons['delete'] = function ($url, $model, $key, $index, $this)
             {
-                return Html::a('<span class="icon icon-trash md-tip"></span>', $url, [
+                return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/cross.png">', $url, [
                     'title' => Yii::t('yii', 'Delete'), 
                     'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'), 
                     'data-method' => 'post', 

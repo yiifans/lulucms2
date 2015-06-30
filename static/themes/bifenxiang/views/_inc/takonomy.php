@@ -18,13 +18,15 @@ if(isset($takonomyId))
     $takonomies = Takonomy::getArrayTree($this->getConfigValue($takonomyId));
 ?>
 
-            <div class="widget d_postlist">
-            	<div class="title"><h2>分类</h2></div>
-            	<ul>
-            		<li><?php echo Html::a('所有',['/'.$moduleId])?></li>
-            		<?php foreach ($takonomies as $takonomy):?>
-            		<li><?php echo Html::a($takonomy['name'],['/'.$moduleId.'/default/list','takonomy'=>$takonomy['id']])?></li>
-            		<?php endforeach;?>
-            	</ul>
-            </div>
+<div class="widget d_postlist">
+    <div class="title">
+        <h2>分类</h2>
+    </div>
+    <ul>
+        <li><?php echo Html::a('所有',['/'.$moduleId.'/default/list'])?></li>
+        <?php foreach ($takonomies as $takonomy):?>
+        <li><?php echo Html::a($takonomy['name'],['/'.$moduleId.'/default/list','takonomy'=>$takonomy['id']])?></li>
+        <?php endforeach;?>
+    </ul>
+</div>
 <?php }?>

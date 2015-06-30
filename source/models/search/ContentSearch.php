@@ -18,7 +18,7 @@ class ContentSearch extends Content
     public function rules()
     {
         return [
-            [['id', 'takonomy_id', 'user_id', 'last_user_id', 'created_at', 'updated_at', 'focus_count', 'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count', 'is_sticky', 'is_recommend', 'is_headline', 'flag', 'allow_comment', 'sort_num', 'visibility', 'status'], 'integer'],
+            [['id', 'takonomy_id', 'user_id', 'last_user_id', 'created_at', 'updated_at', 'focus_count', 'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count', 'sticky', 'recommend', 'headline', 'flag', 'allow_comment', 'sort_num', 'visibility', 'status'], 'integer'],
             [['user_name', 'last_user_name', 'password', 'template', 'content_type', 'seo_title', 'seo_keywords', 'seo_description', 'title', 'summary', 'thumb', 'url_alias'], 'safe'],
         ];
     }

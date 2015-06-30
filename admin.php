@@ -1,6 +1,6 @@
 <?php
 
-use source\core\back\BaseBackApplication;
+use source\core\back\BackApplication;
 use source\LuLu;
 
 
@@ -23,6 +23,7 @@ $config = yii\helpers\ArrayHelper::merge(
     require(__DIR__ . '/backend/config/main-local.php')
 );
 
-$app = new BaseBackApplication($config);
+$app = new BackApplication($config);
+$app->defaultRoute='/site/welcome';
 $app->run();
 

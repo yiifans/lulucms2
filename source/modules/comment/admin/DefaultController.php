@@ -5,11 +5,11 @@ namespace source\modules\comment\admin;
 use Yii;
 use source\models\Comment;
 use source\models\search\CommentSearch;
-use source\core\back\BaseBackController;
+use source\core\back\BackController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-class DefaultController extends BaseBackController
+class DefaultController extends BackController
 {
  public function behaviors()
     {

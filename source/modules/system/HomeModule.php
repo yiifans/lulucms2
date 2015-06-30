@@ -2,8 +2,8 @@
 
 namespace source\modules\post;
 
-use source\core\modularity\BaseFrontModule;
-class HomeModule extends BaseFrontModule
+use source\core\modularity\FrontModule;
+class HomeModule extends FrontModule
 {
     public $controllerNamespace = 'source\modules\post\home';
 

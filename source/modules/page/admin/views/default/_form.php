@@ -4,99 +4,144 @@ use source\core\widgets\ActiveForm;
 use source\models\Content;
 use source\models\Takonomy;
 use source\libs\Common;
+use source\LuLu;
+use source\libs\Resource;
+use source\libs\TreeHelper;
+use source\libs\Constants;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Content */
 /* @var $form yii\widgets\ActiveForm */
 
 $filedOptions = [
-	'template' => "{label}{input}\n{error}", 
-	'labelOptions' => [
-		'class' => 'control-label'
-	]
 ]
 ;
 
 $takonomy = $this->getConfigValue('page_takonomy');
 $takonomies = Takonomy::getArrayTree($takonomy);
 
-$options = Common::buildTreeOptions($takonomies, $model->takonomy_id);
+$options = TreeHelper::buildTreeOptions($takonomies, $model->takonomy_id);
+
+LuLu::setViewParam(['defaultLayout'=>false]);
+
+$template2="{label}\n{input}\n{error}\n{hint}";
+$template4="{label}\n<div class=\"da-form-item small\" style=\"margin-left:0px;\">{input}\n{error}</div>\n{hint}";
+//$template4="<div class=\"da-form-col-4-8\">{label}</div>\n<div class=\"da-form-col-2-8\" style=\"margin-left:0px;\">{input}\n{error}</div>\n{hint}";
 
 ?>
 
-<div class="content-form ">
 
 
 
     <?php
 				
 $form = ActiveForm::begin([
-					'options'=>['enctype'=>'multipart/form-data',],
-					'fieldConfig' => [
-						'template' => "{label}<div class=\"col-md-8\">{input}</div>\n{error}", 
-						'labelOptions' => [
-							'class' => 'col-md-4 control-label no-padding-left no-padding-right align-left'
-						]
-					], 
-					
+					'options'=>['enctype'=>'multipart/form-data','class'=>'da-form'],
+					'fieldConfig'=>[
+					    'size'=>'default',
+                    ]
 				]);
 				?>
+    <div class="da-form-inline">
     
-<div class="row">
-		<div class="col-md-9">
-		    <?= $form->field($model, 'title',$filedOptions)->textInput(['maxlength' => 256,'placeholder'=>'请输入标题'])->label(false)?>
-		
-		    <?= $form->field($model, 'url_alias',$filedOptions)->textInput(['maxlength' => 128,'placeholder'=>'Url 地址'])?>
-		
-		    <?= $form->field($bodyModel, 'body',$filedOptions)->textarea(['rows' => 12]) ?>	
-		    
-		    <?= $form->field($model, 'summary',$filedOptions)->textarea(['rows' => 6])?>
-		    
-		     <div class="form-group field-content-thumb">
-				<label class="control-label" for="content-thumb">缩略图</label>
-				<div class="file-box">
-					<input type="text" id="content-thumb" class="form-control" style="display: inline-block; width:500px; " name="Content[thumb]" value="<?php echo $model['thumb']?>" maxlength="128">
-					<input type='button' class='form-control' style="display: inline-block;width:60px;" value='浏览...' /> 
-					<input type="file" name="Content[thumb]" class="file" onchange="document.getElementById('content-thumb').value=getFilePath(this);" /> 
-				</div>
-				
-	
-				<div class="help-block"></div>
-			</div>
-		</div>
-
-		<div class="col-md-3 form-horizontal" >
-	
-			<?= $form->field($model, 'status')->dropDownList(Content::getStatusItems())?>
-			<?= $form->field($model, 'visibility')->dropDownList(Content::getVisibilityItems())?>
-			
-			<?= $form->field($model, 'password')->passwordInput(['maxlength' => 64])?>
-		
-		    <?= $form->field($model, 'allow_comment')->checkbox([],false)?>
-		    
-		    <?= $form->field($model, 'is_sticky')->checkbox([],false)?>
-		   
-	
-	        <?= $form->field($model, 'takonomy_id')->dropDownList($options,['prompt'=>'请选择','options'=>['encodeSpaces'=>true]])?>
-	
-		    <?= $form->field($model, 'template')->textInput(['maxlength' => 64])?>
-		     <?= $form->field($model, 'comment_count')->textInput()?>
-		
-		    <?= $form->field($model, 'view_count')->textInput()?>
-		
-		    <?= $form->field($model, 'agree_count')->textInput()?>
-		
-		    <?= $form->field($model, 'against_count')->textInput()?>
-						
-		 	<div  class="form-group">
-		        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary'])?>
-		    </div>
-	</div>
+            <div class="grid_3">
+                <div class="da-panel">
+                    <div class="da-panel-header">
+                        <span class="da-panel-title">
+                            <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/16/pencil.png" alt="">
+                            <?= $this->title ?>
+                        </span>
+                    </div>
+                  
+                    <div class="da-panel-content">
+            		    <?= $form->field($model, 'title',$filedOptions)->textInput(['maxlength' => 256,'placeholder'=>'请输入标题'])?>
+            		    <?= $form->field($model, 'sub_title',$filedOptions)->textInput(['maxlength' => 256,'placeholder'=>'请输入副标题'])?>
+            		    <?= $form->field($model, 'url_alias',$filedOptions)->textInput(['maxlength' => 256,'placeholder'=>'Url 地址'])?>
+            		    <?= $form->field($model, 'redirect_url',$filedOptions)->textInput(['maxlength' => 256])?>
+            		
+            		    <?= $form->field($bodyModel, 'body',$filedOptions)->textarea(['rows' => 12]) ?>	
+            		    
+            		    <?= $form->field($model, 'summary',$filedOptions)->textarea(['rows' => 6])?>
+            		    
+            		    <?= $form->field($model, 'thumb',$filedOptions)->fileInput(['class'=>'da-custom-file'])?>
+            		   
+            			
+                    </div>
+                </div>
+            </div>
+                                    
+            <div class="grid_1">
+            
+                <div class="da-panel">
+                    <div class="da-panel-header">
+                        <span class="da-panel-title">
+                            <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/16/pencil.png" alt="">
+                            属性设置
+                        </span>
+                    </div>
+            
+                    <div class="da-panel-content">
+                    
+            	       <div class="da-form-row">       
+            			<?= $form->field($model, 'takonomy_id',['template'=>$template2,'options'=>['class'=>'da-form-col-12']])->dropDownList($options,['prompt'=>'请选择'])?>
+                       </div>                    
+             	      <div class="da-form-row">
+            		    <?= $form->field($model, 'sort_num',['template'=>$template2,'options'=>['class'=>'da-form-col-6 alpha']])->textInput()?>
+            		    <?= $form->field($model, 'template',['template'=>$template2,'options'=>['class'=>'da-form-col-6 omega']])->textInput(['maxlength' => 64])?>
+                      </div>
+                      
 
 
+            		
+            	      <div class="da-form-row">
+            		    <?= $form->field($model, 'recommend',['template'=>$template2,'options'=>['class'=>'da-form-col-4 alpha']])->dropDownList(Constants::getRecommendItems())?>
+            		    <?= $form->field($model, 'headline',['template'=>$template2,'options'=>['class'=>'da-form-col-4']])->dropDownList(Constants::getHeadlineItems())?>
+            		    <?= $form->field($model, 'sticky',['template'=>$template2,'options'=>['class'=>'da-form-col-4 omega']])->dropDownList(Constants::getStickyItems())?>
+                      </div>
+             	      
+            	       <div class="da-form-row">       
+                        
+            			<?= $form->field($model, 'status',['template'=>$template2,'options'=>['class'=>'da-form-col-4 alpha']])->dropDownList(Constants::getStatusItemsForContent(),[],false)?>
+            			
+            			<?= $form->field($model, 'visibility',['template'=>$template2,'options'=>['class'=>'da-form-col-4']])->dropDownList(Constants::getVisibilityItems(),[],false)?>
+            			
+            			<?= $form->field($model, 'allow_comment',['template'=>$template2,'options'=>['class'=>'da-form-col-4 omega']])->dropDownList(Constants::getYesNoItems(),[],false)?>
+            		
+                        </div>
+                       <!--                        		   
+            	       <div class="da-form-row">            		    
+            		    <?= $form->field($model, 'view_count',['template'=>$template2,'options'=>['class'=>'da-form-col-3 alpha']])->textInput()?>
+            		    <?= $form->field($model, 'comment_count',['template'=>$template2,'options'=>['class'=>'da-form-col-3']])->textInput()?>
+            		    <?= $form->field($model, 'agree_count',['template'=>$template2,'options'=>['class'=>'da-form-col-3']])->textInput()?>
+            		    <?= $form->field($model, 'against_count',['template'=>$template2,'options'=>['class'=>'da-form-col-3 omega']])->textInput()?>   
+                       </div>
+                        -->
+                       <?= $form->defaultButtons() ?>    
+                       
+                    </div>
+                </div>
+ 
+ 
+                <div class="da-panel collapsible collapsed">
+                    <div class="da-panel-header">
+                        <span class="da-panel-title">
+                            <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/16/pencil.png" alt="">
+                            SEO设置
+                        </span>
+                    </div>
+            
+                    <div class="da-panel-content">
+                    
+            		
+            		    <?= $form->field($model, 'seo_title',['options'=>['class'=>'da-form-row da-form-block'],'size'=>'large'])->textInput(['maxlength' => 256])?>
+            		    <?= $form->field($model, 'seo_keywords',['options'=>['class'=>'da-form-row da-form-block'],'size'=>'large'])->textInput(['maxlength' => 256])?>
+            		    <?= $form->field($model, 'seo_description',['options'=>['class'=>'da-form-row da-form-block'],'size'=>'large'])->textarea(['maxlength' => 256,'rows'=>5])?>
+            		
+                    </div>
+                </div>               
+            </div>
 
-
-</div>
+</div>			
 <?php ActiveForm::end(); ?>
 
-</div>
+

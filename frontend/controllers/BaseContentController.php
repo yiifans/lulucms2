@@ -8,12 +8,12 @@ use source\models\search\ContentSearch;
 use source\core\base\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use source\core\front\BaseFrontActiveRecord;
-use source\core\front\BaseFrontController;
+use source\core\front\FrontActiveRecord;
+use source\core\front\FrontController;
 use source\models\Takonomy;
 use source\LuLu;
 
-abstract class BaseContentController extends BaseFrontController
+abstract class BaseContentController extends FrontController
 {
 	public $content_type;
 	

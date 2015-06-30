@@ -1,0 +1,60 @@
+/*
+ * Dandelion Admin v1.0 - Demo Stylesheet
+ *
+ * This file is part of Dandelion Admin, an Admin template build for sale at ThemeForest.
+ * For questions, suggestions or support request, please mail me at maimairel@yahoo.com
+ *
+ * Development Started:
+ * March 25, 2012
+ *
+ * ===============================================
+ * Table of Contents
+ * ===============================================
+ *
+ * 1. Vertical Sliders
+ * 2. Icon List
+ *
+ */
+ 
+/* (1) Vertical Sliders
+================================================== */
+
+#da-slider-equalizer span
+{
+	height:120px; float:left; margin:0 16px;
+}
+
+/* (2) Icon List
+================================================== */
+
+ul.da-icon-list li
+{
+	margin:0;
+	list-style:none;
+}
+
+ul.da-icon-list li
+{
+	display:block;
+	float:left;
+	margin:4px;
+}
+
+ul.da-icon-list.black li span
+{
+	background-color:#444444;
+	border-color:#000000;
+}
+
+ul.da-icon-list li span
+{
+	padding:10px;
+	display:block;
+	background-color:#fefefe;
+	border:1px solid #f0f0f0;
+	
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	-o-border-radius:4px;
+	border-radius:4px;
+}

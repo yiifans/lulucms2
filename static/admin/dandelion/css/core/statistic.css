@@ -1,0 +1,203 @@
+/*
+ * Dandelion Admin v1.0 - Statistical Widget Stylesheet
+ *
+ * This file is part of Dandelion Admin, an Admin template build for sale at ThemeForest.
+ * For questions, suggestions or support request, please mail me at maimairel@yahoo.com
+ *
+ * Development Started:
+ * March 25, 2012
+ *
+ * ===============================================
+ * Table of Contents
+ * ===============================================
+ *
+ * 1. Circular Stat
+ * 2. Summary Stat
+ *
+ */
+
+/* (1) Circular Stats
+================================================== */
+
+.da-circular-stat-wrap, 
+.da-circular-stat
+{
+	margin:0;
+	list-style:none;
+}
+
+.da-circular-stat-wrap
+{
+	text-align:center;
+	margin-bottom:20px;
+}
+
+.da-circular-stat
+{
+	display:inline-block;
+	width:135px; height:135px;
+	position:relative;
+	margin:0 5px 5px 5px;
+	background:url(../../images/circular-stat-back.png) no-repeat center center;
+	background-size:100% 100%;
+}
+
+.da-circular-stat .da-circular-front, 
+.da-circular-stat .da-circular-progress
+{
+	display:block;
+	position:absolute;
+	width:120px; height:120px;
+	top:8px; left:8px;
+	z-index:50;
+}
+	
+.da-circular-stat .da-circular-front
+{
+	z-index:100;
+	background:url(../../images/circular-stat-front.png) no-repeat center center;
+	background-size:100% 100%;
+}
+
+.da-circular-stat .da-circular-front .da-circular-digit, 
+.da-circular-stat .da-circular-front .da-circular-label
+{
+	display:block;
+	width:70px;
+	height:30px;
+	margin:auto;
+	margin-top:30px;
+	text-align:center;
+}
+
+.da-circular-stat .da-circular-front .da-circular-digit
+{
+	color:#181818;
+	font-size:14px;
+	color:#444444;
+	font-weight:bold;
+}
+
+.da-circular-stat .da-circular-front .da-circular-digit span
+{
+	font-size:18px;
+}
+
+.da-circular-stat .da-circular-front .da-circular-label
+{
+	margin-top:4px;
+	color:#000000;
+	font-size:11px;
+}
+
+
+/* (2) Summary Stats
+================================================== */
+
+ul.da-summary-stat, 
+ul.da-summary-stat li
+{
+	margin:0;
+	list-style:none;
+}
+
+ul.da-summary-stat li:after
+{
+	clear: both;
+	content: ' ';
+	display: block;
+	font-size: 0;
+	line-height: 0;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+ul.da-summary-stat li
+{
+	display:block;
+	clear:both;
+}
+
+ul.da-summary-stat > li > a, 
+ul.da-summary-stat > li > span
+{
+	text-decoration:none;
+	display:block;
+	padding:8px;
+	
+	-webkit-border-radius:6px;
+	-moz-border-radius:6px;
+	-o-border-radius:6px;
+	border-radius:6px;
+	
+	-webkit-transition:all 100ms ease-out;
+	-o-transition:all 100ms ease-out;
+	-moz-transition:all 100ms ease-out;
+	transition:all 100ms ease-out;
+}
+
+ul.da-summary-stat > li:hover > a, 
+ul.da-summary-stat > li:hover > span
+{
+	background-color:#f0f0f0;
+}
+
+ul.da-summary-stat li .da-summary-icon
+{
+	width:48px;
+	height:48px;
+	display:block;
+	float:left;
+	position:relative;
+	text-align:center;
+	background-color:#656565;
+	
+	-webkit-border-radius:6px;
+	-moz-border-radius:6px;
+	-o-border-radius:6px;
+	border-radius:6px;
+}
+
+ul.da-summary-stat li .da-summary-icon img
+{
+	max-height:32px;
+	max-width:32px;
+	position:absolute;
+	left:50%; top:50%;
+	margin-left:-16px;
+	margin-top:-16px;
+}
+
+ul.da-summary-stat li .da-summary-text
+{
+	margin-left:56px;
+	display:block;
+	color:#656565;
+}
+
+ul.da-summary-stat li .da-summary-text span.value
+{
+	color:#444444;
+	font-size:21px;
+	font-weight:bold;
+	display:block;
+	display:inline-block;
+}
+
+ul.da-summary-stat li .da-summary-text span.label
+{
+	display:block;
+}
+
+ul.da-summary-stat li .da-summary-text span.value.up
+{
+	background:url(../../images/up.png) no-repeat right center;
+	padding-right:24px;
+}
+
+ul.da-summary-stat li .da-summary-text span.value.down
+{
+	background:url(../../images/down.png) no-repeat right center;
+	padding-right:24px;
+}

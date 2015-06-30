@@ -1,9 +1,7 @@
 <?php
 namespace source\modules\modularity;
 
-use source\core\modularity\ModuleInfo;
-
-class ModularityInfo extends ModuleInfo
+class ModularityInfo extends \source\core\modularity\ModuleInfo
 {
 
     public function init()

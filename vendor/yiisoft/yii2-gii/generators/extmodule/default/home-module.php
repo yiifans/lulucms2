@@ -15,7 +15,7 @@ namespace source\modules\<?= $generator->moduleDir?>;
 
 use source\LuLu;
 
-class HomeModule extends \source\core\modularity\BaseFrontModule
+class HomeModule extends \source\core\modularity\FrontModule
 {
     
     public $controllerNamespace = 'source\modules\<?= $generator->moduleDir?>\home';

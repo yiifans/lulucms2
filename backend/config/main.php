@@ -29,12 +29,15 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'admin/error',
+            'errorAction' => 'site/error',
         ],
         'view' => [
-        	'class' => 'source\core\back\BaseBackView',
+        	'class' => 'source\core\back\BackView',
         ],
-        
+        'request'=>[
+            'class' => 'yii\web\Request',
+            'enableCsrfValidation'=>false,
+        ]
         
     ],
     'modules' => [

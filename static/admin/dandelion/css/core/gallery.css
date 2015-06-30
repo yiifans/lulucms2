@@ -1,0 +1,262 @@
+/*
+ * Dandelion Admin v1.0 - Gallery Stylesheet
+ *
+ * This file is part of Dandelion Admin, an Admin template build for sale at ThemeForest.
+ * For questions, suggestions or support request, please mail me at maimairel@yahoo.com
+ *
+ * Development Started:
+ * March 25, 2012
+ *
+ */
+
+.da-gallery ul, 
+.da-gallery ul li
+{
+	margin:0;
+	list-style:none;
+	text-align:center;
+}
+
+.da-gallery ul li
+{
+	display:inline-block;
+	position:relative;
+	margin:15px;
+	
+	width:150px;
+	height:150px;
+}
+
+.da-gallery ul li a
+{
+	display:block;
+	position:relative;
+	z-index:15;
+	zoom:1;
+}
+
+.da-gallery ul li a img
+{
+	padding:6px;
+	max-width:138px;
+	max-height:138px;
+	background-color:#ffffff;
+	border:1px solid #dcdcdc;
+	border:1px solid rgba(255, 255, 255, 0);
+	
+	-webkit-border-radius:3px;
+	-o-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;	
+	
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+	-o-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);	
+}
+
+.da-gallery ul li a:after, 
+.da-gallery ul li a:before
+{
+	content:"";
+	position:absolute;
+	width:100%; height:100%;
+	border:6px solid #fafafa;
+	background-color:#808080;
+
+	left:0; top:0;
+	
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+	-o-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+	
+	-webkit-border-radius:3px;
+	-o-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;	
+	
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.da-gallery ul li a:after
+{
+	z-index:-10;
+	
+	-webkit-transform:rotate(8deg);
+	-o-transform:rotate(8deg);
+	-moz-transform:rotate(8deg);
+	transform:rotate(8deg);	
+}
+
+.da-gallery ul li a:before
+{
+	z-index:-5;
+	
+	-webkit-transform:rotate(4deg);
+	-o-transform:rotate(4deg);
+	-moz-transform:rotate(4deg);
+	transform:rotate(4deg);	
+}
+
+.da-gallery ul li:nth-child(even) a:after
+{
+	-webkit-transform:rotate(-6deg);
+	-o-transform:rotate(-6deg);
+	-moz-transform:rotate(-6deg);
+	transform:rotate(-6deg);
+}
+
+.da-gallery ul li:nth-child(even) a:before
+{
+	-webkit-transform:rotate(-2deg);
+	-o-transform:rotate(-2deg);
+	-moz-transform:rotate(-2deg);
+	transform:rotate(-2deg);
+}
+
+.da-gallery ul li:nth-child(3n) a:after
+{
+	-webkit-transform:rotate(6deg);
+	-o-transform:rotate(6deg);
+	-moz-transform:rotate(6deg);
+	transform:rotate(6deg);
+}
+
+.da-gallery ul li:nth-child(3n) a:before
+{
+	-webkit-transform:rotate(3deg);
+	-o-transform:rotate(3deg);
+	-moz-transform:rotate(3deg);
+	transform:rotate(3deg);
+}
+
+.da-gallery ul li:nth-child(5n) a:after
+{
+	-webkit-transform:rotate(-8deg);
+	-o-transform:rotate(-8deg);
+	-moz-transform:rotate(-8deg);
+	transform:rotate(-8deg);	
+}
+
+.da-gallery ul li:nth-child(5n) a:before
+{
+	-webkit-transform:rotate(-4deg);
+	-o-transform:rotate(-4deg);
+	-moz-transform:rotate(-4deg);
+	transform:rotate(-4deg);
+}
+
+.da-gallery ul li:nth-child(8n) a:after
+{
+	-webkit-transform:rotate(-8deg);
+	-o-transform:rotate(-8deg);
+	-moz-transform:rotate(-8deg);
+	transform:rotate(-8deg);
+}
+
+.da-gallery ul li:nth-child(8n) a:before
+{
+	-webkit-transform:rotate(-3deg);
+	-o-transform:rotate(-3deg);
+	-moz-transform:rotate(-3deg);
+	transform:rotate(-3deg);
+}
+
+.da-gallery ul li span.da-gallery-hover ul li, 
+.da-gallery ul li span.da-gallery-hover ul li a, 
+.da-gallery ul li span.da-gallery-hover ul li a:after, 
+.da-gallery ul li span.da-gallery-hover ul li a:before
+{
+	width:auto;
+	height:auto;
+	border:none;
+	margin:auto;
+	
+	-webkit-transform:none;
+	-o-transform:none;
+	-moz-transform:none;
+	transform:none;
+}
+
+.da-gallery ul li span.da-gallery-hover
+{
+	display:block;
+	z-index:20;
+	position:relative;
+	margin:0; padding:0;
+	right:0; bottom:0;
+}
+
+.da-gallery ul li span.da-gallery-hover ul 
+{
+	position:absolute;
+	right:10px;
+	bottom:11px;
+}
+
+.da-gallery ul li span.da-gallery-hover ul li
+{
+	padding:0;
+	float:left;
+	margin:0 1px;
+	overflow:hidden;
+}
+
+.da-gallery ul li span.da-gallery-hover ul li a
+{
+	display:block;
+	text-indent:-99999px;
+	text-decoration:none;
+	width:32px;
+	height:32px;
+	margin:0; padding:0;
+	border:1px solid #060606;
+	opacity:0;
+	
+	-webkit-border-radius:3px;
+	-o-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+	
+	-webkit-box-shadow:inset 0 1px 0 rgba(255, 255, 255, 0.08);
+	-o-box-shadow:inset 0 1px 0 rgba(255, 255, 255, 0.08);
+	-moz-box-shadow:inset 0 1px 0 rgba(255, 255, 255, 0.08);
+	box-shadow:inset 0 1px 0 rgba(255, 255, 255, 0.08);
+	
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;	
+	
+	background-color:#202020;
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+
+.da-gallery ul li span.da-gallery-hover ul li.da-gallery-update a
+{
+	background-image:url(../../images/icons/white/16/pencil.png);
+	top:50px;
+}
+
+.da-gallery ul li span.da-gallery-hover ul li.da-gallery-delete a
+{
+	background-image:url(../../images/icons/white/16/cross_small.png);
+	top:150px;
+}
+
+.da-gallery ul li:hover span.da-gallery-hover ul li a
+{
+	top:0;
+	opacity:1;
+}
+
+.da-gallery ul li span.da-gallery-hover ul li a:hover
+{
+	background-color:#101010;
+}

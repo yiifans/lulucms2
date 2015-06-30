@@ -5,7 +5,7 @@ use yii\web\Controller;
 use Yii;
 use source\models\Content;
 use source\models\search\ContentSearch;
-use source\core\back\BaseBackController;
+use source\core\back\BackController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use backend\controllers\ContentController;
@@ -14,7 +14,7 @@ use source\modules\post\models\source\modules\post\models;
 use source\LuLu;
 use source\modules\modularity\models\Modularity;
 
-class DefaultController extends BaseBackController
+class DefaultController extends BackController
 {
 
     public function init()

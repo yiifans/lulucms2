@@ -1,6 +1,6 @@
 <?php
 
-use source\core\front\BaseFrontApplication;
+use source\core\front\FrontApplication;
 use source\libs\Common;
 // comment out the following two lines when deployed to production
 defined('YII_DEBUG') or define('YII_DEBUG', true);
@@ -21,7 +21,7 @@ $config = yii\helpers\ArrayHelper::merge(
 		require(__DIR__ . '/frontend/config/main-local.php')
 );
 
-$app = new BaseFrontApplication($config);
+$app = new FrontApplication($config);
 $siteStatus = Common::getConfigValue('sys_status');
 if($siteStatus === '0')
 {

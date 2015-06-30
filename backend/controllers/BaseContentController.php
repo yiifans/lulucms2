@@ -4,14 +4,14 @@ namespace backend\controllers;
 use Yii;
 use source\models\Content;
 use source\models\search\ContentSearch;
-use source\core\back\BaseBackController;
+use source\core\back\BackController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use source\libs\Common;
 use source\helpers\StringHelper;
 use source\LuLu;
 
-abstract class BaseContentController extends BaseBackController
+abstract class BaseContentController extends BackController
 {
 
     protected $content_type;
