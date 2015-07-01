@@ -2770,6 +2770,7 @@ a.label-inverse:hover, a.badge-inverse:hover {
     height: 45px;
     border-bottom: 1px solid #90bba8;
     margin: 5px 20px;
+    margin-top:0px;
 }
 
     .title h2 {
@@ -2778,6 +2779,7 @@ a.label-inverse:hover, a.badge-inverse:hover {
         width: 80px;
         line-height: 45px;
         color: #1abc9c;
+        margin:0px;
     }
 
 .excerpt {
