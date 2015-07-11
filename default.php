@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <head>
+    <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <title>Hello! LuLu CMS</title>
-    <link href="static/common/default/css/bootstrap.min.css" rel="stylesheet">
-    <link href="static/common/default/css/font-awesome.min.css" rel="stylesheet">
-    <link href="static/common/default/css/invite.css" rel="stylesheet">
+    <link href="static/default/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/default/css/font-awesome.min.css" rel="stylesheet">
+    <link href="static/default/css/invite.css" rel="stylesheet">
 </head>
 <body>
     <div class="hero-unit">
@@ -28,7 +29,7 @@
         </div>
     </div>
     <div class="compare-box text-center">
-        <img src="static/common/default/images/compare.png" srcset="static/common/default/images/compare@2x.png 2x, static/common/default/images/compare.png 1x">
+        <img src="static/default/images/compare.png" srcset="static/default/images/compare@2x.png 2x, static/common/default/images/compare.png 1x">
     </div>
 
 
@@ -69,12 +70,12 @@
             </div>
         </div>
     </div>
-    <script src="static/common/default/js/jquery-1.11.2.min.js"></script>
-    <script src="static/common/default/js/bootstrap.min.js"></script>
-    <script src="static/common/default/js/stickUp.js"></script>
+    <script src="static/default/js/jquery-1.11.2.min.js"></script>
+    <script src="static/default/js/bootstrap.min.js"></script>
+    <script src="static/default/js/stickUp.js"></script>
     <script>var code = "VIZMW4IaAz-QHJnU"; var browserBrand = "chrome";
     </script>
-    <script src="static/common/default/js/invite.js"></script>
+    <script src="static/default/js/invite.js"></script>
     <script>var jiathis_config = { summary: "", shortUrl: false, hideMore: false, imageUrl: 'http://honx.instatic/common/default/images/compare@2x.png' }
     </script>
     <script src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
