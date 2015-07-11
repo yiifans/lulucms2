@@ -9,22 +9,22 @@
 <body>
     <div class="hero-unit">
         <div class="invite-box">
-            ��������LuLu CMS
+            诚邀体验LuLu CMS
         </div>
         <h1 class="text-center">LuLu CMS</h1>
         <p class="intro">
-            Ϊѧ�ߡ�����Ա�����������ߴ���Ĳ��ͳ���<br>
+            为学者、程序员、创作爱好者打造的博客程序<br>
             <br>
         </p>
         <p class="intro small">
-            һ�����Yii2��ܿ�����<br>
-            ģ�黯����Ȩ�޹�����һ��Ĺ���ǿ���CMS����
+            一款基于Yii2框架开发的<br>
+            模块化、集权限管理于一体的功能强大的CMS程序
         </p>
         <div>
-            <a href="https://github.com/yiifans/lulucms2" class="download-extension btn btn-warning">����LuLu CMS</a>
+            <a href="https://github.com/yiifans/lulucms2" class="download-extension btn btn-warning">下载LuLu CMS</a>
         </div>
         <div>
-            <a href="index.php" target="_blank" class="download-chrome">������ҳ</a>
+            <a href="index.php" target="_blank" class="download-chrome">进入首页</a>
         </div>
     </div>
     <div class="compare-box text-center">
@@ -34,31 +34,31 @@
 
     <div class="help-box">
         <div class="container">
-            <h3><i class="fa fa-graduation-cap"></i>��ôʹ��LuLu CMS
+            <h3><i class="fa fa-graduation-cap"></i>怎么使用LuLu CMS
             </h3>
             <div class="row">
                 <div class="col-xs-4">
-                    <p>���ȴ�Git��������LuLu CMS����data\sqlĿ¼�п����ҵ���Ӧ��sql�ű��ļ���</p>
-                    <p>���½����ݿ⣬�ٵ���sql�ű���Ȼ����source\config\main-local.php���������ݿ���Ϣ</p>
-                    <p>�������뿴�ұ���Ƶ��ʾ��</p>
+                    <p>首先从Git上面下载LuLu CMS。在data\sql目录中可以找到相应的sql脚本文件。</p>
+                    <p>先新建数据库，再导入sql脚本，然后在source\config\main-local.php中设置数据库信息</p>
+                    <p>（更多请看右边视频演示）</p>
                 </div>
                 <div class="col-xs-8">
                     <video src="/static/video/demo.mp4" autoplay loop controls></video>
                 </div>
             </div>
-            <h3><i class="fa fa-money"></i>LuLu CMS����ѵ���
+            <h3><i class="fa fa-money"></i>LuLu CMS是免费的吗？
             </h3>
-            <p>�ǵģ�LuLu CMS�ǿ�Դ��ѵġ�</p>
+            <p>是的，LuLu CMS是开源免费的。</p>
             <p>
-                ���⣬�����Ҷ�LuLu CMS����Ȥ����һ�𿪷�ά����<br>
+                另外，如果大家对LuLu CMS感兴趣可以一起开发维护。<br>
             </p>
-            <p>������õĶ����а�������֧�����ǡ�</p>
+            <p>如果觉得的对您有帮助可以支持我们。</p>
            
-            <h3><i class="fa fa-gift"></i>�������Ҹ���ʲô��
+            <h3><i class="fa fa-gift"></i>接下来我该做什么？
             </h3>
             <p>
-                ���ںܶ�С��鶼˵����װϵͳ֮�󣬾Ͳ�֪������ȥ��LuLu CMS�ˡ�<br>
-                ���ԣ������Ctrl+D�ѱ�ҳ�����ղؼУ�Ȼ�����������ɡ�
+                由于很多小伙伴都说，重装系统之后，就不知道哪里去找LuLu CMS了。<br>
+                所以，请果断Ctrl+D把本页加入收藏夹，然后，愉快地上网吧。
             </p>
         </div>
         <div class="footer">
