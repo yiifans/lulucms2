@@ -8,9 +8,11 @@ use source\core\modularity\ModuleInfo;
 use source\modules\modularity\models\Modularity;
 
 class ModularitySerivce extends ModuleService
-{
-    
-    public $id = 'modularitySerivce';
+{   
+    public function getServiceId()
+    {
+        return 'modularitySerivce';
+    }
     
     public function getActiveModules($isAdmin=false)
     {

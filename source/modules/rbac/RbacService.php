@@ -11,9 +11,6 @@ use source\LuLu;
 
 class RbacService extends \source\core\modularity\ModuleService
 {
-
-    public $id = 'rbacService';
-
     private $assignmentTable;
     private $roleTable;
     private $permissionTable;
@@ -27,6 +24,11 @@ class RbacService extends \source\core\modularity\ModuleService
         $this->roleTable = Role::tableName();
         $this->permissionTable = Permission::tableName();
         $this->relationTable = Relation::tableName();
+    }
+    
+    public function getServiceId()
+    {
+        return 'rbacService';
     }
    
 //     public function getRolesByUser($user)

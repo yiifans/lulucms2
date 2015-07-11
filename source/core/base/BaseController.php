@@ -40,7 +40,7 @@ class BaseController extends Controller
     public function init()
     {
         parent::init();
-        
+       
         $this->modularityService = LuLu::getService('modularity');
         $this->rbacService = LuLu::getService('rbac');
     }

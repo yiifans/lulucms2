@@ -22,7 +22,7 @@ class BackController extends BaseController
             exit('<script>top.location.href="'.$url.'"</script>');
         }
         
-        if(!in_array($action->id,['error','message','welcome']))
+        if(!in_array($action->id,['logout', 'error','message','welcome']))
         {
             if (! $this->rbacService->checkPermission(null, 'manager_admin') || ! $this->rbacService->checkPermission())
             {

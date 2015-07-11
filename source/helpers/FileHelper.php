@@ -37,6 +37,7 @@ class FileHelper extends \yii\helpers\BaseFileHelper
         {
             $path = self::buildPath($path);
         }
+        $path = self::normalizePath($path);
         LuLu::info($path);
         return file_exists($path);
     }
