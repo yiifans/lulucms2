@@ -97,8 +97,8 @@ return $message;
         $config = [
             'class' => 'Swift_SmtpTransport',
             'host' => 'smtp.sina.com',			//使用163邮箱
-            'username' => 'cloudon10@sina.com',	//你的163的帐号
-            'password' => "19850210co",				//你的163的密码
+            'username' => 'xxx@sina.com',	//你的163的帐号
+            'password' => "xxx",				//你的163的密码
             'port' => '25',
             //'port'=>'465',
             //'encryption' => 'ssl',
