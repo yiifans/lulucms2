@@ -13,6 +13,7 @@ class AdminModule extends \source\core\modularity\BackModule
     {
         parent::init();
 
+        $this->defaultRoute='dict-category';
         // custom initialization code goes here
     }
     

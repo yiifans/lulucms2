@@ -1,34 +1,32 @@
 <?php
-
 namespace source\core\widgets;
 
 use yii\base\Widget;
 use yii\web\View;
 use components\Core;
 
-
 class KindEditor extends BaseWidget
 {
-	public $params=[];
 
-	public $libUrl = '/static/kindeditor';
+    public $params = [];
 
-	public $input = null;
-	
-	public $editorId = null;
+    public $libUrl = '/static/kindeditor';
 
-	public $defaultParams = [
-		'allowFileManager' => 'true'
-	];
+    public $input = null;
 
-	public function init()
-	{
-		parent::init();
-		$this->libUrl=Core::getSAdminUrl().'/static/kindeditor';
-	}
-	
+    public $editorId = null;
 
-	public function run()
+    public $defaultParams = [
+        'allowFileManager' => 'true'
+    ];
+
+    public function init()
+    {
+        parent::init();
+        $this->libUrl = Core::getSAdminUrl() . '/static/kindeditor';
+    }
+
+    public function run()
 	{
 		$view = $this->view;
 		

@@ -5,6 +5,9 @@ namespace source\models;
 use Yii;
 use source\libs\TreeHelper;
 use source\libs\Constants;
+use source\libs\Resource;
+use yii\helpers\Url;
+use source\LuLu;
 
 /**
  * This is the model class for table "lulu_menu".
@@ -22,6 +25,14 @@ use source\libs\Constants;
  */
 class Menu extends \source\core\base\BaseActiveRecord
 {
+    public function init()
+    {
+        $this->target=Constants::Target_Self;
+        $this->status = Constants::Status_Enable;
+        
+        parent::init();
+    }
+    
     /**
      * @inheritdoc
      */
@@ -119,23 +130,23 @@ class Menu extends \source\core\base\BaseActiveRecord
         return $items;
     }
     
-    private static function getArrayTreeInternal($category, $parentId = 0, $level = 0)
+    private static function getArrayTreeInternal($category, $parentId = 0, $level = 0,$status=null)
     {
-    	$items = self::getChildren($category,$parentId);
+    	$items = self::getChildren($category,$parentId,$status);
     	 
     	$dataList=[];
     	foreach ($items as $item)
     	{
     		$item->level=$level;
     		$dataList[$item['id']]=$item;
-    		$temp = self::getArrayTreeInternal($category,$item->id, $level + 1);
+    		$temp = self::getArrayTreeInternal($category,$item->id, $level + 1,$status);
     		$dataList = array_merge($dataList, $temp);
     	}
     	 
     	return $dataList;
     }
     
-    public static function getArrayTree($category)
+    public static function getArrayTree($category,$status=null)
     {
     	return self::getArrayTreeInternal($category,0,0);
     }
@@ -163,6 +174,50 @@ class Menu extends \source\core\base\BaseActiveRecord
         $items = self::getChildren($category,$parentId,1);
         return self::getMenuHtmlInternal($category, $items);
     }
+   
+    public static function getAdminMenu()
+    {
+        $html='';
+        
+        $adminUrl = Resource::getAdminUrl();
+        
+        $action = LuLu::getApp()->requestedAction;
+        $urlArray = explode('/', $action->uniqueId);
+     
+        $roots = self::getChildren('admin', 0, 1);
+        foreach ($roots as $menu)
+        {
+            $url= $menu['url']==='#'? '#':Url::to([$menu['url']]);
+            $title='<span class="da-nav-icon"><img src="'.$adminUrl.'/images/icons/black/32/'.$menu['thumb'].'" alt="'.$menu['name'].'" /></span>'.$menu['name'];
+            
+            $html .= '<li id="menu-item-'.$menu['id'].'"><a href="'.$url.'">'.$title.'</a>';
+            
+            $children = self::getChildren('admin',$menu['id'],1);
+            if(count($children)>0)
+            {
+                $opened=false;
+                $childHtml='';
+                foreach ($children as $child)
+                {
+                    $menuUrlArray = explode('/',trim($child['url'],'/'));
+                    if(in_array($urlArray[0],$menuUrlArray))
+                    {
+                        $opened=true;
+                    }
+                    $childUrl= $child['url']==='#'? '#':Url::to([$child['url']]);
+                    $childHtml.='<li id="menu-item-'.$child['id'].'"><a href="'.$childUrl.'">'.$child['name'].'</a></li>';
+                }
+                
+                $html.= $opened?'<ul>':'<ul class="closed">';
+                $html.=$childHtml;
+                $html.='</ul>';
+            }
+            $html.='</li>';
+        }
+        
+        return $html;
+    }
+    
     
     public function beforeDelete()
     {

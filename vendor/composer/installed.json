@@ -1,23 +1,23 @@
 [
     {
         "name": "yiisoft/yii2-composer",
-        "version": "2.0.2",
-        "version_normalized": "2.0.2.0",
+        "version": "2.0.3",
+        "version_normalized": "2.0.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/yiisoft/yii2-composer.git",
-            "reference": "e0f95611402ad0e8e66f9764dddb6bac624b75c2"
+            "reference": "ca8d23707ae47d20b0454e4b135c156f6da6d7be"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/e0f95611402ad0e8e66f9764dddb6bac624b75c2",
-            "reference": "e0f95611402ad0e8e66f9764dddb6bac624b75c2",
+            "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/ca8d23707ae47d20b0454e4b135c156f6da6d7be",
+            "reference": "ca8d23707ae47d20b0454e4b135c156f6da6d7be",
             "shasum": ""
         },
         "require": {
             "composer-plugin-api": "1.0.0"
         },
-        "time": "2015-01-11 03:57:55",
+        "time": "2015-03-01 06:22:44",
         "type": "composer-plugin",
         "extra": {
             "class": "yii\\composer\\Plugin",
@@ -85,8 +85,7 @@
             {
                 "name": "Edward Z. Yang",
                 "email": "admin@htmlpurifier.org",
-                "homepage": "http://ezyang.com",
-                "role": "Developer"
+                "homepage": "http://ezyang.com"
             }
         ],
         "description": "Standards compliant HTML filter written in PHP",
@@ -96,38 +95,44 @@
         ]
     },
     {
-        "name": "swiftmailer/swiftmailer",
-        "version": "v5.3.1",
-        "version_normalized": "5.3.1.0",
+        "name": "cebe/markdown",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/swiftmailer/swiftmailer.git",
-            "reference": "c5f963e7f9d6f6438fda4f22d5cc2db296ec621a"
+            "url": "https://github.com/cebe/markdown.git",
+            "reference": "54a2c49de31cc44e864ebf0500a35ef21d0010b2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/c5f963e7f9d6f6438fda4f22d5cc2db296ec621a",
-            "reference": "c5f963e7f9d6f6438fda4f22d5cc2db296ec621a",
+            "url": "https://api.github.com/repos/cebe/markdown/zipball/54a2c49de31cc44e864ebf0500a35ef21d0010b2",
+            "reference": "54a2c49de31cc44e864ebf0500a35ef21d0010b2",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.3"
+            "lib-pcre": "*",
+            "php": ">=5.4.0"
         },
         "require-dev": {
-            "mockery/mockery": "~0.9.1"
+            "cebe/indent": "*",
+            "facebook/xhprof": "*@dev",
+            "phpunit/phpunit": "4.1.*"
         },
-        "time": "2014-12-05 14:17:14",
+        "time": "2015-03-06 05:28:07",
+        "bin": [
+            "bin/markdown"
+        ],
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "5.3-dev"
+                "dev-master": "1.1.x-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
-            "files": [
-                "lib/swift_required.php"
-            ]
+            "psr-4": {
+                "cebe\\markdown\\": ""
+            }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -135,33 +140,35 @@
         ],
         "authors": [
             {
-                "name": "Chris Corbyn"
-            },
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
+                "name": "Carsten Brandt",
+                "email": "mail@cebe.cc",
+                "homepage": "http://cebe.cc/",
+                "role": "Creator"
             }
         ],
-        "description": "Swiftmailer, free feature-rich PHP mailer",
-        "homepage": "http://swiftmailer.org",
+        "description": "A super fast, highly extensible markdown parser for PHP",
+        "homepage": "https://github.com/cebe/markdown#readme",
         "keywords": [
-            "mail",
-            "mailer"
+            "extensible",
+            "fast",
+            "gfm",
+            "markdown",
+            "markdown-extra"
         ]
     },
     {
         "name": "bower-asset/jquery",
-        "version": "2.1.3",
-        "version_normalized": "2.1.3.0",
+        "version": "2.1.4",
+        "version_normalized": "2.1.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/jquery/jquery.git",
-            "reference": "8f2a9d9272d6ed7f32d3a484740ab342c02541e0"
+            "reference": "7751e69b615c6eca6f783a81e292a55725af6b85"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/jquery/jquery/zipball/8f2a9d9272d6ed7f32d3a484740ab342c02541e0",
-            "reference": "8f2a9d9272d6ed7f32d3a484740ab342c02541e0",
+            "url": "https://api.github.com/repos/jquery/jquery/zipball/7751e69b615c6eca6f783a81e292a55725af6b85",
+            "reference": "7751e69b615c6eca6f783a81e292a55725af6b85",
             "shasum": ""
         },
         "require-dev": {
@@ -176,6 +183,7 @@
             "bower-asset-ignore": [
                 "**/.*",
                 "build",
+                "dist/cdn",
                 "speed",
                 "test",
                 "*.md",
@@ -195,80 +203,18 @@
         ]
     },
     {
-        "name": "bower-asset/yii2-pjax",
-        "version": "v2.0.2",
-        "version_normalized": "2.0.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/yiisoft/jquery-pjax.git",
-            "reference": "fb92be865c0fd6583714475cb7d629020749d73f"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/fb92be865c0fd6583714475cb7d629020749d73f",
-            "reference": "fb92be865c0fd6583714475cb7d629020749d73f",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/jquery": ">=1.8"
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": "./jquery.pjax.js",
-            "bower-asset-ignore": [
-                ".travis.yml",
-                "Gemfile",
-                "Gemfile.lock",
-                "vendor/",
-                "script/",
-                "test/"
-            ]
-        },
-        "installation-source": "dist"
-    },
-    {
-        "name": "bower-asset/punycode",
-        "version": "v1.3.2",
-        "version_normalized": "1.3.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/bestiejs/punycode.js.git",
-            "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/bestiejs/punycode.js/zipball/38c8d3131a82567bfef18da09f7f4db68c84f8a3",
-            "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3",
-            "shasum": ""
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": "punycode.js",
-            "bower-asset-ignore": [
-                "coverage",
-                "tests",
-                ".*",
-                "component.json",
-                "Gruntfile.js",
-                "node_modules",
-                "package.json"
-            ]
-        },
-        "installation-source": "dist"
-    },
-    {
         "name": "bower-asset/jquery.inputmask",
-        "version": "3.1.53",
-        "version_normalized": "3.1.53.0",
+        "version": "3.1.63",
+        "version_normalized": "3.1.63.0",
         "source": {
             "type": "git",
             "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
-            "reference": "1a863a0c9b733444f6766e5500eaf79b7b1d1d03"
+            "reference": "c40c7287eadc31e341ebbf0c02352eb55b9cbc48"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/1a863a0c9b733444f6766e5500eaf79b7b1d1d03",
-            "reference": "1a863a0c9b733444f6766e5500eaf79b7b1d1d03",
+            "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/c40c7287eadc31e341ebbf0c02352eb55b9cbc48",
+            "reference": "c40c7287eadc31e341ebbf0c02352eb55b9cbc48",
             "shasum": ""
         },
         "require": {
@@ -305,86 +251,89 @@
             "form",
             "input",
             "inputmask",
-            "jQuery",
+            "jquery",
             "mask",
             "plugins"
         ]
     },
     {
-        "name": "cebe/markdown",
-        "version": "1.0.1",
-        "version_normalized": "1.0.1.0",
+        "name": "bower-asset/punycode",
+        "version": "v1.3.2",
+        "version_normalized": "1.3.2.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/cebe/markdown.git",
-            "reference": "9d6c36d6623497523ed421a31d940bc1d7435578"
+            "url": "https://github.com/bestiejs/punycode.js.git",
+            "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/cebe/markdown/zipball/9d6c36d6623497523ed421a31d940bc1d7435578",
-            "reference": "9d6c36d6623497523ed421a31d940bc1d7435578",
+            "url": "https://api.github.com/repos/bestiejs/punycode.js/zipball/38c8d3131a82567bfef18da09f7f4db68c84f8a3",
+            "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3",
+            "shasum": ""
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": "punycode.js",
+            "bower-asset-ignore": [
+                "coverage",
+                "tests",
+                ".*",
+                "component.json",
+                "Gruntfile.js",
+                "node_modules",
+                "package.json"
+            ]
+        },
+        "installation-source": "dist"
+    },
+    {
+        "name": "bower-asset/yii2-pjax",
+        "version": "v2.0.4",
+        "version_normalized": "2.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/jquery-pjax.git",
+            "reference": "3f20897307cca046fca5323b318475ae9dac0ca0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/3f20897307cca046fca5323b318475ae9dac0ca0",
+            "reference": "3f20897307cca046fca5323b318475ae9dac0ca0",
             "shasum": ""
         },
         "require": {
-            "lib-pcre": "*",
-            "php": ">=5.4.0"
+            "bower-asset/jquery": ">=1.8"
         },
-        "require-dev": {
-            "cebe/indent": "*",
-            "facebook/xhprof": "*@dev",
-            "phpunit/phpunit": "3.7.*"
-        },
-        "time": "2014-10-25 16:16:49",
-        "bin": [
-            "bin/markdown"
-        ],
-        "type": "library",
+        "type": "bower-asset-library",
         "extra": {
-            "branch-alias": {
-                "dev-master": "1.0.x-dev"
-            }
+            "bower-asset-main": "./jquery.pjax.js",
+            "bower-asset-ignore": [
+                ".travis.yml",
+                "Gemfile",
+                "Gemfile.lock",
+                "vendor/",
+                "script/",
+                "test/"
+            ]
         },
         "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "cebe\\markdown\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
         "license": [
             "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Carsten Brandt",
-                "email": "mail@cebe.cc",
-                "homepage": "http://cebe.cc/",
-                "role": "Creator"
-            }
-        ],
-        "description": "A super fast, highly extensible markdown parser for PHP",
-        "homepage": "https://github.com/cebe/markdown#readme",
-        "keywords": [
-            "extensible",
-            "fast",
-            "gfm",
-            "markdown",
-            "markdown-extra"
         ]
     },
     {
         "name": "yiisoft/yii2",
-        "version": "2.0.2",
-        "version_normalized": "2.0.2.0",
+        "version": "2.0.4",
+        "version_normalized": "2.0.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/yiisoft/yii2-framework.git",
-            "reference": "a0bb60febe1e886d7c45ab3a70e17a3b3149f1a3"
+            "reference": "726867caee3f23aa7a6975c801e64b6021e14f86"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/a0bb60febe1e886d7c45ab3a70e17a3b3149f1a3",
-            "reference": "a0bb60febe1e886d7c45ab3a70e17a3b3149f1a3",
+            "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/726867caee3f23aa7a6975c801e64b6021e14f86",
+            "reference": "726867caee3f23aa7a6975c801e64b6021e14f86",
             "shasum": ""
         },
         "require": {
@@ -392,15 +341,14 @@
             "bower-asset/jquery.inputmask": "3.1.*",
             "bower-asset/punycode": "1.3.*",
             "bower-asset/yii2-pjax": ">=2.0.1",
-            "cebe/markdown": "~1.0.0",
+            "cebe/markdown": "~1.0.0 | ~1.1.0",
             "ext-mbstring": "*",
-            "ext-mcrypt": "*",
             "ezyang/htmlpurifier": "4.6.*",
             "lib-pcre": "*",
             "php": ">=5.4.0",
             "yiisoft/yii2-composer": "*"
         },
-        "time": "2015-01-11 03:57:55",
+        "time": "2015-05-10 20:09:47",
         "bin": [
             "yii"
         ],
@@ -464,25 +412,79 @@
         ]
     },
     {
-        "name": "yiisoft/yii2-swiftmailer",
-        "version": "2.0.2",
-        "version_normalized": "2.0.2.0",
+        "name": "swiftmailer/swiftmailer",
+        "version": "v5.4.0",
+        "version_normalized": "5.4.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/yiisoft/yii2-swiftmailer.git",
-            "reference": "6a1545ff54410ca7fe48a014927f780e3f414a9f"
+            "url": "https://github.com/swiftmailer/swiftmailer.git",
+            "reference": "31454f258f10329ae7c48763eb898a75c39e0a9f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/6a1545ff54410ca7fe48a014927f780e3f414a9f",
-            "reference": "6a1545ff54410ca7fe48a014927f780e3f414a9f",
+            "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/31454f258f10329ae7c48763eb898a75c39e0a9f",
+            "reference": "31454f258f10329ae7c48763eb898a75c39e0a9f",
             "shasum": ""
         },
         "require": {
-            "swiftmailer/swiftmailer": "*",
-            "yiisoft/yii2": "*"
+            "php": ">=5.3.3"
         },
-        "time": "2015-01-11 03:57:55",
+        "require-dev": {
+            "mockery/mockery": "~0.9.1"
+        },
+        "time": "2015-03-14 06:06:39",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "5.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "lib/swift_required.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Chris Corbyn"
+            },
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "Swiftmailer, free feature-rich PHP mailer",
+        "homepage": "http://swiftmailer.org",
+        "keywords": [
+            "mail",
+            "mailer"
+        ]
+    },
+    {
+        "name": "yiisoft/yii2-swiftmailer",
+        "version": "2.0.4",
+        "version_normalized": "2.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/yii2-swiftmailer.git",
+            "reference": "4ec435a89e30b203cea99770910fb5499cb3627a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/4ec435a89e30b203cea99770910fb5499cb3627a",
+            "reference": "4ec435a89e30b203cea99770910fb5499cb3627a",
+            "shasum": ""
+        },
+        "require": {
+            "swiftmailer/swiftmailer": "~5.0",
+            "yiisoft/yii2": ">=2.0.4"
+        },
+        "time": "2015-05-10 22:12:32",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -517,23 +519,23 @@
     },
     {
         "name": "yiisoft/yii2-codeception",
-        "version": "2.0.2",
-        "version_normalized": "2.0.2.0",
+        "version": "2.0.4",
+        "version_normalized": "2.0.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/yiisoft/yii2-codeception.git",
-            "reference": "aab5841badf988c5358409b312fd7cde407ae61b"
+            "reference": "de5007e7a99359597abbfe1c88dca3ce620061c5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-codeception/zipball/aab5841badf988c5358409b312fd7cde407ae61b",
-            "reference": "aab5841badf988c5358409b312fd7cde407ae61b",
+            "url": "https://api.github.com/repos/yiisoft/yii2-codeception/zipball/de5007e7a99359597abbfe1c88dca3ce620061c5",
+            "reference": "de5007e7a99359597abbfe1c88dca3ce620061c5",
             "shasum": ""
         },
         "require": {
-            "yiisoft/yii2": "*"
+            "yiisoft/yii2": ">=2.0.4"
         },
-        "time": "2015-01-11 03:57:55",
+        "time": "2015-05-10 22:08:30",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -564,17 +566,17 @@
     },
     {
         "name": "bower-asset/bootstrap",
-        "version": "v3.3.1",
-        "version_normalized": "3.3.1.0",
+        "version": "v3.3.4",
+        "version_normalized": "3.3.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/twbs/bootstrap.git",
-            "reference": "9a7e365c2c4360335d25246dac11afb1f577210a"
+            "reference": "a10eb60bc0b07b747fa0c4ebd8821eb7307bd07f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/twbs/bootstrap/zipball/9a7e365c2c4360335d25246dac11afb1f577210a",
-            "reference": "9a7e365c2c4360335d25246dac11afb1f577210a",
+            "url": "https://api.github.com/repos/twbs/bootstrap/zipball/a10eb60bc0b07b747fa0c4ebd8821eb7307bd07f",
+            "reference": "a10eb60bc0b07b747fa0c4ebd8821eb7307bd07f",
             "shasum": ""
         },
         "require": {
@@ -589,7 +591,8 @@
                 "dist/fonts/glyphicons-halflings-regular.eot",
                 "dist/fonts/glyphicons-halflings-regular.svg",
                 "dist/fonts/glyphicons-halflings-regular.ttf",
-                "dist/fonts/glyphicons-halflings-regular.woff"
+                "dist/fonts/glyphicons-halflings-regular.woff",
+                "dist/fonts/glyphicons-halflings-regular.woff2"
             ],
             "bower-asset-ignore": [
                 "/.*",
@@ -617,28 +620,32 @@
     },
     {
         "name": "yiisoft/yii2-bootstrap",
-        "version": "2.0.2",
-        "version_normalized": "2.0.2.0",
+        "version": "2.0.4",
+        "version_normalized": "2.0.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/yiisoft/yii2-bootstrap.git",
-            "reference": "e3e4fdebb911ed64075adc0bab1b718531331138"
+            "reference": "1b6b1e61cf91c3cdd517d6a7e71d30bb212e4af0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/e3e4fdebb911ed64075adc0bab1b718531331138",
-            "reference": "e3e4fdebb911ed64075adc0bab1b718531331138",
+            "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/1b6b1e61cf91c3cdd517d6a7e71d30bb212e4af0",
+            "reference": "1b6b1e61cf91c3cdd517d6a7e71d30bb212e4af0",
             "shasum": ""
         },
         "require": {
             "bower-asset/bootstrap": "3.3.* | 3.2.* | 3.1.*",
-            "yiisoft/yii2": "*"
+            "yiisoft/yii2": ">=2.0.4"
         },
-        "time": "2015-01-11 03:57:55",
+        "time": "2015-05-10 22:08:17",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
                 "dev-master": "2.0.x-dev"
+            },
+            "asset-installer-paths": {
+                "npm-asset-library": "vendor/npm",
+                "bower-asset-library": "vendor/bower"
             }
         },
         "installation-source": "dist",
@@ -665,24 +672,24 @@
     },
     {
         "name": "yiisoft/yii2-debug",
-        "version": "2.0.2",
-        "version_normalized": "2.0.2.0",
+        "version": "2.0.4",
+        "version_normalized": "2.0.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/yiisoft/yii2-debug.git",
-            "reference": "5bb8dd123ffd5d3f93ce1dcdbe16bf8b85d1b45a"
+            "reference": "5c7081b2be71c61d3a50d978b31edc3e0b6f2f97"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/5bb8dd123ffd5d3f93ce1dcdbe16bf8b85d1b45a",
-            "reference": "5bb8dd123ffd5d3f93ce1dcdbe16bf8b85d1b45a",
+            "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/5c7081b2be71c61d3a50d978b31edc3e0b6f2f97",
+            "reference": "5c7081b2be71c61d3a50d978b31edc3e0b6f2f97",
             "shasum": ""
         },
         "require": {
-            "yiisoft/yii2": "*",
+            "yiisoft/yii2": ">=2.0.4",
             "yiisoft/yii2-bootstrap": "*"
         },
-        "time": "2015-01-11 03:57:55",
+        "time": "2015-05-10 22:08:56",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -779,30 +786,34 @@
     },
     {
         "name": "yiisoft/yii2-gii",
-        "version": "2.0.2",
-        "version_normalized": "2.0.2.0",
+        "version": "2.0.4",
+        "version_normalized": "2.0.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/yiisoft/yii2-gii.git",
-            "reference": "81c5972de857aab908f92fdb2b979e8471d94b4c"
+            "reference": "e5a023e8779bd774194842ec1b8fb4917cf04007"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/81c5972de857aab908f92fdb2b979e8471d94b4c",
-            "reference": "81c5972de857aab908f92fdb2b979e8471d94b4c",
+            "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/e5a023e8779bd774194842ec1b8fb4917cf04007",
+            "reference": "e5a023e8779bd774194842ec1b8fb4917cf04007",
             "shasum": ""
         },
         "require": {
             "bower-asset/typeahead.js": "0.10.*",
             "phpspec/php-diff": ">=1.0.2",
-            "yiisoft/yii2": "*",
-            "yiisoft/yii2-bootstrap": "*"
+            "yiisoft/yii2": ">=2.0.4",
+            "yiisoft/yii2-bootstrap": "~2.0"
         },
-        "time": "2015-01-11 03:57:55",
+        "time": "2015-05-10 22:09:31",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
                 "dev-master": "2.0.x-dev"
+            },
+            "asset-installer-paths": {
+                "npm-asset-library": "vendor/npm",
+                "bower-asset-library": "vendor/bower"
             }
         },
         "installation-source": "dist",
@@ -880,24 +891,24 @@
     },
     {
         "name": "yiisoft/yii2-faker",
-        "version": "2.0.2",
-        "version_normalized": "2.0.2.0",
+        "version": "2.0.3",
+        "version_normalized": "2.0.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/yiisoft/yii2-faker.git",
-            "reference": "5bc693c3f0c8b1f056427645253e46c9e5d5597c"
+            "reference": "b88ca69ee226a3610b2c26c026c3203d7ac50f6c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-faker/zipball/5bc693c3f0c8b1f056427645253e46c9e5d5597c",
-            "reference": "5bc693c3f0c8b1f056427645253e46c9e5d5597c",
+            "url": "https://api.github.com/repos/yiisoft/yii2-faker/zipball/b88ca69ee226a3610b2c26c026c3203d7ac50f6c",
+            "reference": "b88ca69ee226a3610b2c26c026c3203d7ac50f6c",
             "shasum": ""
         },
         "require": {
             "fzaninotto/faker": "*",
             "yiisoft/yii2": "*"
         },
-        "time": "2015-01-11 03:57:55",
+        "time": "2015-03-01 06:22:44",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {

@@ -10,8 +10,8 @@ class AdminModule extends \source\core\modularity\BackModule
     public function getMenus()
     {
         return [
-            ['新建',['/post/default/create']],
-            ['所有文章',['/post']],
+            ['新建',['/post/post/create']],
+            ['所有文章',['/post/post']],
             ['设置',['/post/setting']],
         ];
     }

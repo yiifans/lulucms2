@@ -22,19 +22,19 @@ class ActionColumn extends \yii\grid\ActionColumn
 
     public $queryParams = [];
 
+    public $template='{update} {delete}';
     public function init()
     {
         parent::init();
-        $this->headerOptions['width'] = '120px';
-        
-        $this->template = '{update} {delete}';
+        //$this->headerOptions['width'] = '120px';
+        $this->contentOptions=['class'=>'da-icon-column'];
     }
 
     protected function initDefaultButtons()
     {
         if (! isset($this->buttons['view']))
         {
-            $this->buttons['view'] = function ($url, $model, $key, $index, $this)
+            $this->buttons['view'] = function ($url, $model, $key, $index, $gridView)
             {
                 return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/magnifier.png">', $url, [
                     'title' => Yii::t('yii', 'View'), 
@@ -44,7 +44,7 @@ class ActionColumn extends \yii\grid\ActionColumn
         }
         if (! isset($this->buttons['update']))
         {
-            $this->buttons['update'] = function ($url, $model, $key, $index, $this)
+            $this->buttons['update'] = function ($url, $model, $key, $index, $gridView)
             {
                 return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/pencil.png">', $url, [
                     'title' => Yii::t('yii', 'Update'), 
@@ -54,7 +54,7 @@ class ActionColumn extends \yii\grid\ActionColumn
         }
         if (! isset($this->buttons['delete']))
         {
-            $this->buttons['delete'] = function ($url, $model, $key, $index, $this)
+            $this->buttons['delete'] = function ($url, $model, $key, $index, $gridView)
             {
                 return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/cross.png">', $url, [
                     'title' => Yii::t('yii', 'Delete'), 
@@ -68,26 +68,29 @@ class ActionColumn extends \yii\grid\ActionColumn
 
     public function createUrl($action, $model, $key, $index)
     {
-        if ($this->urlCreator instanceof Closure)
-        {
-            return call_user_func($this->urlCreator, $action, $model, $key, $index);
-        }
-        else
-        {
-            $params = is_array($key) ? $key : [
-                'id' => (string) $key
-            ];
+        if ($this->urlCreator instanceof Closure) {
+            return call_user_func($this->urlCreator, $action, $model, $key, $index,$this);
+        } else {
+            $params = \Yii::$app->request->queryParams;
+            if(is_array($key))
+            {
+                $params=array_merge($params,$key);
+            }
+            else
+            {
+                $params['id']=(string) $key;
+            }
             if (isset($this->queryParams[$action]))
             {
                 $params = array_merge($params, $this->queryParams[$action]);
             }
             
             $params[0] = $this->controller ? $this->controller . '/' . $action : $action;
-            
+    
             return Url::toRoute($params);
         }
     }
-
+    
     /**
      * @inheritdoc
      */

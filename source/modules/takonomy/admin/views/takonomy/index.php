@@ -36,9 +36,13 @@ $this->addBreadcrumbs([
         'layout' => "{items}\n{pager}",
         'columns' => [
             [
+              'class'=>'source\core\grid\IdColumn',
+            ],     
+            [
 	
 				'attribute'=>'name',
 				'format'=>'html',
+                'width'=>'auto',
 				 'value'=>function ($model,$key,$index,$column){
 						return str_repeat(Constants::TabSize, $model->level).Html::a($model->name,['takonomy/update','id'=>$model->id]);
 				    }
@@ -49,11 +53,10 @@ $this->addBreadcrumbs([
             
             [
             'attribute'=>'url_alias',
-            'headerOptions'=>['width'=>'500px']
+                'width'=>'250px',
             ],
             [
-                'attribute'=>'sort_num',
-                'headerOptions'=>['width'=>'80px']
+                'class'=>'source\core\grid\SortColumn',
             ],
             ['class' => 'source\core\grid\ActionColumn',
 				'queryParams'=>['view'=>['category'=>$category]]

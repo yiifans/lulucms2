@@ -35,21 +35,6 @@ return [
         
     ],
     'modules' => [
-// 	    'comment' => [
-// 	    	'class' => 'source\modules\comment\HomeModule',
-// 	    ],
-// 	    'post' => [
-// 	    	'class' => 'source\modules\post\HomeModule',
-// 	    ],
-// 	    'page' => [
-// 	    	'class' => 'source\modules\page\HomeModule',
-// 	    ],
-// 	    'takonomy' => [
-// 	    	'class' => 'source\modules\takonomy\HomeModule',
-// 	    ],
-// 	    'menu' => [
-// 	    	'class' => 'source\modules\menu\HomeModule',
-// 	    ],
     ],
     'params' => $params,
 ];

@@ -16,6 +16,6 @@ class DictInfo extends \source\core\modularity\ModuleInfo
         $this->version = '1.0';
         $this->description = '常用的数据，如 省市数据';
         
-        $this->is_system = true;
+        //$this->is_system = true;
     }
 }

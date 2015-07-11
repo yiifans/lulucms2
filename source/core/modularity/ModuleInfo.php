@@ -7,7 +7,7 @@ class ModuleInfo extends Object
 {
 
     public $id;
-    
+
     public $name;
 
     public $version;
@@ -20,7 +20,7 @@ class ModuleInfo extends Object
 
     public $author_url;
 
-    public $is_system=false;
+    public $is_system = false;
 
     public $is_content;
 

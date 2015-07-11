@@ -26,21 +26,22 @@ $this->addBreadcrumbs([
         'layout' => "{items}\n{pager}",
         'columns' => [
             [
-            'attribute'=>'id',
-            'headerOptions'=>['width'=>'120px']
+              'class'=>'source\core\grid\IdColumn',
             ],
             [
                 'attribute'=>'name',
                 'format'=>'html',
-                'headerOptions'=>['width'=>'250px'],
+                'width'=>'250px',
                 'value'=>function ($model,$key,$index,$column)
                 {
             
                     return Html::a($model->name,['/takonomy/takonomy/index','category'=>$model->id]);
                 }
             ],
-            'description',
-
+            [
+            'attribute'=>'description',
+            'width'=>'auto',
+            ],
             [
 				'class' => 'source\core\grid\ActionColumn',
 				

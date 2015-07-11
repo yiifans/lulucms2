@@ -22,11 +22,13 @@ if ($.support.pjax) {
 
     frame.$('#main').on('pjax:success', function() {
       equal(frame.location.pathname, "/hello.html")
+      equal(frame.location.search, "")
       start()
     })
     frame.$.pjax({
       url: "hello.html",
-      container: "#main"
+      container: "#main",
+      cache: false
     })
   })
 
@@ -123,12 +125,31 @@ if ($.support.pjax) {
     var frame = this.frame
 
     frame.evaledScriptLoaded = function() {
-      equal(2, frame.evaledSrcScriptNum)
-      equal(true, frame.evaledInlineScript)
-      start()
+      equal(frame.evaledSrcScriptNum, 2)
+      deepEqual(frame.evaledInlineLog, ["one"])
+
+      frame.$.pjax({
+        url: "scripts.html?name=two",
+        container: "#main"
+      })
+
+      frame.$("#main").one("pjax:end", function() {
+        deepEqual(frame.evaledInlineLog, ["one", "two"])
+
+        goBack(frame, function() {
+          deepEqual(frame.evaledInlineLog, ["one", "two", "one"])
+
+          goForward(frame, function() {
+            deepEqual(frame.evaledInlineLog, ["one", "two", "one", "two"])
+            equal(frame.evaledSrcScriptNum, 2)
+            start()
+          })
+        })
+      })
     }
+
     frame.$.pjax({
-      url: "scripts.html",
+      url: "scripts.html?name=one",
       container: "#main"
     })
   })
@@ -330,6 +351,40 @@ if ($.support.pjax) {
     equal(frame.location.search, "?foo=1&bar=2")
   })
 
+  asyncTest("mixed containers", function() {
+    var frame = this.frame
+
+    frame.$.pjax({
+      url: "fragment.html",
+      container: "#main"
+    })
+
+    frame.$("#main").one("pjax:end", function() {
+      frame.$.pjax({
+        url: "aliens.html",
+        container: "#foo"
+      })
+
+      frame.$("#foo").one("pjax:end", function() {
+        equal(frame.$("#main > #foo > ul > li").last().text(), "aliens")
+
+        goBack(frame, function() {
+          equal(frame.$("#main > #foo").text().trim(), "Foo")
+
+          goBack(frame, function() {
+            equal(frame.$("#main > ul > li").first().text(), "home")
+
+            goForward(frame, function() {
+              goForward(frame, function() {
+                equal(frame.$("#main > #foo > ul > li").last().text(), "aliens")
+                start()
+              })
+            })
+          })
+        })
+      })
+    })
+  })
 
   asyncTest("only fragment is inserted", function() {
     var frame = this.frame
@@ -686,13 +741,17 @@ if ($.support.pjax) {
     var frame = this.frame
 
     frame.$.pjax({
-      url: "timeout.html",
+      url: "timeout.html#hello",
       container: "#main"
     })
+
+    equal(frame.location.pathname, "/timeout.html")
+    equal(frame.location.hash, "#hello")
 
     this.iframe.onload = function() {
       equal(frame.$("#main p").html(), "SLOW DOWN!")
       equal(frame.location.pathname, "/timeout.html")
+      equal(frame.location.hash, "#hello")
       start()
     }
   })
@@ -789,6 +848,46 @@ if ($.support.pjax) {
       frame.history.forward()
     }, 0)
   }
+
+  asyncTest("clicking back while loading cancels XHR", function() {
+    var frame = this.frame
+
+    frame.$('#main').on('pjax:timeout', function(event) {
+      event.preventDefault()
+    })
+
+    frame.$("#main").one('pjax:send', function() {
+
+      // Check that our request is aborted (need to check
+      // how robust this is across browsers)
+      frame.$("#main").one('pjax:complete', function(e, xhr, textStatus) {
+        equal(xhr.status, 0)
+        equal(textStatus, 'abort')
+      })
+
+      setTimeout(function() {
+        frame.history.back()
+      }, 250)
+
+      // Make sure the URL and content remain the same after the
+      // XHR would have arrived (delay on timeout.html is 1s)
+      setTimeout(function() {
+        var afterBackLocation = frame.location.pathname
+        var afterBackTitle = frame.document.title
+
+        setTimeout(function() {
+          equal(frame.location.pathname, afterBackLocation)
+          equal(frame.document.title, afterBackTitle)
+          start()
+        }, 1000)
+      }, 500)
+    })
+
+    frame.$.pjax({
+      url: "timeout.html",
+      container: "#main"
+    })
+  })
 
   asyncTest("popstate going back to page", function() {
     var frame = this.frame
@@ -925,7 +1024,6 @@ if ($.support.pjax) {
     })
   })
 
-  // Test is fragile
   asyncTest("no initial pjax:popstate event", function() {
     var frame = this.frame
     var count = 0
@@ -942,19 +1040,16 @@ if ($.support.pjax) {
       } else if (count == 3) {
         equal(frame.location.pathname, "/env.html")
         frame.history.back()
-        setTimeout(function() { window.iframeLoad(frame) }, 1000)
       } else if (count == 4) {
         equal(frame.location.pathname, "/hello.html")
         frame.history.back()
-        setTimeout(function() { window.iframeLoad(frame) }, 1000)
       } else if (count == 5) {
         equal(frame.location.pathname, "/home.html")
         frame.history.forward()
-        setTimeout(function() { window.iframeLoad(frame) }, 1000)
       } else if (count == 6) {
-        // Should skip pjax:popstate since there's no initial pjax.state
         frame.$('#main').on('pjax:popstate', function(event) {
           if (count == 6) {
+            // Should skip pjax:popstate since there's no initial pjax.state
             ok(event.state.url.match("/hello.html"), event.state.url)
             ok(false)
           } else if (count == 7) {
@@ -967,11 +1062,13 @@ if ($.support.pjax) {
           if (count == 6) {
             count++
             frame.history.forward()
-            setTimeout(function() { window.iframeLoad(frame) }, 1000)
-          } else {
-            setTimeout(function() { start() }, 1000)
           }
         })
+
+        // Browsers that don't fire initial "popstate" should just resume
+        setTimeout(function() {
+          start()
+        }, 100)
       }
     }
 
@@ -1139,24 +1236,10 @@ if ($.support.pjax) {
     })
   })
 
-  asyncTest("follows redirect with X-PJAX-URL header", function() {
-    var frame = this.frame
-
-    frame.$('#main').on("pjax:success", function() {
-      equal(frame.location.pathname, "/hello.html")
-      equal(frame.$("#main > p").html().trim(), "Hello!")
-      start()
-    })
-    frame.$.pjax({
-      url: "redirect.html",
-      container: "#main"
-    })
-  })
-
   asyncTest("lazily sets initial $.pjax.state", function() {
     var frame = this.frame
 
-    ok(!frame.$.pjax.state)
+    equal(frame.$.pjax.state, null)
 
     frame.$('#main').on("pjax:success", function() {
       start()
@@ -1166,24 +1249,28 @@ if ($.support.pjax) {
       container: "#main"
     })
 
-    ok(frame.$.pjax.state.id)
-    ok(frame.$.pjax.state.url.match("/home.html"))
-    equal(frame.$.pjax.state.container, "#main")
+    var initialState = frame.$.pjax.state
+    ok(initialState.id)
+    equal(initialState.url, "http://" + frame.location.host + "/home.html")
+    equal(initialState.container, "#main")
   })
 
   asyncTest("updates $.pjax.state to new page", function() {
     var frame = this.frame
 
     frame.$('#main').on("pjax:success", function() {
-      ok(frame.$.pjax.state.id)
-      ok(frame.$.pjax.state.url.match("/hello.html"))
-      equal(frame.$.pjax.state.container, "#main")
+      var state = frame.$.pjax.state
+      ok(state.id)
+      equal(state.url, "http://" + frame.location.host + "/hello.html#new")
+      equal(state.container, "#main")
       start()
     })
     frame.$.pjax({
-      url: "hello.html",
+      url: "hello.html#new",
       container: "#main"
     })
+
+    var initialState = frame.$.pjax.state
   })
 
   asyncTest("new id is generated for new pages", function() {

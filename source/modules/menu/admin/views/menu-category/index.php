@@ -19,24 +19,25 @@ $this->addBreadcrumbs([
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
-        'layout' => "{items}\n{pager}",
+        
         'columns' => [
           
             [
-              'attribute'=>'id',
-               'headerOptions'=>['width'=>'120px']  
+              'class'=>'source\core\grid\IdColumn',
             ],
             [
     			'attribute'=>'name',
     			'format'=>'html',
-                'headerOptions'=>['width'=>'250px'],
+                'width'=>'250px',
 				'value'=>function ($model,$key,$index,$column)
 					{
-						
-						return Html::a($model->name,['/menu/default/index','category'=>$model->id]);
+						return Html::a($model->name,['/menu/menu/index','category'=>$model->id]);
 					}
 			],
-            'description',
+            [
+            'attribute'=>'description',
+            'width'=>'auto'
+            ],
             ['class' => 'source\core\grid\ActionColumn'],
         ],
     ]); ?>

@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use source\LuLu;
 
 /* @var $this yii\web\View */
 /* @var $name string */
@@ -9,19 +10,11 @@ use yii\helpers\Html;
 
 $this->title = $name;
 ?>
-<div class="site-error">
+<div id="da-error-wrapper">
+                	                   
+	<h1 class="da-error-heading"><?= $message ?></h1>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <div class="alert alert-danger">
-        <?= nl2br(Html::encode($message)) ?>
-    </div>
-
-    <p>
-        The above error occurred while the Web server was processing your request.
-    </p>
-    <p>
-        Please contact us if you think this is a server error. Thank you.
-    </p>
-
+	<p><a href="<?php echo LuLu::getApp()->request->getReferrer()?>">返回上一页</a></p>
+	
 </div>
+

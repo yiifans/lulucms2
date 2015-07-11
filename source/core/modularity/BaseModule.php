@@ -23,7 +23,7 @@ class BaseModule extends \source\core\base\BaseModule
     {
         parent::init();
         
-        $this->modularityService=LuLu::getService('modularityService');
+        $this->modularityService=LuLu::getService('modularity');
     }
 	
 	public function getMenus()

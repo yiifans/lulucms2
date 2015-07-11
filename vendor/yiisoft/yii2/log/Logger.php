@@ -116,7 +116,10 @@ class Logger extends Component
     {
         parent::init();
         register_shutdown_function(function () {
-            // make sure "flush()" is called last when there are multiple shutdown functions
+            // make regular flush before other shutdown functions, which allows session data collection and so on
+            $this->flush();
+            // make sure log entries written by shutdown functions are also flushed
+            // ensure "flush()" is called last when there are multiple shutdown functions
             register_shutdown_function([$this, 'flush'], true);
         });
     }
@@ -209,7 +212,7 @@ class Logger extends Component
             $matched = empty($categories);
             foreach ($categories as $category) {
                 $prefix = rtrim($category, '*');
-                if (strpos($timing['category'], $prefix) === 0 && ($timing['category'] === $category || $prefix !== $category)) {
+                if (($timing['category'] === $category || $prefix !== $category) && strpos($timing['category'], $prefix) === 0) {
                     $matched = true;
                     break;
                 }
@@ -219,7 +222,7 @@ class Logger extends Component
                 foreach ($excludeCategories as $category) {
                     $prefix = rtrim($category, '*');
                     foreach ($timings as $i => $timing) {
-                        if (strpos($timing['category'], $prefix) === 0 && ($timing['category'] === $category || $prefix !== $category)) {
+                        if (($timing['category'] === $category || $prefix !== $category) && strpos($timing['category'], $prefix) === 0) {
                             $matched = false;
                             break;
                         }

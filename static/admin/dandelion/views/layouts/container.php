@@ -8,9 +8,12 @@ use source\models\Takonomy;
 use source\libs\Resource;
 use source\LuLu;
 use yii\helpers\Url;
+use source\models\Menu;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
+
+$rbacService = LuLu::getService('rbac');
 
 ?>
 
@@ -60,7 +63,7 @@ use yii\helpers\Url;
         '/plugins/fileinput/jquery.fileinput.js',
         '/plugins/placeholder/jquery.placeholder.js',
         '/plugins/mousewheel/jquery.mousewheel.js',
-        '/plugins/tinyscrollbar/jquery.tinyscrollbar.js',
+        '/plugins/tinyscrollbar/jquery.tinyscrollbar.min.js',
         '/plugins/tipsy/jquery.tipsy-min.js',
         '/plugins/tipsy/tipsy.css',
     ]);?>
@@ -68,6 +71,8 @@ use yii\helpers\Url;
     <!-- Demo JavaScript Files -->
     <?php Resource::registerAdmin([
         '/js/demo/demo.validation.js',
+        '/js/demo/demo.ui.js',
+        '/js/demo/demo.tables.js',
     ]);?>
 
     <!-- Core JavaScript Files -->
@@ -152,9 +157,10 @@ use yii\helpers\Url;
                     <!-- Main Navigation -->
                     <div id="da-main-nav" class="da-button-container">
                         <ul>
+                        <?php echo Menu::getAdminMenu();?>
+                        <!-- 
                             <li>
                                 <a href="<?php echo Url::to(['/site/welcome'])?>">
-                                    <!-- Icon Container -->
                                     <span class="da-nav-icon">
                                         <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/32/home.png" alt="Dashboard" />
                                     </span>
@@ -163,7 +169,6 @@ use yii\helpers\Url;
                             </li>
                             <li>
                                 <a href="#">
-                                    <!-- Icon Container -->
                                     <span class="da-nav-icon">
                                         <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/32/graph.png" alt="Charts" />
                                     </span>
@@ -180,7 +185,6 @@ use yii\helpers\Url;
                             </li>
                             <li>
                                 <a href="#">
-                                    <!-- Icon Container -->
                                     <span class="da-nav-icon">
                                         <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/32/day_calendar.png" alt="Calendar" />
                                     </span>
@@ -194,7 +198,6 @@ use yii\helpers\Url;
                             </li>
                             <li>
                                 <a href="#">
-                                    <!-- Icon Container -->
                                     <span class="da-nav-icon">
                                         <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/32/file_cabinet.png" alt="File Handling" />
                                     </span>
@@ -247,20 +250,20 @@ use yii\helpers\Url;
                             </li>
                             <li>
                                 <a href="#">
-                                    <!-- Icon Container -->
                                     <span class="da-nav-icon">
                                         <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/32/table_1.png" alt="Table" />
                                     </span>
                                     用户
                                 </a>
                                 <ul class="closed">
-                                    <li><?php echo Html::a('用户列表',['/page/default/create'])?></li>
-                                    <li><?php echo Html::a('用户组',['/page/default/create'])?></li>
+                                    <li><?php echo Html::a('用户列表',['/user/user'])?></li>
+                                    <li><?php echo Html::a('角色管理',['/rbac/role'])?></li>
+                                    <li><?php echo Html::a('权限管理',['/rbac/permission'])?></li>
+                                    <li><?php echo Html::a('分类管理',['/rbac/category'])?></li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="#">
-                                    <!-- Icon Container -->
                                     <span class="da-nav-icon">
                                         <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/32/create_write.png" alt="Form" />
                                     </span>
@@ -274,7 +277,6 @@ use yii\helpers\Url;
                             </li>
                             <li>
                                 <a href="#">
-                                    <!-- Icon Container -->
                                     <span class="da-nav-icon">
                                         <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/32/settings.png" alt="" />
                                     </span>
@@ -286,6 +288,8 @@ use yii\helpers\Url;
                                     <li><a href="typography.html">系统维护</a></li>
                                 </ul>
                             </li>
+                             -->
+                             
                         </ul>
                     </div>
 
@@ -318,6 +322,25 @@ use yii\helpers\Url;
                                 <?php endif;?>
 
                                 <div class="da-panel-content">
+                                    <?php if(($message = LuLu::getFlash('error'))!==null):?>
+                                    <div class="da-message error">
+                                        <?php 
+                                        if(is_array($message))
+                                        {
+                                            echo '<ul>';
+                                            foreach ($message as $item)
+                                            {
+                                                echo '<li>'.$item.'</li>';
+                                            }
+                                            echo '</ul>';
+                                        }
+                                        else
+                                        {
+                                            echo $message;
+                                        }
+                                        ?>
+                                    </div>
+                                    <?php endif;?>
                                     <?php echo $content ?>
                                 </div>
                             </div>

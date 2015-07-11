@@ -83,9 +83,9 @@ class Resource
 
     public static function registerAdmin($url)
     {
-        if(is_array($url))
+        if (is_array($url))
         {
-            foreach($url as $u)
+            foreach ($url as $u)
             {
                 $u = self::getAdminUrl($u);
                 self::registerFile($u);

@@ -10,7 +10,7 @@ use source\helpers\ArrayHelper;
 /* @var $model app\models\config\Basic */
 /* @var $form ActiveForm */
 
-$this->title='页面模块设置';
+$this->title='单面模块设置';
 $this->addBreadcrumbs([
 		'基本设置'
 		]);

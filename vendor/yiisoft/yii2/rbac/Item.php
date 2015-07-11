@@ -8,7 +8,6 @@
 namespace yii\rbac;
 
 use yii\base\Object;
-use yii\base\Model;
 
 /**
  * @author Qiang Xue <qiang.xue@gmail.com>

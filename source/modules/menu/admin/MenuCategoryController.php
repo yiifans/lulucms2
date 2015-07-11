@@ -8,12 +8,14 @@ use source\models\search\MenuCategorySearch;
 use source\core\back\BackController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\base\ErrorException;
 
 /**
  * MenuCategoryController implements the CRUD actions for MenuCategory model.
  */
 class MenuCategoryController extends BackController
 {
+
    
     /**
      * Lists all MenuCategory models.

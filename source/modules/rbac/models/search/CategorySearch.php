@@ -1,11 +1,12 @@
 <?php
 
-namespace app\modules\rbac\models\search;
+namespace source\modules\rbac\models\search;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\rbac\models\Category;
+use source\modules\rbac\models\Category;
+use source\LuLu;
 
 /**
  * CategorySearch represents the model behind the search form about `app\modules\rbac\models\Category`.
@@ -19,7 +20,7 @@ class CategorySearch extends Category
     {
         return [
             [['id', 'type', 'sort_num'], 'integer'],
-            [['name', 'note'], 'safe'],
+            [['name', 'description'], 'safe'],
         ];
     }
 
@@ -48,21 +49,22 @@ class CategorySearch extends Category
         ]);
 
         $this->load($params);
-
+        $this->type=LuLu::getGetValue('type');
+        
+        $query->andWhere([
+            'type' => $this->type,
+        ]);
+        
         if (!$this->validate()) {
             // uncomment the following line if you do not want to any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
         }
 
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'type' => $this->type,
-            'sort_num' => $this->sort_num,
-        ]);
+
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'note', $this->note]);
+            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

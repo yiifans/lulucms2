@@ -1,17 +1,15 @@
 <?php
+namespace source\modules\post;
 
-namespace app\modules\rbac;
-
-class HomeModule extends \yii\base\Module
+class HomeModule extends \source\core\modularity\FrontModule
 {
-    public $controllerNamespace = 'app\modules\rbac\controllers';
+
+    public $controllerNamespace = 'source\modules\post\home';
 
     public function init()
     {
         parent::init();
-
-        // custom initialization code goes here
         
-        $this->layout='main';
+        // custom initialization code goes here
     }
 }

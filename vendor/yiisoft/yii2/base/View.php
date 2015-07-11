@@ -218,11 +218,8 @@ class View extends Component
         $viewFile = Yii::getAlias($viewFile);
 
         if ($this->theme !== null) {
-        	
             $viewFile = $this->theme->applyTo($viewFile);
-            
         }
-      
         if (is_file($viewFile)) {
             $viewFile = FileHelper::localize($viewFile);
         } else {

@@ -1,27 +1,43 @@
 <?php
 
-namespace app\modules\rbac\models;
+namespace source\modules\rbac\models;
 
 use Yii;
+use source\helpers\ArrayHelper;
+
 
 /**
  * This is the model class for table "lulu_auth_role".
  *
- * @property string $key
- * @property integer $category_id
+ * @property string $id
+ * @property string $category
  * @property string $name
- * @property integer $created_at
- * @property integer $updated_at
- * @property string $note
+ * @property string $description
+ * @property boolean $is_system
+ * @property boolean $status
+ 
  */
 class Role extends BaseRbacActiveRecord
 {
+    const Category_Member='member';
+    const Category_Admin='admin';
+    const Category_System='system';
+    public static function getCategoryItems($key=null)
+    {
+        $items = [
+            self::Category_Member=>'会员角色',
+            self::Category_Admin=>'管理员角色',
+            self::Category_System=>'系统角色',
+        ];
+        return ArrayHelper::getItems($items,$key);
+    }
+    
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'lulu_auth_role';
+        return '{{%auth_role}}';
     }
 
     /**
@@ -30,10 +46,10 @@ class Role extends BaseRbacActiveRecord
     public function rules()
     {
         return [
-            [['key', 'category_id', 'name', 'created_at', 'updated_at'], 'required'],
-            [['category_id', 'created_at', 'updated_at'], 'integer'],
-            [['note'], 'string'],
-            [['key', 'name'], 'string', 'max' => 64]
+            [['id', 'category', 'name', 'is_system', 'status'], 'required'],
+            [['is_system', 'status'], 'boolean'],
+            [['description'], 'string', 'max'=>128],
+            [['id', 'name', 'category'], 'string', 'max' => 64]
         ];
     }
 
@@ -43,12 +59,24 @@ class Role extends BaseRbacActiveRecord
     public function attributeLabels()
     {
         return [
-            'key' => '标识',
-            'category_id' => '分类',
+            'id' => '标识',
+            'category' => '分类',
             'name' => '名称',
-            'created_at' => '创建时间',
-            'updated_at' => '修改时间',
-            'note' => '备注',
+            'description' => '描述',
+            'is_system' => '系统内置',
+            'status' => '状态',
+            
         ];
+    }
+    
+    public static function buildOptions()
+    {
+        $ret=[];
+        $rows = self::findAll();
+        foreach ($rows as $row)
+        {
+            $ret[]=['id'=>$row['id'],'name'=>$row['name'],'category'=>self::getCategoryItems($row['category'])];
+        }
+        return $ret;
     }
 }

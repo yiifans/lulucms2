@@ -1,6 +1,18 @@
 Yii Framework 2 Codeception extension Change Log
 ================================================
 
+2.0.4 under development
+-----------------------
+
+- Enh #1: Allow to configure DI Container in configuration files (leandrogehlen)
+
+
+2.0.3 March 01, 2015
+--------------------
+
+- Bug #6978: DI Container is not reset when destroying application in functional tests (ivokund)
+
+
 2.0.2 January 11, 2015
 ----------------------
 

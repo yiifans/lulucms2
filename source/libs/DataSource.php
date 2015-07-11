@@ -248,7 +248,7 @@ class DataSource
 	*
 	* $other
 	* $other['where]=''
-	* $other['order']='sort_num asc'
+	* $other['order']='sort_num desc'
 	* $other['offset]=''
 	* $other['limit]=''
 	*/
@@ -296,7 +296,7 @@ class DataSource
 		}
 		else 
 		{
-			$query->orderBy('sort_num asc');
+			$query->orderBy('sort_num desc');
 		}
 		
 		if(isset($other['offset']) && is_integer($other['offset']))

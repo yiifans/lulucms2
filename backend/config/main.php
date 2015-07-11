@@ -41,27 +41,6 @@ return [
         
     ],
     'modules' => [
-// 	    'comment' => [
-// 	    	'class' => 'source\modules\comment\AdminModule',
-// 	    ],
-// 	    'post' => [
-// 	    	'class' => 'source\modules\post\AdminModule',
-// 	    ],
-// 	     'page' => [
-// 	    	'class' => 'source\modules\page\AdminModule',
-// 	    ],
-// 	    'takonomy' => [
-// 	    	'class' => 'source\modules\takonomy\AdminModule',
-// 	    ],
-        'menu' => [
-            'class' => 'source\modules\menu\AdminModule',
-        ],
-	    'system' => [
-	    	'class' => 'source\modules\system\AdminModule',
-	    ],
-        'modularity' => [
-            'class' => 'source\modules\modularity\AdminModule',
-        ],
     ],
     'params' => $params,
 ];

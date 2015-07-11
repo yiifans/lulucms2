@@ -23,15 +23,6 @@ class Common
 		return $model->value;
 	}
 	
-	public static function getThemeDir()
-	{
-		
-	}
-	public static function getThemeUrl()
-	{
-		
-	}
-	
 	
 	
 	public static function getTakonomyCategories()

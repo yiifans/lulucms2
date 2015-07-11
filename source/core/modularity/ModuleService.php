@@ -8,10 +8,10 @@ class ModuleService extends BaseComponent implements IModuleService
 {
 
     public $id;
-    
+
     public function getServiceId()
     {
-        if(empty($this->id))
+        if (empty($this->id))
         {
             $fullClass = self::className();
             $a = explode('\\', $fullClass);

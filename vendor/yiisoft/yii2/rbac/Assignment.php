@@ -9,7 +9,6 @@ namespace yii\rbac;
 
 use Yii;
 use yii\base\Object;
-use yii\base\Model;
 
 /**
  * Assignment represents an assignment of a role to a user.

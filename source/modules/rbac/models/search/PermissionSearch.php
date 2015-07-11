@@ -1,11 +1,12 @@
 <?php
 
-namespace app\modules\rbac\models\search;
+namespace source\modules\rbac\models\search;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\rbac\models\Permission;
+use source\modules\rbac\models\Permission;
+use source\LuLu;
 
 /**
  * PermissionSearch represents the model behind the search form about `app\modules\rbac\models\Permission`.
@@ -18,8 +19,8 @@ class PermissionSearch extends Permission
     public function rules()
     {
         return [
-            [['key', 'name', 'rule', 'data', 'note'], 'safe'],
-            [['category_id', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'name', 'description'], 'safe'],
+            [['category_id', 'form'], 'integer'],
         ];
     }
 
@@ -42,13 +43,21 @@ class PermissionSearch extends Permission
     public function search($params)
     {
         $query = Permission::find();
+        $query->orderBy('id asc,sort_num desc');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
+        
         $this->load($params);
 
+        $this->category_id = LuLu::getGetValue('category');
+        
+        $query->andWhere([
+            'category_id' => $this->category_id,
+        ]);
+        
         if (!$this->validate()) {
             // uncomment the following line if you do not want to any records when validation fails
             // $query->where('0=1');
@@ -57,15 +66,12 @@ class PermissionSearch extends Permission
 
         $query->andFilterWhere([
             'category_id' => $this->category_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'form' => $this->form,
         ]);
 
-        $query->andFilterWhere(['like', 'key', $this->key])
+        $query->andFilterWhere(['like', 'id', $this->id])
             ->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'rule', $this->rule])
-            ->andFilterWhere(['like', 'data', $this->data])
-            ->andFilterWhere(['like', 'note', $this->note]);
+            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

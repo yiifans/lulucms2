@@ -11,7 +11,13 @@
 
 (function($) {
 	$(document).ready(function(e) {
-		$("table#da-ex-datatable-numberpaging").dataTable({sPaginationType: "full_numbers"});
-		$("table#da-ex-datatable-default").dataTable();
+		//$("table#da-ex-datatable-numberpaging").dataTable({sPaginationType: "full_numbers"});
+		//$("table#da-ex-datatable-default").dataTable();
+
+		$(".da-table tbody tr").hover(function () {
+		    $(this).addClass("hover");
+		}, function () {
+		    $(this).removeClass("hover");
+		});
 	});
 }) (jQuery);

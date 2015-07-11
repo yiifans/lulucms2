@@ -292,6 +292,22 @@ test("Delete selection with non-masks", function () {
     $("#testmask").remove();
 });
 
+test("Selection and backspace also deletes previous - kenaku", function () {
+    var $fixture = $("#qunit-fixture");
+    $fixture.append('<input type="text" id="testmask" />');
+    $("#testmask").inputmask("999 99 99 999");
+
+    $("#testmask")[0].focus();
+    $("#testmask").Type("1234567890");
+
+    $.caret($("#testmask"), 2, 3);
+    $("#testmask").SendKey($.inputmask.keyCode.BACKSPACE);
+    equal($("#testmask").val(), "124 56 78 90_", "Result " + $("#testmask").val());
+
+    $("#testmask").remove();
+});
+
+
 module("Non-greedy masks");
 test("inputmask(\"*\", { greedy: false, repeat: \"*\" }) - replace cd with 1", function () {
     var $fixture = $("#qunit-fixture");
@@ -437,4 +453,34 @@ asyncTest("creditcard switch - pchelailya", function () {
 
         $("#testmask").remove();
     }, 0);
+});
+
+test("maskscache - same mask diff definitions - StonesEditeurs", function () {
+    var $fixture = $("#qunit-fixture");
+    $fixture.append('<input type="text" id="testmask" />');
+    $("#testmask").inputmask({
+        mask: "Z{1,*}",
+        definitions: {
+            'Z': {
+                validator: function (chrs, buffer, pos, strict, opts) {
+                    return { pos: pos, c: 'A' };
+                },
+            }
+        }
+    });
+
+    $("#testmask").inputmask({
+        mask: "Z{1,*}", // <= Same mask
+        definitions: {
+            'Z': {
+                validator: function (chrs, buffer, pos, strict, opts) {
+                    return { pos: pos, c: 'B' };  // <= another definition
+                },
+            }
+        }
+    });
+
+    $("#testmask").Type("abcdef");
+    equal(document.getElementById("testmask")._valueGet(), "BBBBBB", "Result " + document.getElementById("testmask")._valueGet());
+    $("#testmask").remove();
 });

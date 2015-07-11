@@ -1,6 +1,18 @@
 Yii Framework 2 swiftmailer extension Change Log
 ================================================
 
+2.0.4 under development
+-----------------------
+
+- Enh #4: Added ability to pass SwiftMailer log entries to `Yii::info()` (klimov-paul)
+
+
+2.0.3 March 01, 2015
+--------------------
+
+- no changes in this release.
+
+
 2.0.2 January 11, 2015
 ----------------------
 

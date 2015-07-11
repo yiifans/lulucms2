@@ -80,7 +80,10 @@ class ArrayDataProvider extends BaseDataProvider
 
         if (($pagination = $this->getPagination()) !== false) {
             $pagination->totalCount = $this->getTotalCount();
-            $models = array_slice($models, $pagination->getOffset(), $pagination->getLimit());
+
+            if ($pagination->getPageSize() > 0) {
+                $models = array_slice($models, $pagination->getOffset(), $pagination->getLimit(), true);
+            }
         }
 
         return $models;
@@ -91,7 +94,6 @@ class ArrayDataProvider extends BaseDataProvider
      */
     protected function prepareKeys($models)
     {
-    	
         if ($this->key !== null) {
             $keys = [];
             foreach ($models as $model) {
@@ -104,7 +106,6 @@ class ArrayDataProvider extends BaseDataProvider
 
             return $keys;
         } else {
-        	var_dump($models);
             return array_keys($models);
         }
     }

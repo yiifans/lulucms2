@@ -8,7 +8,6 @@
 namespace yii\rbac;
 
 use yii\base\Object;
-use yii\base\Model;
 
 /**
  * Rule represents a business constraint that may be associated with a role, permission or assignment.

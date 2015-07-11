@@ -28,20 +28,26 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         
         'columns' => [
-            
+            [
+            'class'=>'source\core\grid\IdColumn',
+            ],            
 			[
 				'attribute'=>'name',
+			    'width'=>'auto',
 			], 
-            'value:ntext',
+            [
+                'attribute'=>'value',
+                'format'=>'ntext',
+                'width'=>'auto',
+            ],            
+            
             // 'description',
             // 'thumb',
             [
-                'attribute'=>'sort_num',
-                'headerOptions'=>['width'=>'80px']
+              'class'=>'source\core\grid\SortColumn',
             ],
             [
-                'attribute'=>'statusText',
-                'headerOptions'=>['width'=>'80px'],
+              'class'=>'source\core\grid\StatusColumn',
             ],
             ['class' => 'source\core\grid\ActionColumn',
 				'queryParams'=>['view'=>['category'=>$category]]

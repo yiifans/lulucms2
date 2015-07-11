@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\controllers;
+namespace source\modules\user\admin;
 
 use Yii;
 use source\models\User;
@@ -8,23 +8,13 @@ use source\models\search\UserSearch;
 use source\core\back\BackController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use source\libs\Constants;
 
 /**
  * UserController implements the CRUD actions for User model.
  */
 class UserController extends BackController
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all User models.
@@ -61,9 +51,11 @@ class UserController extends BackController
     public function actionCreate()
     {
         $model = new User();
+        $model->scenario='create';
+        $model->status = Constants::Status_Enable;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -80,9 +72,10 @@ class UserController extends BackController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->scenario='update';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

@@ -5,7 +5,7 @@ namespace source\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\Models\User;
+use source\models\User;
 
 /**
  * UserSearch represents the model behind the search form about `app\Models\User`.
@@ -58,8 +58,8 @@ class UserSearch extends User
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            //'created_at' => $this->created_at,
+            //'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username])

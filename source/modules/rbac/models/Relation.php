@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\rbac\models;
+namespace source\modules\rbac\models;
 
 use Yii;
 
@@ -28,7 +28,7 @@ class Relation extends BaseRbacActiveRecord
     {
         return [
             [['role', 'permission'], 'required'],
-            [['value'], 'string'],
+            [['value'], 'string','max'=>128],
             [['role', 'permission'], 'string', 'max' => 64]
         ];
     }
@@ -43,5 +43,19 @@ class Relation extends BaseRbacActiveRecord
             'permission' => '权限',
             'value' => '值',
         ];
+    }
+
+    public static function AddBatchItems($role, $permissions)
+    {
+        self::deleteAll(['role' => $role]);
+        
+        foreach ($permissions as $key => $value)
+        {
+            $newRelation = new Relation();
+            $newRelation->role = $role;
+            $newRelation->permission = $key;
+            $newRelation->value = is_string($value) ? $value : implode(',', $value);
+            $newRelation->save();
+        }
     }
 }

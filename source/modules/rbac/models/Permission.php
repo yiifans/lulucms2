@@ -1,58 +1,64 @@
 <?php
 
-namespace app\modules\rbac\models;
+namespace source\modules\rbac\models;
 
 use Yii;
+use source\helpers\ArrayHelper;
+use source\libs\Constants;
 
 /**
  * This is the model class for table "lulu_auth_permission".
  *
- * @property string $key
- * @property integer $category_id
+ * @property string $id
+ * @property string $category
  * @property string $name
+ * @property string $description
  * @property integer $form
- * @property string $options
  * @property string $default_value
- * @property string $note
+ * @property string $rule
+ * @property integer $sort_num
  */
 class Permission extends BaseRbacActiveRecord
 {
+    const Category_Basic='basic';
+    const Category_Controller='controller';
+    const Category_System='system';
+    public static function getCategoryItems($key=null)
+    {
+        $items = [
+            //self::Category_Basic=>'基本权限',
+            self::Category_Controller=>'控制器权限',
+            self::Category_System=>'系统权限',
+        ];
+        return ArrayHelper::getItems($items,$key);
+    }
+    
 	const Form_Boolean=1;
 	const Form_Input=2;
-	const Form_RadioList=3;
-	const Form_CheckboxList=4;
-	
-	public static function getForms($type=null)
+	const Form_Textarea=3;
+	const Form_RadioList=4;
+	const Form_CheckboxList=5;
+	public static function getFormItems($key=null)
 	{
-		$ret = [
+		$items = [
 			self::Form_Boolean=>'布尔值',
-			self::Form_Input=>'输入框',
+			self::Form_Input=>'单行输入框',
+		    self::Form_Textarea=>'多行输入框',
 			self::Form_RadioList=>'单选',
 			self::Form_CheckboxList=>'多选',
 		];
-		//return isset($ret[$type]);
-		if($type!==null)
-		{
-			if(isset($ret[$type]))
-			{
-				return $ret[$type];
-			}
-			
-			return 'unknown:'.$type;
-		}
-		return $ret;
+		return ArrayHelper::getItems($items,$key);
 	}
 	public function getFormView()
 	{
-		if($this->form===self::Form_Boolean){
-			return '_boolean';
-		}else if($this->form===self::Form_Input){
-			return '_input';
-		}else if($this->form===self::Form_RadioList){
-			return '_radiolist';
-		}else if($this->form===self::Form_CheckboxList){
-			return '_checkboxlist';
-		}
+	    $items = [
+	        self::Form_Boolean=>'_boolean',
+	        self::Form_Input=>'_input',
+	        self::Form_Textarea=>'_textarea',
+	        self::Form_RadioList=>'_radiolist',
+	        self::Form_CheckboxList=>'_checkboxlist',
+	    ];
+	    return ArrayHelper::getItems($items,$this->form);
 	}
 	
     /**
@@ -60,7 +66,7 @@ class Permission extends BaseRbacActiveRecord
      */
     public static function tableName()
     {
-        return 'lulu_auth_permission';
+        return '{{%auth_permission}}';
     }
 
     /**
@@ -69,10 +75,11 @@ class Permission extends BaseRbacActiveRecord
     public function rules()
     {
         return [
-            [['key', 'category_id', 'name', 'form'], 'required'],
-            [['category_id', 'form'], 'integer'],
-            [['options', 'default_value', 'note'], 'string'],
-            [['key', 'name'], 'string', 'max' => 64]
+            [['id', 'category', 'name', 'form','sort_num'], 'required'],
+            [['form','sort_num'], 'integer'],
+            [['default_value'], 'string'],
+            [['description'], 'string', 'max'=>128],
+            [['id', 'name', 'category','rule'], 'string', 'max' => 64]
         ];
     }
 
@@ -82,13 +89,83 @@ class Permission extends BaseRbacActiveRecord
     public function attributeLabels()
     {
         return [
-            'key' => '标识',
-            'category_id' => '所属分类',
+            'id' => '标识',
+            'category' => '所属分类',
             'name' => '名称',
+            'description' => '备注',
             'form' => '表单类型',
-            'options' => '选项',
-            'default_value' => '默认值',
-            'note' => '备注',
+            'default_value' => '默认值/选项',
+            'sort_num' => '排序',
+            'rule'=>'使用规则',
         ];
+    }
+    
+    public function getDefaultValue()
+    {
+        if($this->form===self::Form_Boolean||$this->form===self::Form_Input||$this->form===self::Form_Textarea)
+        {
+            return $this->default_value;
+        }
+        
+        $ret=[];
+        $options = explode("\r\n", $this->default_value);
+        foreach ($options as $option)
+        {
+            $item = explode("|", $option);
+            if(count($item)===3)
+            {
+                $ret[]=$item[0];
+                if($this->form===self::Form_RadioList)
+                {
+                    break;
+                }
+            }
+        }
+        return $ret;
+    }
+    
+    public function getOptions()
+    {
+        if($this->form===self::Form_Boolean||$this->form===self::Form_Input||$this->form===self::Form_Textarea)
+        {
+            return [];
+        }
+        $ret=[];
+    
+        $options = explode("\r\n", $this->default_value);
+        foreach ($options as $option)
+        {
+            $item = explode("|", $option);
+            if(count($item)===1)
+            {
+                $ret[$item[0]]=$item[0];
+            }
+            else 
+            {
+                $ret[$item[0]]=$item[1];
+            }
+        }
+        return $ret;
+    }
+    
+    public static function getAllPermissionsGroupedByCategory()
+    {
+        $allPermissions=[];
+        $allPermissions[Permission::Category_Basic]=[];
+        $allPermissions[Permission::Category_Controller]=[];
+        $allPermissions[Permission::Category_System]=[];
+        
+        $permissions = self::findAll([],'sort_num desc');
+        foreach ($permissions as $permission)
+        {
+            $allPermissions[$permission->category][]=$permission;
+        }
+        return $allPermissions;
+    }
+    
+    public function beforeSave($insert)
+    {
+        $this->default_value= trim($this->default_value);
+        return parent::beforeSave($insert);
     }
 }

@@ -3,6 +3,7 @@
 namespace source\models;
 
 use Yii;
+use source\libs\Constants;
 
 /**
  * This is the model class for table "{{%user}}".
@@ -16,11 +17,12 @@ use Yii;
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
+ * @property string $role
  */
 class User extends \source\core\base\BaseActiveRecord  implements \yii\web\IdentityInterface
 {
 	public $password;
-	public $rememberMe;
+	
     /**
      * @inheritdoc
      */
@@ -35,9 +37,12 @@ class User extends \source\core\base\BaseActiveRecord  implements \yii\web\Ident
     public function rules()
     {
         return [
-            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at','password'], 'required'],
+            [['username', 'auth_key', 'password_hash', 'email','role'], 'required'],
+            [['username','email'],'unique'],
+            [['password'], 'required','on'=>['login','create']],
             [['status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 8],
+            ['email','email'],
+            [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32]
         ];
     }
@@ -46,7 +51,8 @@ class User extends \source\core\base\BaseActiveRecord  implements \yii\web\Ident
     {
     	$parent = parent::scenarios();
     	$parent['login'] = ['username','password'];
-    	$parent['register'] = ['username','password','email'];
+    	$parent['create'] = ['username','password', 'email','status','role'];
+    	$parent['update'] = ['username','password', 'email','status','updated_at','role'];
     	return $parent;
     }
     
@@ -57,17 +63,23 @@ class User extends \source\core\base\BaseActiveRecord  implements \yii\web\Ident
     {
         return [
             'id' => 'ID',
-            'username' => 'Username',
+            'username' => '用户名',
+            'password'=>'密码',
             'auth_key' => 'Auth Key',
             'password_hash' => 'Password Hash',
             'password_reset_token' => 'Password Reset Token',
             'email' => 'Email',
-            'status' => 'Status',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'status' => '状态',
+            'statusText' => '状态',
+            'created_at' => '创建时间',
+            'updated_at' => '更新时间',
+            'role'=>'角色'
         ];
     }
-    
+    public function getStatusText()
+    {
+        return Constants::getStatusItems($this->status);
+    }
     public static function findByUsername($username)
     {
         return self::findOne(['username'=>$username]);
@@ -90,12 +102,12 @@ class User extends \source\core\base\BaseActiveRecord  implements \yii\web\Ident
     
     public function getAuthKey()
     {
-    	return $this->auth_key;
+    	return $this->id;
     }
   
     public function validateAuthKey($authKey)
     {
-    	return $this->auth_key === $authKey;
+    	return $this->id === $authKey;
     }
     
     public function validatePassword($password,$password_hash)
@@ -103,6 +115,34 @@ class User extends \source\core\base\BaseActiveRecord  implements \yii\web\Ident
     	return Yii::$app->security->validatePassword($password, $password_hash);
     }
     
+    public function generatePasswordHash()
+    {
+        $this->password_hash = Yii::$app->getSecurity()->generatePasswordHash($this->password);
+    }
+    
+    /**
+     * Generates "remember me" authentication key
+     */
+    public function generateAuthKey()
+    {
+        $this->auth_key = Yii::$app->getSecurity()->generateRandomKey();
+    }
+    
+    /**
+     * Generates new password reset token
+     */
+    public function generatePasswordResetToken()
+    {
+        $this->password_reset_token = Yii::$app->getSecurity()->generateRandomKey() . '_' . time();
+    }
+    
+    /**
+     * Removes password reset token
+     */
+    public function removePasswordResetToken()
+    {
+        $this->password_reset_token = null;
+    }
    
    
     public function login()
@@ -118,11 +158,23 @@ class User extends \source\core\base\BaseActiveRecord  implements \yii\web\Ident
     			\Yii::$app->user->login($user,50000);
     			return true;
     		}
-    		
-    		return false;
-    	}else{
-    		
-    		return false;
     	}
+    	
+    	return false;
+    }
+    
+    public function beforeSave($insert)
+    {
+        if($insert)
+        {
+            //$this->generateAuthKey();
+            $this->generatePasswordHash();
+            //$this->generatePasswordResetToken();
+        }
+        if(!$insert && !empty($this->password))
+        {
+            $this->generatePasswordHash();
+        }
+        return parent::beforeSave($insert);
     }
 }

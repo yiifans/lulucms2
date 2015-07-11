@@ -142,7 +142,12 @@ class LuLu extends \Yii
         return $default;
     }
 
-    public static function setFalsh($type, $message)
+    public static function getFlash($type,$default=null)
+    {
+        $app = self::getApp();
+        return $app->session->getFlash($type,$default);
+    }
+    public static function setFlash($type, $message)
     {
         $app = self::getApp();
         $app->session->setFlash($type, $message);
@@ -294,6 +299,7 @@ class LuLu extends \Yii
 	
 	public static function getService($id)
 	{
+	    $id=$id.'Service';
         $component = self::$app->get($id,true);
 	    if( $component instanceof ModuleService)
 	    {

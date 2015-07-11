@@ -15,7 +15,7 @@ module.exports = function (grunt) {
         for (var srcNdx in srcFiles) {
             var dstFile = srcFiles[srcNdx].replace("js/", ""),
                 dstFileMin = dstFile.replace(".js", ".min.js");
-            wrapAMDLoader(srcFiles[srcNdx], "build/" + dstFile, dstFile.indexOf("extension") == -1 ? ["jquery"] : ["jquery", "./jquery.inputmask"]);
+            wrapModuleLoaders(srcFiles[srcNdx], "build/" + dstFile, dstFile.indexOf("extension") == -1 ? ["jquery"] : ["jquery", "./jquery.inputmask"]);
             uglifyConfig[dstFile] = {
                 dest: 'dist/inputmask/' + dstFile,
                 src: "build/" + dstFile,
@@ -44,15 +44,27 @@ module.exports = function (grunt) {
         }
         return uglifyConfig;
     }
-    function wrapAMDLoader(src, dst, dependencies) {
+    function wrapModuleLoaders(src, dst, dependencies) {
         function stripClosureExecution() {
             return srcFile.replace(new RegExp("\\(jQuery\\).*$"), "");
+        }
+
+        function createCommonJsRequires(dependencies) {
+            var res = [];
+
+            dependencies.forEach(function (dep) {
+                res.push("require('" + dep + "')");
+            });
+
+            return res.join(", ");
         }
 
         var srcFile = grunt.file.read(src),
             dstContent = "(function (factory) {" +
                 "if (typeof define === 'function' && define.amd) {" +
                 "define(" + JSON.stringify(dependencies) + ", factory);" +
+                "} else if (typeof exports === 'object') {" +
+                "module.exports = factory(" + createCommonJsRequires(dependencies) + ");" +
                 "} else {" +
                 "factory(jQuery);" +
                 "}}\n" + stripClosureExecution() + ");";
@@ -69,7 +81,7 @@ module.exports = function (grunt) {
         },
         bump: {
             options: {
-                files: ['package.json', 'bower.json', 'jquery.inputmask.jquery.json'],
+                files: ['package.json', 'bower.json', 'composer.json', 'component.json'],
                 updateConfigs: ['pkg'],
                 commit: false,
                 createTag: false,
@@ -84,7 +96,7 @@ module.exports = function (grunt) {
         },
         nugetpack: {
             dist: {
-                src: function () { return process.platform === "linux" ? 'nuget/jquery.inputmask.linux.nuspec' : 'nuget/jquery.inputmask.nuspec'; }(),
+                src: function () { return process.platform === "linux" ? 'nuspecs/jquery.inputmask.linux.nuspec' : 'nuspecs/jquery.inputmask.nuspec'; }(),
                 dest: 'dist/',
                 options: {
                     version: '<%= pkg.version %>'
@@ -123,6 +135,6 @@ module.exports = function (grunt) {
     grunt.registerTask('publish:major', ['clean', 'bump:major', 'uglify', 'shell:gitcommitchanges', 'release', 'nugetpack', 'nugetpush']);
 
     // Default task(s).
-    grunt.registerTask('default', ['clean', 'uglify']);
+    grunt.registerTask('default', ['bump:prerelease','clean', 'uglify']);
 
 };

@@ -6,9 +6,20 @@ use yii\web\NotFoundHttpException;
 use yii\helpers\ArrayHelper;
 use yii\base\InvalidConfigException;
 use source\LuLu;
+use source\libs\Constants;
 
 class BaseActiveRecord extends \yii\db\ActiveRecord
 {
+
+    public function init()
+    {
+        if($this->hasAttribute('sort_num'))
+        {
+            $this->sort_num=Constants::getSortNum();
+        }
+        parent::init();
+    }
+    
     // Query
     public static function find()
     {
@@ -107,9 +118,9 @@ class BaseActiveRecord extends \yii\db\ActiveRecord
         {
             if ($this->hasAttribute('sort_num'))
             {
-                if ($this->sort_num == null || $this->sort_num == '')
+                if ($this->sort_num === null || $this->sort_num === '')
                 {
-                    $this->sort_num = 0;
+                    $this->sort_num = Constants::getSortNum();
                 }
             }
             if ($this->hasAttribute('created_at'))
@@ -134,6 +145,7 @@ class BaseActiveRecord extends \yii\db\ActiveRecord
         parent::afterValidate();
         if ($this->hasErrors())
         {
+            LuLu::setErrorMessage($this->getFirstErrors());
             LuLu::info($this->errors, self::className());
         }
     }

@@ -14,10 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 $css=<<<CSS
-table.da-table tr td.da-icon-column {
-text-align: center;
-width: 120px;
-}
+
 table.da-table tr td.da-icon-column a{margin-right:5px;}
 CSS;
 $this->registerCss($css);
@@ -31,10 +28,10 @@ $this->registerCss($css);
 <table class="da-table">
     <thead>
         <tr>
-            <th>标识</th>
-            <th>名称</th>
+            <th width="90px">标识</th>
+            <th width="250px">名称</th>
             <th>描述</th>
-            <th></th>
+            <th width="120px"></th>
         </tr>
     </thead>
     <tbody>

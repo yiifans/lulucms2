@@ -4,7 +4,6 @@ namespace source\core\widgets;
 use Yii;
 use yii\helpers\Html;
 
-
 class LinkPager extends \yii\widgets\LinkPager implements IBaseWidget
 {
 
@@ -75,10 +74,8 @@ class LinkPager extends \yii\widgets\LinkPager implements IBaseWidget
         if ($this->lastPageLabel !== false)
         {
             $buttons[] = $this->renderPageButton($this->lastPageLabel, $pageCount - 1, $this->lastPageCssClass, $currentPage >= $pageCount - 1, false);
-    	}
-    
-    	return $buttons;
+        }
+        
+        return $buttons;
     }
-    
-   
 }

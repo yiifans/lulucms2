@@ -16,9 +16,15 @@ use source\core\widgets\LoopData;
 use source\libs\Resource;
 use source\core\widgets\LinkPager;
 use source\libs\DataSource;
+use source\LuLu;
 
 class BaseView extends View
 {
+
+    public function init()
+    {
+        parent::init();
+    }
 
     public function renderFile($viewFile, $params = [], $context = null)
     {
@@ -55,45 +61,48 @@ class BaseView extends View
 		}
 	}
 
-	public function getThemeUrl($url)
-	{
-	    $themeUrl = Resource::getThemeUrl($url);
-	    return $themeUrl;
-	}
-	
-	public function getDataSource($where=null,$orderBy=null,$limit=10,$options=[])
-	{
-	    $datas = DataSource::getContents($where,$orderBy,$limit,$options);
-	    return $datas;
-	}
-	
-	public function linkPager($pager)
-	{
-	    echo LinkPager::widget(['pagination' => $pager,]);
-	}
-	
-	public function loopData($dataSource,$item,$appendOptions=[])
-	{
-	    $options=[];
-	    $options['dataSource']=$dataSource;
-	    $options['item']=Resource::getThemePath($item);
-	    
-	    echo LoopData::widget($options);
-	}
-	
-	public function beginLoopData($dataSource,$item,$appendOptions=[])
-	{
-	    $options=[];
-	    $options['dataSource']=$dataSource;
-	    $options['item']=Resource::getThemePath($item);
-	    
-	    return LoopData::begin($options);
-	}
-	public function endLoopData()
-	{
-	    LoopData::end();
-	}
-	
+    public function getThemeUrl($url)
+    {
+        $themeUrl = Resource::getThemeUrl($url);
+        return $themeUrl;
+    }
+
+    public function getDataSource($where = null, $orderBy = null, $limit = 10, $options = [])
+    {
+        $datas = DataSource::getContents($where, $orderBy, $limit, $options);
+        return $datas;
+    }
+
+    public function linkPager($pager)
+    {
+        echo LinkPager::widget([
+            'pagination' => $pager
+        ]);
+    }
+
+    public function loopData($dataSource, $item, $appendOptions = [])
+    {
+        $options = [];
+        $options['dataSource'] = $dataSource;
+        $options['item'] = Resource::getThemePath($item);
+        
+        echo LoopData::widget($options);
+    }
+
+    public function beginLoopData($dataSource, $item, $appendOptions = [])
+    {
+        $options = [];
+        $options['dataSource'] = $dataSource;
+        $options['item'] = Resource::getThemePath($item);
+        
+        return LoopData::begin($options);
+    }
+
+    public function endLoopData()
+    {
+        LoopData::end();
+    }
+
     public function getConfig($id)
     {
         return Common::getConfig($id);
@@ -103,5 +112,4 @@ class BaseView extends View
     {
         return Common::getConfigValue($id);
     }
-    
 }

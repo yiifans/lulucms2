@@ -1,9 +1,9 @@
 /*
 Input Mask plugin extensions
 http://github.com/RobinHerbots/jquery.inputmask
-Copyright (c) 2010 - 2014 Robin Herbots
+Copyright (c) 2010 -  Robin Herbots
 Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
-Version: 0.0.0
+Version: 0.0.0-dev
 
 Optional extensions on the jquery.inputmask base
 */
@@ -75,7 +75,7 @@ Optional extensions on the jquery.inputmask base
 
                 return currentyear;
             },
-            onKeyUp: function (e, buffer, opts) {
+            onKeyDown: function (e, buffer, caretPos, opts) {
                 var $input = $(this);
                 if (e.ctrlKey && e.keyCode == $.inputmask.keyCode.RIGHT) {
                     var today = new Date();
@@ -114,9 +114,16 @@ Optional extensions on the jquery.inputmask base
                     cardinality: 2,
                     prevalidator: [{
                         validator: function (chrs, maskset, pos, strict, opts) {
-                            if (!isNaN(maskset.buffer[pos + 1])) chrs += maskset.buffer[pos + 1];
-                            var isValid = chrs.length == 1 ? opts.regex.val1pre.test(chrs) : opts.regex.val1.test(chrs);
+                            var pchrs = chrs;
+                            if (!isNaN(maskset.buffer[pos + 1])) pchrs += maskset.buffer[pos + 1];
+                            var isValid = pchrs.length == 1 ? opts.regex.val1pre.test(pchrs) : opts.regex.val1.test(pchrs);
                             if (!strict && !isValid) {
+                                isValid = opts.regex.val1.test(chrs + "0");
+                                if (isValid) {
+                                    maskset.buffer[pos] = chrs;
+                                    maskset.buffer[++pos] = "0";
+                                    return { "pos": pos, "c": "0" };
+                                }
                                 isValid = opts.regex.val1.test("0" + chrs);
                                 if (isValid) {
                                     maskset.buffer[pos] = "0";
@@ -284,7 +291,7 @@ Optional extensions on the jquery.inputmask base
                 val1: new RegExp("0[1-9]|1[012]") //month
             },
             leapday: "02/29/",
-            onKeyUp: function (e, buffer, opts) {
+            onKeyDown: function (e, buffer, caretPos, opts) {
                 var $input = $(this);
                 if (e.ctrlKey && e.keyCode == $.inputmask.keyCode.RIGHT) {
                     var today = new Date();
@@ -298,7 +305,7 @@ Optional extensions on the jquery.inputmask base
             placeholder: "yyyy/mm/dd",
             alias: "mm/dd/yyyy",
             leapday: "/02/29",
-            onKeyUp: function (e, buffer, opts) {
+            onKeyDown: function (e, buffer, caretPos, opts) {
                 var $input = $(this);
                 if (e.ctrlKey && e.keyCode == $.inputmask.keyCode.RIGHT) {
                     var today = new Date();

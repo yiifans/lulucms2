@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\rbac\models;
+namespace source\modules\rbac\models;
 
 use Yii;
 
@@ -9,8 +9,6 @@ use Yii;
  *
  * @property string $user
  * @property string $role
- * @property integer $created_at
- * @property string $note
  */
 class Assignment extends BaseRbacActiveRecord
 {
@@ -19,7 +17,7 @@ class Assignment extends BaseRbacActiveRecord
      */
     public static function tableName()
     {
-        return 'lulu_auth_assignment';
+        return '{{%auth_assignment}}';
     }
 
     /**
@@ -28,9 +26,7 @@ class Assignment extends BaseRbacActiveRecord
     public function rules()
     {
         return [
-            [['user', 'role', 'created_at'], 'required'],
-            [['created_at'], 'integer'],
-            [['note'], 'string'],
+            [['user', 'role'], 'required'],
             [['user', 'role'], 'string', 'max' => 64]
         ];
     }
@@ -43,8 +39,7 @@ class Assignment extends BaseRbacActiveRecord
         return [
             'user' => '用户',
             'role' => '角色',
-            'created_at' => '创建时间',
-            'note' => '备注',
+          
         ];
     }
 }

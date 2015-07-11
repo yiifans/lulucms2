@@ -2,49 +2,45 @@
 namespace source\core\back;
 
 use Yii;
-use app\Models\User;
-use source\models\search\UserSearch;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use yii\db\ActiveRecord;
-use yii\base\Model;
 use source\core\base\BaseController;
 use yii\helpers\Url;
 use source\LuLu;
-use yii\filters\AccessControl;
 
 class BackController extends BaseController
 {
 
-    public $modularityService;
-
-    public function init()
-    {
-        parent::init();
-        $this->modularityService = LuLu::getService('modularityService');
-        
-        
-    }
-
     public function beforeAction($action)
     {
-        if(in_array($action->id, ['login','captcha','error']))
+        if (in_array($action->id, ['login','captcha']))
         {
             return parent::beforeAction($action);
         }
         
-        if(\Yii::$app->user->isGuest)
+        if (\Yii::$app->user->isGuest)
         {
             $url = Url::to(['/site/login']);
             exit('<script>top.location.href="'.$url.'"</script>');
         }
+        
+        if(!in_array($action->id,['error','message','welcome']))
+        {
+            if (! $this->rbacService->checkPermission(null, 'manager_admin') || ! $this->rbacService->checkPermission())
+            {
+                return $this->showMessage();
+            }
+        }
         return parent::beforeAction($action);
     }
-
-    public function reloadAdmin()
+    
+    public function showMessage($message = null, $title = '提示',$params=[])
     {
-        $url = LuLu::getAlias('@web') . '/admin.php';
-        exit('<script>top.location.href="' . $url . '"</script>');
+        if ($message === null)
+        {
+            $message = '权限不足，无法进行此项操作';
+        }
+    
+        $params=array_merge(['title'=>$title,'message'=>$message],$params);
+        
+        return $this->render('//site/message',$params);
     }
 }

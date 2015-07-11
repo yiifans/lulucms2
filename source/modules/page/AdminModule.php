@@ -9,8 +9,8 @@ class AdminModule extends \source\core\modularity\BackModule
     public function getMenus()
     {
         return [
-            ['新建',['/page/default/create']],
-            ['所有页面',['/page']],
+            ['新建',['/page/page/create']],
+            ['所有单面',['/page/page']],
             ['设置',['/page/setting']],
         ];
     }

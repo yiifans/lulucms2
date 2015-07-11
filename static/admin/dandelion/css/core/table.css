@@ -100,7 +100,10 @@ table.da-table tr.even
 {
 	background-color:#fcfcfc;
 }
-
+table.da-table tr.hover
+{
+	background-color:#FBFFE4;
+}
 /* (2) Detail View Table
 ================================================== */
 

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 06 月 30 日 14:22
+-- 生成日期: 2015 年 07 月 11 日 03:20
 -- 服务器版本: 5.6.12-log
 -- PHP 版本: 5.4.16
 
@@ -31,8 +31,6 @@ USE `lulucms2`;
 CREATE TABLE IF NOT EXISTS `lulu_auth_assignment` (
   `user` varchar(64) NOT NULL,
   `role` varchar(64) NOT NULL,
-  `created_at` int(11) NOT NULL,
-  `note` text,
   PRIMARY KEY (`user`,`role`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -40,8 +38,8 @@ CREATE TABLE IF NOT EXISTS `lulu_auth_assignment` (
 -- 转存表中的数据 `lulu_auth_assignment`
 --
 
-INSERT INTO `lulu_auth_assignment` (`user`, `role`, `created_at`, `note`) VALUES
-('admin111', 'administrator', 1427599963, NULL);
+INSERT INTO `lulu_auth_assignment` (`user`, `role`) VALUES
+('admin111', 'administrator');
 
 -- --------------------------------------------------------
 
@@ -52,22 +50,24 @@ INSERT INTO `lulu_auth_assignment` (`user`, `role`, `created_at`, `note`) VALUES
 CREATE TABLE IF NOT EXISTS `lulu_auth_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
+  `description` varchar(128) DEFAULT NULL,
   `type` int(11) NOT NULL,
   `sort_num` int(11) NOT NULL,
-  `note` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- 转存表中的数据 `lulu_auth_category`
 --
 
-INSERT INTO `lulu_auth_category` (`id`, `name`, `type`, `sort_num`, `note`) VALUES
-(1, '管理员角色', 1, 1, ''),
-(2, '会员角色', 1, 1, ''),
-(3, 'c', 2, 3, ''),
-(5, '基本操作规则', 3, 1, ''),
-(6, '基本权限操作', 2, 1, '');
+INSERT INTO `lulu_auth_category` (`id`, `name`, `description`, `type`, `sort_num`) VALUES
+(1, '系统角色', NULL, 1, 1),
+(2, '会员角色', NULL, 1, 1),
+(5, '基本操作规则', NULL, 3, 1),
+(6, '基本权限', '', 2, 1),
+(7, '系统权限', '系统权限', 2, 100),
+(8, '管理角色', '', 1, 2),
+(9, '控制器权限', '', 2, 1436084643);
 
 -- --------------------------------------------------------
 
@@ -76,29 +76,41 @@ INSERT INTO `lulu_auth_category` (`id`, `name`, `type`, `sort_num`, `note`) VALU
 --
 
 CREATE TABLE IF NOT EXISTS `lulu_auth_permission` (
-  `key` varchar(64) NOT NULL,
-  `category_id` int(11) NOT NULL,
+  `id` varchar(64) NOT NULL,
+  `category` varchar(64) NOT NULL,
   `name` varchar(64) NOT NULL,
+  `description` varchar(128) DEFAULT NULL,
   `form` int(11) NOT NULL,
   `options` text,
-  `default_value` text,
-  `note` text,
-  PRIMARY KEY (`key`)
+  `default_value` mediumtext,
+  `rule` varchar(64) DEFAULT NULL,
+  `sort_num` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `lulu_auth_permission`
 --
 
-INSERT INTO `lulu_auth_permission` (`key`, `category_id`, `name`, `form`, `options`, `default_value`, `note`) VALUES
-('create', 6, '增加权限', 1, '', '1', ''),
-('createnews', 3, '添加新闻', 1, '', '', ''),
-('createpost', 3, '增加文章', 2, '', '', ''),
-('delete', 6, '删除权限', 4, '1|x\r\n2|xx\r\n3|xxx', '2', ''),
-('index', 6, '查看权限', 1, '', '', ''),
-('list', 6, '列表权限', 3, '', '', ''),
-('update', 6, '更新权限', 2, '', '', ''),
-('updatenews', 3, '更新新闻', 3, '', '', '');
+INSERT INTO `lulu_auth_permission` (`id`, `category`, `name`, `description`, `form`, `options`, `default_value`, `rule`, `sort_num`) VALUES
+('allow_access', 'system', '允许访问', '', 3, NULL, '*', NULL, 1000),
+('deny_access', 'system', '禁止访问', '', 3, NULL, '', NULL, 1000),
+('dict/dict', 'controller', '数据字典子项', '', 5, NULL, 'index|首页\r\ncreate|录入\r\nupdate:get|编辑(GET)\r\nupdate:post|编辑(POST)\r\ndelete|删除', 'ControllerRule', 499),
+('dict/dict-category', 'controller', '数据字典管理', '', 5, NULL, 'index|首页\r\ncreate|录入\r\nupdate:get|编辑(GET)\r\nupdate:post|编辑(POST)\r\ndelete|删除', 'ControllerRule', 500),
+('manager_admin', 'system', '管理后台', '', 1, NULL, '', 'BooleanRule', 12222),
+('menu/menu', 'controller', '菜单子项', '', 5, NULL, 'index|首页\r\ncreate|录入\r\nupdate:get|编辑(GET)\r\nupdate:post|编辑(POST)\r\ndelete|删除', 'ControllerRule', 790),
+('menu/menu-category', 'controller', '菜单管理', '', 5, NULL, 'index|首页\r\ncreate|录入\r\nupdate:get|编辑(GET)\r\nupdate:post|编辑(POST)\r\ndelete|删除', 'ControllerRule', 800),
+('modularity/default', 'controller', '模块管理', '', 5, NULL, 'index|首页\r\nactive|开启\r\ndeactive|关闭', 'ControllerRule', 900),
+('page/page', 'controller', '单面管理', '', 5, NULL, 'index|首页\r\ncreate|录入\r\nupdate:get|编辑(GET)\r\nupdate:post|编辑(POST)\r\ndelete|删除', 'ControllerRule', 300),
+('page/setting', 'controller', '单面设置', '', 5, NULL, 'index:get|分类(GET)\r\nindex:post|分类(POST)', 'ControllerRule', 299),
+('post/post', 'controller', '文章管理', '', 5, NULL, 'index|首页\r\ncreate|录入\r\nupdate:get|编辑(GET)\r\nupdate:post|编辑(POST)\r\ndelete|删除', 'ControllerRule', 400),
+('post/setting', 'controller', '文章设置', '', 5, NULL, 'index:get|分类(GET)\r\nindex:post|分类(POST)', 'ControllerRule', 399),
+('rbac/permission', 'controller', '权限管理', '', 5, NULL, 'index|首页\r\ncreate|录入\r\nupdate:get|编辑(GET)', 'ControllerRule', 170),
+('rbac/role', 'controller', '角色管理', '', 5, NULL, 'index|首页\r\ncreate|录入\r\nrelation:get|设置权限(GET)\r\nrelation:post|设置权限(POST)\r\nupdate:get|编辑(GET)\r\nupdate:post|编辑(POST)\r\ndelete|删除', 'ControllerRule', 190),
+('system/setting', 'controller', '系统设置', '', 5, NULL, 'basic:get|站点信息(GET)\r\nbasic:post|站点信息(POST)\r\naccess:get|注册与访问控制(GET)\r\naccess:post|注册与访问控制(POST)\r\nseo:get|SEO设置(GET)\r\nseo:post|SEO设置(POST)\r\ndatetime:get|时间设置(GET)\r\ndatetime:post|时间设置(POST)\r\nemail:get|邮件设置(GET)\r\nemail:post|邮件设置(POST)', 'ControllerRule', 1000),
+('takonomy/takonomy', 'controller', '分类子项', '', 5, NULL, 'index|首页\r\ncreate|录入\r\nupdate:get|编辑(GET)\r\nupdate:post|编辑(POST)\r\ndelete|删除', 'ControllerRule', 690),
+('takonomy/takonomy-category', 'controller', '分类管理', '', 5, NULL, 'index|首页\r\ncreate|录入\r\nupdate:get|编辑(GET)\r\nupdate:post|编辑(POST)\r\ndelete|删除', 'ControllerRule', 700),
+('user/user', 'controller', '用户管理', '', 5, NULL, 'index|首页\r\ncreate|录入\r\nupdate:get|编辑(GET)\r\nupdate:post|编辑(POST)\r\ndelete|删除', 'ControllerRule', 200);
 
 -- --------------------------------------------------------
 
@@ -109,7 +121,7 @@ INSERT INTO `lulu_auth_permission` (`key`, `category_id`, `name`, `form`, `optio
 CREATE TABLE IF NOT EXISTS `lulu_auth_relation` (
   `role` varchar(64) NOT NULL,
   `permission` varchar(64) NOT NULL,
-  `value` text,
+  `value` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`role`,`permission`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -118,14 +130,32 @@ CREATE TABLE IF NOT EXISTS `lulu_auth_relation` (
 --
 
 INSERT INTO `lulu_auth_relation` (`role`, `permission`, `value`) VALUES
-('administrator', 'create', '0'),
-('administrator', 'createnews', '1'),
-('administrator', 'createpost', '3'),
-('administrator', 'delete', '2,3'),
-('administrator', 'index', '0'),
-('administrator', 'list', ''),
-('administrator', 'update', '1'),
-('administrator', 'updatenews', ''),
+('administrator', 'allow_access', '*'),
+('administrator', 'deny_access', ''),
+('administrator', 'dict/dict', 'index,create,update:get,update:post,delete'),
+('administrator', 'dict/dict-category', 'index,create,update:get,update:post,delete'),
+('administrator', 'manager_admin', '1'),
+('administrator', 'menu/menu', 'index,create,update:get,update:post,delete'),
+('administrator', 'menu/menu-category', 'index,create,update:get,update:post,delete'),
+('administrator', 'modularity/default', 'index,active,deactive'),
+('administrator', 'page/page', 'index,create,update:get,update:post,delete'),
+('administrator', 'page/setting', 'index:get,index:post'),
+('administrator', 'post/post', 'index,create,update:get,update:post,delete'),
+('administrator', 'post/setting', 'index:get,index:post'),
+('administrator', 'rbac/permission', 'index,create,update:get'),
+('administrator', 'rbac/role', 'index,create,relation:get,relation:post,update:get,update:post,delete'),
+('administrator', 'system/setting', 'basic:get,basic:post,access:get,access:post,seo:get,seo:post,datetime:get,datetime:post,email:get,email:post'),
+('administrator', 'takonomy/takonomy', 'index,create,update:get,update:post,delete'),
+('administrator', 'takonomy/takonomy-category', 'index,create,update:get,update:post,delete'),
+('administrator', 'user/user', 'index,create,update:get,update:post,delete'),
+('deny_access', 'allow_access', ''),
+('deny_access', 'create', '1'),
+('deny_access', 'delete', '0'),
+('deny_access', 'deny_access', '*'),
+('deny_access', 'index', '0'),
+('deny_access', 'list', '0'),
+('deny_access', 'manager_admin', '0'),
+('deny_access', 'update', '0'),
 ('member_1', 'create', '1'),
 ('member_1', 'createnews', '0'),
 ('member_1', 'createpost', ''),
@@ -134,7 +164,13 @@ INSERT INTO `lulu_auth_relation` (`role`, `permission`, `value`) VALUES
 ('member_1', 'list', ''),
 ('member_1', 'update', ''),
 ('member_1', 'updatenews', ''),
-('member_2', 'createnews', 'member_2');
+('member_2', 'create', '1'),
+('member_2', 'createnews', '1'),
+('member_2', 'createpost', ''),
+('member_2', 'delete', '文本'),
+('member_2', 'index', '2'),
+('member_2', 'list', '3'),
+('member_2', 'update', '');
 
 -- --------------------------------------------------------
 
@@ -143,23 +179,27 @@ INSERT INTO `lulu_auth_relation` (`role`, `permission`, `value`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `lulu_auth_role` (
-  `key` varchar(64) NOT NULL,
-  `category_id` int(11) NOT NULL,
+  `id` varchar(64) NOT NULL,
+  `category` varchar(64) NOT NULL,
   `name` varchar(64) NOT NULL,
-  `created_at` int(11) NOT NULL,
-  `updated_at` int(11) NOT NULL,
-  `note` text,
-  PRIMARY KEY (`key`)
+  `description` varchar(128) DEFAULT NULL,
+  `is_system` tinyint(1) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `lulu_auth_role`
 --
 
-INSERT INTO `lulu_auth_role` (`key`, `category_id`, `name`, `created_at`, `updated_at`, `note`) VALUES
-('administrator', 1, '管理员', 1427551056, 1427600194, ''),
-('member_1', 2, '初级会员', 1427599089, 1427599089, ''),
-('member_2', 2, '中级会员', 1427599301, 1427599301, '');
+INSERT INTO `lulu_auth_role` (`id`, `category`, `name`, `description`, `is_system`, `status`) VALUES
+('administrator', 'admin', '管理员', '', 1, 1),
+('deny_access', 'system', '禁止访问', '', 1, 1),
+('deny_speak', 'system', '禁止发言', '', 1, 1),
+('editor', 'admin', '编辑', '', 0, 1),
+('guest', 'system', '游客', '', 1, 1),
+('member_1', 'member', '初级会员', '', 0, 1),
+('member_2', 'member', '中级会员', '', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -210,7 +250,7 @@ INSERT INTO `lulu_config` (`id`, `value`) VALUES
 ('sys_datetime_time_format', '0'),
 ('sys_date_format', ''),
 ('sys_date_format_custom', ''),
-('sys_default_role', 'subscriber'),
+('sys_default_role', 'member_1'),
 ('sys_icp', 'aa'),
 ('sys_lang', 'zh-CN'),
 ('sys_seo_description', 'lulucms description'),
@@ -272,7 +312,7 @@ CREATE TABLE IF NOT EXISTS `lulu_content` (
   `thumb` varchar(256) DEFAULT NULL,
   `thumbs` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
 
 --
 -- 转存表中的数据 `lulu_content`
@@ -285,7 +325,7 @@ INSERT INTO `lulu_content` (`id`, `takonomy_id`, `user_id`, `user_name`, `last_u
 (4, 16, 1, '', NULL, NULL, 1431160693, 1431160693, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 1, '', '', 0, 1, 1, 'post', NULL, NULL, NULL, 'Java适配器模式（Adapter模式）', NULL, NULL, NULL, '适配器模式定义：将两个不兼容的类纠合在一起使用，属于结构型模式，需要有Adaptee(被适配者)和Adaptor(适配器)两个身份。为何使用适配器模式我们经常碰到要将两个没有关系的类组合在一起使用，第一解决方案是：修改各自类的接口，但是如果我们没有源代码，或者，我们不愿意为了一个应用而修改各自的接口..', 'data/attachment/20150424/20150424125806_35680.jpg', NULL),
 (5, NULL, 1, '', NULL, NULL, 1431162045, 1435468665, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 1, '', '', 0, 1, 1, 'post', '', '', '', '驱虎吞狼', '', '', '', '典故来历编辑然而从字面不难理解，"驱虎吞狼"的操作者需要有高超的技术和手段，否则虎害大于狼害，后患无穷。2具体实例编辑例一:荀彧同时掌握了刘备、吕布、袁术三人的性格特征和心理状态，并且利用刘备对汉室的忠诚、吕布的贪婪自大和袁术的逞强好胜来达到调动他们互相攻伐。例二:东汉未年,大将军何进召董卓入京勤王,后被十常侍计杀,董卓入京后,祸乱后宫,扰乱朝纲.引得朝野不满,群雄割据,东汉灭亡。例三:益州牧刘璋，想藉刘备之力，抵抗张鲁、曹操。不料被庞统用计，刘备反手攻击刘璋，刘璋不得已于214年投降，被流放至', '', NULL),
 (6, 15, 1, '', NULL, NULL, 1431158480, 1431158480, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, '', '', 0, 1, 1, 'post', NULL, NULL, NULL, '三国中的"驱虎吞狼"和"二虎竞食"是什么意思?', NULL, NULL, NULL, '荀彧的“二虎竞食”并不是象“子美”说的那样，也没有什么香饽饽让两人抢啊！~其实他是要曹操借着天子的名义给刘备一个徐州牧的官职，然后让他去打吕布。这样就有两个结果：第一，刘备把吕布灭了，这样刘备少了三国战神的帮助，曹操就能省心了。第二，刘备要是没法灭了吕布，那吕布肯定会反扑，弄不好反到把刘备给灭了，曹操不就更省心！~但是可惜，刘备没上当！~~而“驱虎吞狼”也并完全不是三十六计中的“借刀杀人”。他其实是同时掌握了刘备、吕布、袁术三人的性格特征和心理状态，并且运用刘备的忠厚老实，吕布的无谋多疑、袁术的', 'data/attachment/20150424/20150424125917_60446.jpg', NULL),
-(7, NULL, 1, '', NULL, NULL, 1431162568, 1431162568, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 1, '', '', 0, 1, 1, 'post', NULL, NULL, NULL, '专家认为饮食在减肥上的效果大于运动', NULL, NULL, NULL, '三名国际专家在《英国运动医学》上发表社论，认为运动对抗肥胖症效果有限，而摄取过多的糖类和碳水化合物才是需要注意的重点，专家称食品业鼓吹让消费者相信增加运动就可以忽视不健康的饮食习惯。肥胖者无需大量运动就能减肥，重点就是要少吃一点。研究显示每摄取来自糖类的150卡热量，患糖尿病的风险就比摄取来自脂肪的150卡热量高出10多倍。　　他们引用《柳叶刀》上的研究，指出不适当的饮食所导致的不健康问题，比不运动、喝酒、抽烟所导致的问题加起来还要多。他们的观点也有争议。', 'data/attachment/20150424/20150424130320_76950.jpg', NULL),
+(7, NULL, 1, '', NULL, NULL, 1431162568, 1431162568, 0, 0, 41, 0, 0, 0, 0, 0, 0, 0, 1, '', '', 0, 1, 1, 'post', NULL, NULL, NULL, '专家认为饮食在减肥上的效果大于运动', NULL, NULL, NULL, '三名国际专家在《英国运动医学》上发表社论，认为运动对抗肥胖症效果有限，而摄取过多的糖类和碳水化合物才是需要注意的重点，专家称食品业鼓吹让消费者相信增加运动就可以忽视不健康的饮食习惯。肥胖者无需大量运动就能减肥，重点就是要少吃一点。研究显示每摄取来自糖类的150卡热量，患糖尿病的风险就比摄取来自脂肪的150卡热量高出10多倍。　　他们引用《柳叶刀》上的研究，指出不适当的饮食所导致的不健康问题，比不运动、喝酒、抽烟所导致的问题加起来还要多。他们的观点也有争议。', 'data/attachment/20150424/20150424130320_76950.jpg', NULL),
 (8, NULL, 1, '', NULL, NULL, 1429888360, 1429888360, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, NULL, NULL, 0, 1, 1, 'post', NULL, NULL, NULL, '海尔出了一款洗衣机…手持的…要用7号电池', NULL, NULL, NULL, '　4月24日消息，此前在家博会上亮相的海尔手持式洗衣机咕咚近日在海尔官网接受预约，售价299元。　　海尔codo咕咚手持洗衣机采用三节7号电池驱动，能够产生每分钟700次频率的拍打，用“挤压洗”的洗涤方式去污，号称可洗掉酒渍、血渍等较小的污渍，避免了为一个小小的污渍就大动干戈洗整件衣服的情况。　　目前，海尔在其官网公布了这款codo咕咚手持洗衣机的预约价格为299元，将于5月正式开卖。', 'data/attachment/20150424/20150424130634_66285.jpg', NULL),
 (9, NULL, 1, NULL, NULL, NULL, 1431158470, 1431158470, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', '', 0, 1, 1, 'post', NULL, NULL, NULL, '由项目浅谈JS中MVVM模式', NULL, NULL, NULL, '1.背景最近项目原因使用了durandal.js和knockout.js，颇有受益。决定写一个比较浅显的总结。之前一直在用SpringMVC框架写后台，前台是用JSP+JS+标签库，算是很传统的MVC开发模式了。后来，前端用Flex还有微软的WPF做过开发，到这次，前端使用纯JS+HTML，利用knockout.js，也算是接触了几种语言下的MVVM模式。此次开发中，结合require.js和durandal.js，完成了按需加载、AMD规范以及前端页面路由。当然了，一般控件的编写和改用，还是使', 'data/attachment/20150424/20150424004759_37040.jpg', NULL),
 (10, NULL, 1, NULL, NULL, NULL, 1429837422, 1429837422, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, NULL, NULL, 0, 1, 1, 'post', NULL, NULL, NULL, 'hh', NULL, NULL, NULL, 'hh', '', NULL),
@@ -298,12 +338,11 @@ INSERT INTO `lulu_content` (`id`, `takonomy_id`, `user_id`, `user_name`, `last_u
 (17, NULL, 1, NULL, NULL, NULL, 1431343419, 1434976752, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 1, '', '', 0, 1, 1, 'page', NULL, NULL, NULL, 'dd', NULL, NULL, NULL, 'dd', '', NULL),
 (18, NULL, 1, 'admin111', NULL, NULL, 1434635391, 1434635391, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, '', '', 0, 1, 1, 'post', NULL, NULL, NULL, 'ateaa', NULL, NULL, NULL, 'sss', '', NULL),
 (19, 16, 1, 'admin111', NULL, NULL, 1434635464, 1435468710, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, '', '', 0, 1, 1, 'post', '', '', '', 'aaaaaa', '', '', '', '"的操作者需要有高超的技术和手段，否则虎害大于狼害，后患无穷。2具体实例编辑例一:荀彧同时掌握了刘备、吕布、袁术三人的性格特征和心理状态，并且利用刘备对汉室的忠诚、吕布的贪婪自大和袁术的逞强好胜来达到调动他们互相攻伐。例二:东汉未年,大将军何进召董卓入京勤王,后被十常侍计杀,董卓入京后,祸乱后宫,扰乱朝纲.引得朝野不满,群雄割据,东汉灭亡。例三:益州牧刘璋，想藉刘', '', NULL),
-(20, 17, 1, 'admin111', NULL, NULL, 1434977081, 1434977081, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', '', 0, 1, 1, 'page', NULL, NULL, NULL, '关于我们', NULL, NULL, NULL, 'LuLuCMS是一款基于php5+mysql5开发的多功能开源的网站内容管理系统。使用高性能的PHP5的web应用程序开发框架YII构建，具有操作简单、稳定、安全、高效、跨平台等特点。采用MVC设计模式，模板定制方便灵活，内置小挂工具，方便制作各类功能和效果，LuLuCMS可用于企业建站、个人博客、资讯门户、图片站等各类型站点。特点：1.开源免费无论是个人还是企业展示型网站均可用本系统来完成2.数据调用方便快捷自主研发的数据调用模块，能快速调用各类型数据，方便建站3.应用范围广这套系统不是企业网', '', NULL),
-(21, 17, 1, 'admin111', NULL, NULL, 1434977117, 1434977361, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', '', 0, 1, 1, 'page', NULL, NULL, NULL, '企业文化', NULL, NULL, NULL, '迪尔和肯尼迪把企业文化整个理论系统概述为5个要素，即企业环境、价值观、英雄人物、文化仪式和文化网络。企业环境是指企业的性质、企业的经营方向、外部环境、企业的社会形象、与外界的联系等方面。它往往决定企业的行为。价值观是指企业内成员对某个事件或某种行为好与坏、善与恶、正确与错误、是否值得仿效的一致认识。价值观是企业文化的核心，统一的价值观使企业内成员在判断自己行为时具有统一的标准，并以此来选择自己的行为。英雄人物是指企业文化的核心人物或企业文化的人格化，其作用在于作为一种活的样板，给企业中其他员工提', '', NULL),
-(22, 17, 1, 'admin111', NULL, NULL, 1434977141, 1435468353, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 1, '', '', 0, 1, 1, 'page', '', '', '', '管理团队', '', '', '', '团队是现代企业管理中战斗的核心，几乎没有一家企业不谈团队，好象团队就是企业做大做强的灵丹妙药，只要抓紧团队建设就能有锦锈前程了。团队是个好东西，但怎样的团队才算一个好团队，怎样才能运作好一个团队呢？却是许多企业管理者不甚了然的，于是在企业团队建设的过程中就出现了许多弊病，例如从理论著作中生搬硬套到团队运作里面，是很难产生好团队的。任何理念都不能执着，执着生僵化，就会蜕变为形式主义，后果很糟糕。在如今企业管理者热火朝天进行的团队建设中就存在这个问题，将团队作为企业文化建设的至上准则是不恰当的，是不', '', NULL),
-(23, 17, 1, 'admin111', NULL, NULL, 1434977339, 1434977348, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, '', '', 0, 1, 1, 'page', NULL, NULL, NULL, '联系我们', NULL, NULL, NULL, '联系我们', '', NULL),
-(24, 10, 1, 'admin111', NULL, NULL, 1435425325, 1435425325, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, '', '', 0, 1, 1, 'page', NULL, NULL, NULL, 'fff', NULL, NULL, NULL, 'www', '', NULL),
-(25, 18, 1, 'admin111', NULL, NULL, 1435477970, 1435477970, 0, 0, 1, 0, 0, 0, NULL, NULL, NULL, 0, 1, NULL, '', 0, 1, 1, 'post', '', '', '', 'a', 'b', 'c', 'd', 'f', 'data/attachment/20150628/20150628075250_53376.png', NULL);
+(20, 17, 1, 'admin111', NULL, NULL, 1434977081, 1434977081, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, '', '', 0, 1, 1, 'page', NULL, NULL, NULL, '关于我们', NULL, NULL, NULL, 'LuLuCMS是一款基于php5+mysql5开发的多功能开源的网站内容管理系统。使用高性能的PHP5的web应用程序开发框架YII构建，具有操作简单、稳定、安全、高效、跨平台等特点。采用MVC设计模式，模板定制方便灵活，内置小挂工具，方便制作各类功能和效果，LuLuCMS可用于企业建站、个人博客、资讯门户、图片站等各类型站点。特点：1.开源免费无论是个人还是企业展示型网站均可用本系统来完成2.数据调用方便快捷自主研发的数据调用模块，能快速调用各类型数据，方便建站3.应用范围广这套系统不是企业网', '', NULL),
+(21, 17, 1, 'admin111', NULL, NULL, 1434977117, 1434977361, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, '', '', 0, 1, 1, 'page', NULL, NULL, NULL, '企业文化', NULL, NULL, NULL, '迪尔和肯尼迪把企业文化整个理论系统概述为5个要素，即企业环境、价值观、英雄人物、文化仪式和文化网络。企业环境是指企业的性质、企业的经营方向、外部环境、企业的社会形象、与外界的联系等方面。它往往决定企业的行为。价值观是指企业内成员对某个事件或某种行为好与坏、善与恶、正确与错误、是否值得仿效的一致认识。价值观是企业文化的核心，统一的价值观使企业内成员在判断自己行为时具有统一的标准，并以此来选择自己的行为。英雄人物是指企业文化的核心人物或企业文化的人格化，其作用在于作为一种活的样板，给企业中其他员工提', '', NULL),
+(22, 17, 1, 'admin111', NULL, NULL, 1434977141, 1435468353, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 1, '', '', 0, 1, 1, 'page', '', '', '', '管理团队', '', '', '', '团队是现代企业管理中战斗的核心，几乎没有一家企业不谈团队，好象团队就是企业做大做强的灵丹妙药，只要抓紧团队建设就能有锦锈前程了。团队是个好东西，但怎样的团队才算一个好团队，怎样才能运作好一个团队呢？却是许多企业管理者不甚了然的，于是在企业团队建设的过程中就出现了许多弊病，例如从理论著作中生搬硬套到团队运作里面，是很难产生好团队的。任何理念都不能执着，执着生僵化，就会蜕变为形式主义，后果很糟糕。在如今企业管理者热火朝天进行的团队建设中就存在这个问题，将团队作为企业文化建设的至上准则是不恰当的，是不', '', NULL),
+(23, 17, 1, 'admin111', NULL, NULL, 1434977339, 1434977348, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 1, '', '', 0, 1, 1, 'page', NULL, NULL, NULL, '联系我们', NULL, NULL, NULL, '联系我们', '', NULL),
+(24, 10, 1, 'admin111', NULL, NULL, 1435425325, 1435425325, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, '', '', 0, 1, 1, 'page', NULL, NULL, NULL, 'fff', NULL, NULL, NULL, 'www', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -341,7 +380,7 @@ CREATE TABLE IF NOT EXISTS `lulu_content_post` (
   `content_id` int(11) NOT NULL,
   `body` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- 转存表中的数据 `lulu_content_post`
@@ -359,8 +398,7 @@ INSERT INTO `lulu_content_post` (`id`, `content_id`, `body`) VALUES
 (9, 7, '三名国际专家在《英国运动医学》上发表社论，认为运动对抗肥胖症效果有限，而摄取过多的糖类和碳水化合物才是需要注意的重点，专家称食品业鼓吹让消费者相信增加运动就可以忽视不健康的饮食习惯。肥胖者无需大量运动就能减肥，重点就是要少吃一点。研究显示每摄取来自糖类的150卡热量，患糖尿病的风险就比摄取来自脂肪的150卡热量高出10多倍。　　他们引用《柳叶刀》上的研究，指出不适当的饮食所导致的不健康问题，比不运动、喝酒、抽烟所导致的问题加起来还要多。他们的观点也有争议。'),
 (10, 11, ''),
 (11, 18, 'sss'),
-(12, 19, '"的操作者需要有高超的技术和手段，否则虎害大于狼害，后患无穷。2具体实例编辑例一:荀彧同时掌握了刘备、吕布、袁术三人的性格特征和心理状态，并且利用刘备对汉室的忠诚、吕布的贪婪自大和袁术的逞强好胜来达到调动他们互相攻伐。例二:东汉未年,大将军何进召董卓入京勤王,后被十常侍计杀,董卓入京后,祸乱后宫,扰乱朝纲.引得朝野不满,群雄割据,东汉灭亡。例三:益州牧刘璋，想藉刘'),
-(13, 25, 'e');
+(12, 19, '"的操作者需要有高超的技术和手段，否则虎害大于狼害，后患无穷。2具体实例编辑例一:荀彧同时掌握了刘备、吕布、袁术三人的性格特征和心理状态，并且利用刘备对汉室的忠诚、吕布的贪婪自大和袁术的逞强好胜来达到调动他们互相攻伐。例二:东汉未年,大将军何进召董卓入京勤王,后被十常侍计杀,董卓入京后,祸乱后宫,扰乱朝纲.引得朝野不满,群雄割据,东汉灭亡。例三:益州牧刘璋，想藉刘');
 
 -- --------------------------------------------------------
 
@@ -429,29 +467,47 @@ CREATE TABLE IF NOT EXISTS `lulu_menu` (
   `status` tinyint(4) NOT NULL DEFAULT '1',
   `sort_num` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
 
 --
 -- 转存表中的数据 `lulu_menu`
 --
 
 INSERT INTO `lulu_menu` (`id`, `parent_id`, `category_id`, `name`, `url`, `target`, `description`, `thumb`, `status`, `sort_num`) VALUES
-(1, 0, 'admin', '全局设置', '#', '_self', '', '', 1, 1),
-(2, 1, 'admin', '时间设置', '/system/setting/datetime', '_self', '', '', 1, 10),
-(3, 1, 'admin', '注册与访问控制', '/system/setting/access', '_self', '', '', 1, 10),
 (4, 0, 'main', 'tt', '#', '_self', '', '', 1, 10),
-(6, 1, 'admin', '站点信息', '/system/setting/basic', '_self', '', '', 1, 10),
 (7, 0, 'main', '文章', 'index.php?r=post', '_self', '', '', 1, 10),
-(8, 0, 'main', '单页', 'index.php?r=page', '_self', '', '', 1, 10),
-(9, 8, 'main', '测试', '#', '_self', '', '', 1, 10),
-(10, 8, 'main', '测试2', '#', '_self', '', '', 1, 10),
+(8, 0, 'main', '关于', 'index.php?r=page', '_self', '', '', 1, 10),
+(9, 8, 'main', '企业文化', 'index.php?r=page/default/detail&id=21', '_self', '', '', 1, 10),
+(10, 8, 'main', '管理团队', 'index.php?r=page%2Fdefault%2Fdetail&id=22', '_self', '', '', 1, 10),
 (11, 9, 'main', '测试22', '#', '_self', '', '', 1, 10),
 (12, 9, 'main', '测试23', '#', '_self', '', '', 0, 10),
 (13, 9, 'main', '测试24', '#', '_self', '', '', 1, 10),
 (14, 12, 'main', '测试23——1', '#', '_self', '', '', 1, 10),
-(15, 10, 'main', '测试21', '#', '_self', '', '', 1, 10),
-(16, 10, 'main', '测试22', '#', '_self', '', '', 1, 10),
-(17, 12, 'main', '测试23-2', '#', '_self', '', '', 1, 10);
+(15, 8, 'main', '联系我们', 'index.php?r=page%2Fdefault%2Fdetail&id=23', '_self', '', '', 1, 10),
+(16, 8, 'main', '关于我们', 'index.php?r=page%2Fdefault%2Fdetail&id=20', '_self', '', '', 1, 10),
+(17, 12, 'main', '测试23-2', '#', '_self', '', '', 1, 10),
+(24, 4, 'main', 'dd', 's', '_self', '', '', 1, 100),
+(29, 0, 'admin', '设置', '#', '_self', '', 'cog_4.png', 1, 1436371533),
+(30, 29, 'admin', '站点信息', '/system/setting/basic', '_self', '', '', 1, 100),
+(31, 0, 'admin', '基础功能', '#', '_self', '', 'file_cabinet.png', 1, 1436371106),
+(32, 31, 'admin', '菜单管理', '/menu', '_self', '', '', 1, 100),
+(33, 29, 'admin', '注册与访问控制', '/system/setting/access', '_self', '', '', 1, 95),
+(34, 29, 'admin', 'SEO设置', '/system/setting/seo', '_self', '', '', 1, 90),
+(35, 29, 'admin', '时间设置', '/system/setting/datetime', '_self', '', '', 1, 85),
+(36, 29, 'admin', '邮件设置', '/system/setting/email', '_self', '', '', 1, 80),
+(37, 29, 'admin', '模块设置', '/modularity', '_self', '', '', 1, 75),
+(38, 31, 'admin', '分类管理', '/takonomy', '_self', '', '', 1, 95),
+(39, 31, 'admin', '字典管理', '/dict', '_self', '', '', 1, 90),
+(40, 0, 'admin', '用户', '#', '_self', '', 'users.png', 1, 1436279605),
+(41, 40, 'admin', '用户列表', '/user/user', '_self', '', '', 1, 100),
+(42, 40, 'admin', '角色管理', '/rbac/role', '_self', '', '', 1, 95),
+(43, 40, 'admin', '权限管理', '/rbac/permission', '_self', '', '', 1, 90),
+(46, 0, 'admin', '内容', '#', '_self', '', 'create_write.png', 1, 1436366691),
+(47, 0, 'admin', '主题', '#', '_self', '', 'images_2.png', 1, 1436241091),
+(48, 0, 'admin', '工具', '#', '_self', '', 'tools.png', 1, 1436231106),
+(49, 0, 'admin', '首页', '/site/welcome', '_self', '', 'home.png', 1, 1436371633),
+(50, 46, 'admin', '单面管理', '/page/page', '_self', '', '', 1, 1436444895),
+(51, 46, 'admin', '文章管理', '/post/post', '_self', '', '', 1, 1436444927);
 
 -- --------------------------------------------------------
 
@@ -496,14 +552,16 @@ CREATE TABLE IF NOT EXISTS `lulu_modularity` (
 --
 
 INSERT INTO `lulu_modularity` (`id`, `is_system`, `is_content`, `enable_admin`, `enable_home`) VALUES
-('dict', 0, 0, 1, 0),
+('dict', 0, 0, 1, 1),
 ('dsf', 0, 0, 1, 0),
 ('menu', 0, 0, 1, 1),
 ('modularity', 0, 0, 1, 1),
 ('page', 0, 0, 1, 1),
 ('post', 0, 0, 1, 1),
+('rbac', 0, 0, 1, 1),
 ('system', 0, 0, 1, 1),
 ('takonomy', 0, 0, 1, 1),
+('user', 0, 0, 1, 1),
 ('yy-y', 0, 0, 1, 0);
 
 -- --------------------------------------------------------
@@ -547,7 +605,7 @@ INSERT INTO `lulu_takonomy` (`id`, `parent_id`, `category_id`, `name`, `url_alia
 (15, 0, 'post', 'java', '', NULL, '', 0, 1),
 (16, 0, 'post', 'dotnot', '', NULL, '', 0, 2),
 (17, 0, 'page', '关于', '', NULL, '', 0, 1),
-(18, 16, 'post', 'asp.net', 'asp.net', NULL, '', 0, 100);
+(18, 16, 'post', 'asp.net', 'asp-net', NULL, '', 0, 100);
 
 -- --------------------------------------------------------
 
@@ -602,15 +660,17 @@ CREATE TABLE IF NOT EXISTS `lulu_user` (
   `status` smallint(6) NOT NULL DEFAULT '10',
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
+  `role` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `lulu_user`
 --
 
-INSERT INTO `lulu_user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin111', '4PBB6MTWO0ZNhgM8da2jONmIIhapjSlu', '$2y$13$tGFMmA2lvR5dgcwJ2RSRGOKWZuGHd.4k6OJ8xO2aQsODaH9GuRXYS', NULL, 'admin111@admin.com', 10, 1422277168, 1422277168);
+INSERT INTO `lulu_user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `role`) VALUES
+(1, 'admin111', '4PBB6MTWO0ZNhgM8da2jONmIIhapjSlu', '$2y$13$OBXVTVyDKRteeKB3Q/6BiOEDCuL7BnObs4ETexf27ULwqtuYxfQ3u', NULL, 'admin111@admin.com', 1, 1422277168, 1436069385, 'administrator'),
+(3, 'test', '', '$2y$13$AhBcgX94zIzGCKRy3NNMc.DncGZ9YzXtRmDI12ee5cY5KNfxk6Ha2', '2', 'test@admin.com', 1, 1436063932, 1436069354, 'member_1');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

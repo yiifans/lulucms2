@@ -8,8 +8,8 @@ class LoopData extends BaseWidget
 
     public $dataSource;
 
-    public $rowParam='row';
-    
+    public $rowParam = 'row';
+
     public $item = 'item';
 
     public $itemsTag = '{items}';
@@ -31,7 +31,7 @@ class LoopData extends BaseWidget
     public function run()
     {
         $container = trim(ob_get_clean());
-       
+        
         $ret = '';
         
         if (! empty($this->item))
