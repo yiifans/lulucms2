@@ -14,6 +14,7 @@ class BasicConfig extends ConfigForm
     
 	public $sys_site_name;
 	public $sys_site_description;
+	public $sys_site_about;
 	public $sys_site_url;
 	public $sys_site_email;
 	
@@ -27,7 +28,7 @@ class BasicConfig extends ConfigForm
     public function rules()
     {
         return [
-            [['sys_site_name', 'sys_site_description', 'sys_site_url', 
+            [['sys_site_name', 'sys_site_description','sys_site_about', 'sys_site_url', 
 				'sys_lang', 'sys_icp', 'sys_stat'], 'string'],
 			[['sys_site_email'],'email'],
             [['sys_status'],'boolean'],
@@ -42,6 +43,7 @@ class BasicConfig extends ConfigForm
         return [
             'sys_site_name' => '网站名称',
             'sys_site_description' => '网站描述',
+            'sys_site_about' => '关于',
             //'sys_site_url' => '网站Url',
             'sys_site_email' => '站点Email',
            

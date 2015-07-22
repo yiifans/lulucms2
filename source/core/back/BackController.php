@@ -8,7 +8,6 @@ use source\LuLu;
 
 class BackController extends BaseController
 {
-
     public function beforeAction($action)
     {
         if (in_array($action->id, ['login','captcha']))
@@ -22,13 +21,17 @@ class BackController extends BaseController
             exit('<script>top.location.href="'.$url.'"</script>');
         }
         
-        if(!in_array($action->id,['logout', 'error','message','welcome']))
+        if (! $this->rbacService->checkPermission(null, 'manager_admin'))
         {
-            if (! $this->rbacService->checkPermission(null, 'manager_admin') || ! $this->rbacService->checkPermission())
-            {
-                return $this->showMessage();
-            }
+            return $this->showMessage();
         }
+        
+        if(!in_array($action->id, ['logout','error','welcome' ]) 
+            &&! $this->rbacService->checkPermission())
+        {
+            return $this->showMessage();
+        }
+        
         return parent::beforeAction($action);
     }
     

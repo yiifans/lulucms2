@@ -22,7 +22,7 @@ $this->registerCss($css);
 ?>
 
 <?php $this->toolbars([
-    Html::a('新建模块', ['/gii/default/view','id'=>'extmodule'], ['class' => 'btn btn-xs btn-primary mod-site-save','target'=>'_blank']),
+    Html::a('新建模块', ['/gii/default/view','id'=>'lulumodule'], ['class' => 'btn btn-xs btn-primary mod-site-save','target'=>'_blank']),
 ]);?>
 
 <table class="da-table">
@@ -31,7 +31,7 @@ $this->registerCss($css);
             <th width="90px">标识</th>
             <th width="250px">名称</th>
             <th>描述</th>
-            <th width="120px"></th>
+            <th width="150px"></th>
         </tr>
     </thead>
     <tbody>

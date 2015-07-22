@@ -77,7 +77,7 @@ class StringHelper
      * @param string $charset utf-8¦gb2312¦gbk¦big5 编码
      * @param $suffix 尾缀
      */
-    public static function subStr($str, $length = -1, $charset = "", $start = 0, $suffix = null)
+    public static function subString($str, $length = -1, $start = 0, $suffix = null,$charset = "")
     {
         if ($length < 1)
         {

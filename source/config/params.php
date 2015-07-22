@@ -4,6 +4,7 @@ $params = [
     'supportEmail' => 'support@example.com',
     'user.passwordResetTokenExpire' => 3600,
     'homeTheme'=>'bifenxiang',
+    'homeTheme'=>'fengyun',
     'adminTheme'=>'dandelion',// 'weicenter2',
 
 ];

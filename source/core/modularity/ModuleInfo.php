@@ -20,7 +20,7 @@ class ModuleInfo extends Object
 
     public $author_url;
 
-    public $is_system = true;
+    public $is_system = false;
 
     public $is_content;
 

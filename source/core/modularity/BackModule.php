@@ -8,6 +8,6 @@ class BackModule extends BaseModule
     {
         parent::init();
         
-        $this->setViewPath($this->getBasePath() . '/admin/views');
+        //$this->setViewPath($this->getBasePath() . '/admin/views');
     }
 }

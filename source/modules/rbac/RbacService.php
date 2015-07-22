@@ -8,14 +8,17 @@ use source\modules\rbac\models\Relation;
 use yii\db\Query;
 use source\modules\rbac\models\Category;
 use source\LuLu;
+use source\core\front\FrontApplication;
 
 class RbacService extends \source\core\modularity\ModuleService
-{
+{   
     private $assignmentTable;
     private $roleTable;
     private $permissionTable;
     private $relationTable;
 
+    private $ruleNamespace='\source\modules\rbac\rules\\';
+    
     public function init()
     {
         parent::init();
@@ -30,70 +33,72 @@ class RbacService extends \source\core\modularity\ModuleService
     {
         return 'rbacService';
     }
-   
-//     public function getRolesByUser($user)
-//     {
-//         $query = new Query();
-//         $query->select([
-//             'r.id',
-//             'r.category_id',
-//             'r.name',
-//             'r.description',
-//             'r.is_system',
-//             'r.status',
-//         ]);
-//         $query->from([
-//             'r'=>$this->roleTable,
-//             'a'=>$this->assignmentTable,
-//         ]);
-//         $query->where('r.id=a.role');
-//         $query->andWhere([
-//             'a.user' => $user
-//         ]);
-//         $rows = $query->all();
-//         return $this->convertPermissionValue($rows);
-//     }
+    
+    public function getRolesByUser($user)
+    {
+        $query = new Query();
+        $query->select([
+            'r.id',
+            'r.category',
+            'r.name',
+            'r.description',
+            'r.is_system',
+            'r.sort_num',
+        ]);
+        $query->from([
+            'r'=>$this->roleTable,
+            'a'=>$this->assignmentTable,
+        ]);
+        $query->where('r.id=a.role');
+        $query->andWhere([
+            'a.user' => $user
+        ]);
+        $rows = $query->indexBy('id')->all();
+        return $rows;
+    }
 
-//     public function getPermissionsByUser($user=null)
-//     {
-//         $query = new Query();
-//         $query->select([
-//             'r.role',
-//             'r.permission', 
-//             'r.value',
-//             'p.rule', 
-//             'p.form'
-//         ]);
-//         $query->from([
-//             'p'=>$this->permissionTable,
-//             'r'=>$this->relationTable, 
-//             'a'=>$this->assignmentTable,
-//         ]);
-//         $query->where('p.id=r.permission and r.role=a.role');
-//         $query->andWhere([
-//             'a.user' => $user
-//         ]);
-//         $query->from([
-//             'p'=>$this->permissionTable,
-//             'r'=>$this->relationTable,
-//         ]);
-//         $query->where('p.id=r.permission and r.role=a.role');
-//         $query->andWhere([
-//             'a.user' => $user
-//         ]);
-//         $rows = $query->all();
-//         return $this->convertPermissionValue($rows);
-//     }
+    public function getPermissionsByUser($user=null)
+    {
+        $query = new Query();
+        $query->select([
+            'p.id',
+            'p.category',
+            'p.name',
+            'p.description',
+            'p.form',
+            'p.default_value',
+            'p.rule',
+            'p.sort_num',
+            'r.role',
+            'r.value',
+        ]);
+        $query->from([
+            'p'=>$this->permissionTable,
+            'r'=>$this->relationTable, 
+            'a'=>$this->assignmentTable,
+        ]);
+        $query->where('p.id=r.permission and r.role=a.role');
+        $query->andWhere([
+            'a.user' => $user
+        ]);
+        $rows = $query->all();
+        return $this->convertPermissionValue($rows);
+    }
 
     public function getPermissionsByRole($role)
     {
         $query = new Query();
         $query->select([
-            'r.role',
-            'r.permission', 
-            'r.value', 
-            'p.rule',
+            'p.id',
+            'p.category',
+            'p.name',
+            'p.description',
             'p.form',
+            'p.default_value',
+            'p.rule',
+            'p.sort_num',
+            'r.role',
+            'r.value',
         ]);
         $query->from([
             'p'=>$this->permissionTable,
@@ -102,7 +107,6 @@ class RbacService extends \source\core\modularity\ModuleService
         $query->where('r.permission=p.id');
         $query->andWhere(['r.role' => $role ]);
         $rows = $query->all();
-        
         return $this->convertPermissionValue($rows);
     }
 
@@ -116,24 +120,20 @@ class RbacService extends \source\core\modularity\ModuleService
         foreach ($rows as $row)
         {
             $form = intval($row['form']);
-            $v = $row['value'];
             if ($form === Permission::Form_Boolean)
             {
-                if ($v === '1' || $v === 'true')
-                {
-                    $v = true;
-                }
-                else
-                {
-                    $v = false;
-                }
+                $v = ($row['value'] === '1' || $row['value'] === 'true') ? true : false;
             }
             else if ($form === Permission::Form_CheckboxList)
             {
-                $v = explode(',', $v);
+                $v = explode(',', $row['value']);
             }
-            $row['value']=$v;
-            $ret[$row['permission']] = $row;
+            else
+            {
+                $v = $row['value'];
+            }
+            $row['value'] = $v;
+            $ret[$row['id']][] = $row;
         }
         return $ret;
     }
@@ -161,12 +161,44 @@ class RbacService extends \source\core\modularity\ModuleService
         return $this->executeRule($role, $rows[$permission],$params);
     }
    
-    private function executeRule($role,$permission,$params=[])
+  
+    private function checkSkipActions()
     {
-        $ruleClass = $permission['rule'];
-        $ruleClass='\source\modules\rbac\rules\\'.$ruleClass;
-        
-        $ruleInstance = new $ruleClass();
-        return $ruleInstance->execute($role,$permission,$params);
+        if(empty($this->skipActions))
+        {
+            return false;
+        }
+        $actionId = LuLu::getApp()->requestedAction->uniqueId;
+        if(LuLu::getApp() instanceof FrontApplication )
+        {
+            $actionId='home_'.$actionId;
+        }
+        return in_array($actionId, $this->skipActions);
+    }
+    
+    private function executeRule($user,$permission,$params=[])
+    {
+        if(is_array($permission))
+        {
+            foreach ($permission as $v)
+            {
+                $ruleClass=$this->ruleNamespace.$v['rule'];
+    
+                $ruleInstance = new $ruleClass();
+                $ret = $ruleInstance->execute($user,$v,$params);
+                if($ret===true)
+                {
+                    return true;
+                }
+            }
+        }
+        else
+        {
+            $ruleClass=$this->ruleNamespace.$permission['rule'];
+    
+            $ruleInstance = new $ruleClass();
+            return $ruleInstance->execute($user,$permission,$params);
+        }
+    
     }
 }

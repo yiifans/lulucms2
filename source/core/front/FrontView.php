@@ -32,17 +32,22 @@ class FrontView extends BaseView
         $config = [
             'pathMap' => [
                 '@app/views' => [
-                    '@static/themes/' . $currentTheme . '/views', 
-                    '@static/themes/default/views'
+                    '@statics/themes/' . $currentTheme . '/views', 
+                    '@statics/themes/default/views'
                 ], 
                 '@source/modules/' . $moduleId . '/home/views' => [
-                    '@static/themes/' . $currentTheme . '/modules/' . $moduleId, 
-                    '@static/themes/default/modules/' . $moduleId
+                    '@statics/themes/' . $currentTheme . '/modules/' . $moduleId, 
+                    '@statics/themes/default/modules/' . $moduleId
                 ]
             ], 
-            'baseUrl' => '@static/themes/default'
+            'baseUrl' => '@statics/themes/default'
         ];
         
         $this->theme = new Theme($config);
+    }
+    
+    public function renderMenu($category='main',$parentId=0)
+    {
+        echo \source\models\Menu::getMenuHtml($category, 0);
     }
 }

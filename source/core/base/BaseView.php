@@ -21,6 +21,7 @@ use source\LuLu;
 class BaseView extends View
 {
 
+    public $layout=null;
     public function init()
     {
         parent::init();
@@ -35,6 +36,11 @@ class BaseView extends View
         return parent::renderFile($viewFile, $params, $context);
     }
 
+    public function getHomeUrl($url=null)
+    {
+        return LuLu::getHomeUrl($url);
+    }
+    
     public function setTheme()
     {
     }
@@ -61,7 +67,7 @@ class BaseView extends View
 		}
 	}
 
-    public function getThemeUrl($url)
+    public function getThemeUrl($url=null)
     {
         $themeUrl = Resource::getThemeUrl($url);
         return $themeUrl;
@@ -73,18 +79,13 @@ class BaseView extends View
         return $datas;
     }
 
-    public function linkPager($pager)
-    {
-        echo LinkPager::widget([
-            'pagination' => $pager
-        ]);
-    }
+  
 
     public function loopData($dataSource, $item, $appendOptions = [])
     {
         $options = [];
         $options['dataSource'] = $dataSource;
-        $options['item'] = Resource::getThemePath($item);
+        $options['item'] = $item;
         
         echo LoopData::widget($options);
     }
@@ -93,7 +94,7 @@ class BaseView extends View
     {
         $options = [];
         $options['dataSource'] = $dataSource;
-        $options['item'] = Resource::getThemePath($item);
+        $options['item'] = $item;
         
         return LoopData::begin($options);
     }

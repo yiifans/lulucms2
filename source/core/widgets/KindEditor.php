@@ -4,15 +4,16 @@ namespace source\core\widgets;
 use yii\base\Widget;
 use yii\web\View;
 use components\Core;
+use source\libs\Resource;
 
 class KindEditor extends BaseWidget
 {
 
     public $params = [];
 
-    public $libUrl = '/static/kindeditor';
+    public $libUrl = '';
 
-    public $input = null;
+    public $inputId = null;
 
     public $editorId = null;
 
@@ -23,7 +24,7 @@ class KindEditor extends BaseWidget
     public function init()
     {
         parent::init();
-        $this->libUrl = Core::getSAdminUrl() . '/static/kindeditor';
+        $this->libUrl = Resource::getCommonUrl() . '/libs/kindeditor';
     }
 
     public function run()
@@ -39,14 +40,9 @@ class KindEditor extends BaseWidget
 			$view->params['__KindEditor'] = true;
 		}
 		
-		if($this->input === null)
-		{
-			$this->input = '#' . $this->id;
-		}
-		
 		if($this->editorId === null)
 		{
-			$this->editorId = 'editor_' . str_replace(['#','-'], ['','_'], $this->input);
+			$this->editorId = 'editor_' . str_replace(['#','-'], ['','_'], $this->inputId);
 		}
 		
 		$this->params = array_merge($this->defaultParams, $this->params);
@@ -60,7 +56,7 @@ class KindEditor extends BaseWidget
 		$jsString = <<<JS
 var $this->editorId;
 KindEditor.ready(function(K) {
-	$this->editorId = K.create('$this->input', {
+	$this->editorId = K.create('$this->inputId', {
 		$paramsString
 	});
 });

@@ -46,7 +46,7 @@ abstract class BaseContentController extends BackController
                     $content = strip_tags($bodyModel->body);
                     $pattern = '/\s/'; // 去除空白
                     $content = preg_replace($pattern, '', $content);
-                    $model->summary = StringHelper::subStr($content, 250);
+                    $model->summary = StringHelper::subString($content, 250);
                 }
             }
             if ($model->save())

@@ -15,7 +15,7 @@ class BaseApplication extends \yii\web\Application
         
         $this->activeModules = $moduleManager->getActiveModules($isAdmin);
         
-        $module = $isAdmin ? 'AdminModule' : 'HomeModule';
+        $module = $isAdmin ? 'admin\AdminModule' : 'home\HomeModule';
         foreach ($this->activeModules as $m)
         {
             $moduleId = $m['id'];

@@ -13,6 +13,6 @@ class ModularityInfo extends \source\core\modularity\ModuleInfo
         $this->version = '1.0';
         $this->description = '用来对系统中的模块进行管理';
         
-        //$this->is_system = true;
+        $this->is_system = true;
     }
 }

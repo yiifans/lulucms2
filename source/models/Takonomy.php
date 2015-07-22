@@ -109,7 +109,7 @@ class Takonomy extends \source\core\base\BaseActiveRecord
     
     private static function getArrayTreeInternal($category, $parentId = 0, $level = 0)
     {
-    	$takonomies = self::findAll(['category_id'=>$category,'parent_id'=>$parentId],'sort_num desc');
+    	$takonomies = self::findAll(['category_id'=>$category,'parent_id'=>$parentId],'sort_num asc');
     	
     	$dataList=[];
     	foreach ($takonomies as $takonomy)

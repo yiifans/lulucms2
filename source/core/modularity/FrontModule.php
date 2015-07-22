@@ -8,6 +8,6 @@ class FrontModule extends BaseModule
     {
         parent::init();
         
-        $this->setViewPath($this->getBasePath() . '/home/views');
+        //$this->setViewPath($this->getBasePath() . '/home/views');
     }
 }

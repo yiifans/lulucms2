@@ -35,18 +35,7 @@ class LoopData extends BaseWidget
         $ret = '';
         
         if (! empty($this->item))
-        {
-            $itemTemplate = '';
-            if (strpos($this->item, '@') === 0 || strpos($this->item, '/') === 0)
-            {
-                $itemTemplate = $this->item;
-            }
-            else
-            {
-                $itemTemplate = '@app/widgets/views/loop-data/' . $this->item;
-            }
-            $itemTemplate = $this->item;
-            
+        {   
             $count = count($this->dataSource);
             
             $index = - 1;
@@ -83,7 +72,7 @@ class LoopData extends BaseWidget
                 $this->params['isFirst'] = $isFirst;
                 $this->params['isLast'] = $isLast;
                 
-                $ret .= $this->render($itemTemplate, $this->params);
+                $ret .= $this->render($this->item, $this->params);
             }
         }
         

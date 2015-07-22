@@ -1,25 +1,30 @@
 <?php
 namespace source\modules\modularity;
 
-
 use source\LuLu;
 use source\core\modularity\ModuleService;
 use source\core\modularity\ModuleInfo;
 use source\modules\modularity\models\Modularity;
+use yii\helpers\FileHelper;
 
 class ModularitySerivce extends ModuleService
-{   
+{
+
     public function getServiceId()
     {
         return 'modularitySerivce';
     }
-    
-    public function getActiveModules($isAdmin=false)
+
+    public function getActiveModules($isAdmin = false)
     {
         $ret = [];
         
         $field = $isAdmin ? 'enable_admin' : 'enable_home';
-        $allModules = Modularity::find()->where([$field => 1])->indexBy('id')->all();
+        $allModules = Modularity::find()->where([
+            $field => 1
+        ])
+            ->indexBy('id')
+            ->all();
         
         $modules = $this->loadAllModules();
         foreach ($modules as $m)
@@ -53,32 +58,32 @@ class ModularitySerivce extends ModuleService
             if (array_key_exists($moduleId, $allModules))
             {
                 $exitModule = $allModules[$moduleId];
-               
-                if($ret[$moduleId]['has_admin'])
+                
+                if ($ret[$moduleId]['has_admin'])
                 {
                     $ret[$moduleId]['can_active_admin'] = ($exitModule['enable_admin'] === null || $exitModule['enable_admin'] === 0) ? true : false;
                 }
-                if($ret[$moduleId]['has_home'])
+                if ($ret[$moduleId]['has_home'])
                 {
                     $ret[$moduleId]['can_active_home'] = ($exitModule['enable_home'] === null || $exitModule['enable_home'] === 0) ? true : false;
                 }
                 
                 $ret[$moduleId]['can_install'] = false;
-                $ret[$moduleId]['can_uninstall'] = ( $ret[$moduleId]['has_admin'] && $exitModule['enable_admin'] ||  $ret[$moduleId]['has_home'] && $exitModule['enable_home']) ? false : true;
+                $ret[$moduleId]['can_uninstall'] = ($ret[$moduleId]['has_admin'] && $exitModule['enable_admin'] || $ret[$moduleId]['has_home'] && $exitModule['enable_home']) ? false : true;
             }
         }
         return $ret;
     }
 
-    private $allModules=null;
-    
+    private $allModules = null;
+
     private function loadAllModules()
     {
-        if($this->allModules !== null)
+        if ($this->allModules !== null)
         {
             return $this->allModules;
         }
-        $this->allModules=[];
+        $this->allModules = [];
         
         $moduleRootPath = LuLu::getAlias('@source') . '/modules';
         
@@ -86,78 +91,61 @@ class ModularitySerivce extends ModuleService
         {
             while (($moduleFolder = $moduleRootDir->read()) !== false)
             {
-                $modulePath = $moduleRootPath . '/' . $moduleFolder;
-                if (preg_match('|^\.+$|', $moduleFolder) || ! is_dir($modulePath))
+                $currentModuleDir = $moduleRootPath . '/' . $moduleFolder;
+                if (preg_match('|^\.+$|', $moduleFolder) || ! is_dir($currentModuleDir))
                 {
                     continue;
                 }
                 
-                if ($moduleDir = @ dir($modulePath))
+                $moduleClassName = ucwords($moduleFolder);
+                
+                if (FileHelper::exist($currentModuleDir . '/' . $moduleClassName . 'Info.php'))
                 {
-                    $moduleClassName = ucwords($moduleFolder);
-                    
-                    $class=null;
+                    $class = 'source\modules\\' . $moduleFolder . '\\' . $moduleClassName . 'Info';
+                }
+                else
+                {
+                    continue;
+                }
+                
+                $instance = null;
+                try
+                {
+                    // $moduleObj = LuLu::createObject($class);
+                    $instance = new $class();
+                    if (empty($instance->id))
+                    {
+                        $instance->id = $moduleFolder;
+                    }
+                    if (empty($instance->name))
+                    {
+                        $instance->name = $moduleFolder;
+                    }
+                }
+                catch (Exception $e)
+                {
                     $instance = null;
-                    $has_admin= false;
-                    $has_home=false;
+                }
+                
+                if ($instance !== null)
+                {
+                    $has_admin = FileHelper::exist($currentModuleDir . '/admin/AdminModule.php') ? true : false;
+                    $has_home = FileHelper::exist($currentModuleDir . '/home/HomeModule.php') ? true : false;
                     
-                    while (($item = $moduleDir->read()) !== false)
-                    {
-                        $itemPath = $moduleRootPath . '/' . $moduleFolder . '/' . $item;
-                        if (preg_match('|^\.+$|', $item) || is_dir($itemPath))
-                        {
-                            continue;
-                        }
-                        if ($item === $moduleClassName . 'Info.php')
-                        {
-                            $class = 'source\modules\\' . $moduleFolder . '\\' . $moduleClassName . 'Info';
-                        }
-                        if ($item === 'AdminModule.php')
-                        {
-                            $has_admin = true;
-                        }
-                        if ($item === 'HomeModule.php')
-                        {
-                            $has_home = true;
-                        }
-                    }
-                    if($class!==null)
-                    {
-                        try
-                        {
-                            // $moduleObj = LuLu::createObject($class);
-                            $instance = new $class();
-                            if (empty($instance->id))
-                            {
-                                $instance->id = $moduleFolder;
-                            }
-                            if (empty($instance->name))
-                            {
-                                $instance->name = $moduleFolder;
-                            }
-                        }
-                        catch (Exception $e)
-                        {
-                            // $instance=$e;
-                        }
-                    }
-                    if($instance!==null)
-                    {
-                        $this->allModules[$instance->id] = [
-                            'id' => $instance->id,
-                            'dir'=>$moduleFolder,
-                            'dir_class'=>$moduleClassName,
-                            'class' => $class,
-                            'instance' => $instance,
-                            
-                            'can_install' => true,
-                            'can_uninstall' => true,
-                            'has_admin' => $has_admin,
-                            'has_home' => $has_home,
-                            'can_active_admin' => false,
-                            'can_active_home' => false
-                        ];
-                    }
+                    $this->allModules[$instance->id] = [
+                        'id' => $instance->id, 
+                        'dir' => $moduleFolder, 
+                        'dir_class' => $moduleClassName, 
+                        'class' => $class, 
+                        'instance' => $instance, 
+                        
+                        'can_install' => true, 
+                        'can_uninstall' => true, 
+                        'has_admin' => $has_admin, 
+                        'has_home' => $has_home, 
+                        'can_active_admin' => false, 
+                        'can_active_home' => false
+                    ];
                 }
             }
         }

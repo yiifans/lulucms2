@@ -15,5 +15,7 @@ class PageInfo extends ModuleInfo
         $this->name = '单面';
         $this->version = '1.0';
         $this->description = '单面内容模块';
+        
+        $this->is_system = true;
     }
 }

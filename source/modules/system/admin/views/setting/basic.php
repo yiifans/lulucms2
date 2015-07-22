@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use source\core\widgets\ActiveForm;
 use source\models\config\BasicConfig;
+use source\core\widgets\KindEditor;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\config\Basic */
@@ -20,7 +21,9 @@ $this->addBreadcrumbs([
     <?= $form->field($model, 'sys_lang')->dropDownList(['zh-CN'=>'中文','en-US'=>'英文'])?>
     <?= $form->field($model, 'sys_icp')?>
     <?= $form->field($model, 'sys_stat')->textarea(['rows'=>5])?>
+    <?= $form->field($model, 'sys_site_about',['size'=>'default'])->textarea(['rows'=>5])?>
     <?= $form->field($model, 'sys_status')->radioList(['1'=>'正常','0'=>'关闭'])?>
+    <?php echo KindEditor::widget(['inputId'=>'#basicconfig-sys_site_about'])?>
     <?= $form->defaultButtons() ?>
 <?php ActiveForm::end(); ?>
            

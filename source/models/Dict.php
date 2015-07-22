@@ -114,7 +114,7 @@ class Dict extends \source\core\base\BaseActiveRecord
         {
             $where['status']=$status;
         }
-        $items = self::findAll($where,'sort_num desc');
+        $items = self::findAll($where,'sort_num asc');
         return $items;
     }
     private static function getArrayTreeInternal($category, $parentId = 0, $level = 0)

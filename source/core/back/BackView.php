@@ -23,13 +23,13 @@ class BackView extends BaseView
         $config = [
             'pathMap' => [
                 '@app/views' => [
-                    '@static/admin/' . $currentTheme . '/views'
+                    '@statics/admin/' . $currentTheme . '/views'
                 ], 
                 '@source/modules/' . $moduleId . '/admin/views' => [
-                    '@static/admin/' . $currentTheme . '/modules/' . $moduleId
+                    '@statics/admin/' . $currentTheme . '/modules/' . $moduleId
                 ]
             ], 
-            'baseUrl' => '@static/admin/' . $currentTheme
+            'baseUrl' => '@statics/admin/' . $currentTheme
         ];
         
         $this->theme = new Theme($config);

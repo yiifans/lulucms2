@@ -11,8 +11,10 @@ class LinkPager extends \yii\widgets\LinkPager implements IBaseWidget
     {
         parent::init();
         
+        $this->firstPageLabel='首页';
         $this->prevPageLabel = '上一页';
         $this->nextPageLabel = '下一页';
+        $this->lastPageLabel='尾页';
     }
 
     protected function renderPageButtons()
@@ -25,7 +27,24 @@ class LinkPager extends \yii\widgets\LinkPager implements IBaseWidget
         
         return Html::tag('div', '<ul>' . implode("\n", $buttons) . '</ul>', $this->options);
     }
-
+    
+    protected function renderPageButton($label, $page, $class, $disabled, $active)
+    {
+        $options = ['class' => $class === '' ? null : $class];
+        if ($active) {
+            Html::addCssClass($options, $this->activePageCssClass);
+        }
+        if ($disabled) {
+            Html::addCssClass($options, $this->disabledPageCssClass);
+    
+            return Html::tag('li', Html::tag('span', $label), $options);
+        }
+        $linkOptions = $this->linkOptions;
+        $linkOptions['data-page'] = $page;
+    
+        return Html::tag('li', Html::a($label, $this->pagination->createUrl($page), $linkOptions), $options);
+    }
+    
     protected function getButtonItems()
     {
         $pageCount = $this->pagination->getPageCount();

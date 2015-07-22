@@ -7,9 +7,12 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'security' => [
+            'class' => 'source\core\base\Security',
+        ],
 	  	'assetManager' => [
-			'basePath' => '@webroot/static/assets',
-			'baseUrl'=>'@web/static/assets',
+			'basePath' => '@webroot/statics/assets',
+			'baseUrl'=>'@web/statics/assets',
 	      		'bundles' => [
 	          	// you can override AssetBundle configs here
 	      	],

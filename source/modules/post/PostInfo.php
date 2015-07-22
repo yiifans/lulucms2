@@ -14,5 +14,7 @@ class PostInfo extends ModuleInfo
         $this->name = '文章';
         $this->version = '1.0';
         $this->description = '文章模块';
+        
+        $this->is_system = true;
     }
 }

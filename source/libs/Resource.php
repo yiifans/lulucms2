@@ -35,7 +35,7 @@ class Resource
 
     public static function getCommonPath($path = null)
     {
-        $ret = LuLu::getAlias('@webroot/static/common');
+        $ret = LuLu::getAlias('@webroot/statics/common');
         if ($path != null)
         {
             return $ret . $path;
@@ -45,7 +45,7 @@ class Resource
 
     public static function getCommonUrl($url = null)
     {
-        $ret = LuLu::getAlias('@web/static/common');
+        $ret = LuLu::getAlias('@web/statics/common');
         if ($url != null)
         {
             return $ret . $url;
@@ -62,7 +62,7 @@ class Resource
     public static function getAdminPath($path = null)
     {
         $currentTheme = self::getAdminTheme();
-        $ret = '@webroot/static/admin/' . $currentTheme;
+        $ret = '@webroot/statics/admin/' . $currentTheme;
         if ($path != null)
         {
             return $ret . $path;
@@ -73,7 +73,7 @@ class Resource
     public static function getAdminUrl($url = null)
     {
         $currentTheme = self::getAdminTheme();
-        $ret = LuLu::getAlias('@web/static/admin/' . $currentTheme);
+        $ret = LuLu::getAlias('@web/statics/admin/' . $currentTheme);
         if ($url != null)
         {
             return $ret . $url;
@@ -101,7 +101,7 @@ class Resource
     public static function getThemePath($path = null)
     {
         $currentTheme = self::getHomeTheme();
-        $ret = '@webroot/static/themes/' . $currentTheme;
+        $ret = '@webroot/statics/themes/' . $currentTheme;
         if ($path != null)
         {
             return $ret . $path;
@@ -112,7 +112,7 @@ class Resource
     public static function getThemeUrl($url = null)
     {
         $currentTheme = self::getHomeTheme();
-        $ret = LuLu::getAlias('@web/static/themes/' . $currentTheme);
+        $ret = LuLu::getAlias('@web/statics/themes/' . $currentTheme);
         if ($url != null)
         {
             return $ret . $url;
@@ -129,7 +129,7 @@ class Resource
     public static function getContentItemView($content)
     {
         $currentTheme = self::getHomeTheme();
-        $ret = '@webroot/static/themes/' . $currentTheme . '/modules/' . $content['type'] . '/_inc/content_default';
+        $ret = '@webroot/statics/themes/' . $currentTheme . '/modules/' . $content['type'] . '/_inc/content_default';
         
         return $ret;
     }

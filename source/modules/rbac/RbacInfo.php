@@ -14,5 +14,7 @@ class RbacInfo extends ModuleInfo
         $this->name = '权限模块';
         $this->version = '1.0';
         $this->description = '权限管理模块';
+        
+        $this->is_system = true;
     }
 }

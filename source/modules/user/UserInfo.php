@@ -13,5 +13,7 @@ class UserInfo extends \source\core\modularity\ModuleInfo
         $this->name = '用户模块';
         $this->version = '1.0';
         $this->description = '用户管理模块';
+        
+        $this->is_system = true;
     }
 }

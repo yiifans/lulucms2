@@ -19,6 +19,7 @@ return [
             'enableAutoLogin' => true,
             'loginUrl' => ['admin/login'],
         ],
+        
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [

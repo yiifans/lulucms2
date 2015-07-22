@@ -35,15 +35,24 @@ class SiteController extends BackController
         {
             return $this->goHome();
         }
-        
+        $message='';
         $this->layout = false;
         $model = new \source\models\LoginForm();
         if ($model->load(LuLu::$app->request->post()) && $model->login())
         {
-            return $this->goBack();
+            if($this->rbacService->checkPermission(null,'manager_admin'))
+            {
+                return $this->goBack();
+            }
+            else 
+            {
+                LuLu::$app->user->logout();
+                $message='您没有权限登录管理系统';
+            }
         }
         return $this->render('login', [
-            'model' => $model
+            'model' => $model,
+            'message'=>$message,
         ]);
     }
 }

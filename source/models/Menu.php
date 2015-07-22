@@ -126,10 +126,14 @@ class Menu extends \source\core\base\BaseActiveRecord
         {
             $where['status']=$status;
         }
-        $items = self::findAll($where,'sort_num desc');
+        $items = self::findAll($where,'sort_num asc');
         return $items;
     }
     
+    public static function getArrayTree($category,$status=null)
+    {
+        return self::getArrayTreeInternal($category,0,0);
+    }
     private static function getArrayTreeInternal($category, $parentId = 0, $level = 0,$status=null)
     {
     	$items = self::getChildren($category,$parentId,$status);
@@ -146,35 +150,39 @@ class Menu extends \source\core\base\BaseActiveRecord
     	return $dataList;
     }
     
-    public static function getArrayTree($category,$status=null)
-    {
-    	return self::getArrayTreeInternal($category,0,0);
-    }
     
-    public static function getMenuHtmlInternal($category,$items)
-    {
-        $html='';
-        foreach ($items as $menu)
-        {
-            $html .= '<li id="menu-item-'.$menu['id'].'" class="menu-item menu-item-type-'.$category.' menu-item-'.$menu['id'].'"><a href="'.$menu['url'].'" target="'.$menu['target'].'">'.$menu['name'].'</a>';
-            $children = self::getChildren($category,$menu['id'],1);
-            if(count($children)>0)
-            {
-                $html.='<ul class="children-menus menu-children-'.$menu['id'].'">';
-                $html.=self::getMenuHtmlInternal($category, $children);
-                $html.='</ul>';
-            }
-            $html.='</li>';
-        }
-   	    return $html;
-    }
     
+   
     public static function getMenuHtml($category,$parentId)
     {
         $items = self::getChildren($category,$parentId,1);
         return self::getMenuHtmlInternal($category, $items);
     }
+    private static function getMenuHtmlInternal($category,$items)
+    {
+        $html='';
+        foreach ($items as $menu)
+        {
+            $children = self::getChildren($category,$menu['id'],1);
+    
+            if(count($children)>0)
+            {
+                $html .= '<li id="menu-item-'.$menu['id'].'" class="menu-item menu-item-type-'.$category.' menu-item-'.$menu['id'].' menu-item-has-children"><a href="'.$menu['url'].'" target="'.$menu['target'].'">'.$menu['name'].'</a>';
+                $html.='<ul class="sub-menu sub-menu-'.$menu['id'].'">';
+                $html.=self::getMenuHtmlInternal($category, $children);
+                $html.='</ul>';
+                $html.='</li>';
+            }
+            else
+            {
+                $html .= '<li id="menu-item-'.$menu['id'].'" class="menu-item menu-item-type-'.$category.' menu-item-'.$menu['id'].'"><a href="'.$menu['url'].'" target="'.$menu['target'].'">'.$menu['name'].'</a>';
+                $html.='</li>';
+            }
+        }
+        return $html;
+    }
    
+    
     public static function getAdminMenu()
     {
         $html='';
@@ -218,6 +226,7 @@ class Menu extends \source\core\base\BaseActiveRecord
         return $html;
     }
     
+
     
     public function beforeDelete()
     {

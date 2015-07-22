@@ -8,6 +8,7 @@ use source\models\Content;
 use source\libs\TreeHelper;
 use source\libs\Resource;
 use source\libs\Constants;
+use source\core\widgets\KindEditor;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Content */
@@ -30,7 +31,7 @@ $template4="{label}\n<div class=\"da-form-item small\" style=\"margin-left:0px;\
 ?>
 
     <?php
-				
+
 $form = ActiveForm::begin([
 					'options'=>['enctype'=>'multipart/form-data','class'=>'da-form'],
 					'fieldConfig'=>[
@@ -55,7 +56,9 @@ $form = ActiveForm::begin([
             		    <?= $form->field($model, 'url_alias',$filedOptions)->textInput(['maxlength' => 256,'placeholder'=>'Url 地址'])?>
             		    <?= $form->field($model, 'redirect_url',$filedOptions)->textInput(['maxlength' => 256])?>
             		
-            		    <?= $form->field($bodyModel, 'body',$filedOptions)->textarea(['rows' => 12]) ?>	
+            		    <?= $form->field($bodyModel, 'body',['size'=>'large'])->textarea(['rows' => 22]) ?>	
+            		    <?php echo KindEditor::widget(['inputId'=>'#'.Html::getInputId($bodyModel, 'body')])?>
+            		    
             		    
             		    <?= $form->field($model, 'summary',$filedOptions)->textarea(['rows' => 6])?>
             		    
