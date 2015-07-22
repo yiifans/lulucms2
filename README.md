@@ -3,10 +3,6 @@ one powerful and modularity CMS. based on Yii2
 
 Live Demo
 
-frontend
+frontend: http://www.lulucms.com/
 
-http://www.lulucms.com/
-
-backend(demo/demo)
-
-http://www.lulucms.com/admin.php
+backend(demo/demo): http://www.lulucms.com/admin.php
