@@ -1,4 +1,4 @@
-# lulucms2
+# LuLu CMS2
 1、LuLu CMS 2
 
 one powerful and modularity CMS. based on Yii2
@@ -26,5 +26,5 @@ backend(demo/demo): http://www.lulucms.com/admin.php
 the admin user id/password is admin111/admin111
 
 
-4、NOTE:
+4、Note:
 
