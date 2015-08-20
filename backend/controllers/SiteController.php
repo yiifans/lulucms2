@@ -21,6 +21,11 @@ class SiteController extends BackController
         return $this->render('welcome');
     }
 
+    public function actionTest()
+    {
+        return $this->render('welcome');
+    }
+    
     public function actionLogout()
     {
         LuLu::$app->user->logout();
@@ -40,7 +45,7 @@ class SiteController extends BackController
         $model = new \source\models\LoginForm();
         if ($model->load(LuLu::$app->request->post()) && $model->login())
         {
-            if($this->rbacService->checkPermission(null,'manager_admin'))
+            if($this->rbacService->checkPermission('manager_admin'))
             {
                 return $this->goBack();
             }

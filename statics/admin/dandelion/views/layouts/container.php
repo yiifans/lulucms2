@@ -4,7 +4,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use source\models\Takonomy;
+use source\models\Taxonomy;
 use source\libs\Resource;
 use source\LuLu;
 use yii\helpers\Url;
@@ -51,12 +51,15 @@ $rbacService = LuLu::getService('rbac');
     <?php Resource::registerAdmin('/js/jquery-1.7.2.min.js');?>
 
     <!-- jQuery-UI JavaScript Files -->
+    
     <?php Resource::registerAdmin([
         '/plugins/jui/js/jquery-ui-1.8.20.min.js',
         '/plugins/jui/js/jquery.ui.timepicker.min.js',
         '/plugins/jui/js/jquery.ui.touch-punch.min.js',
         '/plugins/jui/css/jquery.ui.all.css',
-    ]);?>
+    ]);
+    
+    ?>
 
     <!-- Plugin Files -->
     <?php Resource::registerAdmin([
@@ -78,7 +81,7 @@ $rbacService = LuLu::getService('rbac');
     <!-- Core JavaScript Files -->
     <?php Resource::registerAdmin([
         '/js/core/dandelion.core.js',
-        '/js/core/dandelion.customizer.js',
+        //'/js/core/dandelion.customizer.js',
     ]);?>
 
     <title><?php echo $this->title ?> - <?php echo $this->getConfigValue('sys_site_name')?></title>
@@ -158,138 +161,6 @@ $rbacService = LuLu::getService('rbac');
                     <div id="da-main-nav" class="da-button-container">
                         <ul>
                         <?php echo Menu::getAdminMenu();?>
-                        <!-- 
-                            <li>
-                                <a href="<?php echo Url::to(['/site/welcome'])?>">
-                                    <span class="da-nav-icon">
-                                        <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/32/home.png" alt="Dashboard" />
-                                    </span>
-                                    首页
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="da-nav-icon">
-                                        <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/32/graph.png" alt="Charts" />
-                                    </span>
-                                    设置
-                                </a>
-                                <ul class="closed">
-                                    <li><?php echo Html::a('站点信息',['/system/setting/basic'])?></li>
-                                    <li><?php echo Html::a('注册与访问控制',['/system/setting/access'])?></li>
-                                    <li><?php echo Html::a('SEO设置',['/system/setting/seo'])?></li>
-                                    <li><?php echo Html::a('时间设置',['/system/setting/datetime'])?></li>
-                                    <li><?php echo Html::a('邮件设置',['/system/setting/email'])?></li>
-                                    <li><?php echo Html::a('模块管理',['/modularity'])?></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="da-nav-icon">
-                                        <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/32/day_calendar.png" alt="Calendar" />
-                                    </span>
-                                    基础功能
-                                </a>
-                                <ul class="closed">
-                                    <li><?php echo Html::a('菜单管理',['/menu'])?></li>
-                                    <li><?php echo Html::a('分类管理',['/takonomy'])?></li>
-                                    <li><?php echo Html::a('数据字典',['/dict/dict-category'])?></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="da-nav-icon">
-                                        <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/32/file_cabinet.png" alt="File Handling" />
-                                    </span>
-                                    内容
-                                </a>
-                                <ul class="closed">
-                                    <?php 
-                                    foreach (LuLu::$app->activeModules as $id => $moduleInfo){
-                                        $module = LuLu::$app->getModule($id);
-                                        if(!($module instanceof \source\core\base\BaseModule))
-                                        {
-                                            continue;
-                                        }
-                                        $menus = $module->getMenus();
-                                        if(count($menus)===0)
-                                        {
-                                            continue;
-                                        }
-                                    ?>
-                                    <li>
-                                        <a href="#" class=" icon" data="icon">
-                                            <?php echo $moduleInfo['instance']->name;?>
-                                        </a>
-
-                                        <ul class="closed">
-                                            <?php 
-                                            foreach ($menus as $menu)
-                                            {
-                                                if(isset($menu['url']))
-                                                {
-                                                    $url = $menu['url'];
-                                                }
-                                                else if(isset($menu[1]))
-                                                {
-                                                    $url = $menu[1];
-                                                }
-                                                else
-                                                {
-                                                    continue;
-                                                }
-                                            
-                                                $title = isset($menu['title'])? $menu['title']: $menu[0];
-                                                echo '<li><span style="padding-left: 20px;">'. Html::a($title,$url).'</span></li>';
-                                            }?>
-                                        </ul>
-                                    </li>
-
-                                    <?php }?>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="da-nav-icon">
-                                        <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/32/table_1.png" alt="Table" />
-                                    </span>
-                                    用户
-                                </a>
-                                <ul class="closed">
-                                    <li><?php echo Html::a('用户列表',['/user/user'])?></li>
-                                    <li><?php echo Html::a('角色管理',['/rbac/role'])?></li>
-                                    <li><?php echo Html::a('权限管理',['/rbac/permission'])?></li>
-                                    <li><?php echo Html::a('分类管理',['/rbac/category'])?></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="da-nav-icon">
-                                        <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/32/create_write.png" alt="Form" />
-                                    </span>
-                                    主题
-                                </a>
-                                <ul class="closed">
-                                    <li><?php echo Html::a('主题',['/page/default/create'])?></li>
-                                    <li><?php echo Html::a('菜单',['/page/default/create'])?></li>
-                                    <li><?php echo Html::a('小工具',['/page/default/create'])?></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="da-nav-icon">
-                                        <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/32/settings.png" alt="" />
-                                    </span>
-                                    工具
-                                </a>
-                                <ul class="closed">
-                                    <li><a href="grids.html">任务管理</a></li>
-                                    <li><a href="typography.html">用户群管理</a></li>
-                                    <li><a href="typography.html">系统维护</a></li>
-                                </ul>
-                            </li>
-                             -->
-                             
                         </ul>
                     </div>
 

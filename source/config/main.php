@@ -6,6 +6,12 @@ return [
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
+            'cachePath'=>'@data/cache',
+        ],
+        'schemaCache' => [
+            'class' => 'yii\caching\FileCache',
+            'cachePath'=>'@data/cache',
+            'keyPrefix'=>'scheme_'
         ],
         'security' => [
             'class' => 'source\core\base\Security',
@@ -14,11 +20,17 @@ return [
 			'basePath' => '@webroot/statics/assets',
 			'baseUrl'=>'@web/statics/assets',
 	      		'bundles' => [
+	      		    'yii\web\JqueryAsset'=>[
+	      		        'js'=>[]
+	      		    ],
 	          	// you can override AssetBundle configs here
 	      	],
 	      	//'linkAssets' => true,
 	      	// ...
 	   ],
+        'urlManager' =>[
+            'class'=>'source\core\base\UrlManager',
+        ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'transport' => [
@@ -38,7 +50,7 @@ return [
             ],
         ],
         'modularityService' => [
-            'class' => 'source\modules\modularity\ModularitySerivce',
+            'class' => 'source\modules\modularity\ModularityService',
         ],
     ],
 ];

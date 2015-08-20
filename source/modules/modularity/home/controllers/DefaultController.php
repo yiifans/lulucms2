@@ -11,7 +11,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use frontend\controllers\ContentController;
 use source\LuLu;
-use source\models\Takonomy;
+use source\models\Taxonomy;
 use source\modules\post\models\ContentPost;
 
 

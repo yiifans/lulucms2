@@ -3,16 +3,16 @@ use yii\web\View;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use source\libs\Resource;
-use source\models\Takonomy;
+use source\models\Taxonomy;
 /* @var $this yii\web\View */
-$this->title = $takonomyModel['name'];
+$this->title = $taxonomyModel['name'];
 
 ?>
 
-<?php if(!empty($takonomyModel->id)):?>
+<?php if(!empty($taxonomyModel->id)):?>
     <header class="page-header">
-    <h1 class="page-title"><?php echo $takonomyModel->name ?></h1>
-    <div class="taxonomy-description"><?php echo $takonomyModel->description?></div>
+    <h1 class="page-title"><?php echo $taxonomyModel->name ?></h1>
+    <div class="taxonomy-description"><?php echo $taxonomyModel->description?></div>
     </header>
 <?php endif;?>
 

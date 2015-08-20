@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],            
 			[
 				'attribute'=>'name',
-			    'width'=>'auto',
+			    'width'=>'250px',
 			], 
             [
                 'attribute'=>'value',

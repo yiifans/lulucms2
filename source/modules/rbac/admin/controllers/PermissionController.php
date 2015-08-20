@@ -24,17 +24,31 @@ class PermissionController extends BaseRbacController
     public function actionIndex()
     {
         $result=[];
-        $rows = Permission::findAll(null,'sort_num desc');
+        $rows = Permission::findAll(null,'sort_num asc');
         foreach($rows as $row)
         {
             $result[$row->category][]=$row;
         }
         
         return $this->render('index', [
-            'basicsDataProvider' => new ArrayDataProvider(['allModels'=>ArrayHelper::getValue($result, Permission::Category_Basic,[]),'key'=>'id']),
-            'controllersDataProvider' => new ArrayDataProvider(['allModels'=>ArrayHelper::getValue($result, Permission::Category_Controller,[]),'key'=>'id']),
-            'systemsDataProvider' => new ArrayDataProvider(['allModels'=>ArrayHelper::getValue($result, Permission::Category_System,[]),'key'=>'id']),
+            'basicsDataProvider' =>$this->getDataRrovider($result, Permission::Category_Basic),
+            'controllersDataProvider' => $this->getDataRrovider($result, Permission::Category_Controller),
+            'systemsDataProvider' => $this->getDataRrovider($result, Permission::Category_System),
         ]);
+    }
+    
+    private function getDataRrovider($result,$category)
+    {
+        $provider = new ArrayDataProvider([
+            'allModels'=>ArrayHelper::getValue($result, $category,[]),
+            'key'=>'id',
+            'pagination' => [
+                'pageSize' => -1,
+            ]
+            
+        ]);
+        
+        return $provider;
     }
 
     /**

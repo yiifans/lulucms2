@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'columns' => [
             [
-              'class'=>'source\core\grid\IdColumn',
+              'class'=>'source\core\grid\TextIdColumn',
             ],
             [
     			'attribute'=>'name',
@@ -36,8 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
 					}
 			],
             [
-            'attribute'=>'description',
-            'width'=>'auto',
+                'attribute'=>'description',
+                'width'=>'auto',
             ],
 
             ['class' => 'source\core\grid\ActionColumn'],

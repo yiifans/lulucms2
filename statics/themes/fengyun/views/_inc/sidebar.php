@@ -22,7 +22,7 @@ use source\models\Content;
         <div class="clear"></div>
     </div>
 
-    <?php echo $this->render('//_inc/takonomy');?>
+    <?php echo $this->render('//_inc/taxonomy');?>
     
     <h3 class="widget-title">随便看看</h3>
     <div class="box_r widget">

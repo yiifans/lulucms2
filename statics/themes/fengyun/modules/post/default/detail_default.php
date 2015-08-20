@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use source\models\Takonomy;
+use source\models\Taxonomy;
 use source\models\Content;
 use yii\helpers\Url;
 use source\libs\Resource;
@@ -36,11 +36,6 @@ $this->title = $model['title'];
         <!-- .entry-header -->
     </header>
     <div class="clearfix entry-content entry1" style="padding-top: 10px;">
-        <?php if(!empty($model['thumb'])):?>
-        <!-- 截图 -->
-        <img width="600" src="<?php echo $model['thumb']?>"  alt="U9947P827DT20150402093723" />
-        <?php endif;?>
-    
         <?php echo $model['body_body'] ?>
     </div>
     

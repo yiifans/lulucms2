@@ -10,8 +10,8 @@ use source\helpers\DateTimeHelper;
 
 <article class="excerpt">
     <header>
-    	<?php if(isset($content->takonomy)):?>
-    	<a class="label label-important" href=""><?php echo $post->takonomy->name; ?><i class="label-arrow"></i></a>
+    	<?php if(isset($content->taxonomy)):?>
+    	<a class="label label-important" href=""><?php echo $post->taxonomy->name; ?><i class="label-arrow"></i></a>
     	<?php endif;?>
         
         <h2><?php echo Html::a($content['title'],$content['url'])?></h2>

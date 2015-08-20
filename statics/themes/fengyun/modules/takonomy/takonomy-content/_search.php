@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\search\TakonomyContentSearch */
+/* @var $model app\models\search\TaxonomyContentSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="takonomy-content-search">
+<div class="taxonomy-content-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'takonomy_id') ?>
+    <?= $form->field($model, 'taxonomy_id') ?>
 
     <?= $form->field($model, 'content_id') ?>
 

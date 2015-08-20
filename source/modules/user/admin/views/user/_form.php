@@ -22,9 +22,9 @@ use source\modules\rbac\models\Role;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => 255]) ?>
 
+    <?= $form->field($model, 'role')->dropDownList(ArrayHelper::map($this->rbacService->getAllRoles(), 'id', 'name','category')) ?>
+    
     <?= $form->field($model, 'status')->radioList(Constants::getStatusItems()) ?>
-
-    <?= $form->field($model, 'role')->dropDownList(ArrayHelper::map(Role::buildOptions(), 'id', 'name','category')) ?>
   
 
     <?= $form->defaultButtons() ?>

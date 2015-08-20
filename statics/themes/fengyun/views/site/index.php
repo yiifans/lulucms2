@@ -13,12 +13,14 @@ use source\core\widgets\LoopData;
 $this->layout = 'main';
 $this->title='首页';
 
+$locals = DataSource::getPagedContents();
 ?>
 
 <?php 
-        $this->loopData($rows,'//_inc/content_default');
+
+        $this->loopData($locals['rows'],'//_inc/content_default');
         echo \statics\themes\fengyun\functions\LinkPager::widget([
-            'pagination' => $pager
+            'pagination' => $locals['pager']
         ]);
         ?>
         

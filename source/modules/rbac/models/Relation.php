@@ -3,6 +3,8 @@
 namespace source\modules\rbac\models;
 
 use Yii;
+use source\LuLu;
+use source\modules\rbac\RbacService;
 
 /**
  * This is the model class for table "lulu_auth_relation".
@@ -18,7 +20,7 @@ class Relation extends BaseRbacActiveRecord
      */
     public static function tableName()
     {
-        return 'lulu_auth_relation';
+        return '{{%auth_relation}}';
     }
 
     /**
@@ -48,6 +50,7 @@ class Relation extends BaseRbacActiveRecord
     public static function AddBatchItems($role, $permissions)
     {
         self::deleteAll(['role' => $role]);
+        LuLu::deleteCache(RbacService::CachePrefix.$role);
         
         foreach ($permissions as $key => $value)
         {

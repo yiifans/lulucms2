@@ -14,7 +14,6 @@ use source\helpers\ArrayHelper;
  * @property string $name
  * @property string $description
  * @property boolean $is_system
- * @property boolean $status
  
  */
 class Role extends BaseRbacActiveRecord
@@ -46,8 +45,8 @@ class Role extends BaseRbacActiveRecord
     public function rules()
     {
         return [
-            [['id', 'category', 'name', 'is_system', 'status'], 'required'],
-            [['is_system', 'status'], 'boolean'],
+            [['id', 'category', 'name', 'is_system'], 'required'],
+            [['is_system'], 'boolean'],
             [['description'], 'string', 'max'=>128],
             [['id', 'name', 'category'], 'string', 'max' => 64]
         ];
@@ -64,8 +63,6 @@ class Role extends BaseRbacActiveRecord
             'name' => '名称',
             'description' => '描述',
             'is_system' => '系统内置',
-            'status' => '状态',
-            
         ];
     }
     

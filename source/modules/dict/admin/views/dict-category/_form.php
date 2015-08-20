@@ -18,7 +18,7 @@ use source\core\widgets\ActiveForm;
     
         <?= $form->field($model, 'name')->textInput(['maxlength' => 64])?>
     
-        <?= $form->field($model, 'description')->textInput(['maxlength' => 512])?>
+        <?= $form->field($model, 'description')->textarea(['maxlength' => 512])?>
 
     <?= $form->defaultButtons() ?>
 <?php ActiveForm::end(); ?>

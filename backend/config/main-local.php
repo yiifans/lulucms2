@@ -19,6 +19,8 @@ if (!YII_ENV_TEST) {
         'class'=>'yii\gii\Module',
         'generators'=>[
             'lulumodule'=>'backend\gii\generators\lulumodule\Generator',
+            'lulumodel'=>'backend\gii\generators\lulumodel\Generator',
+            'lulucrud'=>'backend\gii\generators\lulucrud\Generator',
         ],
     ];
 }

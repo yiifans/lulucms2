@@ -29,7 +29,6 @@ if(empty($title))
     <link rel="stylesheet" href="<?php echo $this->getThemeUrl()?>/css/base1.css" />
     <link rel="stylesheet" href="<?php echo $this->getThemeUrl()?>/css/style.css" type="text/css" media="screen" />
     <link rel='stylesheet' id='themememe-icons-css' href='<?php echo $this->getThemeUrl()?>/css/fonts/font-awesome.min.css?ver=1419744126' type='text/css' media='all' />
-    <link rel='stylesheet' id='themememe-fonts-css' href='//fonts.useso.com/css?family=Raleway%3A400%2C500%2C700%2C900%7CNoto+Serif%3A400%2C700%2C400italic%2C700italic&#038;subset=latin%2Clatin-ext&#038;ver=1419744126' type='text/css' media='all' />
     
     <script type='text/javascript' src='<?php echo $this->getThemeUrl()?>/js/jquery.min.js?ver=1419744126'></script>
     <script type='text/javascript' src='<?php echo $this->getThemeUrl()?>/js/jquery-migrate.min.js?ver=1419744126'></script>
@@ -58,6 +57,7 @@ if(empty($title))
                 <div class="clearfix menu-bar">
                     <ul id="menu-main" class="menu">
                         <?php $this->renderMenu('main');?>
+                        <li id="menu-item-yiifans" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-yiifans"><a href="http://www.yiifans.com" target="_blank">Yii2 交流社区</a></li>
                     </ul>
                 </div>
                 <!-- .site-menu -->
@@ -67,7 +67,7 @@ if(empty($title))
                 <div class="search-toggle"><i class="fa fa-search"></i></div>
                 <div class="search-expand">
                     <div class="search-expand-inner">
-                        <script type="text/javascript">document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E%3Cscript charset="utf-8" src="http://rp.baidu.com/rp3w/3w.js?sid=9711837401499785203') + '&t=' + (Math.ceil(new Date() / 3600000)) + unescape('"%3E%3C/script%3E'));</script>
+                        
                     </div>
                 </div>
                 <!-- .site-search -->

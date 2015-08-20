@@ -23,7 +23,7 @@ $this->addBreadcrumbs([
         'columns' => [
           
             [
-              'class'=>'source\core\grid\IdColumn',
+              'class'=>'source\core\grid\TextIdColumn',
             ],
             [
     			'attribute'=>'name',

@@ -10,15 +10,16 @@ use source\core\widgets\LoopData;
 
 /* @var $this source\core\front\FrontView */
 $this->title='首页';
+$locals = DataSource::getPagedContents();
 
 ?>
 
 <div class="content-wrap">
 	<div class="content">
         <?php 
-        $this->loopData($rows,'//_inc/content_default');
+        $this->loopData($locals['rows'],'//_inc/content_default');
         echo \statics\themes\bifenxiang\functions\LinkPager::widget([
-            'pagination' => $pager
+            'pagination' => $locals['pager']
         ]);
         ?>
     </div>

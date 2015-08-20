@@ -16,9 +16,9 @@ use source\helpers\StringHelper;
 class ContentBody extends \source\core\base\BaseActiveRecord
 {
     
-    public function getTakonomy()
+    public function getTaxonomy()
     {
-        return $this->hasOne(Takonomy::className(), ['id'=>'takonomy_id']);
+        return $this->hasOne(Taxonomy::className(), ['id'=>'taxonomy_id']);
     }
 
     public function getHead()

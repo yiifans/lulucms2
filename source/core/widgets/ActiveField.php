@@ -54,30 +54,9 @@ class ActiveField extends \yii\widgets\ActiveField implements IBaseWidget
     public function checkbox($options = [], $enclosedByLabel = true)
     {
         $options = array_merge($this->inputOptions, $options);
-        if ($enclosedByLabel)
-        {
-            $this->parts['{input}'] = Html::activeCheckbox($this->model, $this->attribute, $options);
-            $this->parts['{label}'] = '';
-        }
-        else
-        {
-            if (isset($options['label']) && ! isset($this->parts['{label}']))
-            {
-                $this->parts['{label}'] = $options['label'];
-                if (! empty($options['labelOptions']))
-                {
-                    $this->labelOptions = $options['labelOptions'];
-                }
-            }
-            unset($options['labelOptions']);
-            $options['label'] = null;
-            $this->parts['{input}'] = Html::activeCheckbox($this->model, $this->attribute, $options);
-        }
-        $this->adjustLabelFor($options);
-        
-        return $this;
+        return parent::checkbox($options, $enclosedByLabel);
     }
-
+   
     public function dropDownList($items, $options = [], $generateDefault = true)
     {
         if ($generateDefault === true && ! isset($options['prompt']))
@@ -86,4 +65,89 @@ class ActiveField extends \yii\widgets\ActiveField implements IBaseWidget
         }
         return parent::dropDownList($items, $options);
     }
+
+    public function reayOnly($value = null, $options = [])
+    {
+        $options = array_merge($this->inputOptions, $options);
+        
+        $this->adjustLabelFor($options);
+        $value = $value === null ? Html::getAttributeValue($this->model, $this->attribute) : $value;
+        $options['class']='da-style';
+        $options['style']='display: inline-block;';
+        $this->parts['{input}'] = Html::activeHiddenInput($this->model, $this->attribute) . Html::tag('span', $value, $options);
+    
+        return $this;
+    }
+   
+    public function radioList($items,$options=[])
+    { 
+        $options['tag']='ul';
+        
+        $inputId = Html::getInputId($this->model, $this->attribute);
+        $this->selectors=['input'=>"#$inputId input"];
+        
+        $options['class']='da-form-list inline';
+        $encode = !isset($options['encode']) || $options['encode'];
+        $itemOptions = isset($options['itemOptions']) ? $options['itemOptions'] : [];
+        
+        $options['item'] = function($index, $label, $name, $checked, $value)
+        use($encode, $itemOptions)
+        {
+            $radio = Html::radio($name, $checked, array_merge($itemOptions, [
+                'value' => $value,
+                'label' => $encode ? Html::encode($label) : $label,
+            ]));
+            
+            return '<li>'.$radio.'</li>';
+        };
+        return parent::radioList($items, $options);
+    }
+    
+    public function checkboxList($items,$options=[])
+    {
+        
+        $options['tag']='ul';
+        
+        $inputId = Html::getInputId($this->model, $this->attribute);
+        $this->selectors=['input'=>"#$inputId input"];
+        
+        $options['class']='da-form-list inline';
+        $encode = !isset($options['encode']) || $options['encode'];
+        $itemOptions = isset($options['itemOptions']) ? $options['itemOptions'] : [];
+    
+        $options['item'] = function($index, $label, $name, $checked, $value)
+        use($encode, $itemOptions)
+        {
+            $checkbox = Html::checkbox($name, $checked, array_merge($itemOptions, [
+                'value' => $value,
+                'label' => $encode ? Html::encode($label) : $label,
+            ]));
+    
+            return '<li>'.$checkbox.'</li>';
+        };
+        return parent::checkboxList($items, $options);
+    }
+    
+    public function textarea($options = [])
+    {
+        if(!isset($options['rows']))
+        {
+            $options['rows'] = 5;
+        }
+        return parent::textarea($options);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

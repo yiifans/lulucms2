@@ -11,7 +11,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use frontend\controllers\ContentController;
 use source\LuLu;
-use source\models\Takonomy;
+use source\models\Taxonomy;
 
 
 class DefaultController extends BaseController
@@ -19,25 +19,25 @@ class DefaultController extends BaseController
    
     public function actionIndex()
     {
-    	$takonomy=LuLu::getGetValue('takonomy');
+    	$taxonomy=LuLu::getGetValue('taxonomy');
     	
     	$query = Content::find();
     	
     	$query->where(['content_type'=>$this->content_type]);
-    	$query->andFilterWhere(['takonomy_id'=>$takonomy]);
+    	$query->andFilterWhere(['taxonomy_id'=>$taxonomy]);
     	
     	
-    	if($takonomy===null)
+    	if($taxonomy===null)
     	{
-    		$takonomyModel=Takonomy::findOne(['id'=>$takonomy]);
+    		$taxonomyModel=Taxonomy::findOne(['id'=>$taxonomy]);
     	}
     	else 
     	{
-    		$takonomyModel=['id'=>null,'name'=>'所有'];
+    		$taxonomyModel=['id'=>null,'name'=>'所有'];
     	}
     	
     	$locals = LuLu::getPagedRows($query,['orderBy'=>'created_at desc','pageSize'=>10]);
-    	$locals['takonomyModel']=$takonomyModel;
+    	$locals['taxonomyModel']=$taxonomyModel;
     	
     	return $this->render('index', $locals);
     }

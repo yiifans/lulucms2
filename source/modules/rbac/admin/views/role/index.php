@@ -24,7 +24,7 @@ $columns =  [
             ],
             [
                 'attribute'=>'name',
-                'width'=>'120px;'
+                'width'=>'250px;'
             ],    
            
             [
@@ -32,8 +32,10 @@ $columns =  [
                 'width'=>'auto'
             ],
 
-            ['class' => 'source\core\grid\ActionColumn',
+            [
+                'class' => 'source\core\grid\ActionColumn',
 				'template'=>'{permission}{update} {delete}',
+                'width'=>'60px',
 				'buttons' =>['permission'=>function ($url,$model) {
 				    return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/key.png">', Url::to(['relation','role'=>$model['id']]), [
 				        'title' => '设置权限',

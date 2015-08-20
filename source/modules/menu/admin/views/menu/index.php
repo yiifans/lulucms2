@@ -45,9 +45,13 @@ $this->addBreadcrumbs([
 			], 
 			[
 			'attribute'=>'url',
-			'width'=>'500px',
+			'width'=>'250px',
 			],
-			'targetText',
+			[
+			    'class' => 'source\core\grid\CenterColumn',
+			    'attribute'=>'targetText',
+			    'width'=>'50px',
+			],
             [
               'class'=>'source\core\grid\SortColumn',
             ],

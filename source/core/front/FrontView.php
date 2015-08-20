@@ -14,6 +14,7 @@ use source\core\base\BaseView;
 use yii\base\Theme;
 use source\LuLu;
 use source\libs\Resource;
+use source\libs\DataSource;
 
 class FrontView extends BaseView
 {
@@ -49,5 +50,10 @@ class FrontView extends BaseView
     public function renderMenu($category='main',$parentId=0)
     {
         echo \source\models\Menu::getMenuHtml($category, 0);
+    }
+    
+    public function getFragmentData($fid,$other=[])
+    {
+        return DataSource::getFragmentData($fid,$other);
     }
 }

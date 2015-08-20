@@ -3,7 +3,7 @@ namespace source\modules\post\home\controllers;
 
 use source\models\Content;
 use source\LuLu;
-use source\models\Takonomy;
+use source\models\Taxonomy;
 use source\modules\post\models\ContentPost;
 use frontend\controllers\BaseContentController;
 

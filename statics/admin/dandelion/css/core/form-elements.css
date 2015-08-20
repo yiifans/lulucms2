@@ -31,7 +31,8 @@ form.da-form input[type="text"],
 form.da-form input[type="password"], 
 form.da-form select, 
 form.da-form textarea, 
-form.da-form .customfile
+form.da-form .customfile,
+form.da-form .da-style
 {
 	background-color:#fcfcfc;
 	border:1px solid #d1d1d1;
@@ -99,53 +100,45 @@ form.da-form textarea
 /* (2) Customfile
 ================================================== */
 
-.customfile-input
-{
-	position: absolute;
-	height: 100px;
-	cursor:pointer;
-	background: transparent;
-	border: 0;
-	opacity: 0;
-	-moz-opacity: 0;
-	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
-	z-index: 999999;
-}
-
 form.da-form .customfile
 {
+	padding:0px;
 	position:relative;
 	overflow:hidden; 
 }
 
-.customfile-disabled
+form.da-form .customfile .customfile-feedback
 {
-	opacity: .5;
-	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);
-	cursor: default;
-}
-
-.customfile-feedback
-{
+	/*width:80%;*/
+	border:none;
 	line-height:15px;
-	display:block;
+	padding-right: 70px;
+	/*display:block;*/
 	overflow:hidden;
 	white-space:nowrap;
 	text-overflow:ellipsis;
 }
 
+.customfile-button,.customfile-input
+{
+	position: absolute;
+	right:0px;
+	top:0px;
+}
 .customfile-button
 {
-	outline:none;
-	float:right;
+	
+	/*outline:none;
+	float:right;*/
+	
 	line-height:15px;
 	padding:6px 10px;
-	margin:-7px -7px -7px 0;
+	/*margin:-7px -7px -7px 0;*/
 	cursor:pointer;
 	z-index:9999;
 	
 	background:#f3f3f3 url(../../images/button-gradient.png) repeat-x left bottom;
-	border:1px solid #d1d1d1;
+	border-left:1px solid #d1d1d1;
 	
 	-webkit-border-radius:0 2px 2px 0;
 	-o-border-radius:0 2px 2px 0;
@@ -157,7 +150,25 @@ form.da-form .customfile
 	-moz-box-shadow:inset 0 1px 1px rgba(255, 255, 255, 0.6);
 	box-shadow:inset 0 1px 1px rgba(255, 255, 255, 0.6);
 }
+.customfile-input
+{
+	width:65px;
+	height: 30px;
+	cursor:pointer;
+	background: transparent;
+	border: 0;
+	opacity: 0;
+	-moz-opacity: 0;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+	z-index: 999999;
+}
 
+.customfile-disabled
+{
+	opacity: .5;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+	cursor: default;
+}
 .customfile:not(.customfile-disabled):active .customfile-button
 {
 	background-image:none;

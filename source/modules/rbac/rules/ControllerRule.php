@@ -7,13 +7,7 @@ use source\LuLu;
 class ControllerRule extends Rule
 {
 
-    
-    // $role = $permission['role'];
-    // $permission = $permission['permission'];
-    // $value = $permission['value'];
-    // $rule = $permission['rule'];
-    // $form = $permission['form'];
-    public function execute($role, $permission, $params = [])
+    public function execute($permission, $params = [], $role = null)
     {
         $actionId = isset($params['actionId']) ? $params['actionId'] : LuLu::getApp()->requestedAction->id;
         
@@ -24,8 +18,8 @@ class ControllerRule extends Rule
         }
         
         $method = LuLu::getApp()->request->method;
-        $method=strtolower($method);
-        if (in_array($actionId.':'.$method, $actions))
+        $method = strtolower($method);
+        if (in_array($actionId . ':' . $method, $actions))
         {
             return true;
         }

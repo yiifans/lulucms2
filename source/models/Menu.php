@@ -8,6 +8,7 @@ use source\libs\Constants;
 use source\libs\Resource;
 use yii\helpers\Url;
 use source\LuLu;
+use source\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "lulu_menu".
@@ -25,6 +26,15 @@ use source\LuLu;
  */
 class Menu extends \source\core\base\BaseActiveRecord
 {
+    const CachePrefix = 'menu_';
+    
+    public function behaviors()
+    {
+        return [
+            'treeBehavior'=>['class'=>'source\core\behaviors\TreeBehavior']
+        ];
+    }
+        
     public function init()
     {
         $this->target=Constants::Target_Self;
@@ -38,7 +48,7 @@ class Menu extends \source\core\base\BaseActiveRecord
      */
     public static function tableName()
     {
-        return 'lulu_menu';
+        return '{{%menu}}';
     }
 
     /**
@@ -54,12 +64,9 @@ class Menu extends \source\core\base\BaseActiveRecord
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
+    public static function getAttributeLabels($attribute = null)
     {
-        return [
+        $items = [
             'id' => 'ID',
             'parent_id' => '父结点',
             'category_id' => '分类',
@@ -73,86 +80,117 @@ class Menu extends \source\core\base\BaseActiveRecord
             'statusText' => '状态',
             'sort_num' => '排序',
         ];
+        return ArrayHelper::getItems($items, $attribute);
     }
     
-    public function getStatusText()
-    {
-        return Constants::getStatusItems($this->status);
-    }
+    
+
     public function getTargetText()
     {
         return Constants::getTargetItems($this->target);
     }
     
-    private $_level;
-    public function getLevel()
-    {
-        return $this->_level;
-    }
-    public function setLevel($value)
-    {
-        $this->_level = $value;
-    }
     
-    public function getLevelName()
+    private static function getArrayTreeInternal($category, $parentId = 0, $level = 0)
     {
-        return str_repeat(Constants::TabSize, $this->level).$this->name;
-    }
+        $children = self::findAll(['category_id'=>$category,'parent_id'=>$parentId],'sort_num asc');
     
-    private $_parentIds;
-    public function getParentIds()
-    {
-        if($this->_parentIds===null)
+        $items =[];
+        foreach ($children as $child)
         {
-            $this->_parentIds=TreeHelper::getParentIds(Menu::className(), $this->parent_id);
+            $child->level=$level;
+            $items[$child['id']]=$child;
+            $temp = self::getArrayTreeInternal($category,$child->id, $level + 1);
+            $items = array_merge($items, $temp);
         }
-        return $this->_parentIds;
-    }
     
-    private $_childrenIds;
-    public function getChildrenIds()
-    {
-        if($this->_childrenIds===null)
-        {
-            $this->_childrenIds= TreeHelper::getChildrenIds(Menu::className(), $this->id);
-        }
-        return $this->_childrenIds;
-    }
-    
-    public static function getChildren($category,$parentId,$status=null)
-    {
-        $where = ['category_id'=>$category,'parent_id'=>$parentId];
-        if($status!=null)
-        {
-            $where['status']=$status;
-        }
-        $items = self::findAll($where,'sort_num asc');
         return $items;
     }
     
-    public static function getArrayTree($category,$status=null)
+    public static function getMenusByCategory($category,$fromCache = true)
     {
-        return self::getArrayTreeInternal($category,0,0);
-    }
-    private static function getArrayTreeInternal($category, $parentId = 0, $level = 0,$status=null)
-    {
-    	$items = self::getChildren($category,$parentId,$status);
-    	 
-    	$dataList=[];
-    	foreach ($items as $item)
-    	{
-    		$item->level=$level;
-    		$dataList[$item['id']]=$item;
-    		$temp = self::getArrayTreeInternal($category,$item->id, $level + 1,$status);
-    		$dataList = array_merge($dataList, $temp);
-    	}
-    	 
-    	return $dataList;
+        $cachekey = self::CachePrefix.$category;
+        
+        $values = $fromCache? LuLu::getCache($cachekey) : false;
+        
+        if($values===false)
+        {
+            $values = self::getArrayTreeInternal($category,0,0);
+            LuLu::setCache($cachekey, $values);
+        }
+        return $values;
     }
     
+    public static function clearCachedMenus($category)
+    {
+        $cachekey = self::CachePrefix.$category;
+        LuLu::deleteCache($cachekey);
+    }
+
+//     public static function getMenusWidthStatus($category,$status=false,$fromCache = true)
+//     {
+//         $menus = self::getMenusByCategory($category,$fromCache);
+//         if($status==false)
+//         {
+//             return $menus;
+//         }
+        
+//         $rets = [];
+        
+//         $disabledMenu = false;
+        
+//         foreach ($menus as $menu)
+//         {
+//             if($disabledMenu!==false)
+//             {
+//                 if($menu->level > $disabledMenu->level)
+//                 {
+//                     continue;
+//                 }
+//                 else
+//                 {
+//                     $disabledMenu = false;
+//                 }
+//             }
+            
+//             if($menu->status)
+//             {
+//                 $rets[]=$menu;
+//             }
+//             else 
+//             {
+//                 $disabledMenu = $menu;
+//             }
+//         }
+//         return $rets;
+//     }
+
     
     
-   
+
+    public static function getChildren($category,$parentId,$status=null)
+    {
+        $items = [];
+        $menus = self::getMenusByCategory($category);
+        foreach ($menus as $menu)
+        {
+            if($menu->parent_id == $parentId)
+            {
+                if($status && $menu->status!==1)
+                {
+                    continue;
+                }
+                $items[]=$menu;
+            }
+        }
+        return $items;
+    }
+    
+    public static function getArrayTree($category)
+    {
+        return self::getMenusByCategory($category);
+    }
+    
     public static function getMenuHtml($category,$parentId)
     {
         $items = self::getChildren($category,$parentId,1);
@@ -226,12 +264,15 @@ class Menu extends \source\core\base\BaseActiveRecord
         return $html;
     }
     
-
-    
     public function beforeDelete()
     {
         $childrenIds = $this->getChildrenIds();
         self::deleteAll(['id'=>$childrenIds]);
         return true;
+    }
+    
+    public function clearCache()
+    {
+        self::clearCachedMenus($this->category_id);
     }
 }

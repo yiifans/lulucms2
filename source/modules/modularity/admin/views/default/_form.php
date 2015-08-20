@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 use source\core\widgets\ActiveForm;
 use source\models\Content;
-use source\models\Takonomy;
+use source\models\Taxonomy;
 use source\libs\Common;
 
 /* @var $this yii\web\View */
@@ -17,9 +17,9 @@ $filedOptions = [
 ]
 ;
 
-$takonomies = Takonomy::getArrayTree('post');
+$taxonomies = Taxonomy::getArrayTree('post');
 
-$options = Common::buildTreeOptions($takonomies, $model->takonomy_id);
+$options = Common::buildTreeOptions($taxonomies, $model->taxonomy_id);
 
 ?>
 
@@ -76,7 +76,7 @@ $form = ActiveForm::begin([
 		    <?= $form->field($model, 'is_sticky')->checkbox([],false)?>
 		   
 	
-	        <?= $form->field($model, 'takonomy_id')->dropDownList($options,['prompt'=>'请选择'])?>
+	        <?= $form->field($model, 'taxonomy_id')->dropDownList($options,['prompt'=>'请选择'])?>
 	
 		    <?= $form->field($model, 'template')->textInput(['maxlength' => 64])?>
 		     <?= $form->field($model, 'comment_count')->textInput()?>

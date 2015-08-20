@@ -4,15 +4,15 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\TakonomyContent */
+/* @var $model app\models\TaxonomyContent */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="takonomy-content-form">
+<div class="taxonomy-content-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'takonomy_id')->textInput() ?>
+    <?= $form->field($model, 'taxonomy_id')->textInput() ?>
 
     <?= $form->field($model, 'content_id')->textInput() ?>
 

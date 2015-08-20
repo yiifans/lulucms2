@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Takonomy */
+/* @var $model app\models\Taxonomy */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="takonomy-form">
+<div class="taxonomy-form">
 
     <?php $form = ActiveForm::begin(); ?>
 

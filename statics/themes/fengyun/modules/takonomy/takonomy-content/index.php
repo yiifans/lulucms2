@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\search\TakonomyContentSearch */
+/* @var $searchModel app\models\search\TaxonomyContentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Takonomy Contents';
+$this->title = 'Taxonomy Contents';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="takonomy-content-index">
+<div class="taxonomy-content-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Takonomy Content', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Taxonomy Content', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'takonomy_id',
+            'taxonomy_id',
             'content_id',
 
             ['class' => 'yii\grid\ActionColumn'],

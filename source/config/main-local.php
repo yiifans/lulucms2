@@ -7,7 +7,9 @@ return [
             'username' => 'root',
             'password' => '',
             'charset' => 'utf8',
-			'tablePrefix' => 'lulu_'
+			'tablePrefix' => 'lulu_',
+            'enableSchemaCache' => true,
+            'schemaCache' => 'schemaCache',
         ],
 
     ],

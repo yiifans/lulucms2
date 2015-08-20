@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use source\core\grid\GridView;
 use source\LuLu;
 use source\models\Content;
+use source\libs\Constants;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\ContentSearch */
@@ -45,7 +46,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'comment_count',
             'view_count',
             [
-              'class'=>'source\core\grid\StatusColumn',
+                'attribute'=>'status',
+                'width'=>'25px',
+                'content'=>function($model,$key,$index,$gridView){
+                    return Constants::getStatusItemsForContent($model->status);
+                },
             ],
             // 'diggs',
             // 'burys',

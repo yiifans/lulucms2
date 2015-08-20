@@ -13,12 +13,13 @@ use source\libs\Common;
 use yii\helpers\Url;
 use source\libs\Constants;
 use yii\helpers\Html;
+use source\LuLu;
 
 /**
  * This is the model class for table "lulu_content".
  *
  * @property integer $id
- * @property integer $takonomy_id
+ * @property integer $taxonomy_id
  * 
  * @property integer $user_id
  * @property string $user_name
@@ -42,7 +43,8 @@ use yii\helpers\Html;
  * 
  * @property integer $allow_comment
  * @property string $password
- * @property string $template
+ * @property string $view
+ * @property string $layout
  * 
  * @property integer $sort_num
  * @property integer $visibility
@@ -92,9 +94,9 @@ class Content extends \source\core\base\BaseActiveRecord
         return parent::beforeSave($insert);
     }
     
-    public function getTakonomy()
+    public function getTaxonomy()
     {
-        return $this->hasOne(Takonomy::className(), ['id'=>'takonomy_id']);
+        return $this->hasOne(LuLu::getService('taxonomy')->getClass("Taxonomy"), ['id'=>'taxonomy_id']);
     }
 
    
@@ -168,9 +170,9 @@ class Content extends \source\core\base\BaseActiveRecord
     public function rules()
     {
         return [
-            [['takonomy_id', 'user_id', 'last_user_id', 'created_at', 'updated_at', 'focus_count', 'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count', 'sticky', 'recommend', 'headline', 'flag', 'allow_comment', 'sort_num', 'visibility', 'status'], 'integer'],
+            [['taxonomy_id', 'user_id', 'last_user_id', 'created_at', 'updated_at', 'focus_count', 'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count', 'sticky', 'recommend', 'headline', 'flag', 'allow_comment', 'sort_num', 'visibility', 'status'], 'integer'],
             [['content_type', 'title'], 'required'],
-            [['user_name', 'last_user_name', 'password', 'template', 'content_type'], 'string', 'max' => 64],
+            [['user_name', 'last_user_name', 'password', 'view', 'layout', 'content_type'], 'string', 'max' => 64],
             [['seo_title', 'seo_keywords', 'seo_description', 'title','sub_title', 'url_alias','redirect_url', 'thumb'], 'string', 'max' => 256],
             [['summary'], 'string', 'max' => 512],
             [['thumbs'], 'string', 'max' => 1024]
@@ -184,7 +186,7 @@ class Content extends \source\core\base\BaseActiveRecord
     {
         return [
             'id' => 'ID',
-            'takonomy_id' => '分类',
+            'taxonomy_id' => '分类',
             'user_id' => '用户ID',
             'user_name' => '用户名',
             'userText'=>'用户名',
@@ -204,7 +206,8 @@ class Content extends \source\core\base\BaseActiveRecord
             'flag' => '标签',
             'allow_comment' => '允许评论',
             'password' => '密码',
-            'template' => '模板',
+            'view' => '视图(view)',
+            'layout' => '布局(layout)',
             'sort_num' => '排序',
             'visibility' => '可见',
             'status' => '状态',

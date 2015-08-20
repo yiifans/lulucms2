@@ -3,6 +3,8 @@
 namespace source\models;
 
 use Yii;
+use source\LuLu;
+use source\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%config}}".
@@ -12,6 +14,8 @@ use Yii;
  */
 class Config extends \source\core\base\BaseActiveRecord
 {
+    const CachePrefix='config_';
+    
     /**
      * @inheritdoc
      */
@@ -32,14 +36,50 @@ class Config extends \source\core\base\BaseActiveRecord
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
+    public static function getAttributeLabels($attribute = null)
     {
-        return [
+        $items = [
             'id' => '名称', 
             'value' => '值'
         ];
+        return ArrayHelper::getItems($items, $attribute);
+    }
+    
+    public static function getModel($id,$fromCache=true)
+    {
+        $cacheKey = self::CachePrefix.$id;
+        
+        $value = $fromCache? LuLu::getCache($cacheKey) : false;
+        
+        if($value===false)
+        {
+            $value = Config::findOne(['id'=>$id]);
+            if($value !== null)
+            {
+                LuLu::setCache($cacheKey, $value);
+            }
+        }
+        return $value;
+    }
+    
+    public static function getValue($id,$fromCache=true)
+    {
+        $value = self::getModel($id, $fromCache);
+        if($value===null)
+        {
+            return '不存在配置项：'.$id;
+        }
+        return $value->value;
+    }
+    
+    public static function clearCachedConfig($id)
+    {
+        $cacheKey = self::CachePrefix.$id;
+        LuLu::deleteCache($cacheKey);
+    }
+    
+    public function clearCache()
+    {
+        self::clearCachedConfig($this->id);
     }
 }

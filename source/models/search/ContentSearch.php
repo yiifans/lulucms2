@@ -18,8 +18,8 @@ class ContentSearch extends Content
     public function rules()
     {
         return [
-            [['id', 'takonomy_id', 'user_id', 'last_user_id', 'created_at', 'updated_at', 'focus_count', 'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count', 'sticky', 'recommend', 'headline', 'flag', 'allow_comment', 'sort_num', 'visibility', 'status'], 'integer'],
-            [['user_name', 'last_user_name', 'password', 'template', 'content_type', 'seo_title', 'seo_keywords', 'seo_description', 'title', 'summary', 'thumb', 'url_alias'], 'safe'],
+            [['id', 'taxonomy_id', 'user_id', 'last_user_id', 'created_at', 'updated_at', 'focus_count', 'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count', 'sticky', 'recommend', 'headline', 'flag', 'allow_comment', 'sort_num', 'visibility', 'status'], 'integer'],
+            [['user_name', 'last_user_name', 'password', 'view', 'layout', 'content_type', 'seo_title', 'seo_keywords', 'seo_description', 'title', 'summary', 'thumb', 'url_alias'], 'safe'],
         ];
     }
 
@@ -57,7 +57,7 @@ class ContentSearch extends Content
 
         $query->andFilterWhere([
 //             'id' => $this->id,
-//             'takonomy_id' => $this->takonomy_id,
+//             'taxonomy_id' => $this->taxonomy_id,
 //             'user_id' => $this->user_id,
 //             'last_user_id' => $this->last_user_id,
 //             'created_at' => $this->created_at,
@@ -81,7 +81,7 @@ class ContentSearch extends Content
         $query->andFilterWhere(['like', 'user_name', $this->user_name])
             ->andFilterWhere(['like', 'last_user_name', $this->last_user_name])
             ->andFilterWhere(['like', 'password', $this->password])
-            ->andFilterWhere(['like', 'template', $this->template])
+            //->andFilterWhere(['like', 'template', $this->template])
             ->andFilterWhere(['like', 'content_type', $this->content_type])
             ->andFilterWhere(['like', 'seo_title', $this->seo_title])
             ->andFilterWhere(['like', 'seo_keywords', $this->seo_keywords])

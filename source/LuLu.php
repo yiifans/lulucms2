@@ -177,6 +177,27 @@ class LuLu extends \Yii
         parent::info($dump, $category);
     }
 
+    public static function getCache($key)
+    {
+        $cache = LuLu::$app->cache;
+        return $cache->get($key);
+    }
+    public static function setCache($key, $value, $duration = 0, $dependency = null)
+    {
+        $cache = LuLu::$app->cache;
+        return $cache->set($key, $value,$duration,$dependency);
+    }
+    public static function deleteCache($key)
+    {
+        $cache = LuLu::$app->cache;
+        $cache->delete($key);
+    }
+    public static function flushCache()
+    {
+        $cache = LuLu::$app->cache;
+        $cache->flush();
+    }
+    
     public static function getUser()
     {
         $app = self::getApp();

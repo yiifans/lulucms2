@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\TakonomyContent */
+/* @var $model app\models\TaxonomyContent */
 
-$this->title = 'Create Takonomy Content';
-$this->params['breadcrumbs'][] = ['label' => 'Takonomy Contents', 'url' => ['index']];
+$this->title = 'Create Taxonomy Content';
+$this->params['breadcrumbs'][] = ['label' => 'Taxonomy Contents', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="takonomy-content-create">
+<div class="taxonomy-content-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

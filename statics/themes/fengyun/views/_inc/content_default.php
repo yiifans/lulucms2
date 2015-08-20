@@ -50,10 +50,10 @@ use source\helpers\StringHelper;
 
         <!-- .entry-content -->
         <footer class="entry-meta entry-footer">
-            <?php if(isset($row->takonomy)):?>
+            <?php if(isset($row->taxonomy)):?>
             <span class="cat-links">
                 <i class="fa fa-folder-open"></i>
-                <a href="<?php echo Url::to(['/'.$row['content_type'].'/default/list','takonomy'=>$row->takonomy['id']])?>" rel="category tag"><?php echo $row->takonomy->name; ?></a>			</span>
+                <a href="<?php echo Url::to(['/'.$row['content_type'].'/default/list','taxonomy'=>$row->taxonomy['id']])?>" rel="category tag"><?php echo $row->taxonomy->name; ?></a>			</span>
             <?php endif;?>
 
 

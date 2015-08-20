@@ -16,15 +16,17 @@ class KindEditor extends BaseWidget
     public $inputId = null;
 
     public $editorId = null;
+    public $width = '100%';
 
     public $defaultParams = [
-        'allowFileManager' => 'true'
+        'allowFileManager' => 'true',
     ];
 
     public function init()
     {
         parent::init();
         $this->libUrl = Resource::getCommonUrl() . '/libs/kindeditor';
+        $this->defaultParams['width']='"'.$this->width.'"';
     }
 
     public function run()

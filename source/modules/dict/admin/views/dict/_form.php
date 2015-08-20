@@ -38,15 +38,13 @@ $options = TreeHelper::buildTreeOptionsForSelf($categories, $model);
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => 64]) ?>
 
-    <?= $form->field($model, 'value')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'description')->textInput(['maxlength' => 512]) ?>
+    <?= $form->field($model, 'value')->textarea() ?>
 
     <?= $form->field($model, 'thumb')->textInput(['maxlength' => 512]) ?>
-
-    <?= $form->field($model, 'status')->radioList(Constants::getStatusItems()) ?>
+    <?= $form->field($model, 'description')->textarea(['maxlength' => 512]) ?>    
 
     <?= $form->field($model, 'sort_num')->textInput() ?>
+    <?= $form->field($model, 'status')->radioList(Constants::getStatusItems()) ?>
 
     <?= $form->defaultButtons() ?>
 

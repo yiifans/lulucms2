@@ -15,15 +15,15 @@ $this->addBreadcrumbs([
 		'基本设置'
 		]);
 		
-		$categories = Common::getTakonomyCategories();
+		$categories = Common::getTaxonomyCategories();
 ?>
     
 
                 
-                <?php $form = ActiveForm::begin(); ?>
-               
-                    <?= $form->field($model, 'post_takonomy')->dropDownList(ArrayHelper::map($categories, 'id', 'name')) ?>
-                   
-                    <?= $form->defaultButtons() ?>
-                <?php ActiveForm::end(); ?>
+<?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'post_taxonomy')->dropDownList(ArrayHelper::map($categories, 'id', 'name')) ?>
+   
+    <?= $form->defaultButtons() ?>
+<?php ActiveForm::end(); ?>
            

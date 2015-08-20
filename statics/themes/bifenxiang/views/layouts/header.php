@@ -42,7 +42,7 @@ if(empty($title))
         <div id="nav-header" class="navbar">
             <ul class="nav">
             	<?php echo $this->renderMenu();?>
-            	<li id="menu-item-yiifans" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-yiifans"><a href="http://www.yiifans.com" target="_blank">Yii交流社区</a></li>
+            	<li id="menu-item-yiifans" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-yiifans"><a href="http://www.yiifans.com" target="_blank">Yii2 交流社区</a></li>
             </ul>
         </div>
     </header>

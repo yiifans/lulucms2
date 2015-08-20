@@ -4,7 +4,7 @@ namespace source\core\grid;
 class IdColumn extends DataColumn
 {
     public $attribute='id';
-    public $headerOptions=['width'=>'60px'];
+    public $headerOptions=['width'=>'25px'];
 
     public function init()
     {

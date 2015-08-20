@@ -2,7 +2,7 @@
 namespace source\modules\page\home\controllers;
 
 use source\LuLu;
-use source\models\Takonomy;
+use source\models\Taxonomy;
 use source\models\Content;
 use source\modules\page\models\ContentPage;
 use frontend\controllers\BaseContentController;

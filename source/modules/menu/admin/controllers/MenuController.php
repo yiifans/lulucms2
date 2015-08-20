@@ -25,13 +25,13 @@ class MenuController extends BackController
     public function actionIndex($category)
     {
         $dataProvider = new ArrayDataProvider([
+            'allModels'=>Menu::getArrayTree($category),
+            'key'=>'id',
             'pagination' => [
                 'pageSize' => -1,
             ],
         ]);
-        $dataProvider->allModels=Menu::getArrayTree($category);
-        $dataProvider->key='id';
-        
+      
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);

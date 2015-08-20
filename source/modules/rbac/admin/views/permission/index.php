@@ -22,7 +22,7 @@ $columns =  [
     ],
     [
         'attribute'=>'name',
-        'width'=>'auto',
+        'width'=>'250px',
     ],
     [
         'attribute'=>'description',

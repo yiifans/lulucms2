@@ -18,13 +18,7 @@ class SiteController extends FrontController
 {
     public function actionIndex()
     {
-        $query = Content::leftJoinWith('takonomy');
-        $locals = LuLu::getPagedRows($query, [
-            'orderBy' => 'created_at desc', 
-            'pageSize' => 6
-        ]);
-       
-        return $this->render('index', $locals);
+        return $this->render('index', []);
     }
 
     public function actionLogin()

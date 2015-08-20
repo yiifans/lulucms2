@@ -20,11 +20,8 @@ use source\modules\rbac\models\Role;
 
     <?= $form->field($model, 'name')->textInput() ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 5]) ?>
+    <?= $form->field($model, 'description')->textarea() ?>
 
-    <?php if(!$model->is_system):?>
-    <?= $form->field($model, 'status')->radioList(Constants::getStatusItems()) ?>
-    <?php endif;?>
     <?= $form->defaultButtons() ?>
 
     <?php ActiveForm::end(); ?>

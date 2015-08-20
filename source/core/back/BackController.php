@@ -10,6 +10,10 @@ class BackController extends BaseController
 {
     public function beforeAction($action)
     {
+        if(!parent::beforeAction($action))
+        {
+            return false;
+        }
         if (in_array($action->id, ['login','captcha']))
         {
             return parent::beforeAction($action);
@@ -21,15 +25,17 @@ class BackController extends BaseController
             exit('<script>top.location.href="'.$url.'"</script>');
         }
         
-        if (! $this->rbacService->checkPermission(null, 'manager_admin'))
+        if (! $this->rbacService->checkPermission('manager_admin'))
         {
             return $this->showMessage();
         }
         
-        if(!in_array($action->id, ['logout','error','welcome' ]) 
-            &&! $this->rbacService->checkPermission())
+        if(!in_array($action->id, ['logout','error','welcome' ]))
         {
-            return $this->showMessage();
+            if(! $this->rbacService->checkPermission())
+            {
+                return $this->showMessage();
+            }
         }
         
         return parent::beforeAction($action);

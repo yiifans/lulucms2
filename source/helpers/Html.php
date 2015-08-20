@@ -2,9 +2,8 @@
 namespace yii\helpers;
 
 use components\LuLu;
-use yii\helpers\BaseHtml;
 
-class Html extends BaseHtml
+class Html extends \yii\helpers\BaseHtml
 {
     public static function encode($content, $doubleEncode = true)
     {
@@ -24,5 +23,13 @@ class Html extends BaseHtml
     public static function decode($content)
     {
         return htmlspecialchars_decode($content, ENT_QUOTES);
+    }
+    
+    public static function activeFileInput($model, $attribute, $options = [])
+    {
+        // add a hidden field so that if a model only has a file field, we can
+        // still use isset($_POST[$modelClass]) to detect if the input is submitted
+        return static::activeHiddenInput($model, $attribute, ['id' => null])
+        . static::activeInput('file', $model, $attribute, $options);
     }
 }

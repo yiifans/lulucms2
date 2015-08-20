@@ -2,13 +2,7 @@
 namespace source\core\base;
 
 use Yii;
-use app\Models\User;
 use source\models\search\UserSearch;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use yii\db\ActiveRecord;
-use yii\base\Model;
 use yii\web\View;
 use source\models\Config;
 use source\libs\Common;
@@ -18,13 +12,32 @@ use source\core\widgets\LinkPager;
 use source\libs\DataSource;
 use source\LuLu;
 
+
 class BaseView extends View
 {
 
     public $layout=null;
+    
+    /**
+     * @var ModularityService
+     */
+    public $modularityService;
+    /**
+     * @var RbacService
+     */
+    public $rbacService;
+    /**
+     * @var TaxonomyService
+     */
+    public $taxonomyService;
+    
     public function init()
     {
         parent::init();
+        
+        $this->modularityService = LuLu::getService('modularity');
+        $this->rbacService = LuLu::getService('rbac');
+        $this->taxonomyService = LuLu::getService('taxonomy');
     }
 
     public function renderFile($viewFile, $params = [], $context = null)

@@ -68,5 +68,6 @@ class ConfigForm extends BaseModel
 	protected function saveOneInternal($id, $value)
 	{
 		Config::updateAll(['value' => $value], ['id' => $id]);
+		Config::clearCachedConfig($id);
 	}
 }

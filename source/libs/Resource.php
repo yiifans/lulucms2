@@ -23,13 +23,13 @@ class Resource
 
     public static function getAdminTheme()
     {
-        $currentTheme = LuLu::getAppParam('adminTheme');
+        $currentTheme = Common::getConfigValue('sys_theme_admin');
         return $currentTheme;
     }
 
     public static function getHomeTheme()
     {
-        $currentTheme = LuLu::getAppParam('homeTheme');
+        $currentTheme = Common::getConfigValue('sys_theme_home');
         return $currentTheme;
     }
 

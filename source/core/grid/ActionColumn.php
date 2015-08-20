@@ -20,14 +20,22 @@ use source\libs\Resource;
 class ActionColumn extends \yii\grid\ActionColumn
 {
 
+    public $header = '操作';
     public $queryParams = [];
 
+    public $width = '30px';
+    
     public $template='{update} {delete}';
     public function init()
     {
         parent::init();
-        //$this->headerOptions['width'] = '120px';
-        $this->contentOptions=['class'=>'da-icon-column'];
+        
+        if (! isset($this->headerOptions['width']))
+        {
+            $this->headerOptions['width'] = $this->width;
+        }
+        
+        $this->contentOptions=['class'=>'da-icon-column','style'=>'width:'.$this->width.';'];
     }
 
     protected function initDefaultButtons()

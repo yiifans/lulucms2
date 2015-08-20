@@ -19,7 +19,7 @@ $filedOptions = [
 
 
 $takonomy = $this->getConfigValue('post_takonomy');
-$takonomies = Takonomy::getArrayTree($takonomy);
+$takonomies = $this->takonomyService->getTakonomiesAsTree($takonomy);
 
 $options = TreeHelper::buildTreeOptions($takonomies, $model->takonomy_id);
 
@@ -62,12 +62,13 @@ $form = ActiveForm::begin([
             		    
             		    <?= $form->field($model, 'summary',$filedOptions)->textarea(['rows' => 6])?>
             		    
-            		    <?= $form->field($model, 'thumb',$filedOptions)->fileInput(['class'=>'da-custom-file'])?>
+            		    <?= $form->field($model, 'thumb')->fileInput(['class'=>'da-custom-file'])?>
             		   
             			  
                     </div>
                 </div>
             </div>
+                                    
                                     
             <div class="grid_1">
             
@@ -75,7 +76,7 @@ $form = ActiveForm::begin([
                     <div class="da-panel-header">
                         <span class="da-panel-title">
                             <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/16/pencil.png" alt="">
-                            属性设置
+                            发布
                         </span>
                     </div>
             
@@ -84,10 +85,7 @@ $form = ActiveForm::begin([
             	       <div class="da-form-row">       
             			<?= $form->field($model, 'takonomy_id',['template'=>$template2,'options'=>['class'=>'da-form-col-12']])->dropDownList($options)?>
                        </div>                    
-              	      <div class="da-form-row">
-            		    <?= $form->field($model, 'sort_num',['template'=>$template2,'options'=>['class'=>'da-form-col-6 alpha']])->textInput()?>
-            		    <?= $form->field($model, 'template',['template'=>$template2,'options'=>['class'=>'da-form-col-6 omega']])->textInput(['maxlength' => 64])?>
-                      </div>           	      
+          	      
             	      <div class="da-form-row">
             		    <?= $form->field($model, 'recommend',['template'=>$template2,'options'=>['class'=>'da-form-col-4 alpha']])->dropDownList(Constants::getRecommendItems())?>
             		    <?= $form->field($model, 'headline',['template'=>$template2,'options'=>['class'=>'da-form-col-4']])->dropDownList(Constants::getHeadlineItems())?>
@@ -102,6 +100,22 @@ $form = ActiveForm::begin([
 
 
                        
+                        
+                       <?= $form->defaultButtons() ?>  
+                    </div>
+                </div>
+ 
+                <div class="da-panel collapsible collapsed">
+                    <div class="da-panel-header">
+                        <span class="da-panel-title">
+                            <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/16/pencil.png" alt="">
+                            属性设置
+                        </span>
+                    </div>
+            
+                    <div class="da-panel-content">
+                    
+            		
                        <!--                   		   
             	       <div class="da-form-row">            		    
             		    <?= $form->field($model, 'view_count',['template'=>$template2,'options'=>['class'=>'da-form-col-3 alpha']])->textInput()?>
@@ -110,12 +124,12 @@ $form = ActiveForm::begin([
             		    <?= $form->field($model, 'against_count',['template'=>$template2,'options'=>['class'=>'da-form-col-3 omega']])->textInput()?>   
                        </div>
                         -->
-                        
-                       <?= $form->defaultButtons() ?>  
+              	      <div class="da-form-row">
+            		    <?= $form->field($model, 'sort_num',['template'=>$template2,'options'=>['class'=>'da-form-col-6 alpha']])->textInput()?>
+                      </div> 
+            		
                     </div>
-                </div>
- 
- 
+                </div>  
                 <div class="da-panel collapsible collapsed">
                     <div class="da-panel-header">
                         <span class="da-panel-title">
@@ -132,7 +146,23 @@ $form = ActiveForm::begin([
             		    <?= $form->field($model, 'seo_description',['options'=>['class'=>'da-form-row da-form-block'],'size'=>'large'])->textarea(['maxlength' => 256,'rows'=>5])?>
             		
                     </div>
-                </div>               
+                </div>   
+                <div class="da-panel collapsible collapsed">
+                    <div class="da-panel-header">
+                        <span class="da-panel-title">
+                            <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/16/pencil.png" alt="">
+                            模板设置
+                        </span>
+                    </div>
+            
+                    <div class="da-panel-content">
+                    
+            		
+            		    <?= $form->field($model, 'view',['options'=>['class'=>'da-form-row da-form-block'],'size'=>'large'])->textInput(['maxlength' => 64])?>
+            		    <?= $form->field($model, 'layout',['options'=>['class'=>'da-form-row da-form-block'],'size'=>'large'])->textInput(['maxlength' => 64])?>
+            		
+                    </div>
+                </div>                             
             </div>
 
 </div>			

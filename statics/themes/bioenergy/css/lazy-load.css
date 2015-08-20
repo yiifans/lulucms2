@@ -1,0 +1,77 @@
+.lazy-load-box {
+	opacity: 1;
+	-moz-transform: scale(1) rotate(0deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg);
+	-webkit-transform: scale(1) rotate(0deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg);
+	-o-transform: scale(1) rotate(0deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg);
+	-ms-transform: scale(1) rotate(0deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg);
+	transform: scale(1) rotate(0deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg);
+}
+
+.trigger.lazy-load-box {
+	opacity: 0;
+}
+
+/* Effects */
+.trigger.effect-slideup {
+	-moz-transform: translateY(100px);
+	-webkit-transform: translateY(100px);
+	-o-transform: translateY(100px);
+	-ms-transform: translateY(100px);
+	transform: translateY(100px);
+}
+
+.trigger.effect-slidedown {
+	-moz-transform: translateY(-50px);
+	-webkit-transform: translateY(-50px);
+	-o-transform: translateY(-50px);
+	-ms-transform: translateY(-50px);
+	transform: translateY(-50px);
+}
+
+.trigger.effect-slidefromleft {
+	-moz-transform: translateX(-150px);
+	-webkit-transform: translateX(-150px);
+	-o-transform: translateX(-150px);
+	-ms-transform: translateX(-150px);
+	transform: translateX(-150px);
+}
+
+.trigger.effect-slidefromright {
+	-moz-transform: translateX(150px);
+	-webkit-transform: translateX(150px);
+	-o-transform: translateX(150px);
+	-ms-transform: translateX(150px);
+	transform: translateX(150px);
+}
+
+.trigger.effect-zoomin {
+	-moz-transform: scale(0.5);
+	-webkit-transform: scale(0.5);
+	-o-transform: scale(0.5);
+	-ms-transform: scale(0.5);
+	transform: scale(0.5);
+}
+
+.trigger.effect-zoomout {
+	-moz-transform: scale(1.5);
+	-webkit-transform: scale(1.5);
+	-o-transform: scale(1.5);
+	-ms-transform: scale(1.5);
+	transform: scale(1.5);
+}
+
+.trigger.effect-rotate {
+	-moz-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.trigger.effect-skew {
+	-moz-transform: translateY(100px) skewX(-45deg) skewY(45deg);
+	-webkit-transform: translateY(100px) skewX(-45deg) skewY(45deg);
+	-o-transform: translateY(100px) skewX(-45deg) skewY(45deg);
+	-ms-transform: translateY(100px) skewX(-45deg) skewY(45deg);
+	transform: translateY(100px) skewX(-45deg) skewY(45deg);
+}

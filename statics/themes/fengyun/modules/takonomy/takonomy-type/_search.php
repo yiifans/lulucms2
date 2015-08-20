@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\search\TakonomyTypeSearch */
+/* @var $model app\models\search\TaxonomyTypeSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="takonomy-type-search">
+<div class="taxonomy-type-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],

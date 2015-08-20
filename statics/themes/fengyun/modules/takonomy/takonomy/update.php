@@ -3,14 +3,14 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Takonomy */
+/* @var $model app\models\Taxonomy */
 
-$this->title = 'Update Takonomy: ' . ' ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Takonomies', 'url' => ['index']];
+$this->title = 'Update Taxonomy: ' . ' ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Taxonomies', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="takonomy-update">
+<div class="taxonomy-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

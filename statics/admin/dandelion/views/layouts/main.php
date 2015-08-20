@@ -4,7 +4,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use source\models\Takonomy;
+use source\models\Taxonomy;
 use source\libs\Resource;
 use source\LuLu;
 use yii\helpers\Url;
@@ -179,7 +179,7 @@ use yii\helpers\Url;
                                 </a>
                                 <ul class="closed">
                                     <li><?php echo Html::a('菜单管理',['/menu'])?></li>
-                                    <li><?php echo Html::a('分类管理',['/takonomy'])?></li>
+                                    <li><?php echo Html::a('分类管理',['/taxonomy'])?></li>
                                     <li><?php echo Html::a('数据字典',['/dict/dict-category'])?></li>
                                 </ul>
                             </li>

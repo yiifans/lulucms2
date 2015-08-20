@@ -33,9 +33,18 @@ class BaseController extends Controller
         ];
     }
 
+    /**
+     * @var \source\modules\modularity\ModularityService
+     */
     public $modularityService;
-
-    protected $rbacService;
+    /**
+     * @var \source\modules\rbac\RbacService
+     */
+    public $rbacService;
+    /**
+     * @var \source\modules\taxonomy\TaxonomyService
+     */
+    public $taxonomyService;
 
     public function init()
     {
@@ -43,6 +52,7 @@ class BaseController extends Controller
        
         $this->modularityService = LuLu::getService('modularity');
         $this->rbacService = LuLu::getService('rbac');
+        $this->taxonomyService = LuLu::getService('taxonomy');
     }
 
     public function runAction($id, $params = [])
@@ -109,47 +119,17 @@ class BaseController extends Controller
     
     public function findLayoutFile($view)
     {
-        $module = $this->module;
-        
         if(($view instanceof BaseView) && !empty($view->layout))
         {
-            $layout = $view->layout;
+            $oldLayout = $this->layout;
+            $this->layout = $view->layout;
+            $file = parent::findLayoutFile($view);
+            $this->layout=$oldLayout;
+            return $file;
         }
         else 
         {
-            if (is_string($this->layout)) {
-                $layout = $this->layout;
-            } elseif ($this->layout === null) {
-                while ($module !== null && $module->layout === null) {
-                    $module = $module->module;
-                }
-                if ($module !== null && is_string($module->layout)) {
-                    $layout = $module->layout;
-                }
-            }
+            return parent::findLayoutFile($view);
         }
-        
-    
-        if (!isset($layout)) {
-            return false;
-        }
-    
-        if (strncmp($layout, '@', 1) === 0) {
-            $file = Yii::getAlias($layout);
-        } elseif (strncmp($layout, '/', 1) === 0) {
-            $file = Yii::$app->getLayoutPath() . DIRECTORY_SEPARATOR . substr($layout, 1);
-        } else {
-            $file = $module->getLayoutPath() . DIRECTORY_SEPARATOR . $layout;
-        }
-    
-        if (pathinfo($file, PATHINFO_EXTENSION) !== '') {
-            return $file;
-        }
-        $path = $file . '.' . $view->defaultExtension;
-        if ($view->defaultExtension !== 'php' && !is_file($path)) {
-            $path = $file . '.php';
-        }
-    
-        return $path;
     }
 }

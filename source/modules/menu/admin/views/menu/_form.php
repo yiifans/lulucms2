@@ -41,13 +41,16 @@ $options = TreeHelper::buildTreeOptionsForSelf($takonomies, $model);
 
     <?= $form->field($model, 'target')->radioList(Constants::getTargetItems()) ?>
 
-    <?= $form->field($model, 'description')->textInput(['maxlength' => 512]) ?>
+    
 
-    <?= $form->field($model, 'thumb')->textInput(['maxlength' => 512]) ?>
+    <?= $form->field($model, 'thumb')->fileInput(['class'=>'da-custom-file']) ?>
+    <?= $form->field($model, 'description')->textarea(['maxlength' => 512]) ?>
 
-    <?= $form->field($model, 'status')->radioList(Constants::getStatusItems()) ?>
+    
 
     <?= $form->field($model, 'sort_num')->textInput() ?>
+    
+    <?= $form->field($model, 'status')->radioList(Constants::getStatusItems()) ?>
 
     <?= $form->defaultButtons() ?>
 <?php ActiveForm::end(); ?>

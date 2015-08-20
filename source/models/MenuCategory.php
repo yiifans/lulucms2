@@ -3,6 +3,7 @@
 namespace source\models;
 
 use Yii;
+use source\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "lulu_menu_category".
@@ -34,16 +35,14 @@ class MenuCategory extends \source\core\base\BaseActiveRecord
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
+    public static function getAttributeLabels($attribute = null)
     {
-        return [
+        $items = [
             'id' => '标识',
             'name' => '名称',
             'description' => '描述',
         ];
+        return ArrayHelper::getItems($items, $attribute);
     }
     
     public function beforeDelete()

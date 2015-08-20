@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\TakonomyType */
+/* @var $model app\models\TaxonomyType */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Takonomy Types', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Taxonomy Types', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="takonomy-type-view">
+<div class="taxonomy-type-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

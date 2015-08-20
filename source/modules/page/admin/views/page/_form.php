@@ -65,7 +65,7 @@ $form = ActiveForm::begin([
             		    
             		    <?= $form->field($model, 'summary',$filedOptions)->textarea(['rows' => 6])?>
             		    
-            		    <?= $form->field($model, 'thumb',$filedOptions)->fileInput(['class'=>'da-custom-file'])?>
+            		    <?= $form->field($model, 'thumb')->fileInput(['class'=>'da-custom-file'])?>
             		   
             			
                     </div>

@@ -5,6 +5,7 @@ use Yii;
 use source\core\base\BaseView;
 use yii\base\Theme;
 use source\LuLu;
+use source\libs\Resource;
 
 class BackView extends BaseView
 {
@@ -16,7 +17,7 @@ class BackView extends BaseView
 
     public function setTheme()
     {
-        $currentTheme = LuLu::getAppParam('adminTheme');
+        $currentTheme = Resource::getAdminTheme();
         
         $moduleId = LuLu::$app->controller->module->id;
         

@@ -5,6 +5,7 @@ namespace source\models;
 use Yii;
 use source\libs\Constants;
 use source\libs\TreeHelper;
+use source\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%dict}}".
@@ -43,12 +44,9 @@ class Dict extends \source\core\base\BaseActiveRecord
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
+    public static function getAttributeLabels($attribute = null)
     {
-        return [
+        $items = [
             'id' => '编号',
             'parent_id' => '父级',
             'category_id' => '分类',
@@ -60,6 +58,7 @@ class Dict extends \source\core\base\BaseActiveRecord
             'statusText' => '状态',
             'sort_num' => '排序',
         ];
+        return ArrayHelper::getItems($items, $attribute);
     }
     
 

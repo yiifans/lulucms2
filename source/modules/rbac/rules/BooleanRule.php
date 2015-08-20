@@ -7,15 +7,9 @@ use source\LuLu;
 class BooleanRule extends Rule
 {
 
-    
-    // $role = $permission['role'];
-    // $permission = $permission['permission'];
-    // $value = $permission['value'];
-    // $rule = $permission['rule'];
-    // $form = $permission['form'];
-    public function execute($role, $permission, $params = [])
+    public function execute($permission, $params = [], $role = null)
     {
-        if($permission['value'])
+        if ($permission['value'])
         {
             return true;
         }

@@ -2,21 +2,35 @@
 
 namespace source\libs;
 
-use components\LuLu;
+use source\LuLu;
 use yii\base\Object;
 use yii\db\Query;
-use common\models\Fragment1Data;
-use common\models\Fragment2Data;
-use common\models\Fragment3Data;
-use common\models\Fragment;
-use common\models\Page;
+
+use source\modules\fragment\models\Fragment1Data;
+use source\modules\fragment\models\Fragment2Data;
+use source\modules\fragment\models\Fragment;
 use source\models\Content;
 
 class DataSource
 {
+    public static function getPagedContents($where=null,$pageSize=10)
+    {
+        $query = Content::leftJoinWith('taxonomy');
+        if(!empty($where))
+        {
+            $query->andWhere($where);
+        }
+        
+        $locals = LuLu::getPagedRows($query, [
+            'orderBy' => 'created_at desc',
+            'pageSize' => $pageSize
+        ]);
+        return $locals;
+    }
 
     public static function getContents($where=null,$orderBy=null,$limit=10,$options=[])
     {
+        
         $query = Content::find();
         if(!empty($where))
         {
@@ -227,111 +241,10 @@ class DataSource
 		return $query;
 	}
 	
-	/*
-	 * get one fragment
-	 */
-	public static function getFragment($id)
-	{
-		return Fragment::findOne($id);
-	}
 	
-	/*
-	 * get fragments by category id
-	 */
-	public static function getFragmentByCategory($catid)
+	public static function getFragmentData($fid, $other = [],$fromCache=true)
 	{
-		return Fragment::findAll(['category_id' => $catid]);
-	}
-
-	/*
-	 * get data of a fragment id
-	*
-	* $other
-	* $other['where]=''
-	* $other['order']='sort_num desc'
-	* $other['offset]=''
-	* $other['limit]=''
-	*/
-	public static function getFragmentData($fraid, $other = [], $withFragment = false)
-	{
-		$query = null;
-		// $query=Fragment1Data::find();
-		
-		$fragment = Fragment::findOne($fraid);
-		if($fragment == null)
-		{
-			return [];
-		}
-		
-		$type = $fragment->type;
-		
-		if($type == 1)
-		{
-			$query = Fragment1Data::find();
-		}
-		else if($type == 2)
-		{
-			$query = Fragment2Data::find();
-		}
-		else if($type == 3)
-		{
-			$query = Fragment3Data::find();
-		}
-		
-		if($query == null)
-		{
-			return [];
-		}
-		
-		$query->where(['fragment_id' => $fraid]);
-		
-		if(isset($other['where']))
-		{
-			$query->andWhere($other['where']);
-		}
-		
-		if(isset($other['order']))
-		{
-			$query->orderBy($other['where']);
-		}
-		else 
-		{
-			$query->orderBy('sort_num desc');
-		}
-		
-		if(isset($other['offset']) && is_integer($other['offset']))
-		{
-			$query->offset($other['offset']);
-		}
-		
-		if(isset($other['limit']) && $other['limit'])
-		{
-			$query->limit($other['limit']);
-		}
-		$ret = $query->all();
-		if($type === 3)
-		{
-			$temp = [];
-			foreach($ret as $row)
-			{
-				$item = self::getContentByChannel($row['channel_id'], ['where' => 'id=' . $row['content_id']]);
-				if(empty($item))
-				{
-					continue;
-				}
-				$temp[] = $item[0];
-			}
-			$ret = $temp;
-		}
-		
-		if($withFragment)
-		{
-			return [$fragment, $ret];
-		}
-		else
-		{
-			return $ret;
-		}
+	    return Fragment::getData($fid,$other,$fromCache);
 	}
 
 	public static function getPageByCategory($catid)

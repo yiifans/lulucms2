@@ -26,6 +26,10 @@ class Generator extends \yii\gii\Generator
     public $moduleDir;
     public $moduleID;
 
+    public function stickyAttributes()
+    {
+        return array_merge(parent::stickyAttributes(), ['moduleDir']);
+    }
 
     /**
      * @inheritdoc

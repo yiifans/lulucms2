@@ -149,4 +149,29 @@ class BaseActiveRecord extends \yii\db\ActiveRecord
             LuLu::info($this->errors, self::className());
         }
     }
+    
+    public function attributeLabels()
+    {
+        return static::getAttributeLabels();
+    }
+    
+    public static function getAttributeLabels($attribute = null)
+    {
+        return [];
+    }
+    
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        $this->clearCache();
+    }
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        $this->clearCache();
+    }
+    public function clearCache()
+    {
+        
+    }
 }

@@ -75,7 +75,7 @@ class Permission extends BaseRbacActiveRecord
     public function rules()
     {
         return [
-            [['id', 'category', 'name', 'form','sort_num'], 'required'],
+            [['id', 'category', 'name', 'form','sort_num', 'rule'], 'required'],
             [['form','sort_num'], 'integer'],
             [['default_value'], 'string'],
             [['description'], 'string', 'max'=>128],
@@ -155,7 +155,7 @@ class Permission extends BaseRbacActiveRecord
         $allPermissions[Permission::Category_Controller]=[];
         $allPermissions[Permission::Category_System]=[];
         
-        $permissions = self::findAll([],'sort_num desc');
+        $permissions = self::findAll([],'sort_num asc');
         foreach ($permissions as $permission)
         {
             $allPermissions[$permission->category][]=$permission;

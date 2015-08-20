@@ -9,16 +9,23 @@ use yii\db\Query;
 use source\modules\rbac\models\Category;
 use source\LuLu;
 use source\core\front\FrontApplication;
+use source\models\User;
 
 class RbacService extends \source\core\modularity\ModuleService
-{   
+{
+
+    const CachePrefix = 'rbac_';
+
     private $assignmentTable;
+
     private $roleTable;
+
     private $permissionTable;
+
     private $relationTable;
 
-    private $ruleNamespace='\source\modules\rbac\rules\\';
-    
+    private $ruleNamespace = '\source\modules\rbac\rules\\';
+
     public function init()
     {
         parent::init();
@@ -28,26 +35,26 @@ class RbacService extends \source\core\modularity\ModuleService
         $this->permissionTable = Permission::tableName();
         $this->relationTable = Relation::tableName();
     }
-    
+
     public function getServiceId()
     {
         return 'rbacService';
     }
-    
+
     public function getRolesByUser($user)
     {
         $query = new Query();
         $query->select([
-            'r.id',
-            'r.category',
-            'r.name',
-            'r.description',
-            'r.is_system',
-            'r.sort_num',
+            'r.id', 
+            'r.category', 
+            'r.name', 
+            'r.description', 
+            'r.is_system', 
+            'r.sort_num'
         ]);
         $query->from([
-            'r'=>$this->roleTable,
-            'a'=>$this->assignmentTable,
+            'r' => $this->roleTable, 
+            'a' => $this->assignmentTable
         ]);
         $query->where('r.id=a.role');
         $query->andWhere([
@@ -57,57 +64,82 @@ class RbacService extends \source\core\modularity\ModuleService
         return $rows;
     }
 
-    public function getPermissionsByUser($user=null)
+    public function getPermissionsByUser($user = null)
     {
-        $query = new Query();
-        $query->select([
-            'p.id',
-            'p.category',
-            'p.name',
-            'p.description',
-            'p.form',
-            'p.default_value',
-            'p.rule',
-            'p.sort_num',
-            'r.role',
-            'r.value',
-        ]);
-        $query->from([
-            'p'=>$this->permissionTable,
-            'r'=>$this->relationTable, 
-            'a'=>$this->assignmentTable,
-        ]);
-        $query->where('p.id=r.permission and r.role=a.role');
-        $query->andWhere([
-            'a.user' => $user
-        ]);
-        $rows = $query->all();
-        return $this->convertPermissionValue($rows);
+        if($user===LuLu::getIdentity()->username)
+        {
+            
+            $role = LuLu::getIdentity()->role;
+        }
+        else
+        {
+            $user = User::findOne(['username'=>$user]);
+            $role=$user->role;
+            
+        }
+        return $this->getPermissionsByRole($role);
+        
+//        //for assignmentTable
+//         $query = new Query();
+//         $query->select([
+//             'p.id', 
+//             'p.category', 
+//             'p.name', 
+//             'p.description', 
+//             'p.form', 
+//             'p.default_value', 
+//             'p.rule', 
+//             'p.sort_num', 
+//             'r.role', 
+//             'r.value'
+//         ]);
+//         $query->from([
+//             'p' => $this->permissionTable, 
+//             'r' => $this->relationTable, 
+//             'a' => $this->assignmentTable
+//         ]);
+//         $query->where('p.id=r.permission and r.role=a.role');
+//         $query->andWhere([
+//             'a.user' => $user
+//         ]);
+//         $rows = $query->all();
+//         return $this->convertPermissionValue($rows);
     }
 
-    public function getPermissionsByRole($role)
+    public function getPermissionsByRole($role, $fromCache = true)
     {
-        $query = new Query();
-        $query->select([
-            'p.id',
-            'p.category',
-            'p.name',
-            'p.description',
-            'p.form',
-            'p.default_value',
-            'p.rule',
-            'p.sort_num',
-            'r.role',
-            'r.value',
-        ]);
-        $query->from([
-            'p'=>$this->permissionTable,
-            'r'=>$this->relationTable
-        ]);
-        $query->where('r.permission=p.id');
-        $query->andWhere(['r.role' => $role ]);
-        $rows = $query->all();
-        return $this->convertPermissionValue($rows);
+        $cacheKey = self::CachePrefix . $role;
+        
+        $value = $fromCache ? LuLu::getCache($cacheKey) : false;
+        if ($value === false)
+        {
+            $query = new Query();
+            $query->select([
+                'p.id', 
+                'p.category', 
+                'p.name', 
+                'p.description', 
+                'p.form', 
+                'p.default_value', 
+                'p.rule', 
+                'p.sort_num', 
+                'r.role', 
+                'r.value'
+            ]);
+            $query->from([
+                'p' => $this->permissionTable, 
+                'r' => $this->relationTable
+            ]);
+            $query->where('r.permission=p.id');
+            $query->andWhere([
+                'r.role' => $role
+            ]);
+            $rows = $query->all();
+            $value = $this->convertPermissionValue($rows);
+            
+            LuLu::setCache($cacheKey, $value);
+        }
+        return $value;
     }
 
     private function convertPermissionValue($rows)
@@ -138,55 +170,64 @@ class RbacService extends \source\core\modularity\ModuleService
         return $ret;
     }
 
-    public function checkPermission($role=null,$permission=null,$params=[])
+    public function checkPermission($permission = null, $params = [], $user = null)
     {
-        if($role===null)
+        if ($user === null)
         {
-            $role = LuLu::getIdentity()->role;
+            $user = LuLu::getIdentity()->username;
         }
-        if($permission===null)
+        if ($permission === null)
         {
-            $m= LuLu::getApp()->controller->module->id;
-            $c= LuLu::getApp()->controller->id;
-            $permission = empty($m) ?  $c: $m . '/' . $c;
+            $permission = LuLu::getApp()->controller->uniqueId;
         }
-         
-        $rows = $this->getPermissionsByRole($role);
         
-        if(!isset($rows[$permission]))
+        $rows = $this->getPermissionsByUser($user);
+        
+        if (! isset($rows[$permission]))
         {
             return false;
         }
         
-        return $this->executeRule($role, $rows[$permission],$params);
+        return $this->executeRule($rows[$permission], $params,$user);
     }
-   
-  
-    private function checkSkipActions()
+
+    public function checkHomePermission($permission = null, $params = [], $user = null)
     {
-        if(empty($this->skipActions))
+        if ($user === null)
+        {
+            $user = LuLu::getIdentity()->username;
+        }
+        if ($permission === null)
+        {
+            $permission = LuLu::getApp()->controller->uniqueId;
+        }
+        $permission = 'home_' . $permission;
+        
+        $rows = $this->getPermissionsByUser($user);
+        
+        if (! isset($rows[$permission]))
         {
             return false;
         }
-        $actionId = LuLu::getApp()->requestedAction->uniqueId;
-        if(LuLu::getApp() instanceof FrontApplication )
-        {
-            $actionId='home_'.$actionId;
-        }
-        return in_array($actionId, $this->skipActions);
+        
+        return $this->executeRule($rows[$permission], $params, $user);
     }
-    
-    private function executeRule($user,$permission,$params=[])
+
+    private function executeRule($permission, $params = [], $user)
     {
-        if(is_array($permission))
+        if (is_array($permission))
         {
-            foreach ($permission as $v)
+            foreach ($permission as $p)
             {
-                $ruleClass=$this->ruleNamespace.$v['rule'];
-    
+                if (empty($p['rule']))
+                {
+                    return true;
+                }
+                $ruleClass = $this->ruleNamespace . $p['rule'];
+                
                 $ruleInstance = new $ruleClass();
-                $ret = $ruleInstance->execute($user,$v,$params);
-                if($ret===true)
+                $ret = $ruleInstance->execute($p, $params, $user);
+                if ($ret === true)
                 {
                     return true;
                 }
@@ -194,11 +235,20 @@ class RbacService extends \source\core\modularity\ModuleService
         }
         else
         {
-            $ruleClass=$this->ruleNamespace.$permission['rule'];
-    
+            if (empty($permission['rule']))
+            {
+                return true;
+            }
+            
+            $ruleClass = $this->ruleNamespace . $permission['rule'];
+            
             $ruleInstance = new $ruleClass();
-            return $ruleInstance->execute($user,$permission,$params);
+            return $ruleInstance->execute($permission, $params, $user);
         }
-    
+    }
+
+    public function getAllRoles()
+    {
+        return Role::buildOptions();
     }
 }

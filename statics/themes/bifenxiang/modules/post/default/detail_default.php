@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use source\models\Takonomy;
+use source\models\Taxonomy;
 use source\models\Content;
 use yii\helpers\Url;
 use source\libs\Resource;
@@ -65,7 +65,7 @@ $this->title = $model['title'];
     </div>
 </div>
 <aside class="sidebar">
-    <?php echo $this->render('//_inc/takonomy',['takonomyId'=>'post_takonomy']);?>
+    <?php echo $this->render('//_inc/taxonomy',['taxonomyId'=>'post_taxonomy']);?>
     <div class="widget d_postlist">
         <div class="title">
             <h2>为您推荐</h2>

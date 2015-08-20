@@ -19,7 +19,7 @@ use source\modules\rbac\rules\Rule;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id')->textInput(['maxlength' => 64,'readonly'=>$model->isNewRecord ? false : true]) ?>
+    <?= $form->field($model, 'id')->textInput(['maxlength' => 64]) ?>
 
     <?= $form->field($model, 'category')->dropDownList(Permission::getCategoryItems()) ?>
 
@@ -27,9 +27,9 @@ use source\modules\rbac\rules\Rule;
 
     <?= $form->field($model, 'form')->radioList(Permission::getFormItems()) ?>
 
-    <?= $form->field($model, 'default_value')->textarea(['rows' => 5]) ?>
+    <?= $form->field($model, 'default_value')->textarea() ?>
     
-    <?= $form->field($model, 'description')->textarea(['rows' => 5]) ?>
+    <?= $form->field($model, 'description')->textarea() ?>
 
     <?= $form->field($model, 'rule')->dropDownList(Rule::getRules()) ?>
     

@@ -3,9 +3,9 @@ use yii\web\View;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use source\libs\Resource;
-use source\models\Takonomy;
+use source\models\Taxonomy;
 /* @var $this yii\web\View */
-$this->title = $takonomyModel['name'];
+$this->title = $taxonomyModel['name'];
 
 
 ?>
@@ -22,7 +22,7 @@ $this->title = $takonomyModel['name'];
     </div>
 </div>
 <aside class="sidebar">
-    <?php echo $this->render('//_inc/takonomy',['takonomyId'=>'post_takonomy']);?>
+    <?php echo $this->render('//_inc/taxonomy',['taxonomyId'=>'post_taxonomy']);?>
     <div class="widget d_postlist">
         <div class="title">
             <h2>热评文章</h2>
