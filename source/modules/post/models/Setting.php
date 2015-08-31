@@ -9,12 +9,12 @@ class Setting extends ConfigForm
 {
 
     
-	public $post_takonomy;
+	public $post_taxonomy;
 	
     public function rules()
     {
         return [
-            [['post_takonomy'], 'string'],
+            [['post_taxonomy'], 'string'],
 			
         ];
     }
@@ -25,7 +25,7 @@ class Setting extends ConfigForm
     public function attributeLabels()
     {
         return [
-            'post_takonomy' => '绑定分类',
+            'post_taxonomy' => '绑定分类',
            
         ];
     }

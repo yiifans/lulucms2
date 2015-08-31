@@ -4,7 +4,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use source\models\Takonomy;
+use source\models\Taxonomy;
 use source\libs\Resource;
 use source\LuLu;
 

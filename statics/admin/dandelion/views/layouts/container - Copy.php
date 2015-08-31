@@ -4,7 +4,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use source\models\Takonomy;
+use source\models\Taxonomy;
 use source\libs\Resource;
 use source\LuLu;
 use yii\helpers\Url;
@@ -78,7 +78,7 @@ $this->title = $this->getConfigValue('sys_site_name');
                             <?php echo Html::a('设置',['/system/setting/basic'],['data-menu'=>'setting','target'=>'mainFrame'])?>
                         </li>
                         <li>
-                            <?php echo Html::a('类目',['/menu'],['data-menu'=>'takonomy','target'=>'mainFrame'])?>
+                            <?php echo Html::a('类目',['/menu'],['data-menu'=>'taxonomy','target'=>'mainFrame'])?>
                         </li>
 
                         <li>
@@ -143,12 +143,12 @@ $this->title = $this->getConfigValue('sys_site_name');
                         </li>
                     </ul>
 
-                    <ul class="mod-bar" id="takonomy" style="display: none;">
+                    <ul class="mod-bar" id="taxonomy" style="display: none;">
                         <li>
                             <?php echo Html::a('<span>菜单管理</span>',['/menu'],['target'=>'mainFrame'])?>
                         </li>
                         <li>
-                            <?php echo Html::a('<span>分类管理</span>',['/takonomy'],['target'=>'mainFrame'])?>
+                            <?php echo Html::a('<span>分类管理</span>',['/taxonomy'],['target'=>'mainFrame'])?>
                         </li>
                     </ul>
 

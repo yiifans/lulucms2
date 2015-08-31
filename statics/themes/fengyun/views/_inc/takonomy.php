@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use source\libs\Resource;
 use source\models\Content;
-use source\models\Takonomy;
+use source\models\Taxonomy;
 use source\LuLu;
 
 
@@ -13,9 +13,9 @@ use source\LuLu;
 
 $moduleId = LuLu::$app->controller->module->id;
 
-$takonomies = Takonomy::getArrayTree($this->getConfigValue($moduleId.'_takonomy'));
+$taxonomies = Taxonomy::getArrayTree($this->getConfigValue($moduleId.'_taxonomy'));
 
-if(!empty($takonomies))
+if(!empty($taxonomies))
 {
     
 ?>
@@ -23,8 +23,8 @@ if(!empty($takonomies))
     <div class="hot widget">
         <ul>
             <li><?php echo Html::a('所有',['/'.$moduleId.'/default/list'])?></li>
-            <?php foreach ($takonomies as $takonomy):?>
-            <li><?php echo Html::a($takonomy['name'],['/'.$moduleId.'/default/list','takonomy'=>$takonomy['id']])?></li>
+            <?php foreach ($taxonomies as $taxonomy):?>
+            <li><?php echo Html::a($taxonomy['name'],['/'.$moduleId.'/default/list','taxonomy'=>$taxonomy['id']])?></li>
             <?php endforeach;?>
 
         </ul>

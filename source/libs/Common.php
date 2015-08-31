@@ -5,7 +5,6 @@ namespace source\libs;
 
 use yii\web\UploadedFile;
 use source\models\Config;
-use source\models\TaxonomyCategory;
 use source\LuLu;
 class Common 
 {
@@ -18,12 +17,10 @@ class Common
 	    return Config::getValue($id, $fromCache);
 	}
 	
-	
-	
 	public static function getTaxonomyCategories()
 	{
-	     $categories = TaxonomyCategory::findAll([],'name asc');
-	     return $categories;
+	    $service = LuLu::getService('taxonomy');
+	    return $service->getTaxonomyCategories();
 	}
 	
 	

@@ -9,6 +9,7 @@ use yii\helpers\FileHelper;
 use source\modules\taxonomy\models\Taxonomy;
 use source\helpers\ArrayHelper;
 use source\modules\taxonomy\models;
+use source\modules\taxonomy\models\TaxonomyCategory;
 
 class TaxonomyService extends ModuleService
 {
@@ -18,6 +19,12 @@ class TaxonomyService extends ModuleService
         return 'taxonomyService';
     }
 
+    public function getTaxonomyCategories()
+    {
+        $categories = TaxonomyCategory::findAll([],'name asc');
+        return $categories;
+    }
+    
     public function getTaxonomiesAsTree($category)
     {
         return Taxonomy::getArrayTree($category);
@@ -34,10 +41,12 @@ class TaxonomyService extends ModuleService
         }
         return $taxonomyModel;
     }
-    public function getClass($model)
+    
+    public function getModel($model)
     {
         $items = [
             'Taxonomy'=>Taxonomy::className(),
+            'TaxonomyCategory'=>TaxonomyCategory::className(),
         ];
         return ArrayHelper::getItems($items,$model,true);
     }

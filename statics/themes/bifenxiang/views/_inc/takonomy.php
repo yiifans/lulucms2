@@ -4,18 +4,18 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use source\libs\Resource;
 use source\models\Content;
-use source\models\Takonomy;
+use source\models\Taxonomy;
 use source\LuLu;
 
 
 /* @var $this yii\web\View */
 
 
-if(isset($takonomyId))
+if(isset($taxonomyId))
 {
     $moduleId = LuLu::$app->controller->module->id;
     
-    $takonomies = Takonomy::getArrayTree($this->getConfigValue($takonomyId));
+    $taxonomies = Taxonomy::getArrayTree($this->getConfigValue($taxonomyId));
 ?>
 
 <div class="widget d_postlist">
@@ -24,8 +24,8 @@ if(isset($takonomyId))
     </div>
     <ul>
         <li><?php echo Html::a('所有',['/'.$moduleId.'/default/list'])?></li>
-        <?php foreach ($takonomies as $takonomy):?>
-        <li><?php echo Html::a($takonomy['name'],['/'.$moduleId.'/default/list','takonomy'=>$takonomy['id']])?></li>
+        <?php foreach ($taxonomies as $taxonomy):?>
+        <li><?php echo Html::a($taxonomy['name'],['/'.$moduleId.'/default/list','taxonomy'=>$taxonomy['id']])?></li>
         <?php endforeach;?>
     </ul>
 </div>

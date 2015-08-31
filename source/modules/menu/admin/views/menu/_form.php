@@ -14,9 +14,9 @@ use source\libs\TreeHelper;
 $category=$model->category_id;
 
 
-$takonomies = Menu::getArrayTree($category);
+$taxonomies = Menu::getArrayTree($category);
 
-$options = TreeHelper::buildTreeOptionsForSelf($takonomies, $model);
+$options = TreeHelper::buildTreeOptionsForSelf($taxonomies, $model);
 
 ?>
 

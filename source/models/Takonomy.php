@@ -7,7 +7,7 @@ use source\libs\TreeHelper;
 use source\libs\Constants;
 
 /**
- * This is the model class for table "{{%takonomy}}".
+ * This is the model class for table "{{%taxonomy}}".
  *
  * @property integer $id
  * @property integer $parent_id
@@ -18,19 +18,19 @@ use source\libs\Constants;
  * @property integer $sort_num
  * @property string $category_id
  */
-class Takonomy extends \source\core\base\BaseActiveRecord
+class Taxonomy extends \source\core\base\BaseActiveRecord
 {
 	
-    public static function getOneOrDefault($takonomy)
+    public static function getOneOrDefault($taxonomy)
     {
-        $takonomyModel=Takonomy::findOne(['id'=>$takonomy]);
+        $taxonomyModel=Taxonomy::findOne(['id'=>$taxonomy]);
         
-        if($takonomyModel===null)
+        if($taxonomyModel===null)
         {
-            $takonomyModel=['id'=>null,'name'=>'所有'];
+            $taxonomyModel=['id'=>null,'name'=>'所有'];
             
         }
-       return $takonomyModel;
+       return $taxonomyModel;
     }
 	
     /**
@@ -38,7 +38,7 @@ class Takonomy extends \source\core\base\BaseActiveRecord
      */
     public static function tableName()
     {
-        return '{{%takonomy}}';
+        return '{{%taxonomy}}';
     }
 
     /**
@@ -109,14 +109,14 @@ class Takonomy extends \source\core\base\BaseActiveRecord
     
     private static function getArrayTreeInternal($category, $parentId = 0, $level = 0)
     {
-    	$takonomies = self::findAll(['category_id'=>$category,'parent_id'=>$parentId],'sort_num asc');
+    	$taxonomies = self::findAll(['category_id'=>$category,'parent_id'=>$parentId],'sort_num asc');
     	
     	$dataList=[];
-    	foreach ($takonomies as $takonomy)
+    	foreach ($taxonomies as $taxonomy)
     	{
-    		$takonomy->level=$level;
-    		$dataList[$takonomy['id']]=$takonomy;
-    		$temp = self::getArrayTreeInternal($category,$takonomy->id, $level + 1);
+    		$taxonomy->level=$level;
+    		$dataList[$taxonomy['id']]=$taxonomy;
+    		$temp = self::getArrayTreeInternal($category,$taxonomy->id, $level + 1);
     		$dataList = array_merge($dataList, $temp);
     	}
     	

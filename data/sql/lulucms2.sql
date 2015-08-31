@@ -183,8 +183,8 @@ INSERT INTO `lulu_auth_relation` (`role`, `permission`, `value`) VALUES
 ('demo', 'rbac/permission', 'index'),
 ('demo', 'rbac/role', 'index,relation:get,update:get'),
 ('demo', 'system/setting', 'basic:get,access:get,seo:get,datetime:get,email:get'),
-('demo', 'takonomy/takonomy', 'index,update:get'),
-('demo', 'takonomy/takonomy-category', 'index,update:get'),
+('demo', 'taxonomy/taxonomy', 'index,update:get'),
+('demo', 'taxonomy/taxonomy-category', 'index,update:get'),
 ('demo', 'user/user', 'index,update:get'),
 ('deny_access', 'allow_access', ''),
 ('deny_access', 'create', '1'),
@@ -287,8 +287,8 @@ CREATE TABLE IF NOT EXISTS `lulu_config` (
 --
 
 INSERT INTO `lulu_config` (`id`, `value`) VALUES
-('page_takonomy', 'page'),
-('post_takonomy', 'post'),
+('page_taxonomy', 'page'),
+('post_taxonomy', 'post'),
 ('sys_allow_register', '0'),
 ('sys_datetime_date_format', 'Y-m-d'),
 ('sys_datetime_pretty_format', '1'),
@@ -858,7 +858,7 @@ INSERT INTO `lulu_taxonomy_category` (`id`, `name`, `description`) VALUES
 DROP TABLE IF EXISTS `lulu_taxonomy_content`;
 CREATE TABLE IF NOT EXISTS `lulu_taxonomy_content` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `takonomy_id` int(11) NOT NULL,
+  `taxonomy_id` int(11) NOT NULL,
   `content_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

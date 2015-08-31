@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use source\LuLu;
 use source\libs\Common;
 use source\core\widgets\ActiveForm;
-use source\models\Takonomy;
+use source\models\Taxonomy;
 use source\models\Content;
 use source\libs\TreeHelper;
 use source\libs\Resource;
@@ -18,10 +18,10 @@ $filedOptions = [
 ];
 
 
-$takonomy = $this->getConfigValue('post_takonomy');
-$takonomies = $this->takonomyService->getTakonomiesAsTree($takonomy);
+$taxonomy = $this->getConfigValue('post_taxonomy');
+$taxonomies = $this->taxonomyService->getTaxonomiesAsTree($taxonomy);
 
-$options = TreeHelper::buildTreeOptions($takonomies, $model->takonomy_id);
+$options = TreeHelper::buildTreeOptions($taxonomies, $model->taxonomy_id);
 
 LuLu::setViewParam(['defaultLayout'=>false]);
 
@@ -83,7 +83,7 @@ $form = ActiveForm::begin([
                     <div class="da-panel-content">
                     
             	       <div class="da-form-row">       
-            			<?= $form->field($model, 'takonomy_id',['template'=>$template2,'options'=>['class'=>'da-form-col-12']])->dropDownList($options)?>
+            			<?= $form->field($model, 'taxonomy_id',['template'=>$template2,'options'=>['class'=>'da-form-col-12']])->dropDownList($options)?>
                        </div>                    
           	      
             	      <div class="da-form-row">

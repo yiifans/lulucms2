@@ -5,12 +5,12 @@ namespace source\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use source\models\TakonomyContent;
+use source\models\TaxonomyContent;
 
 /**
- * TakonomyContentSearch represents the model behind the search form about `app\models\TakonomyContent`.
+ * TaxonomyContentSearch represents the model behind the search form about `app\models\TaxonomyContent`.
  */
-class TakonomyContentSearch extends TakonomyContent
+class TaxonomyContentSearch extends TaxonomyContent
 {
     /**
      * @inheritdoc
@@ -18,7 +18,7 @@ class TakonomyContentSearch extends TakonomyContent
     public function rules()
     {
         return [
-            [['id', 'takonomy_id', 'content_id'], 'integer'],
+            [['id', 'taxonomy_id', 'content_id'], 'integer'],
         ];
     }
 
@@ -40,7 +40,7 @@ class TakonomyContentSearch extends TakonomyContent
      */
     public function search($params)
     {
-        $query = TakonomyContent::find();
+        $query = TaxonomyContent::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -56,7 +56,7 @@ class TakonomyContentSearch extends TakonomyContent
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'takonomy_id' => $this->takonomy_id,
+            'taxonomy_id' => $this->taxonomy_id,
             'content_id' => $this->content_id,
         ]);
 

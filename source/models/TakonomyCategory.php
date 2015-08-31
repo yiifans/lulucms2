@@ -5,20 +5,20 @@ namespace source\models;
 use Yii;
 
 /**
- * This is the model class for table "lulu_takonomy_category".
+ * This is the model class for table "lulu_taxonomy_category".
  *
  * @property string $id
  * @property string $name
  * @property string $description
  */
-class TakonomyCategory extends \source\core\base\BaseActiveRecord
+class TaxonomyCategory extends \source\core\base\BaseActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'lulu_takonomy_category';
+        return 'lulu_taxonomy_category';
     }
 
     /**
@@ -48,7 +48,7 @@ class TakonomyCategory extends \source\core\base\BaseActiveRecord
     
     public function beforeDelete()
     {
-        Takonomy::deleteAll(['category_id'=>$this->id]);
+        Taxonomy::deleteAll(['category_id'=>$this->id]);
         return true;
     }
 }

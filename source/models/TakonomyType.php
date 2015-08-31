@@ -5,20 +5,20 @@ namespace source\models;
 use Yii;
 
 /**
- * This is the model class for table "{{%takonomy_type}}".
+ * This is the model class for table "{{%taxonomy_type}}".
  *
  * @property integer $id
  * @property string $name
  * @property string $description
  */
-class TakonomyType extends \source\core\base\BaseActiveRecord
+class TaxonomyType extends \source\core\base\BaseActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%takonomy_type}}';
+        return '{{%taxonomy_type}}';
     }
 
     /**

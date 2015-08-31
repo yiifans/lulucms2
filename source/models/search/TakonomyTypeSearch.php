@@ -5,12 +5,12 @@ namespace source\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use source\models\TakonomyType;
+use source\models\TaxonomyType;
 
 /**
- * TakonomyTypeSearch represents the model behind the search form about `app\models\TakonomyType`.
+ * TaxonomyTypeSearch represents the model behind the search form about `app\models\TaxonomyType`.
  */
-class TakonomyTypeSearch extends TakonomyType
+class TaxonomyTypeSearch extends TaxonomyType
 {
     /**
      * @inheritdoc
@@ -41,7 +41,7 @@ class TakonomyTypeSearch extends TakonomyType
      */
     public function search($params)
     {
-        $query = TakonomyType::find();
+        $query = TaxonomyType::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
