@@ -12,6 +12,7 @@ class Common
 	{
 	    return Config::getModel($id, $fromCache);
 	}
+	
 	public static function getConfigValue($id, $fromCache = true)
 	{
 	    return Config::getValue($id, $fromCache);
@@ -22,7 +23,6 @@ class Common
 	    $service = LuLu::getService('taxonomy');
 	    return $service->getTaxonomyCategories();
 	}
-	
 	
 	public static function uploadFile($name)
 	{

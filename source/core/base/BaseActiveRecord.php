@@ -15,29 +15,14 @@ class BaseActiveRecord extends \yii\db\ActiveRecord
     {
         if($this->hasAttribute('sort_num'))
         {
-            $this->sort_num=Constants::getSortNum();
+            $this->sort_num = Constants::getSortNum();
         }
         parent::init();
     }
     
-    // Query
     public static function find()
     {
         return new ActiveQuery(get_called_class());
-    }
-
-    public static function leftJoinWith($with)
-    {
-        $query = self::find();
-        $query->joinWith($with, true, 'LEFT JOIN');
-        return $query;
-    }
-
-    public static function rightJoinWith($with)
-    {
-        $query = self::find();
-        $query->joinWith($with, true, 'RIGHT JOIN');
-        return $query;
     }
 
     public static function findOne($condition = null, $orderBy = null, $with = null, $params = [])
@@ -112,6 +97,20 @@ class BaseActiveRecord extends \yii\db\ActiveRecord
         return $query;
     }
 
+    public static function leftJoinWith($with)
+    {
+        $query = self::find();
+        $query->joinWith($with, true, 'LEFT JOIN');
+        return $query;
+    }
+    
+    public static function rightJoinWith($with)
+    {
+        $query = self::find();
+        $query->joinWith($with, true, 'RIGHT JOIN');
+        return $query;
+    }
+    
     public function beforeValidate()
     {
         if (parent::beforeValidate())

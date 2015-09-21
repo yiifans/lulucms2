@@ -6,7 +6,7 @@ use Yii;
 use source\libs\TreeHelper;
 use source\libs\Constants;
 use source\LuLu;
-use source\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%taxonomy}}".
@@ -101,7 +101,7 @@ class Taxonomy extends \source\core\base\BaseActiveRecord
             $child->level=$level;
             $items[$child['id']]=$child;
             $temp = self::getArrayTreeInternal($category,$child->id, $level + 1);
-            $items = array_merge($items, $temp);
+            $items = ArrayHelper::merge($items, $temp);
         }
     
         return $items;

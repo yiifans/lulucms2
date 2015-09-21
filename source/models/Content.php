@@ -96,7 +96,7 @@ class Content extends \source\core\base\BaseActiveRecord
     
     public function getTaxonomy()
     {
-        return $this->hasOne(LuLu::getService('taxonomy')->getClass("Taxonomy"), ['id'=>'taxonomy_id']);
+        return $this->hasOne(LuLu::getService('taxonomy')->getModel("Taxonomy"), ['id'=>'taxonomy_id']);
     }
 
    
