@@ -37,6 +37,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
+                'label'=>'图片',
+                'value'=>function($model){
+                    return $model->thumb;
+                },
+                'format'=>'image'
+            ],
+            [
                 'class' => 'source\core\grid\DateTimeColumn',
                 'attribute'=>'created_at'
             ],

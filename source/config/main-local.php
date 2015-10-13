@@ -3,9 +3,9 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=lulucms2',
-            'username' => 'root',
-            'password' => '',
+            'dsn' => 'mysql:host=localhost;dbname=question',
+            'username' => 'linjiong',
+            'password' => '13738425476',
             'charset' => 'utf8',
 			'tablePrefix' => 'lulu_',
             'enableSchemaCache' => true,
