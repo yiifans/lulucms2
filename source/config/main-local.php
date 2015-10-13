@@ -4,8 +4,8 @@ return [
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=question',
-            'username' => 'linjiong',
-            'password' => '13738425476',
+            'username' => 'root',
+            'password' => '',
             'charset' => 'utf8',
 			'tablePrefix' => 'lulu_',
             'enableSchemaCache' => true,
