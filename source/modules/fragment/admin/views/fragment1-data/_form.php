@@ -21,7 +21,12 @@ use source\LuLu;
 
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => 64]) ?>
-
+<?php if (!$model->isNewRecord && $model->content): ?>
+    <div class="da-form-row field-fragment2data-thumb">
+        <label class="control-label" for="fragment2data-thumb-show">原内容</label>
+        <div class="da-form-item small"><?=$model->content?></div>
+    </div> 
+<?php endif; ?>
     <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'sort_num')->textInput() ?>
