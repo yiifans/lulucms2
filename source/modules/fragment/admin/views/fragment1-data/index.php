@@ -38,6 +38,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
+                'attribute'=>'content',
+                'width'=>'200px',
+                'value'=>function($model,$key,$index,$column)
+                {
+                    $str=$model->content
+                            ?'<div style="overflow:hidden;width:200px;height:120px;">'.Html::decode($model->content).'</div>'
+                            :'';
+                    return $str;
+                }
+            ],    
+            [
                 'class' => 'source\core\grid\DateTimeColumn',
                 'attribute'=>'created_at'
             ],
