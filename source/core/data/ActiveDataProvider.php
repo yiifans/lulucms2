@@ -12,7 +12,6 @@ use yii\db\ActiveRecord;
 use yii\base\Model;
 use source\core\base\BaseModel;
 use source\core\base\BaseModule;
-use yii\data\ActiveDataProvider;
 
 
 class ActiveDataProvider extends \yii\data\ActiveDataProvider

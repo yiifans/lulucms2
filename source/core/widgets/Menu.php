@@ -3,7 +3,6 @@ namespace source\core\widgets;
 
 use Yii;
 use yii\helpers\Html;
-use source\models\Menu;
 
 class Menu extends BaseWidget
 {

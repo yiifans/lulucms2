@@ -28,7 +28,8 @@ phpunit.phar
 
 /backend/runtime
 /frontend/runtime
-/static/assets
+/statics/assets
+/data/cache
 
 lulucms2.phpproj
 lulucms2.phpproj.user
