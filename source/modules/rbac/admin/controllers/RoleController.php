@@ -11,7 +11,7 @@ use source\LuLu;
 use source\modules\rbac\models\Relation;
 use source\modules\rbac\models\Permission;
 use yii\data\ArrayDataProvider;
-use source\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 
 /**
  * RoleController implements the CRUD actions for Role model.

@@ -1,8 +1,9 @@
 <?php
-namespace source\helpers;
+namespace yii\helpers;
 
 use yii\base\InvalidParamException;
-class ArrayHelper extends \yii\helpers\ArrayHelper
+
+class ArrayHelper extends \yii\helpers\BaseArrayHelper
 {
 
     public static function getItems($items, $key = null,$throw=false)

@@ -8,7 +8,7 @@ use source\libs\Constants;
 use source\libs\Resource;
 use yii\helpers\Url;
 use source\LuLu;
-use source\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "lulu_menu".

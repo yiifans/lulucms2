@@ -20,7 +20,7 @@ namespace <?= $generator->ns ?>;
 
 use Yii;
 use source\LuLu;
-use source\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "<?= $generator->generateTableName($tableName) ?>".
  *

@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use source\LuLu;
 use source\libs\Common;
-use source\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 use source\core\widgets\ActiveForm;
 use source\modules\install\models\Setting;
 

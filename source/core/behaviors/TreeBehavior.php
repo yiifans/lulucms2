@@ -38,7 +38,7 @@ class TreeBehavior extends BaseBehavior
     {
         if($this->_parentIds===null)
         {
-            $this->_parentIds=TreeHelper::getParentIds(Menu::className(), $this->parent_id);
+            $this->_parentIds=TreeHelper::getParentIds($this->owner->className(), $this->owner->parent_id);
         }
         return $this->_parentIds;
     }
@@ -48,7 +48,7 @@ class TreeBehavior extends BaseBehavior
     {
         if($this->_childrenIds===null)
         {
-            $this->_childrenIds= TreeHelper::getChildrenIds(Menu::className(), $this->id);
+            $this->_childrenIds= TreeHelper::getChildrenIds($this->owner->className(), $this->owner->id);
         }
         return $this->_childrenIds;
     }

@@ -7,7 +7,7 @@ echo "<?php\n";
 namespace source\modules\<?= $generator->moduleDir?>\models;
 
 use source\LuLu;
-use source\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 
 class Setting extends \source\models\ConfigForm
 {

@@ -1,7 +1,7 @@
 <?php
 namespace source\libs;
 
-use source\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 /**
  * ChannelController implements the CRUD actions for Channel model.
  */

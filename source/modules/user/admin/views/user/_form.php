@@ -6,7 +6,7 @@ use source\models\Menu;
 use source\libs\Common;
 use source\libs\Constants;
 use source\libs\TreeHelper;
-use source\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 use source\modules\rbac\models\Role;
 
 /* @var $this yii\web\View */

@@ -3,7 +3,7 @@
 namespace source\modules\taxonomy\models;
 
 use Yii;
-use source\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "lulu_taxonomy_category".

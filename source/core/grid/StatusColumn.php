@@ -1,7 +1,7 @@
 <?php
 namespace source\core\grid;
 
-use source\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 use source\libs\Constants;
 class StatusColumn extends DataColumn
 {

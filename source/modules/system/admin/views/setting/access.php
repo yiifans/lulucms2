@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 use source\core\widgets\ActiveForm;
 use source\models\config\BasicConfig;
-use source\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 use source\modules\rbac\models\Role;
 
 /* @var $this yii\web\View */

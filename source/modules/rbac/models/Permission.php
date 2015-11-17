@@ -3,7 +3,7 @@
 namespace source\modules\rbac\models;
 
 use Yii;
-use source\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 use source\libs\Constants;
 
 /**

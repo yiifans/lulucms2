@@ -3,7 +3,7 @@
 namespace source\modules\install\models;
 
 use source\LuLu;
-use source\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 
 class Setting extends \source\models\ConfigForm
 {

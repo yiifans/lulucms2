@@ -9,7 +9,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use source\LuLu;
 use yii\data\ArrayDataProvider;
-use source\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 
 /**
  * PermissionController implements the CRUD actions for Permission model.

@@ -3,7 +3,7 @@
 namespace source\models;
 
 use Yii;
-use source\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "lulu_menu_category".

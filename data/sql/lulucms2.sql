@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 08 月 20 日 00:21
+-- 生成日期: 2015 年 11 月 17 日 01:07
 -- 服务器版本: 5.6.12-log
 -- PHP 版本: 5.4.16
 
@@ -28,7 +28,6 @@ USE `lulucms2`;
 -- 表的结构 `lulu_auth_assignment`
 --
 
-DROP TABLE IF EXISTS `lulu_auth_assignment`;
 CREATE TABLE IF NOT EXISTS `lulu_auth_assignment` (
   `user` varchar(64) NOT NULL,
   `role` varchar(64) NOT NULL,
@@ -48,7 +47,6 @@ INSERT INTO `lulu_auth_assignment` (`user`, `role`) VALUES
 -- 表的结构 `lulu_auth_category`
 --
 
-DROP TABLE IF EXISTS `lulu_auth_category`;
 CREATE TABLE IF NOT EXISTS `lulu_auth_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
@@ -77,7 +75,6 @@ INSERT INTO `lulu_auth_category` (`id`, `name`, `description`, `type`, `sort_num
 -- 表的结构 `lulu_auth_permission`
 --
 
-DROP TABLE IF EXISTS `lulu_auth_permission`;
 CREATE TABLE IF NOT EXISTS `lulu_auth_permission` (
   `id` varchar(64) NOT NULL,
   `category` varchar(64) NOT NULL,
@@ -129,7 +126,6 @@ INSERT INTO `lulu_auth_permission` (`id`, `category`, `name`, `description`, `fo
 -- 表的结构 `lulu_auth_relation`
 --
 
-DROP TABLE IF EXISTS `lulu_auth_relation`;
 CREATE TABLE IF NOT EXISTS `lulu_auth_relation` (
   `role` varchar(64) NOT NULL,
   `permission` varchar(64) NOT NULL,
@@ -183,8 +179,8 @@ INSERT INTO `lulu_auth_relation` (`role`, `permission`, `value`) VALUES
 ('demo', 'rbac/permission', 'index'),
 ('demo', 'rbac/role', 'index,relation:get,update:get'),
 ('demo', 'system/setting', 'basic:get,access:get,seo:get,datetime:get,email:get'),
-('demo', 'taxonomy/taxonomy', 'index,update:get'),
-('demo', 'taxonomy/taxonomy-category', 'index,update:get'),
+('demo', 'takonomy/takonomy', 'index,update:get'),
+('demo', 'takonomy/takonomy-category', 'index,update:get'),
 ('demo', 'user/user', 'index,update:get'),
 ('deny_access', 'allow_access', ''),
 ('deny_access', 'create', '1'),
@@ -221,7 +217,6 @@ INSERT INTO `lulu_auth_relation` (`role`, `permission`, `value`) VALUES
 -- 表的结构 `lulu_auth_role`
 --
 
-DROP TABLE IF EXISTS `lulu_auth_role`;
 CREATE TABLE IF NOT EXISTS `lulu_auth_role` (
   `id` varchar(64) NOT NULL,
   `category` varchar(64) NOT NULL,
@@ -251,7 +246,6 @@ INSERT INTO `lulu_auth_role` (`id`, `category`, `name`, `description`, `is_syste
 -- 表的结构 `lulu_comment`
 --
 
-DROP TABLE IF EXISTS `lulu_comment`;
 CREATE TABLE IF NOT EXISTS `lulu_comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `reply_ids` varchar(128) DEFAULT NULL,
@@ -274,7 +268,6 @@ CREATE TABLE IF NOT EXISTS `lulu_comment` (
 -- 表的结构 `lulu_config`
 --
 
-DROP TABLE IF EXISTS `lulu_config`;
 CREATE TABLE IF NOT EXISTS `lulu_config` (
   `id` varchar(64) NOT NULL,
   `value` text NOT NULL,
@@ -287,7 +280,9 @@ CREATE TABLE IF NOT EXISTS `lulu_config` (
 --
 
 INSERT INTO `lulu_config` (`id`, `value`) VALUES
+('page_takonomy', 'page'),
 ('page_taxonomy', 'page'),
+('post_takonomy', 'post'),
 ('post_taxonomy', 'post'),
 ('sys_allow_register', '0'),
 ('sys_datetime_date_format', 'Y-m-d'),
@@ -311,7 +306,7 @@ INSERT INTO `lulu_config` (`id`, `value`) VALUES
 ('sys_stat', 'bb'),
 ('sys_status', '1'),
 ('sys_theme_admin', 'dandelion'),
-('sys_theme_home', 'bioenergy'),
+('sys_theme_home', 'fengyun'),
 ('sys_timezone', ''),
 ('sys_time_format', ''),
 ('sys_time_format_custom', ''),
@@ -324,7 +319,6 @@ INSERT INTO `lulu_config` (`id`, `value`) VALUES
 -- 表的结构 `lulu_content`
 --
 
-DROP TABLE IF EXISTS `lulu_content`;
 CREATE TABLE IF NOT EXISTS `lulu_content` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `taxonomy_id` int(11) DEFAULT NULL,
@@ -363,7 +357,7 @@ CREATE TABLE IF NOT EXISTS `lulu_content` (
   `thumb` varchar(256) DEFAULT NULL,
   `thumbs` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
 
 --
 -- 转存表中的数据 `lulu_content`
@@ -385,13 +379,14 @@ INSERT INTO `lulu_content` (`id`, `taxonomy_id`, `user_id`, `user_name`, `last_u
 (13, 16, 1, NULL, NULL, NULL, 1431162035, 1431162035, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 1, '', '', NULL, 0, 1, 1, 'post', NULL, NULL, NULL, 'Space X寻“猎鹰9号”失败原因：腿短站不稳', NULL, NULL, NULL, '根据视频的显示，火箭已经处于竖直状态，但最后却翻到　　SpaceX公司在前不久的猎鹰9号火箭测试中仍然没有成功，该公司正在分析着陆失败的原因。　　首席执行官伊隆·马斯克一直在致力于打造可重复使用的火箭，猎鹰9号已经实现了数次空间站补给任务，本次发射后将1.6吨的物资送往国际空间站。虽然龙式飞船成功进入了预定轨道，但猎鹰9号火箭的返回级没有实现一次漂亮的着陆，而是在降落平台时发生了侧翻，爆炸成了碎片。　　首席执行官伊隆·马斯克认为火箭出现了过大的横向速度，导致火箭没有处于竖直状态，最终翻到在发射台', '', NULL),
 (14, 15, 1, NULL, NULL, NULL, 1429892526, 1429892526, 0, 0, 75, 0, 0, 0, 0, 0, 0, 0, 1, NULL, NULL, NULL, 0, 1, 1, 'post', NULL, NULL, NULL, '25张美图，贺哈勃望远镜升空25年！', NULL, NULL, NULL, '到今年4月24日，近地轨道上的哈勃空间望远镜就已经升空整整25年了。图片来源：NASA　　1990年4月24日，发现号航天飞机从美国肯尼迪中心发射升空，将哈勃空间望远镜送上了近地轨道。尽管在最初的几年里，这台望远镜备受视力模糊的困扰，但经过修复和多次维护之后，哈勃已经成为了有史以来最著名、也最重要的天文望远镜，改变了我们对于宇宙的诸多认识，更不用说它还拍摄过许多已经成为经典的绝美太空照片了。　　现在，我们不妨用一组哈勃空间望远镜拍摄的照片，来庆祝它升空25周年。木星和它的大红斑。图片来源：NAS', 'data/attachment/20150424/20150424162206_46279.jpg', NULL),
 (15, NULL, 1, NULL, NULL, NULL, 1431158460, 1437314628, 0, 0, 2, 0, 0, 0, NULL, NULL, NULL, 0, 1, '', '', NULL, 0, 1, 1, 'post', '', '', '', 'ff', '', '', '', 'ddd', '', NULL),
-(16, NULL, 1, NULL, NULL, NULL, 1431856521, 1431856521, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '', '', NULL, 0, 1, 1, 'post', NULL, NULL, NULL, 'ddd', NULL, NULL, NULL, '', '', NULL),
+(16, NULL, 1, NULL, NULL, NULL, 1431856521, 1441026717, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, 0, 1, '', '', '', 0, 1, 1, 'post', '', '', '', 'ddd', '', '', '', '', '', NULL),
 (18, NULL, 1, 'admin111', NULL, NULL, 1434635391, 1434635391, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, '', '', NULL, 0, 1, 1, 'post', NULL, NULL, NULL, 'ateaa', NULL, NULL, NULL, 'sss', '', NULL),
 (19, 16, 1, 'admin111', NULL, NULL, 1434635464, 1435468710, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 1, '', '', NULL, 0, 1, 1, 'post', '', '', '', 'aaaaaa', '', '', '', '"的操作者需要有高超的技术和手段，否则虎害大于狼害，后患无穷。2具体实例编辑例一:荀彧同时掌握了刘备、吕布、袁术三人的性格特征和心理状态，并且利用刘备对汉室的忠诚、吕布的贪婪自大和袁术的逞强好胜来达到调动他们互相攻伐。例二:东汉未年,大将军何进召董卓入京勤王,后被十常侍计杀,董卓入京后,祸乱后宫,扰乱朝纲.引得朝野不满,群雄割据,东汉灭亡。例三:益州牧刘璋，想藉刘', '', NULL),
-(20, 17, 1, 'admin111', NULL, NULL, 1434977081, 1437580617, 0, 0, 11, 0, 0, 0, NULL, NULL, NULL, 0, 1, '', '', NULL, 0, 1, 1, 'page', '', '', '', '关于我们', '', '', '', 'LuLuCMS是一款基于php5+mysql5开发的多功能开源的网站内容管理系统。使用高性能的PHP5的web应用程序开发框架YII构建，具有操作简单、稳定、安全、高效、跨平台等特点。采用MVC设计模式，模板定制方便灵活，内置小挂工具，方便制作各类功能和效果，LuLuCMS可用于企业建站、个人博客、资讯门户、图片站等各类型站点。特点：1.开源免费无论是个人还是企业展示型网站均可用本系统来完成2.数据调用方便快捷自主研发的数据调用模块，能快速调用各类型数据，方便建站3.应用范围广这套系统不是企业网', '', NULL),
+(20, 17, 1, 'admin111', NULL, NULL, 1434977081, 1437580617, 0, 0, 12, 0, 0, 0, NULL, NULL, NULL, 0, 1, '', '', NULL, 0, 1, 1, 'page', '', '', '', '关于我们', '', '', '', 'LuLuCMS是一款基于php5+mysql5开发的多功能开源的网站内容管理系统。使用高性能的PHP5的web应用程序开发框架YII构建，具有操作简单、稳定、安全、高效、跨平台等特点。采用MVC设计模式，模板定制方便灵活，内置小挂工具，方便制作各类功能和效果，LuLuCMS可用于企业建站、个人博客、资讯门户、图片站等各类型站点。特点：1.开源免费无论是个人还是企业展示型网站均可用本系统来完成2.数据调用方便快捷自主研发的数据调用模块，能快速调用各类型数据，方便建站3.应用范围广这套系统不是企业网', '', NULL),
 (21, 17, 1, 'admin111', NULL, NULL, 1434977117, 1437580409, 0, 0, 20, 0, 0, 0, NULL, NULL, NULL, 0, 1, '', '', NULL, 0, 1, 1, 'page', '', '', '', '企业文化', '', '', '', '迪尔和肯尼迪把企业文化整个理论系统概述为5个要素，即企业环境、价值观、英雄人物、文化仪式和文化网络。企业环境是指企业的性质、企业的经营方向、外部环境、企业的社会形象、与外界的联系等方面。它往往决定企业的行为。价值观是指企业内成员对某个事件或某种行为好与坏、善与恶、正确与错误、是否值得仿效的一致认识。价值观是企业文化的核心，统一的价值观使企业内成员在判断自己行为时具有统一的标准，并以此来选择自己的行为。英雄人物是指企业文化的核心人物或企业文化的人格化，其作用在于作为一种活的样板，给企业中其他员工提', 'data/attachment/20150722/20150722155329_29162.jpg', NULL),
-(22, 17, 1, 'admin111', NULL, NULL, 1434977141, 1437580372, 0, 0, 59, 0, 0, 0, NULL, NULL, NULL, 0, 1, '', '', NULL, 0, 1, 1, 'page', '', '', '', '管理团队', '', '', '', '团队是现代企业管理中战斗的核心，几乎没有一家企业不谈团队，好象团队就是企业做大做强的灵丹妙药，只要抓紧团队建设就能有锦锈前程了。团队是个好东西，但怎样的团队才算一个好团队，怎样才能运作好一个团队呢？却是许多企业管理者不甚了然的，于是在企业团队建设的过程中就出现了许多弊病，例如从理论著作中生搬硬套到团队运作里面，是很难产生好团队的。任何理念都不能执着，执着生僵化，就会蜕变为形式主义，后果很糟糕。在如今企业管理者热火朝天进行的团队建设中就存在这个问题，将团队作为企业文化建设的至上准则是不恰当的，是不', 'data/attachment/20150722/20150722155252_22766.jpg', NULL),
-(23, 17, 1, 'admin111', NULL, NULL, 1434977339, 1437319829, 0, 0, 24, 0, 0, 0, NULL, NULL, NULL, 0, 1, '', '', NULL, 0, 1, 1, 'page', '', '', '', '联系我们', '', '', '', '联系我们', 'data/attachment/20150719/20150719153029_75357.jpg', NULL);
+(22, 17, 1, 'admin111', NULL, NULL, 1434977141, 1437580372, 0, 0, 61, 0, 0, 0, NULL, NULL, NULL, 0, 1, '', '', NULL, 0, 1, 1, 'page', '', '', '', '管理团队', '', '', '', '团队是现代企业管理中战斗的核心，几乎没有一家企业不谈团队，好象团队就是企业做大做强的灵丹妙药，只要抓紧团队建设就能有锦锈前程了。团队是个好东西，但怎样的团队才算一个好团队，怎样才能运作好一个团队呢？却是许多企业管理者不甚了然的，于是在企业团队建设的过程中就出现了许多弊病，例如从理论著作中生搬硬套到团队运作里面，是很难产生好团队的。任何理念都不能执着，执着生僵化，就会蜕变为形式主义，后果很糟糕。在如今企业管理者热火朝天进行的团队建设中就存在这个问题，将团队作为企业文化建设的至上准则是不恰当的，是不', 'data/attachment/20150722/20150722155252_22766.jpg', NULL),
+(23, 17, 1, 'admin111', NULL, NULL, 1434977339, 1437319829, 0, 0, 25, 0, 0, 0, NULL, NULL, NULL, 0, 1, '', '', NULL, 0, 1, 1, 'page', '', '', '', '联系我们', '', '', '', '联系我们', 'data/attachment/20150719/20150719153029_75357.jpg', NULL),
+(24, NULL, 1, 'admin111', NULL, NULL, 1441025947, 1441025947, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, 0, 1, NULL, '', '', 1441025905, 1, 1, 'post', '', '', '', 'tes', 'd', 's', '', 's', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -399,7 +394,6 @@ INSERT INTO `lulu_content` (`id`, `taxonomy_id`, `user_id`, `user_name`, `last_u
 -- 表的结构 `lulu_content_page`
 --
 
-DROP TABLE IF EXISTS `lulu_content_page`;
 CREATE TABLE IF NOT EXISTS `lulu_content_page` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content_id` int(11) NOT NULL,
@@ -423,13 +417,12 @@ INSERT INTO `lulu_content_page` (`id`, `content_id`, `body`) VALUES
 -- 表的结构 `lulu_content_post`
 --
 
-DROP TABLE IF EXISTS `lulu_content_post`;
 CREATE TABLE IF NOT EXISTS `lulu_content_post` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content_id` int(11) NOT NULL,
   `body` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- 转存表中的数据 `lulu_content_post`
@@ -447,7 +440,8 @@ INSERT INTO `lulu_content_post` (`id`, `content_id`, `body`) VALUES
 (9, 7, '三名国际专家在《英国运动医学》上发表社论，认为运动对抗肥胖症效果有限，而摄取过多的糖类和碳水化合物才是需要注意的重点，专家称食品业鼓吹让消费者相信增加运动就可以忽视不健康的饮食习惯。肥胖者无需大量运动就能减肥，重点就是要少吃一点。研究显示每摄取来自糖类的150卡热量，患糖尿病的风险就比摄取来自脂肪的150卡热量高出10多倍。　　他们引用《柳叶刀》上的研究，指出不适当的饮食所导致的不健康问题，比不运动、喝酒、抽烟所导致的问题加起来还要多。他们的观点也有争议。'),
 (10, 11, ''),
 (11, 18, 'sss'),
-(12, 19, '"的操作者需要有高超的技术和手段，否则虎害大于狼害，后患无穷。2具体实例编辑例一:荀彧同时掌握了刘备、吕布、袁术三人的性格特征和心理状态，并且利用刘备对汉室的忠诚、吕布的贪婪自大和袁术的逞强好胜来达到调动他们互相攻伐。例二:东汉未年,大将军何进召董卓入京勤王,后被十常侍计杀,董卓入京后,祸乱后宫,扰乱朝纲.引得朝野不满,群雄割据,东汉灭亡。例三:益州牧刘璋，想藉刘');
+(12, 19, '"的操作者需要有高超的技术和手段，否则虎害大于狼害，后患无穷。2具体实例编辑例一:荀彧同时掌握了刘备、吕布、袁术三人的性格特征和心理状态，并且利用刘备对汉室的忠诚、吕布的贪婪自大和袁术的逞强好胜来达到调动他们互相攻伐。例二:东汉未年,大将军何进召董卓入京勤王,后被十常侍计杀,董卓入京后,祸乱后宫,扰乱朝纲.引得朝野不满,群雄割据,东汉灭亡。例三:益州牧刘璋，想藉刘'),
+(13, 24, 's');
 
 -- --------------------------------------------------------
 
@@ -455,7 +449,6 @@ INSERT INTO `lulu_content_post` (`id`, `content_id`, `body`) VALUES
 -- 表的结构 `lulu_dict`
 --
 
-DROP TABLE IF EXISTS `lulu_dict`;
 CREATE TABLE IF NOT EXISTS `lulu_dict` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) NOT NULL,
@@ -483,7 +476,6 @@ INSERT INTO `lulu_dict` (`id`, `parent_id`, `category_id`, `name`, `value`, `des
 -- 表的结构 `lulu_dict_category`
 --
 
-DROP TABLE IF EXISTS `lulu_dict_category`;
 CREATE TABLE IF NOT EXISTS `lulu_dict_category` (
   `id` varchar(64) NOT NULL,
   `name` varchar(64) NOT NULL,
@@ -506,7 +498,6 @@ INSERT INTO `lulu_dict_category` (`id`, `name`, `description`) VALUES
 -- 表的结构 `lulu_fragment`
 --
 
-DROP TABLE IF EXISTS `lulu_fragment`;
 CREATE TABLE IF NOT EXISTS `lulu_fragment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `category_id` int(11) NOT NULL,
@@ -538,7 +529,6 @@ INSERT INTO `lulu_fragment` (`id`, `category_id`, `name`, `description`, `type`)
 -- 表的结构 `lulu_fragment1_data`
 --
 
-DROP TABLE IF EXISTS `lulu_fragment1_data`;
 CREATE TABLE IF NOT EXISTS `lulu_fragment1_data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fragment_id` int(11) NOT NULL,
@@ -565,7 +555,6 @@ INSERT INTO `lulu_fragment1_data` (`id`, `fragment_id`, `title`, `content`, `cre
 -- 表的结构 `lulu_fragment2_data`
 --
 
-DROP TABLE IF EXISTS `lulu_fragment2_data`;
 CREATE TABLE IF NOT EXISTS `lulu_fragment2_data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fragment_id` int(11) NOT NULL,
@@ -617,7 +606,6 @@ INSERT INTO `lulu_fragment2_data` (`id`, `fragment_id`, `title`, `title_format`,
 -- 表的结构 `lulu_fragment_category`
 --
 
-DROP TABLE IF EXISTS `lulu_fragment_category`;
 CREATE TABLE IF NOT EXISTS `lulu_fragment_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
@@ -641,7 +629,6 @@ INSERT INTO `lulu_fragment_category` (`id`, `name`, `type`) VALUES
 -- 表的结构 `lulu_menu`
 --
 
-DROP TABLE IF EXISTS `lulu_menu`;
 CREATE TABLE IF NOT EXISTS `lulu_menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) NOT NULL,
@@ -714,7 +701,6 @@ INSERT INTO `lulu_menu` (`id`, `parent_id`, `category_id`, `name`, `url`, `targe
 -- 表的结构 `lulu_menu_category`
 --
 
-DROP TABLE IF EXISTS `lulu_menu_category`;
 CREATE TABLE IF NOT EXISTS `lulu_menu_category` (
   `id` varchar(64) NOT NULL,
   `name` varchar(64) NOT NULL,
@@ -741,7 +727,6 @@ INSERT INTO `lulu_menu_category` (`id`, `name`, `description`) VALUES
 -- 表的结构 `lulu_modularity`
 --
 
-DROP TABLE IF EXISTS `lulu_modularity`;
 CREATE TABLE IF NOT EXISTS `lulu_modularity` (
   `id` varchar(64) NOT NULL,
   `is_system` tinyint(1) NOT NULL DEFAULT '0',
@@ -777,7 +762,6 @@ INSERT INTO `lulu_modularity` (`id`, `is_system`, `is_content`, `enable_admin`, 
 -- 表的结构 `lulu_taxonomy`
 --
 
-DROP TABLE IF EXISTS `lulu_taxonomy`;
 CREATE TABLE IF NOT EXISTS `lulu_taxonomy` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) NOT NULL,
@@ -798,7 +782,7 @@ CREATE TABLE IF NOT EXISTS `lulu_taxonomy` (
   `contents` int(11) NOT NULL DEFAULT '0',
   `sort_num` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- 转存表中的数据 `lulu_taxonomy`
@@ -831,7 +815,6 @@ INSERT INTO `lulu_taxonomy` (`id`, `parent_id`, `category_id`, `name`, `url_alia
 -- 表的结构 `lulu_taxonomy_category`
 --
 
-DROP TABLE IF EXISTS `lulu_taxonomy_category`;
 CREATE TABLE IF NOT EXISTS `lulu_taxonomy_category` (
   `id` varchar(64) NOT NULL,
   `name` varchar(64) NOT NULL,
@@ -855,10 +838,9 @@ INSERT INTO `lulu_taxonomy_category` (`id`, `name`, `description`) VALUES
 -- 表的结构 `lulu_taxonomy_content`
 --
 
-DROP TABLE IF EXISTS `lulu_taxonomy_content`;
 CREATE TABLE IF NOT EXISTS `lulu_taxonomy_content` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `taxonomy_id` int(11) NOT NULL,
+  `takonomy_id` int(11) NOT NULL,
   `content_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -869,7 +851,6 @@ CREATE TABLE IF NOT EXISTS `lulu_taxonomy_content` (
 -- 表的结构 `lulu_user`
 --
 
-DROP TABLE IF EXISTS `lulu_user`;
 CREATE TABLE IF NOT EXISTS `lulu_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,

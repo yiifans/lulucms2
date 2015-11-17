@@ -4,7 +4,7 @@ namespace source\modules\fragment\models;
 
 use Yii;
 use source\LuLu;
-use source\helpers\ArrayHelper;
+use lulu\helpers\ArrayHelper;
 /**
  * This is the model class for table "{{%fragment}}".
  *

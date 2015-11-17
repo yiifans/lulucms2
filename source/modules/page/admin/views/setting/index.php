@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use source\core\widgets\ActiveForm;
 use source\models\config\BasicConfig;
 use source\libs\Common;
-use source\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\config\Basic */

@@ -7,7 +7,7 @@ use source\core\modularity\ModuleInfo;
 use source\modules\modularity\models\Modularity;
 use yii\helpers\FileHelper;
 use source\modules\taxonomy\models\Taxonomy;
-use source\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 use source\modules\taxonomy\models;
 use source\modules\taxonomy\models\TaxonomyCategory;
 

@@ -3,7 +3,7 @@
 namespace source\modules\tools\models;
 
 use source\LuLu;
-use source\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 
 class CacheForm extends \source\core\base\BaseModel
 {

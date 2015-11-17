@@ -5,7 +5,7 @@ namespace source\models;
 use Yii;
 use source\libs\Constants;
 use source\libs\TreeHelper;
-use source\helpers\ArrayHelper;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%dict}}".
