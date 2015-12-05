@@ -1,16 +1,16 @@
 <?php
 
-namespace source\models\search;
+namespace source\modules\menu\models\search;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use source\models\DictCategory;
+use source\modules\menu\models\MenuCategory;
 
 /**
- * DictCategorySearch represents the model behind the search form about `source\models\DictCategory`.
+ * MenuCategorySearch represents the model behind the search form about `source\models\MenuCategory`.
  */
-class DictCategorySearch extends DictCategory
+class MenuCategorySearch extends MenuCategory
 {
     /**
      * @inheritdoc
@@ -40,7 +40,7 @@ class DictCategorySearch extends DictCategory
      */
     public function search($params)
     {
-        $query = DictCategory::find();
+        $query = MenuCategory::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

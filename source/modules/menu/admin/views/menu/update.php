@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use source\models\MenuCategory;
+use source\modules\menu\models\MenuCategory;
 
 /* @var $this yii\web\View */
 /* @var $model source\models\Menu */

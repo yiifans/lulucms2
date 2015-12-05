@@ -49,7 +49,7 @@ class FrontView extends BaseView
     
     public function renderMenu($category='main',$parentId=0)
     {
-        echo \source\models\Menu::getMenuHtml($category, 0);
+        echo \source\modules\menu\models\Menu::getMenuHtml($category, 0);
     }
     
     public function getFragmentData($fid,$other=[])

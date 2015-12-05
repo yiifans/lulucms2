@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use source\core\grid\GridView;
 use source\LuLu;
-use source\models\MenuCategory;
+use source\modules\menu\models\MenuCategory;
 use yii\helpers\Url;
 use source\libs\Constants;
 

@@ -3,8 +3,8 @@
 namespace source\modules\dict\admin\controllers;
 
 use Yii;
-use source\models\DictCategory;
-use source\models\search\DictCategorySearch;
+use source\modules\dict\models\DictCategory;
+use source\modules\dict\models\search\DictCategorySearch;
 use source\core\back\BackController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

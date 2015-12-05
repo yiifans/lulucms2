@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use source\core\widgets\ActiveForm;
-use source\models\Dict;
+use source\modules\dict\models\Dict;
 use source\libs\Common;
 use source\libs\Constants;
 use source\libs\TreeHelper;

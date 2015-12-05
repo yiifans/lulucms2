@@ -3,8 +3,8 @@
 namespace source\modules\menu\admin\controllers;
 
 use Yii;
-use source\models\Menu;
-use source\models\search\MenuSearch;
+use source\modules\menu\models\Menu;
+use source\modules\menu\models\search\MenuSearch;
 use source\core\back\BackController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

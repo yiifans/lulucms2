@@ -1,11 +1,11 @@
 <?php
 
-namespace source\models\search;
+namespace source\modules\dict\models\search;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use source\models\Dict;
+use source\modules\dict\models\Dict;
 use source\LuLu;
 
 /**

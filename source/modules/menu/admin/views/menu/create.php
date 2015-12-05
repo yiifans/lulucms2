@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use source\LuLu;
-use source\models\MenuCategory;
+use source\modules\menu\models\MenuCategory;
 
 
 /* @var $this yii\web\View */

@@ -8,7 +8,7 @@ use source\models\Taxonomy;
 use source\libs\Resource;
 use source\LuLu;
 use yii\helpers\Url;
-use source\models\Menu;
+use source\modules\menu\models\Menu;
 
 /* @var $this \yii\web\View */
 /* @var $content string */

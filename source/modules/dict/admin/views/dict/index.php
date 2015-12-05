@@ -5,7 +5,7 @@ use yii\helpers\Url;
 use source\LuLu;
 use source\libs\Constants;
 use source\core\grid\GridView;
-use source\models\DictCategory;
+use source\modules\dict\models\DictCategory;
 
 /* @var $this yii\web\View */
 /* @var $searchModel source\models\search\DictSearch */

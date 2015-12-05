@@ -121,11 +121,26 @@ class LuLu extends \Yii
 
     public static function getGetValue($key, $default = NULL)
     {
-        if (self::hasGetValue($key))
+        $data = $_GET;
+        
+        $keys = explode('/', $key);
+        foreach ($keys as $key)
         {
-            return $_GET[$key];
+            if (is_array($data) && key_exists($key, $data))
+            {
+                $data = $data[$key];
+            }
+            else
+            {
+                return $default;
+            }
         }
-        return $default;
+        
+        if ($data===null)
+        {
+            return $default;
+        }
+        return $data;
     }
 
     public static function hasPostValue($key)
@@ -135,11 +150,26 @@ class LuLu extends \Yii
 
     public static function getPostValue($key, $default = NULL)
     {
-        if (self::hasPostValue($key))
+        $data = $_POST;
+        
+        $keys = explode('/', $key);
+        foreach ($keys as $key)
         {
-            return $_POST[$key];
+            if (is_array($data) && key_exists($key, $data))
+            {
+                $data = $data[$key];
+            }
+            else
+            {
+                return $default;
+            }
         }
-        return $default;
+        
+        if ($data===null)
+        {
+            return $default;
+        }
+        return $data;
     }
 
     public static function getFlash($type,$default=null)
@@ -287,33 +317,40 @@ class LuLu extends \Yii
     public static function getPagedRows($query, $config = [])
     {
         $countQuery = clone $query;
-        $pages = new Pagination([
+        $pager = new Pagination([
             'totalCount' => $countQuery->count()
         ]);
         if (isset($config['page']))
         {
-            $pages->setPage($config['page'], true);
+            $pager->setPage($config['page'], true);
         }
         
         if (isset($config['pageSize']))
         {
-            $pages->setPageSize($config['pageSize'], true);
+            $pager->setPageSize($config['pageSize'], true);
         }
         
-        $rows = $query->offset($pages->offset)->limit($pages->limit);
+        $rows = $query->offset($pager->offset)->limit($pager->limit);
         
         if (isset($config['orderBy']))
         {
             $rows = $rows->orderBy($config['orderBy']);
         }
-        $rows = $rows->all();
+        if(isset($config['db']))
+        {
+            $rows = $rows->all($config['db']);
+        }
+        else
+        {
+            $rows = $rows->all();
+        }
         
         $rowsLable = isset($config['rows']) ? $config['rows'] : 'rows';
-        $pagesLable = isset($config['pager']) ? $config['pager'] : 'pager';
+        $pagerLable = isset($config['pager']) ? $config['pager'] : 'pager';
         
         $ret = [];
         $ret[$rowsLable] = $rows;
-        $ret[$pagesLable] = $pages;
+        $ret[$pagerLable] = $pager;
 		
 		return $ret;
 	}

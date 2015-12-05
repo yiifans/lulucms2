@@ -1,7 +1,7 @@
 <?php
-namespace source\helpers;
+namespace yii\helpers;
 
-class StringHelper
+class StringHelper extends \yii\helpers\BaseStringHelper
 {
 
     public static function blank($count)

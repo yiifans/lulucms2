@@ -1,16 +1,16 @@
 <?php
 
-namespace source\models\search;
+namespace source\modules\menu\models\search;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use source\models\TaxonomyType;
+use source\modules\menu\models\Menu;
 
 /**
- * TaxonomyTypeSearch represents the model behind the search form about `app\models\TaxonomyType`.
+ * MenuSearch represents the model behind the search form about `source\models\Menu`.
  */
-class TaxonomyTypeSearch extends TaxonomyType
+class MenuSearch extends Menu
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class TaxonomyTypeSearch extends TaxonomyType
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['name', 'description'], 'safe'],
+            [['id', 'parent_id', 'category_id', 'enabled', 'sort_num'], 'integer'],
+            [['name', 'url', 'target', 'description', 'thumb'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class TaxonomyTypeSearch extends TaxonomyType
      */
     public function search($params)
     {
-        $query = TaxonomyType::find();
+        $query = Menu::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -57,10 +57,17 @@ class TaxonomyTypeSearch extends TaxonomyType
 
         $query->andFilterWhere([
             'id' => $this->id,
+            'parent_id' => $this->parent_id,
+            'category_id' => $this->category_id,
+            'enabled' => $this->enabled,
+            'sort_num' => $this->sort_num,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description]);
+            ->andFilterWhere(['like', 'url', $this->url])
+            ->andFilterWhere(['like', 'target', $this->target])
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'thumb', $this->thumb]);
 
         return $dataProvider;
     }

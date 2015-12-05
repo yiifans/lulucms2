@@ -124,7 +124,7 @@ class BaseActiveRecord extends \yii\db\ActiveRecord
             }
             if ($this->hasAttribute('created_at'))
             {
-                if ($this->created_at == null || $this->created_at == '')
+                if(empty($this->created_at))
                 {
                     $this->created_at = time();
                 }
@@ -133,7 +133,20 @@ class BaseActiveRecord extends \yii\db\ActiveRecord
             {
                 $this->updated_at = time();
             }
-            
+            if($this->hasAttribute('created_by'))
+            {
+                if(empty($this->created_by))
+                {
+                    $this->created_by=LuLu::getIdentity()->username;
+                }
+            }
+            if($this->hasAttribute('updated_by'))
+            {
+                if(empty($this->updated_by))
+                {
+                    $this->updated_by=LuLu::getIdentity()->username;
+                }
+            }
             return true;
         }
         return false;
@@ -142,11 +155,20 @@ class BaseActiveRecord extends \yii\db\ActiveRecord
     public function afterValidate()
     {
         parent::afterValidate();
-        if ($this->hasErrors())
+        if(!$this->hasErrors())
+        {
+            $this->finalValidate();
+        }
+        if($this->hasErrors())
         {
             LuLu::setErrorMessage($this->getFirstErrors());
-            LuLu::info($this->errors, self::className());
+            LuLu::info($this->errors,'validate error:'.self::className());
         }
+    }
+    
+    public function finalValidate()
+    {
+        
     }
     
     public function attributeLabels()
@@ -172,5 +194,28 @@ class BaseActiveRecord extends \yii\db\ActiveRecord
     public function clearCache()
     {
         
+    }
+    
+    public function addTrimRule($rules,$scenarios=[])
+    {
+        $all=[];
+        foreach ($rules as $rule)
+        {
+            if($rule[1]==='trim')
+            {
+                continue;
+            }
+            if(is_string($rule[0]))
+            {
+                $all[]=$rule[0];
+            }
+            else
+            {
+                $all=array_merge($all,$rule[0]);
+            }
+        }
+        $scenarios[]=self::SCENARIO_DEFAULT;
+        $rules[]=[$all,'trim','on'=>$scenarios];
+        return $rules;
     }
 }
