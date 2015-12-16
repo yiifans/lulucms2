@@ -17,7 +17,7 @@ $this->title = '页面';
     <div class="content">
         <?php 
         $this->loopData($rows,'//_inc/content_default');
-        echo \statics\themes\bifenxiang\functions\LinkPager::widget([
+        $this->showWidget('LinkPager', [
             'pagination' => $pager
         ]);
         ?>

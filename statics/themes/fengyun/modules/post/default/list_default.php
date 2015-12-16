@@ -7,7 +7,6 @@ use source\models\Taxonomy;
 /* @var $this yii\web\View */
 $this->title = $taxonomyModel['name'];
 
-var_dump($taxonomyModel);
 ?>
 
 <?php if(!empty($taxonomyModel->id)):?>
@@ -19,9 +18,9 @@ var_dump($taxonomyModel);
 				
 <?php 
 $this->loopData($rows,'//_inc/content_default');
-        echo \statics\themes\fengyun\functions\LinkPager::widget([
-            'pagination' => $pager
-        ]);
+$this->showPager([
+    'pagination' => $pager
+]);
 ?>
 
 

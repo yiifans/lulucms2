@@ -47,6 +47,10 @@ class FrontView extends BaseView
         $this->theme = new Theme($config);
     }
     
+    public function getMenus($category='main',$parentId=0)
+    {
+        return \source\modules\menu\models\Menu::getChildren($category, $parentId,1);
+    }
     public function renderMenu($category='main',$parentId=0)
     {
         echo \source\modules\menu\models\Menu::getMenuHtml($category, 0);

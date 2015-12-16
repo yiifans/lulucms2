@@ -7,9 +7,11 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use source\LuLu;
 use yii\web\ErrorAction;
+use source\traits\CommonTrait;
 
 class BaseController extends Controller
 {
+    use CommonTrait;
 
     public function behaviors()
     {
@@ -33,26 +35,13 @@ class BaseController extends Controller
         ];
     }
 
-    /**
-     * @var \source\modules\modularity\ModularityService
-     */
-    public $modularityService;
-    /**
-     * @var \source\modules\rbac\RbacService
-     */
-    public $rbacService;
-    /**
-     * @var \source\modules\taxonomy\TaxonomyService
-     */
-    public $taxonomyService;
+    
 
     public function init()
     {
         parent::init();
        
-        $this->modularityService = LuLu::getService('modularity');
-        $this->rbacService = LuLu::getService('rbac');
-        $this->taxonomyService = LuLu::getService('taxonomy');
+        $this->initService();
     }
 
     public function runAction($id, $params = [])

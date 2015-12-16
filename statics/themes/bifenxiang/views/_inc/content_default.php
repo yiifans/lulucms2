@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use source\libs\Resource;
 use source\helpers\DateTimeHelper;
-use source\helpers\StringHelper;
+use yii\helpers\StringHelper;
 
 /* @var $this source\core\front\FrontView */
 

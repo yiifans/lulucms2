@@ -11,33 +11,22 @@ use source\libs\Resource;
 use source\core\widgets\LinkPager;
 use source\libs\DataSource;
 use source\LuLu;
+use yii\helpers\FileHelper;
+use source\traits\CommonTrait;
 
 
 class BaseView extends View
 {
 
-    public $layout=null;
+    use CommonTrait;
     
-    /**
-     * @var ModularityService
-     */
-    public $modularityService;
-    /**
-     * @var RbacService
-     */
-    public $rbacService;
-    /**
-     * @var TaxonomyService
-     */
-    public $taxonomyService;
+    public $layout=null;
     
     public function init()
     {
         parent::init();
         
-        $this->modularityService = LuLu::getService('modularity');
-        $this->rbacService = LuLu::getService('rbac');
-        $this->taxonomyService = LuLu::getService('taxonomy');
+        $this->initService();
     }
 
     public function renderFile($viewFile, $params = [], $context = null)
@@ -117,13 +106,25 @@ class BaseView extends View
         LoopData::end();
     }
 
-    public function getConfig($id)
+    
+    
+    public function showWidget($name,$params)
     {
-        return Common::getConfig($id);
+        $currentTheme = Resource::checkHomeThemeFile('/misc/'.$name);
+        if($currentTheme)
+        {
+            $class='\\statics\\themes\\'.$currentTheme.'\\misc\\'.$name;
+            
+            echo $class::widget($params);
+        }
+        else
+        {
+            echo 'the widget '.$name.' does not exist';
+        }
     }
-
-    public function getConfigValue($id)
+    
+    public function showPager($params)
     {
-        return Common::getConfigValue($id);
+        $this->showWidget('LinkPager', $params);
     }
 }

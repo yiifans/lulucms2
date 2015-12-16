@@ -1,5 +1,5 @@
 <?php
-namespace statics\themes\bifenxiang\functions;
+namespace statics\themes\bifenxiang\misc;
 
 use Yii;
 use yii\helpers\Html;

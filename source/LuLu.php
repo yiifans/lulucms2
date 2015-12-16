@@ -5,6 +5,7 @@ use yii\helpers\VarDumper;
 use yii\data\Pagination;
 use source\core\modularity\ModuleService;
 use yii\base\InvalidParamException;
+use yii\helpers\Url;
 
 class LuLu extends \Yii
 {
@@ -119,6 +120,12 @@ class LuLu extends \Yii
         return isset($_GET[$key]);
     }
 
+    /**
+     * 
+     * @param string $key a or a/b/c
+     * @param string $default
+     * @return string|unknown
+     */
     public static function getGetValue($key, $default = NULL)
     {
         $data = $_GET;
@@ -175,30 +182,55 @@ class LuLu extends \Yii
     public static function getFlash($type,$default=null)
     {
         $app = self::getApp();
-        return $app->session->getFlash($type,$default);
+        $flash = $app->session->getFlash($type,$default);
+        if($flash===null)
+        {
+            $flash=[];
+        }
+        if(is_string($flash))
+        {
+            $flash=[$flash];
+        }
+        return $flash;
     }
-    public static function setFlash($type, $message)
+    
+    public static function setFlash($type, $message,$append=true)
     {
+        if($append)
+        {
+            $flash = self::getFlash($type);
+            if(is_string($message))
+            {
+                $flash[]=$message;
+            }
+            else if(is_array($message))
+            {
+                $flash=array_merge($flash,$message);
+            }
+            else if($message===null)
+            {
+                $flash=null;
+            }
+            
+            $message=$flash;
+        }
         $app = self::getApp();
         $app->session->setFlash($type, $message);
     }
 
     public static function setWarningMessage($message)
     {
-        $app = self::getApp();
-        $app->session->setFlash('warning', $message);
+        self::setFlash('warning', $message);
     }
 
     public static function setSuccessMessage($message)
     {
-        $app = self::getApp();
-        $app->session->setFlash('success', $message);
+        self::setFlash('success', $message);
     }
 
     public static function setErrorMessage($message)
     {
-        $app = self::getApp();
-        $app->session->setFlash('error', $message);
+        self::setFlash('error', $message);
     }
 
     public static function info($var, $category = 'application')
@@ -316,9 +348,11 @@ class LuLu extends \Yii
 
     public static function getPagedRows($query, $config = [])
     {
+        $db = isset($config['db'])?$config['db']:null;
+        
         $countQuery = clone $query;
         $pager = new Pagination([
-            'totalCount' => $countQuery->count()
+            'totalCount' => $countQuery->count('*', $db),
         ]);
         if (isset($config['page']))
         {
@@ -336,14 +370,7 @@ class LuLu extends \Yii
         {
             $rows = $rows->orderBy($config['orderBy']);
         }
-        if(isset($config['db']))
-        {
-            $rows = $rows->all($config['db']);
-        }
-        else
-        {
-            $rows = $rows->all();
-        }
+        $rows = $rows->all($db);
         
         $rowsLable = isset($config['rows']) ? $config['rows'] : 'rows';
         $pagerLable = isset($config['pager']) ? $config['pager'] : 'pager';
@@ -364,5 +391,11 @@ class LuLu extends \Yii
 	        return  $component;
 	    }
 	    InvalidParamException("get service:$id");
+	}
+	
+	public static function go($url)
+	{
+	    $url=Url::to($url);
+	    exit('<script>top.location.href="'.$url.'"</script>');
 	}
 }

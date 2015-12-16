@@ -40,6 +40,7 @@ class Setting extends \source\models\ConfigForm
             'bifenxiang'=>'博客主题bifenxiang',
             'fengyun'=>'博客主题fengyun',
             'bioenergy'=>'企业主题',
+            'CodingLife'=>'CodingLife',
         ];
         return $items;
     }

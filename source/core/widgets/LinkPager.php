@@ -97,4 +97,5 @@ class LinkPager extends \yii\widgets\LinkPager implements IBaseWidget
         
         return $buttons;
     }
+   
 }

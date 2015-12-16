@@ -18,9 +18,9 @@ $this->title = $taxonomyModel['name'];
 
 <?php 
 $this->loopData($rows,'//_inc/content_default');
-        echo \statics\themes\fengyun\functions\LinkPager::widget([
-            'pagination' => $pager
-        ]);
+$this->showPager([
+    'pagination' => $pager
+]);
 ?>
 
 

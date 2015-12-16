@@ -1,5 +1,5 @@
 <?php
-namespace statics\themes\fengyun\functions;
+namespace statics\themes\fengyun\misc;
 
 use Yii;
 use yii\helpers\Html;

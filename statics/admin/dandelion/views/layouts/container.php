@@ -193,7 +193,7 @@ $rbacService = LuLu::getService('rbac');
                                 <?php endif;?>
 
                                 <div class="da-panel-content">
-                                    <?php if(($message = LuLu::getFlash('error'))!==null):?>
+                                    <?php if($message = LuLu::getFlash('error')):?>
                                     <div class="da-message error">
                                         <?php 
                                         if(is_array($message))

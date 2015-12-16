@@ -23,7 +23,7 @@ class CacheController extends \source\core\back\BackController
             if($model->asset)
             {
                 $assetDir = LuLu::getAlias('@statics/assets');
-                FileHelper::removeDirectoryContent($assetDir);
+                //FileHelper::removeDirectoryContent($assetDir);
             }
             return $this->redirect(['index']);
         }

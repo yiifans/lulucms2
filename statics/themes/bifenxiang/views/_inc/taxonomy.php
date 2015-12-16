@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use source\libs\Resource;
 use source\models\Content;
-use source\models\Taxonomy;
+use source\modules\taxonomy\models\Taxonomy;
 use source\LuLu;
 
 

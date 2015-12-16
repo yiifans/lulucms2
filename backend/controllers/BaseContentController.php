@@ -8,7 +8,7 @@ use source\core\back\BackController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use source\libs\Common;
-use source\helpers\StringHelper;
+use yii\helpers\StringHelper;
 use source\LuLu;
 
 abstract class BaseContentController extends BackController
@@ -16,6 +16,8 @@ abstract class BaseContentController extends BackController
 
     protected $content_type;
 
+    public $bodyClass;
+    
     protected $bodyModel;
 
     public function actionIndex()
@@ -33,34 +35,6 @@ abstract class BaseContentController extends BackController
         ]);
     }
 
-    public function saveContent($model, $bodyModel)
-    {
-        $postDatas = Yii::$app->request->post();
-        
-        if ($model->load($postDatas) && $bodyModel->load($postDatas) && $model->validate() && $bodyModel->validate())
-        {
-            if ($model->summary === null || $model->summary === '')
-            {
-                if ($bodyModel->hasAttribute('body'))
-                {
-                    $content = strip_tags($bodyModel->body);
-                    $pattern = '/\s/'; // 去除空白
-                    $content = preg_replace($pattern, '', $content);
-                    $model->summary = StringHelper::subString($content, 250);
-                }
-            }
-            if ($model->save())
-            {
-                $bodyModel->content_id = $model->id;
-                $bodyModel->save();
-                
-                return $this->redirect([
-                    'index'
-                ]);
-            }
-        }
-        return false;
-    }
 
     public function actionCreate()
     {
@@ -101,10 +75,17 @@ abstract class BaseContentController extends BackController
 
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-        
-        $this->deleteBodyModel($id);
-        
+        $transaction = LuLu::getDB()->getTransaction();
+        try{
+            $this->findModel($id)->delete();
+            
+            $this->deleteBodyModel($id);
+        }
+        catch (\Exception $e)
+        {
+            $transaction->rollBack();
+        }
+       
         return $this->redirect([
             'index'
         ]);
@@ -124,8 +105,35 @@ abstract class BaseContentController extends BackController
 
     public function findBodyModel($contentId = null)
     {
+        $bodyClass = $this->bodyClass;
+        
+        if ($contentId === null)
+        {
+            return new $bodyClass();
+        }
+        else
+        {
+            $ret = $bodyClass::findOne([
+                'content_id' => $contentId
+            ]);
+            if ($ret === null)
+            {
+                $ret = new $bodyClass();
+                $ret->content_id = $contentId;
+                $ret->body = '';
+                $ret->save();
+            }
+            return $ret;
+        }
     }
 
+    public function onClicked($event)
+    {
+        $this->trigger('clickEvent',$event);
+        
+        //$this->raiseEvent('clickEvent',$event);
+    }
+    
     public function deleteBodyModel($contentId)
     {
         $bodyModel = $this->findBodyModel($contentId);
@@ -133,5 +141,46 @@ abstract class BaseContentController extends BackController
         {
             $bodyModel->delete();
         }
+    }
+    
+    public function saveContent($model, $bodyModel)
+    {
+        $postDatas = Yii::$app->request->post();
+    
+        if ($model->load($postDatas) && $bodyModel->load($postDatas) && $model->validate() && $bodyModel->validate())
+        {
+            $model->summary = $this->getSummary($model, $bodyModel);
+            $transaction = LuLu::getDB()->beginTransaction();
+            try{
+                $model->save(false);
+                $bodyModel->content_id = $model->id;
+                $bodyModel->save();
+                $transaction->commit();
+                
+                return $this->redirect([
+                    'index'
+                ]);
+            }
+            catch (\Exception $e)
+            {
+                $transaction->rollBack();
+                return false;
+            }
+        }
+        return false;
+    }
+    
+    public function getSummary($model, $bodyModel)
+    {
+        if(empty($model->summary))
+        {
+            if ($bodyModel->hasAttribute('body'))
+            {
+                $content = strip_tags($bodyModel->body);
+                $content = preg_replace('/\s/', '', $content);
+                $model->summary = StringHelper::subString($content, 250);
+            }
+        }
+        return $model->summary;
     }
 }

@@ -18,9 +18,9 @@ $locals = DataSource::getPagedContents();
 	<div class="content">
         <?php 
         $this->loopData($locals['rows'],'//_inc/content_default');
-        echo \statics\themes\bifenxiang\functions\LinkPager::widget([
+        $this->showWidget('LinkPager', [
             'pagination' => $locals['pager']
-        ]);
+        ]);        
         ?>
     </div>
 </div>

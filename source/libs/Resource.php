@@ -2,6 +2,7 @@
 namespace source\libs;
 
 use source\LuLu;
+use yii\helpers\FileHelper;
 
 class Resource
 {
@@ -132,6 +133,28 @@ class Resource
         $ret = '@webroot/statics/themes/' . $currentTheme . '/modules/' . $content['type'] . '/_inc/content_default';
         
         return $ret;
+    }
+    
+    public static function checkHomeThemeFile($fileName,$checkDefault=true)
+    {
+        $currentTheme = Resource::getHomeTheme();
+        
+        $path=LuLu::getAlias('statics').'/themes/'.$currentTheme.$fileName.'.php';
+        if(!FileHelper::exist($path) && $checkDefault)
+        {
+            
+            $currentTheme='d';
+            $path=LuLu::getAlias('statics').'/themes/'.$currentTheme.$fileName.'.php';
+        }
+        else
+        {
+            return $currentTheme;
+        }
+        if(!FileHelper::exist($path))
+        {
+            return false;
+        }
+        return $currentTheme;
     }
 }
 

@@ -13,14 +13,18 @@ use source\LuLu;
 
 abstract class BaseContentController extends FrontController
 {
+    public $pageSize_index = 10;
+    public $pageSize_list=10;
+    
 	public $content_type;
+	public $bodyClass;
 	
 	public function actionIndex()
 	{
 	    $query = Content::find();
 	    $query->where(['content_type'=>$this->content_type]);
 	     
-	    $locals = LuLu::getPagedRows($query,['orderBy'=>'created_at desc','pageSize'=>10]);
+	    $locals = LuLu::getPagedRows($query,['orderBy'=>'created_at desc','pageSize'=>$this->pageSize_index]);
 	   
 	    return $this->render('index_default', $locals);
 	}
@@ -42,7 +46,7 @@ abstract class BaseContentController extends FrontController
 	    
 	    LuLu::setViewParam(['taxonomyModel'=>$taxonomyModel]);
 	    
-	    $this->layout = $vars['layout'];
+	    //$this->layout = $vars['layout'];
 	    return $this->render($vars['view'], $locals);
 	}
 	
@@ -61,7 +65,16 @@ abstract class BaseContentController extends FrontController
 	    return $this->render($vars['view'], $locals);
 	}
 	
-	public abstract function getDetail($id);
+    public function getDetail($id)
+    {
+        $model = Content::getBody($this->bodyClass, [
+            'a.id' => $id
+        ])->one();
+       
+        return [
+            'model' => $model
+        ];
+    }
 
 	
     public function getListVars($taxonomy)

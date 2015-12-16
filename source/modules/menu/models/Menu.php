@@ -3,7 +3,6 @@
 namespace source\modules\menu\models;
 
 use Yii;
-use source\libs\TreeHelper;
 use source\libs\Constants;
 use source\libs\Resource;
 use yii\helpers\Url;
@@ -174,7 +173,7 @@ class Menu extends \source\core\base\BaseActiveRecord
         $menus = self::getMenusByCategory($category);
         foreach ($menus as $menu)
         {
-            if($menu->parent_id == $parentId)
+            if($menu->parent_id === $parentId)
             {
                 if($status && $menu->status!==1)
                 {
