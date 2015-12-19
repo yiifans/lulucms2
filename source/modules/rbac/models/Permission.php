@@ -168,4 +168,16 @@ class Permission extends BaseRbacActiveRecord
         $this->default_value= trim($this->default_value);
         return parent::beforeSave($insert);
     }
+    
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        if(!$insert)
+        {
+            if(isset($changedAttributes['id']))
+            {
+                Relation::updateAll(['permission'=>$this->id],['permission'=>$changedAttributes['id']]);
+            }
+        }
+    }
 }
