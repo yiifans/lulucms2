@@ -27,4 +27,4 @@ the admin user id/password is admin111/admin111
 
 
 4、Note:
-
+建议在二次开发的时候在后台【设置】->【模块设置】中增加新模块，全部模块化。这样如果框架有更新也不会影响到模块
