@@ -386,7 +386,7 @@ img {
 
 .postDesc {
     clear: both;
-    color: #bcbcbc;
+    color: #7D8B8D;
     float: none;
     text-align: left;
     line-height: 200%;
@@ -397,7 +397,9 @@ img {
         color: #999;
         float: right;
     }
-
+.day .postDesc {
+    float:right;
+}
 #topics {
     background: #fff;
     overflow: hidden;

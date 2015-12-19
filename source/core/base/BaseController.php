@@ -8,6 +8,7 @@ use yii\filters\VerbFilter;
 use source\LuLu;
 use yii\web\ErrorAction;
 use source\traits\CommonTrait;
+use yii\base\InvalidRouteException;
 
 class BaseController extends Controller
 {

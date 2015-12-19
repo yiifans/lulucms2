@@ -12,12 +12,14 @@ class SiteController extends BackController
 
     public function actionIndex()
     {
-        
+        $this->layout='container';
         return $this->render('index');
     }
 
     public function actionWelcome()
     {
+        
+        
         return $this->render('welcome');
     }
 

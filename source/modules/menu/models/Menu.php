@@ -229,13 +229,16 @@ class Menu extends \source\core\base\BaseActiveRecord
         $action = LuLu::getApp()->requestedAction;
         $urlArray = explode('/', $action->uniqueId);
      
+        $showHome='';
+        
         $roots = self::getChildren('admin', 0, 1);
         foreach ($roots as $menu)
         {
             $url= $menu['url']==='#'? '#':Url::to([$menu['url']]);
             $title='<span class="da-nav-icon"><img src="'.$adminUrl.'/images/icons/black/32/'.$menu['thumb'].'" alt="'.$menu['name'].'" /></span>'.$menu['name'];
             
-            $html .= '<li id="menu-item-'.$menu['id'].'"><a href="'.$url.'">'.$title.'</a>';
+            $html .= '<li id="menu-item-'.$menu['id'].'" '.$showHome.' class="menu-item"><a href="'.$url.'">'.$title.'</a>';
+            $showHome=' style="display:none;"';
             
             $children = self::getChildren('admin',$menu['id'],1);
             if(count($children)>0)
@@ -250,10 +253,11 @@ class Menu extends \source\core\base\BaseActiveRecord
                         $opened=true;
                     }
                     $childUrl= $child['url']==='#'? '#':Url::to([$child['url']]);
-                    $childHtml.='<li id="menu-item-'.$child['id'].'"><a href="'.$childUrl.'">'.$child['name'].'</a></li>';
+                    $childHtml.='<li id="menu-item-'.$child['id'].'"><a href="'.$childUrl.'" target="mainFrame">'.$child['name'].'</a></li>';
                 }
                 
-                $html.= $opened?'<ul>':'<ul class="closed">';
+                //$html.= $opened?'<ul>':'<ul class="closed">';
+                $html.= '<ul>';
                 $html.=$childHtml;
                 $html.='</ul>';
             }

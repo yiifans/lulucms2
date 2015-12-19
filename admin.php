@@ -24,6 +24,6 @@ $config = yii\helpers\ArrayHelper::merge(
 );
 
 $app = new BackApplication($config);
-$app->defaultRoute='/site/welcome';
+$app->defaultRoute='/site/index';
 $app->run();
 

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use source\libs\Resource;
 use source\models\Taxonomy;
+
 /* @var $this yii\web\View */
 $this->title = $taxonomyModel['name'];
 
@@ -11,9 +12,9 @@ $this->title = $taxonomyModel['name'];
 
 <?php 
 $this->loopData($rows,'//_inc/content_default');
-        echo \statics\themes\fengyun\functions\LinkPager::widget([
-            'pagination' => $pager
-        ]);
+$this->showPager([
+    'pagination' => $pager
+]);
 ?>
 
 

@@ -85,157 +85,121 @@ $rbacService = LuLu::getService('rbac');
     ]);?>
 
     <title><?php echo $this->title ?> - <?php echo $this->getConfigValue('sys_site_name')?></title>
+    <script type="text/javascript">
+        function toggleMenu(id) {
+            $(".menu-item").hide();
+            $("#menu-item-" + id).show();
+        }
+    </script>
+    <style type="text/css">
+        html, body {
+            height:100%;
+        }
+    </style>
     <?php $this->head() ?>
 </head>
 
 <body>
     <?php $this->beginBody() ?>
-  
 
-    <!-- Main Wrapper. Set this to 'fixed' for fixed layout and 'fluid' for fluid layout' -->
-    <div id="da-wrapper" class="fluid">
+    <table style="width: 100%; height: 100%;">
+        <tr>
+            <td>
+                <!-- Header -->
+                <div id="da-header">
 
-        <!-- Header -->
-        <div id="da-header">
+                    <div id="da-header-top">
 
-            <div id="da-header-top">
+                        <!-- Container -->
+                        <div class="da-container clearfix">
 
-                <!-- Container -->
-                <div class="da-container clearfix">
-
-                    <!-- Logo Container. All images put here will be vertically centere -->
-                    <div id="da-logo-wrap">
-                        <div id="da-logo">
-                            <div id="da-logo-img">
-                                <a href="<?php echo LuLu::getAlias('@web').'/admin.php';?>">
-                                    <img src="<?php echo Resource::getAdminUrl()?>/images/logo.png" alt="Dandelion Admin" />
-                                </a>
+                            <!-- Logo Container. All images put here will be vertically centere -->
+                            <div id="da-logo-wrap">
+                                <div id="da-logo">
+                                    <div id="da-logo-img">
+                                        <a href="<?php echo LuLu::getAlias('@web').'/admin.php';?>">
+                                            <img src="<?php echo Resource::getAdminUrl()?>/images/logo.png" alt="Dandelion Admin" />
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Header Toolbar Menu -->
-                    <!-- Header Toolbar Menu -->
-                    <div id="da-header-toolbar" class="clearfix">
-                        <div id="da-user-profile">
-                            <div id="da-user-avatar">
-                                <img src="<?php echo Resource::getAdminUrl()?>/images/pp.jpg" alt="" />
+                            <div id="da-header-menu">
+                                <?php foreach($this->menuService->getChildren('admin') as $item):?>
+                                <div class="da-header-menu-item" id="menu-<?php echo $item['id']?>" onclick="toggleMenu(<?php echo $item['id']?>);"><?php echo $item['name']?></div>
+                                <?php endforeach;?>
                             </div>
-                            <div id="da-user-info">
-                                <?php echo LuLu::$app->user->identity->username?>
-                            </div>
-                            <ul class="da-header-dropdown">
-                                <li class="da-dropdown-caret">
-                                    <span class="caret-outer"></span>
-                                    <span class="caret-inner"></span>
-                                </li>
-                                <li class="da-dropdown-divider"></li>
-                                <li><a href="<?php echo LuLu::getAlias('@web').'/index.php';?>" target="_blank">站点首页</a></li>
-                            </ul>
-                            
-                        </div>
-                        <div id="da-header-button-container">
-                            <ul>
-                                <li class="da-header-button logout">
-                                    <?php echo Html::a('退出',['/site/logout'])?>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <!-- Content -->
-        <div id="da-content">
-
-            <!-- Container -->
-            <div class="da-container clearfix">
-
-                <!-- Sidebar -->
-                <div id="da-sidebar-separator"></div>
-                <div id="da-sidebar">
-
-                    <!-- Main Navigation -->
-                    <div id="da-main-nav" class="da-button-container">
-                        <ul>
-                        <?php echo Menu::getAdminMenu();?>
-                        </ul>
-                    </div>
-
-                </div>
-
-                <!-- Main Content Wrapper -->
-                <div id="da-content-wrap" class="clearfix">
-
-                    <!-- Content Area -->
-                    <div id="da-content-area">
-                        <?php if(LuLu::getViewParam('defaultLayout')===null):?>
-                        <div class="grid_4">
-                            <div class="da-panel">
-                                <div class="da-panel-header">
-                                    <span class="da-panel-title">
-                                        <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/16/pencil.png" alt="">
-                                        <?= $this->title ?>
-                                    </span>
-
+                            <!-- Header Toolbar Menu -->
+                            <!-- Header Toolbar Menu -->
+                            <div id="da-header-toolbar" class="clearfix">
+                                <div id="da-user-profile">
+                                    <div id="da-user-avatar">
+                                        <img src="<?php echo Resource::getAdminUrl()?>/images/pp.jpg" alt="" />
+                                    </div>
+                                    <div id="da-user-info">
+                                        <?php echo LuLu::$app->user->identity->username?>
+                                    </div>
+                                    <ul class="da-header-dropdown">
+                                        <li class="da-dropdown-caret">
+                                            <span class="caret-outer"></span>
+                                            <span class="caret-inner"></span>
+                                        </li>
+                                        <li class="da-dropdown-divider"></li>
+                                        <li><a href="<?php echo LuLu::getAlias('@web').'/index.php';?>" target="_blank">站点首页</a></li>
+                                    </ul>
 
                                 </div>
-                                <?php if(($toolbars = LuLu::getViewParam('toolbars'))!==null):?>
-                                <div class="da-panel-toolbar top">
+                                <div id="da-header-button-container">
                                     <ul>
-                                        <?php foreach ($toolbars as $bar):?>
-                                        <li><?php echo $bar;?></li>
-                                        <?php endforeach;?>
+                                        <li class="da-header-button logout">
+                                            <?php echo Html::a('退出',['/site/logout'])?>
+                                        </li>
                                     </ul>
                                 </div>
-                                <?php endif;?>
-
-                                <div class="da-panel-content">
-                                    <?php if($message = LuLu::getFlash('error')):?>
-                                    <div class="da-message error">
-                                        <?php 
-                                        if(is_array($message))
-                                        {
-                                            echo '<ul>';
-                                            foreach ($message as $item)
-                                            {
-                                                echo '<li>'.$item.'</li>';
-                                            }
-                                            echo '</ul>';
-                                        }
-                                        else
-                                        {
-                                            echo $message;
-                                        }
-                                        ?>
-                                    </div>
-                                    <?php endif;?>
-                                    <?php echo $content ?>
-                                </div>
                             </div>
+
                         </div>
-                        <?php else:?>
-                            <?php echo $content ?>
-                        <?php endif;?>
                     </div>
-
                 </div>
+            </td>
+        </tr>
+        <tr>
+            <td height="100%">
+                <table style="width: 100%; height: 100%;margin:0px; padding:0px;" id="da-content">
+                    <tr>
+                        <td width="200px">
+                            <div id="da-sidebar">
 
-            </div>
+                                <!-- Main Navigation -->
+                                <div id="da-main-nav" class="da-button-container">
+                                    <ul>
+                                        <?php echo Menu::getAdminMenu();?>
+                                    </ul>
+                                </div>
 
-        </div>
-
-        <!-- Footer -->
-        <div id="da-footer">
-            <div class="da-container clearfix">
-                <p>
-                Copyright 2012. LuLu CMS Admin. All Rights Reserved.
-            </div>
-        </div>
-
-    </div>
+                            </div>
+                        </td>
+                        <td >
+                            <iframe  id="mainFrame" name="mainFrame" width="100%" height="100%" 
+                                style="overflow: visible;background-color:transparent" frameborder="0" scrolling="yes" 
+                                allowtransparency="true"
+                                src="<?php echo Url::to(['/site/welcome'])?>" ></iframe>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td height="60px">
+                <!-- Footer -->
+                <div id="da-footer">
+                    <div class="da-container clearfix">
+                        <p>
+                        Copyright 2012. LuLu CMS Admin. All Rights Reserved.
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
     <?php $this->endBody() ?>
 </body>
 </html>

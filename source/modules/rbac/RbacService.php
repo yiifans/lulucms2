@@ -10,6 +10,7 @@ use source\modules\rbac\models\Category;
 use source\LuLu;
 use source\core\front\FrontApplication;
 use source\models\User;
+use source\libs\Utility;
 
 class RbacService extends \source\core\modularity\ModuleService
 {
@@ -41,42 +42,45 @@ class RbacService extends \source\core\modularity\ModuleService
         return 'rbacService';
     }
 
-    public function getRolesByUser($user)
+    public function getRolesByUser($username)
     {
-        $query = new Query();
-        $query->select([
-            'r.id', 
-            'r.category', 
-            'r.name', 
-            'r.description', 
-            'r.is_system', 
-            'r.sort_num'
-        ]);
-        $query->from([
-            'r' => $this->roleTable, 
-            'a' => $this->assignmentTable
-        ]);
-        $query->where('r.id=a.role');
-        $query->andWhere([
-            'a.user' => $user
-        ]);
-        $rows = $query->indexBy('id')->all();
-        return $rows;
-    }
-
-    public function getPermissionsByUser($user = null)
-    {
-        if($user===LuLu::getIdentity()->username)
+        if($username===LuLu::getIdentity()->username)
         {
-            
+        
             $role = LuLu::getIdentity()->role;
         }
         else
         {
-            $user = User::findOne(['username'=>$user]);
+            $user = User::findOne(['username'=>$username]);
             $role=$user->role;
-            
         }
+        return $role;
+        
+//         $query = new Query();
+//         $query->select([
+//             'r.id', 
+//             'r.category', 
+//             'r.name', 
+//             'r.description', 
+//             'r.is_system', 
+//             'r.sort_num'
+//         ]);
+//         $query->from([
+//             'r' => $this->roleTable, 
+//             'a' => $this->assignmentTable
+//         ]);
+//         $query->where('r.id=a.role');
+//         $query->andWhere([
+//             'a.user' => $username
+//         ]);
+//         $rows = $query->indexBy('id')->all();
+//         return $rows;
+    }
+
+    public function getPermissionsByUser($username = null)
+    {
+        $role = $this->getRolesByUser($username);
+       
         return $this->getPermissionsByRole($role);
         
 //        //for assignmentTable
@@ -154,7 +158,7 @@ class RbacService extends \source\core\modularity\ModuleService
             $form = intval($row['form']);
             if ($form === Permission::Form_Boolean)
             {
-                $v = ($row['value'] === '1' || $row['value'] === 'true') ? true : false;
+                $v = Utility::isTrue($row['value']);
             }
             else if ($form === Permission::Form_CheckboxList)
             {
@@ -170,25 +174,24 @@ class RbacService extends \source\core\modularity\ModuleService
         return $ret;
     }
 
-    public function checkPermission($permission = null, $params = [], $user = null)
+    public function checkPermission($permission = null, $params = [], $username = null)
     {
-        if ($user === null)
-        {
-            $user = LuLu::getIdentity()->username;
-        }
-        if ($permission === null)
+        if (empty($permission))
         {
             $permission = LuLu::getApp()->controller->uniqueId;
         }
-        
-        $rows = $this->getPermissionsByUser($user);
+        if (empty($username))
+        {
+            $username = LuLu::getIdentity()->username;
+        }
+        $rows = $this->getPermissionsByUser($username);
         
         if (! isset($rows[$permission]))
         {
             return false;
         }
         
-        return $this->executeRule($rows[$permission], $params,$user);
+        return $this->executeRule($rows[$permission], $params,$username);
     }
 
     public function checkHomePermission($permission = null, $params = [], $user = null)
@@ -232,6 +235,7 @@ class RbacService extends \source\core\modularity\ModuleService
                     return true;
                 }
             }
+            return false;
         }
         else
         {

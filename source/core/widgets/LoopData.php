@@ -49,23 +49,9 @@ class LoopData extends BaseWidget
             {
                 $index += 1;
                 
-                if ($index === 0)
-                {
-                    $isFirst = true;
-                }
-                else
-                {
-                    $isFirst = false;
-                }
-                if ($index == ($count - 1))
-                {
-                    $isLast = true;
-                }
-                else
-                {
-                    $isLast = false;
-                }
-                
+                $isFirst = $index === 0;
+                $isLast = $index == ($count - 1);
+               
                 $this->params['id'] = $id;
                 $this->params[$this->rowParam] = $row;
                 $this->params['index'] = $index;

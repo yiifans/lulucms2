@@ -33,9 +33,10 @@ use yii\helpers\StringHelper;
             <?php echo $row['summary']?>
             <?php echo Html::a('阅读全文',$row['url'],['class'=>'c_b_p_desc_readmore'])?>
         </div>
+        <div class="postDesc">posted @ <?php echo $row['createdAt']?> <?php echo $row['user_name']?> 阅读(<?php echo $row['view_count']?>) 评论(<?php echo $row['comment_count']?>) </div>
     </div>
     <div class="clear"></div>
-    <div class="postDesc">posted @ <?php echo $row['createdAt']?> <?php echo $row['user_name']?> 阅读(<?php echo $row['view_count']?>) 评论(<?php echo $row['comment_count']?>) </div>
+    
     <div class="clear"></div>
 
 </div>

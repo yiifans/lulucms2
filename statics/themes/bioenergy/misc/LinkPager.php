@@ -1,5 +1,5 @@
 <?php
-namespace statics\themes\bioenergy\functions;
+namespace statics\themes\bioenergy\misc;
 
 use Yii;
 use yii\helpers\Html;

@@ -13,6 +13,6 @@ class BackApplication extends BaseApplication
         parent::init();
         $this->loadActiveModules(true);
         
-        $this->layout = 'container';
+        $this->layout = 'main';
     }
 }

@@ -19,7 +19,6 @@ $this->loopData($rows,'//_inc/content_default');
 $this->showPager([
     'pagination' => $pager
 ]);
-$this->showWidget($name, $params)
 ?>
 
 
