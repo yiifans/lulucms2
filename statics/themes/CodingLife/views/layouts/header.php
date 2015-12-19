@@ -60,7 +60,7 @@ if(empty($title))
       {
           //var_dump($menu);
           
-          echo '<li><a id="main_'.$menu['id'].'" class="menu" href="'.$menu['url'].'">'.$menu['name'].'</a></li>';
+          echo '<li><a id="main_'.$menu['id'].'" class="menu" href="'.$menu['url'].'" target="'.$menu['target'].'">'.$menu['name'].'</a></li>';
       }
       
                     ?>
