@@ -41,9 +41,13 @@ the admin user id/password is admin111/admin111
 表单类型：多选
 
 默认值/选项：这个里面写的是action id，如
+
 index|首页——代表可执行action为index的get方法和post方法，显示文字为“首页”
+
 update:get|更新(GET)——代表可执行action为update的get方法，不可执行post方法（也就是只能查看，不能提交），显示文字为“更新(GET)”
+
 update:post|更新(POST)——代表可执行action为update的post方法，不可执行get方法（也就是只能提交，不能查看），显示文字为“更新(POST)”
+
 使用规则：选择“对控制器中Action判断” 即可
 
 二、给角色设置权限。
