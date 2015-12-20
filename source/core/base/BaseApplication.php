@@ -5,6 +5,14 @@ use source\LuLu;
 use yii\helpers\FileHelper;
 use source\traits\CommonTrait;
 
+/**
+ *
+ * @property \source\modules\modularity\ModularityService $modularityService
+ * @property \source\modules\rbac\RbacService $rbacService
+ * @property \source\modules\taxonomy\TaxonomyService $taxonomyService
+ * @property \source\modules\menu\MenuService $menuService
+ *
+ */
 class BaseApplication extends \yii\web\Application
 {
     use CommonTrait;

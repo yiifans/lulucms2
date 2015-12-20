@@ -21,4 +21,8 @@ class MenuService extends ModuleService
         return Menu::getChildren($category, $parentId,$status=null);
     }
 
+    public static function getMenuHtml($category,$parentId)
+    {
+        return Menu::getMenuHtml($category, 0);
+    }
 }

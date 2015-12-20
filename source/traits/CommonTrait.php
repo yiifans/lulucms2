@@ -14,7 +14,6 @@ use source\libs\Common;
 
 
 /**
- * Application is the base class for all web application classes.
  *
  * @property \source\modules\modularity\ModularityService $modularityService 
  * @property \source\modules\rbac\RbacService $rbacService 

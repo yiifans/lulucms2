@@ -14,7 +14,14 @@ use source\LuLu;
 use yii\helpers\FileHelper;
 use source\traits\CommonTrait;
 
-
+/**
+ *
+ * @property \source\modules\modularity\ModularityService $modularityService 
+ * @property \source\modules\rbac\RbacService $rbacService 
+ * @property \source\modules\taxonomy\TaxonomyService $taxonomyService
+ * @property \source\modules\menu\MenuService $menuService 
+ *
+ */
 class BaseView extends View
 {
 
@@ -36,13 +43,13 @@ class BaseView extends View
         return parent::renderFile($viewFile, $params, $context);
     }
 
+    public function setTheme()
+    {
+    }
+    
     public function getHomeUrl($url=null)
     {
         return LuLu::getHomeUrl($url);
-    }
-    
-    public function setTheme()
-    {
     }
 	
 	public function addBreadcrumbs($items)
@@ -102,8 +109,6 @@ class BaseView extends View
         LoopData::end();
     }
 
-    
-    
     public function showWidget($name,$params)
     {
         $currentTheme = Resource::checkHomeThemeFile('/misc/'.$name);

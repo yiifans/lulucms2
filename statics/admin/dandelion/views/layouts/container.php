@@ -99,10 +99,10 @@ $rbacService = LuLu::getService('rbac');
     <?php $this->head() ?>
 </head>
 
-<body>
+<body onresize="iFrameHeight();">
     <?php $this->beginBody() ?>
 
-    <table style="width: 100%; height: 100%;">
+    <table style="width: 100%; height: 100%; margin:0px;" id="tableLayout">
         <tr>
             <td>
                 <!-- Header -->
@@ -182,19 +182,38 @@ $rbacService = LuLu::getService('rbac');
                             <iframe  id="mainFrame" name="mainFrame" width="100%" height="100%" 
                                 style="overflow: visible;background-color:transparent" frameborder="0" scrolling="yes" 
                                 allowtransparency="true"
-                                src="<?php echo Url::to(['/site/welcome'])?>" ></iframe>
+                                src="<?php echo Url::to(['/site/welcome'])?>" onLoad="iFrameHeight()"></iframe>
+    <script type="text/javascript" language="javascript">
+       
+        function iFrameHeight() {
+            var bodyHeight = document.body.scrollHeight;
+            
+            var contentHeight = document.body.scrollHeight - 100;
+
+            console.log(contentHeight);
+
+            //$("#tableLayout").height(bodyHeight);
+            
+            var ifm = document.getElementById("mainFrame");
+            ifm.height = contentHeight;
+            
+
+
+            //ifm.height=300;
+        }
+    </script>                                
                         </td>
                     </tr>
                 </table>
             </td>
         </tr>
         <tr>
-            <td height="60px">
+            <td height="40px">
                 <!-- Footer -->
                 <div id="da-footer">
                     <div class="da-container clearfix">
                         <p>
-                        Copyright 2012. LuLu CMS Admin. All Rights Reserved.
+                        Copyright 2012. LuLu CMS Admin. All Rights Reserved.</p>
                     </div>
                 </div>
             </td>
