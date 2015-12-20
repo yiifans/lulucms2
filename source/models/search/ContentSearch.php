@@ -45,6 +45,14 @@ class ContentSearch extends Content
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+//             'pagination' => [
+//                  'pageSize' => 2,
+//              ],
+            'sort'=>[
+                'defaultOrder' => [
+                    'created_at' => SORT_DESC
+                ]
+            ],
         ]);
 
         $this->load($params);

@@ -362,6 +362,12 @@ class LuLu extends \Yii
         return $command->queryOne();
     }
 
+    /**
+     * 
+     * @param unknown $query
+     * @param array $config ['db','page','pageSize','orderBy','rows','pager']
+     * @return multitype:\yii\data\Pagination unknown
+     */
     public static function getPagedRows($query, $config = [])
     {
         $db = isset($config['db'])?$config['db']:null;

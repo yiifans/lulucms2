@@ -13,12 +13,19 @@ use source\LuLu;
 
 abstract class BaseContentController extends FrontController
 {
+    //首页页面大小
     public $pageSize_index = 10;
-    public $pageSize_list=10;
     
+    //内容类型
 	public $content_type;
+	
+	//内容body的class
 	public $bodyClass;
 	
+	/**
+	 * 首页
+	 * @return \yii\base\string
+	 */
 	public function actionIndex()
 	{
 	    $query = Content::find();
@@ -29,6 +36,11 @@ abstract class BaseContentController extends FrontController
 	    return $this->render('index_default', $locals);
 	}
 	
+	/**
+	 * 列表页
+	 * @param integer $taxonomy
+	 * @return \yii\base\string
+	 */
 	public function actionList($taxonomy=-1)
 	{
 	    $query = Content::find();
@@ -39,25 +51,33 @@ abstract class BaseContentController extends FrontController
 	    }
 	    
 	    $taxonomyModel = $this->taxonomyService->getTaxonomyById($taxonomy);
+	    LuLu::setViewParam(['taxonomyModel'=>$taxonomyModel]);
+	    
 	    $vars = $this->getListVars($taxonomyModel);
 	    
 	    $locals = LuLu::getPagedRows($query,['orderBy'=>'created_at desc','pageSize'=>$vars['pageSize']]);
 	    $locals['taxonomyModel']=$taxonomyModel;
 	    
-	    LuLu::setViewParam(['taxonomyModel'=>$taxonomyModel]);
-	    
-	    //$this->layout = $vars['layout'];
+	    $this->layout = $vars['layout'];
 	    return $this->render($vars['view'], $locals);
 	}
 	
 	
-	
+	/**
+	 * 内容页
+	 * @param unknown $id
+	 * @return \yii\base\string
+	 */
 	public function actionDetail($id)
 	{
 	    Content::updateAllCounters(['view_count'=>1],['id'=>$id]);
 	     
 	    $locals = $this->getDetail($id);
-	    $locals['taxonomyModel'] = $this->taxonomyService->getTaxonomyById($locals['model']['taxonomy_id']);
+	    
+	    $taxonomyModel = $this->taxonomyService->getTaxonomyById($locals['model']['taxonomy_id']);
+	    LuLu::setViewParam(['taxonomyModel'=>$taxonomyModel]);
+	    
+	    $locals['taxonomyModel'] = $taxonomyModel;
 	    
 	    $vars = $this->getDetailVars($locals['taxonomyModel'],$locals['model']);
 	   
@@ -76,39 +96,49 @@ abstract class BaseContentController extends FrontController
         ];
     }
 
-	
-    public function getListVars($taxonomy)
+	/**
+	 * 
+	 * @param unknown $taxonomyModel
+	 * @return array ['view','layout','pageSize]
+	 */
+    public function getListVars($taxonomyModel)
 	{
-	    $locals = [];
+	    $vars = [];
 
-	    $locals['view'] = empty($taxonomy['list_view']) ? 'list_default': $taxonomy['list_view'];
-	    $locals['layout'] = empty($taxonomy['list_layout']) ? null: $taxonomy['list_layout'];
-	    $locals['pageSize'] = empty($taxonomy['page_size']) ? 10: $taxonomy['page_size'];
+	    $vars['view'] = empty($taxonomyModel['list_view']) ? 'list_default': $taxonomyModel['list_view'];
+	    $vars['layout'] = empty($taxonomyModel['list_layout']) ? null: $taxonomyModel['list_layout'];
+	    $vars['pageSize'] = empty($taxonomyModel['page_size']) ? 10: $taxonomyModel['page_size'];
 	    return $locals;
 	}
 	
-	public function getDetailVars($taxonomy,$detailModel)
+	/**
+	 * 
+	 * @param unknown $taxonomyModel
+	 * @param unknown $detailModel
+	 * @return array ['view','layout']
+	 */
+	public function getDetailVars($taxonomyModel,$detailModel)
 	{
-	    $locals = [];
+	    $vars = [];
 	    
 	    if(!empty($detailModel['view']))
 	    {
-	        $locals['view']=$detailModel['view'];
+	        $vars['view']=$detailModel['view'];
 	    }
 	    else
 	    {
-	        $locals['view'] = empty($taxonomy['detail_view']) ? 'detail_default': $taxonomy['detail_view'];
+	        $vars['view'] = empty($taxonomyModel['detail_view']) ? 'detail_default': $taxonomyModel['detail_view'];
 	    }
 	    
 	    if(!empty($detailModel['layout']))
 	    {
-	        $locals['layout']=$detailModel['layout'];
+	        $vars['layout']=$detailModel['layout'];
 	    }
 	    else
 	    {
-	        $locals['layout'] = empty($taxonomy['detail_layout']) ? null: $taxonomy['detail_layout'];
+	        $vars['layout'] = empty($taxonomyModel['detail_layout']) ? null: $taxonomyModel['detail_layout'];
 	    }
 	    
-	    return $locals;
+	    return $vars;
 	}
 }

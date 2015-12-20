@@ -23,11 +23,10 @@ abstract class BaseContentController extends BackController
     public function actionIndex()
     {
         $searchModel = new ContentSearch();
-        $dataProvider = $searchModel->search([]);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere([
             'content_type' => $this->content_type
         ]);
-        $dataProvider->query->orderBy('created_at desc');
         
         return $this->render('index', [
             'searchModel' => $searchModel, 
