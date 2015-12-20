@@ -6,13 +6,10 @@ use source\traits\CommonTrait;
 
 class BaseComponent extends Component
 {
-
-    //use CommonTrait;
+    use CommonTrait;
     
     public function init()
     {
         parent::init();
-        
-        //$this->initService();
     }
 }

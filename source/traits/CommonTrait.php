@@ -13,34 +13,28 @@ use yii\base\Model;
 use source\libs\Common;
 
 
+/**
+ * Application is the base class for all web application classes.
+ *
+ * @property \source\modules\modularity\ModularityService $modularityService 
+ * @property \source\modules\rbac\RbacService $rbacService 
+ * @property \source\modules\taxonomy\TaxonomyService $taxonomyService
+ * @property \source\modules\menu\MenuService $menuService 
+ *
+ */
 trait  CommonTrait
-{
-    /**
-     * @var \source\modules\modularity\ModularityService
-     */
-    public $modularityService;
-    /**
-     * @var \source\modules\rbac\RbacService
-     */
-    public $rbacService;
-    /**
-     * @var \source\modules\taxonomy\TaxonomyService
-     */
-    public $taxonomyService;
-    
-    /**
-     * @var \source\modules\menu\MenuService
-     */
-    public $menuService;
-    
-    public function initService()
+{   
+    public function __get($name)
     {
-        $this->modularityService = LuLu::getService('modularity');
-        $this->rbacService = LuLu::getService('rbac');
-        $this->taxonomyService = LuLu::getService('taxonomy');
-        $this->menuService=LuLu::getService('menu');
+        $dot = strpos($name,'Service');
+        if($dot>0)
+        {
+            $serviceName = substr($name,0,$dot);
+            return LuLu::getService($serviceName);
+        }
+        return parent::__get($name);
     }
-    
+   
     public function getConfig($id)
     {
         return Common::getConfig($id);

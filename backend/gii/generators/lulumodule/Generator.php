@@ -66,8 +66,8 @@ class Generator extends \yii\gii\Generator
     public function attributeLabels()
     {
         return [
-            'moduleID' => 'Module ID',
-            'moduleDir' => 'Module Dir',
+            'moduleID' => '模块ID',
+            'moduleDir' => '模块目录名称',
         ];
     }
 
@@ -77,8 +77,8 @@ class Generator extends \yii\gii\Generator
     public function hints()
     {
         return [
-            'moduleID' => 'This refers to the ID of the module, e.g., <code>admin</code>.',
-            'moduleDir' => 'moduleDir <code>admin</code>.',
+            'moduleID' => '模块的ID, e.g., <code>admin</code>.',
+            'moduleDir' => '文件夹名称，如<code>post,shop,news</code>',
         ];
     }
 
@@ -124,7 +124,6 @@ EOD;
         $files=array_merge($files,$this->generateAdmin($modulePath));
         $files=array_merge($files,$this->generateHome($modulePath));
         $files=array_merge($files,$this->generateSetting($modulePath));
-        
         return $files;
     }
    

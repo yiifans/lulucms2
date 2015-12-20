@@ -41,8 +41,6 @@ class BaseController extends Controller
     public function init()
     {
         parent::init();
-       
-        $this->initService();
     }
 
     /**

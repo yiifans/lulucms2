@@ -25,8 +25,6 @@ class BaseView extends View
     public function init()
     {
         parent::init();
-        
-        $this->initService();
     }
 
     public function renderFile($viewFile, $params = [], $context = null)

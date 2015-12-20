@@ -3,15 +3,22 @@ namespace source\core\base;
 
 use source\LuLu;
 use yii\helpers\FileHelper;
+use source\traits\CommonTrait;
 
 class BaseApplication extends \yii\web\Application
 {
-
+    use CommonTrait;
+    
     public $activeModules = [];
 
+    public function init()
+    {
+        parent::init();
+    }
+    
     public function loadActiveModules($isAdmin)
     {
-        $moduleManager = LuLu::getService('modularity');
+        $moduleManager = $this->modularityService;
         
         $this->activeModules = $moduleManager->getActiveModules($isAdmin);
         
