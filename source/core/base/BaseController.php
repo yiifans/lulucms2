@@ -45,6 +45,12 @@ class BaseController extends Controller
         $this->initService();
     }
 
+    /**
+	 * 执行一个action
+	 * @param string $id
+	 * @param array $params
+	 * @return ActionResult
+	 */
     public function runAction($id, $params = [])
     {
         $action = $this->createAction($id);

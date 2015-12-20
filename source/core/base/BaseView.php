@@ -81,8 +81,6 @@ class BaseView extends View
         return $datas;
     }
 
-  
-
     public function loopData($dataSource, $item, $appendOptions = [])
     {
         $options = [];

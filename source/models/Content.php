@@ -86,7 +86,7 @@ class Content extends \source\core\base\BaseActiveRecord
     public function beforeSave($insert)
     {
         $uploadedFile = Common::uploadFile('Content[thumb]');
-        if($uploadedFile!=null)
+        if($uploadedFile['message']==='ok')
         {
             $this->thumb=$uploadedFile['url'].$uploadedFile['new_name'];
         }

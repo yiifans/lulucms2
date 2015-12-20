@@ -233,12 +233,28 @@ class LuLu extends \Yii
         self::setFlash('error', $message);
     }
 
+    
+
+    public static function error($message, $category = 'application')
+    {
+        parent::error($message, $category);
+        self::setErrorMessage($message);
+    }
+    public static function warning($message, $category = 'application')
+    {
+        parent::warning($message, $category);
+        self::setWarningMessage($message);
+    }
     public static function info($var, $category = 'application')
     {
         $dump = VarDumper::dumpAsString($var);
         parent::info($dump, $category);
     }
-
+    public static function debug($var, $category = 'application')
+    {
+        $dump = VarDumper::dumpAsString($var);
+        parent::info($dump, $category);
+    }
     public static function getCache($key)
     {
         $cache = LuLu::$app->cache;

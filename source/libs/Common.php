@@ -8,11 +8,23 @@ use source\models\Config;
 use source\LuLu;
 class Common 
 {
+    /**
+     * 获取配置
+     * @param string $id 配置ID
+     * @param boolean $fromCache 是否从缓存读取，
+     * @return \source\models\Config 
+     */
 	public static function getConfig($id, $fromCache = true)
 	{
 	    return Config::getModel($id, $fromCache);
 	}
 	
+	/**
+	 * 获取配置值
+	 * @param string $id
+	 * @param boolean $fromCache
+	 * @return string
+	 */
 	public static function getConfigValue($id, $fromCache = true)
 	{
 	    return Config::getValue($id, $fromCache);
@@ -24,17 +36,64 @@ class Common
 	    return $service->getTaxonomyCategories();
 	}
 	
+	/**
+	 * 
+	 * -path
+	 * -url
+	 * -name
+	 * -new_name
+	 * -temp_name
+	 * -type
+	 * -ext
+	 * -size
+	 * -message
+	 * 
+	 * @param string $name the form name
+	 * @return array
+	 */
 	public static function uploadFile($name)
 	{
-		
+	    LuLu::info($name,__METHOD__.',the form name is '.$name);
 		$uploadedFile = UploadedFile::getInstanceByName($name);
-	
-		var_dump($uploadedFile);
-		if($uploadedFile === null || $uploadedFile->hasError)
+		
+		if($uploadedFile === null)
 		{
-			return null;
+			return ['message'=>'没有文件'];
 		}
 	
+		if($uploadedFile->hasError)
+		{
+    		switch($uploadedFile->error){
+        		case '1':
+        			$error = '超过php.ini允许的大小。';
+        			break;
+        		case '2':
+        			$error = '超过表单允许的大小。';
+        			break;
+        		case '3':
+        			$error = '图片只有部分被上传。';
+        			break;
+        		case '4':
+        			$error = '请选择图片。';
+        			break;
+        		case '6':
+        			$error = '找不到临时目录。';
+        			break;
+        		case '7':
+        			$error = '写文件到硬盘出错。';
+        			break;
+        		case '8':
+        			$error = 'File upload stopped by extension。';
+        			break;
+        		case '999':
+        		default:
+        			$error = '未知错误。';
+        	}
+		        
+		    LuLu::error($error,'上传文件出错');
+		    return ['message'=>$error];
+		}
+		
 		$ymd = date("Ymd");
 	
 		$save_path = \Yii::getAlias('@attachmentPath') . '/' . $ymd . "/";
@@ -53,7 +112,8 @@ class Common
 	
 		$uploadedFile->saveAs($save_path . $new_file_name);
 	
-		return ['path' => $save_path, 'url' => $save_url, 'name' => $file_name, 'new_name' => $new_file_name, 'ext' => $file_ext];
+		return ['path' => $save_path, 'url' => $save_url, 'name' => $file_name, 'new_name' => $new_file_name, 'ext' => $file_ext,
+		    'temp_name'=>$uploadedFile->tempName,'type'=>$uploadedFile->type,'size'=>$uploadedFile->size,'message'=>'ok'];
 	}
 	
 
