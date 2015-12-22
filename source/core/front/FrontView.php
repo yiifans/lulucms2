@@ -11,7 +11,7 @@ use yii\db\ActiveRecord;
 use yii\base\Model;
 use yii\web\View;
 use source\core\base\BaseView;
-use yii\base\Theme;
+use source\core\base\Theme;
 use source\LuLu;
 use source\libs\Resource;
 use source\libs\DataSource;
@@ -34,14 +34,15 @@ class FrontView extends BaseView
             'pathMap' => [
                 '@app/views' => [
                     '@statics/themes/' . $currentTheme . '/views', 
-                    '@statics/themes/default/views'
+                    '@statics/themes/basic/views'
                 ], 
                 '@source/modules/' . $moduleId . '/home/views' => [
                     '@statics/themes/' . $currentTheme . '/modules/' . $moduleId, 
-                    '@statics/themes/default/modules/' . $moduleId
+                    '@statics/themes/basic/modules/' . $moduleId
                 ]
             ], 
-            'baseUrl' => '@statics/themes/default'
+            'basePath' => '@statics/themes/basic',
+            'baseUrl' => '@statics/themes/basic'
         ];
         
         $this->theme = new Theme($config);

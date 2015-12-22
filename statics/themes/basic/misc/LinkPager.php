@@ -1,5 +1,5 @@
 <?php
-namespace statics\themes\d\misc;
+namespace statics\themes\basic\misc;
 
 use Yii;
 use yii\helpers\Html;

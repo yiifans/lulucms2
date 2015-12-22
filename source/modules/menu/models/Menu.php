@@ -269,8 +269,10 @@ class Menu extends \source\core\base\BaseActiveRecord
     
     public function beforeDelete()
     {
+        //删除子节点
         $childrenIds = $this->getChildrenIds();
         self::deleteAll(['id'=>$childrenIds]);
+        
         return true;
     }
     

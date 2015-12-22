@@ -75,4 +75,9 @@ class SiteController extends FrontController
             'message' => '站点维护中。。。'
         ]);
     }
+    
+    public function actionGuestbook()
+    {
+        return $this->render('guestbook', []);
+    }
 }

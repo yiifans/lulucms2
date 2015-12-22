@@ -9,13 +9,12 @@ use frontend\controllers\BaseContentController;
 
 class DefaultController extends BaseContentController
 {
-
     public function init()
     {
         parent::init();
         $this->content_type = 'post';
         $this->bodyClass = ContentPost::className();
+        $this->pageSize_index=10;
         
     }
-
 }

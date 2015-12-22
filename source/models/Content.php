@@ -103,13 +103,12 @@ class Content extends \source\core\base\BaseActiveRecord
     public static function getBody($class,$condition=[],$columns=[])
     {
         $bodyModel = new $class();
-        $table = $bodyModel::tableName();
         if(empty($columns))
         {
             $columns=$bodyModel->getTableSchema()->columns;
         }
         
-        $selects=['a.*'];
+        $selects = ['content.*'];
         
         foreach ((array)$columns as $column)
         {
@@ -127,8 +126,8 @@ class Content extends \source\core\base\BaseActiveRecord
         
         $query = new Query();
         $query->select($selects)
-            ->from(['a' => Content::tableName()])
-            ->innerJoin(['body'=>$table], '{{a}}.[[id]]={{body}}.[[content_id]]');
+            ->from(['content' => Content::tableName()])
+            ->innerJoin(['body'=>$bodyModel::tableName()], '{{content}}.[[id]]={{body}}.[[content_id]]');
         
         if(!empty($condition))
         {
@@ -137,6 +136,16 @@ class Content extends \source\core\base\BaseActiveRecord
         return $query;
     }
     
+    public static function findPublished($where=null)
+    {
+        $query = self::find();
+        $query->where(['status'=>Constants::Status_Publish]);
+        if(!empty($where))
+        {
+            $query->andWhere($where);
+        }
+        return $query;
+    }
     
     public function behaviors()
     {

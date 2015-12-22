@@ -16,7 +16,7 @@ abstract class BaseContentController extends BackController
 
     protected $content_type;
 
-    public $bodyClass;
+    protected $bodyClass;
     
     protected $bodyModel;
 
@@ -34,21 +34,22 @@ abstract class BaseContentController extends BackController
         ]);
     }
 
-
     public function actionCreate()
     {
         $model = new Content();
-        $model->user_id = LuLu::$app->user->identity->id;
-        $model->user_name = LuLu::$app->user->identity->username;
+        $model->user_id = LuLu::getIdentity()->id;
+        $model->user_name = LuLu::getIdentity()->username;
         $model->content_type = $this->content_type;
         $model->loadDefaultValues();
         
         $bodyModel = $this->findBodyModel();
         $bodyModel->loadDefaultValues();
         
-        if (($r = $this->saveContent($model, $bodyModel)) !== false)
+        if ($this->saveContent($model, $bodyModel))
         {
-            return $r;
+            return $this->redirect([
+                'index'
+            ]);
         }
         
         return $this->render('create', [
@@ -62,10 +63,13 @@ abstract class BaseContentController extends BackController
         $model = $this->findModel($id);
         $bodyModel = $this->findBodyModel($id);
         
-        if (($r = $this->saveContent($model, $bodyModel)) !== false)
+        if ($this->saveContent($model, $bodyModel))
         {
-            return $r;
+            return $this->redirect([
+                'index'
+            ]);
         }
+        
         return $this->render('update', [
             'model' => $model, 
             'bodyModel' => $bodyModel
@@ -77,8 +81,8 @@ abstract class BaseContentController extends BackController
         $transaction = LuLu::getDB()->getTransaction();
         try{
             $this->findModel($id)->delete();
-            
-            $this->deleteBodyModel($id);
+            $this->findBodyModel($id)->delete();
+            $transaction->commit();
         }
         catch (\Exception $e)
         {
@@ -126,22 +130,6 @@ abstract class BaseContentController extends BackController
         }
     }
 
-    public function onClicked($event)
-    {
-        $this->trigger('clickEvent',$event);
-        
-        //$this->raiseEvent('clickEvent',$event);
-    }
-    
-    public function deleteBodyModel($contentId)
-    {
-        $bodyModel = $this->findBodyModel($contentId);
-        if ($bodyModel != null)
-        {
-            $bodyModel->delete();
-        }
-    }
-    
     public function saveContent($model, $bodyModel)
     {
         $postDatas = Yii::$app->request->post();
@@ -156,9 +144,7 @@ abstract class BaseContentController extends BackController
                 $bodyModel->save();
                 $transaction->commit();
                 
-                return $this->redirect([
-                    'index'
-                ]);
+                return true;
             }
             catch (\Exception $e)
             {

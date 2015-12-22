@@ -33,7 +33,7 @@ class TaxonomyService extends ModuleService
     public function getTaxonomyById($id,$default=true)
     {
         $taxonomyModel = Taxonomy::getTaxonomyById($id);
-        if($taxonomyModel===null&&$default===true)
+        if($taxonomyModel===null && $default===true)
         {
             $taxonomyModel= new Taxonomy();
             $taxonomyModel->id=-1;

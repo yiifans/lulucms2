@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use source\core\front\FrontController;
 use source\LuLu;
+use source\libs\DataSource;
 
 abstract class BaseContentController extends FrontController
 {
@@ -28,8 +29,7 @@ abstract class BaseContentController extends FrontController
 	 */
 	public function actionIndex()
 	{
-	    $query = Content::find();
-	    $query->where(['content_type'=>$this->content_type]);
+	    $query = Content::findPublished(['content_type'=>$this->content_type]);
 	     
 	    $locals = LuLu::getPagedRows($query,['orderBy'=>'created_at desc','pageSize'=>$this->pageSize_index]);
 	   
@@ -43,11 +43,10 @@ abstract class BaseContentController extends FrontController
 	 */
 	public function actionList($taxonomy=-1)
 	{
-	    $query = Content::find();
-	    $query->where(['content_type'=>$this->content_type]);
-	    if($taxonomy!==-1)
+	    $query = Content::findPublished(['content_type'=>$this->content_type]);
+	    if(intval($taxonomy)>0)
 	    {
-	        $query->andFilterWhere(['taxonomy_id'=>$taxonomy]);
+	        $query->andFilterWhere(['taxonomy_id'=>intval($taxonomy)]);
 	    }
 	    
 	    $taxonomyModel = $this->taxonomyService->getTaxonomyById($taxonomy);
@@ -88,7 +87,7 @@ abstract class BaseContentController extends FrontController
     public function getDetail($id)
     {
         $model = Content::getBody($this->bodyClass, [
-            'a.id' => $id
+            'content.id' => $id
         ])->one();
        
         return [
@@ -108,7 +107,7 @@ abstract class BaseContentController extends FrontController
 	    $vars['view'] = empty($taxonomyModel['list_view']) ? 'list_default': $taxonomyModel['list_view'];
 	    $vars['layout'] = empty($taxonomyModel['list_layout']) ? null: $taxonomyModel['list_layout'];
 	    $vars['pageSize'] = empty($taxonomyModel['page_size']) ? 10: $taxonomyModel['page_size'];
-	    return $locals;
+	    return $vars;
 	}
 	
 	/**
