@@ -17,7 +17,7 @@ $php_url = dirname(dirname(dirname(dirname(dirname(dirname($_SERVER['PHP_SELF'])
 //文件保存目录路径
 $save_path = $php_path . 'data/attachment/';
 //文件保存目录URL
-$save_url = $php_url . 'data/attachment/';
+$save_url = 'data/attachment/';
 
 
 

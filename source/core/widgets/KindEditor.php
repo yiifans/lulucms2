@@ -20,6 +20,7 @@ class KindEditor extends BaseWidget
 
     public $defaultParams = [
         'allowFileManager' => 'true',
+        'formatUploadUrl' =>'false',
     ];
 
     public function init()

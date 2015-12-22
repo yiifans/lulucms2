@@ -21,7 +21,7 @@ $php_url = dirname(dirname(dirname(dirname(dirname(dirname($_SERVER['PHP_SELF'])
 $root_path = $php_path . 'data/attachment/';
 
 //根目录URL，可以指定绝对路径，比如 http://www.yoursite.com/attached/
-$root_url = $php_url. 'data/attachment/';
+$root_url = 'data/attachment/';
 
 
 
