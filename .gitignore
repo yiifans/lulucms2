@@ -31,6 +31,9 @@ phpunit.phar
 /statics/assets
 /data/cache
 /data/log
+/data/runtime
+/data/install.lock
+/data/config/db.php
 
 lulucms2.phpproj
 lulucms2.phpproj.user
