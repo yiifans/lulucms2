@@ -13,7 +13,7 @@ $this->title = '安装停止';
     <div class="complete">
         <div class="complete_txt">
             <strong>现在您可以：</strong>
-            <a href="index.php" class="action" target="_blank">访问网站首页</a><span>或</span><a href="admin.php" class="action" target="_blank">登陆后台</a>
+            <a href="index.php" class="action">访问网站首页</a><span>或</span><a href="admin.php" class="action">登陆后台</a>
             <div class="complete_note ">
                 <p class="red">如重新安装，请删除<code>data/install.lock</code>文件</p>
                 <p class="help">
