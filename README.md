@@ -5,7 +5,7 @@ one powerful and modularity CMS. based on Yii2
 
 
 
-2、Live Demo
+2、在线演示Live Demo
 
 frontend: http://www.lulucms.com/
 
@@ -13,24 +13,20 @@ backend(demo/demo): http://www.lulucms.com/admin.php
 
 
 
-3、Install:
+3、安装:
 
-1、download lulucms2
+1)、先下载 lulucms2
 
-2、create database
+2)、然后新建数据库
 
-3、import the sql (which in folder data\sql)
-
-4、config the db connection in source\config\main-local.php
-
-the admin user id/password is admin111/admin111
+3)、然后通过web打开lulucms根据提示安装即可
 
 
 4、Note:
 
 建议在二次开发的时候在后台【设置】->【模块设置】中增加新模块，全部模块化。这样如果框架有更新也不会影响到模块
 
-一、添加权限
+【一】、添加权限
 
 在后台添加模块后需要在【用户】->【权限管理】中新建对这个模块的访问权限。
 
@@ -50,7 +46,7 @@ update:post|更新(POST)——代表可执行action为update的post方法，不�
 
 使用规则：选择“对控制器中Action判断” 即可
 
-二、给角色设置权限。
+【二】、给角色设置权限。
 
 把刚刚在【一】里面添加的权限赋值为相应的角色后就可以在后台访问了。
 
