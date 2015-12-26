@@ -42,7 +42,7 @@ use source\LuLu;
     <div class="site-top">
         <div class="clearfix container">
             <div class="site-branding">
-                <h1 class="site-title"><a href="install.php" rel="home" title="LuLu CMS">
+                <h1 class="site-title"><a href="http://www.lulucms.com" rel="home" title="LuLu CMS">
                     LuLu CMS</a></h1>
             </div>
            
