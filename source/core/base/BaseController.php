@@ -9,6 +9,8 @@ use source\LuLu;
 use yii\web\ErrorAction;
 use source\traits\CommonTrait;
 use yii\base\InvalidRouteException;
+use yii\web\View;
+use yii\web\Response;
 
 /**
  *
@@ -49,8 +51,35 @@ class BaseController extends Controller
     public function init()
     {
         parent::init();
+        
+        $this->getView()->on(BaseView::EVENT_BEGIN_PAGE, [$this,'beginPage']);
+        $this->getView()->on(BaseView::EVENT_BEGIN_BODY, [$this,'beginBody']);
+        $this->getView()->on(BaseView::EVENT_BEFORE_RENDER, [$this,'beforeRender']);
+        $this->getView()->on(BaseView::EVENT_AFTER_RENDER, [$this,'afterRender']);
+        $this->getView()->on(BaseView::EVENT_END_BODY, [$this,'endBody']);
+        $this->getView()->on(BaseView::EVENT_END_PAGE, [$this,'endPage']);
+        $this->getView()->on(BaseView::EVENT_AFTER_PAGE, [$this,'afterPage']);
+        LuLu::getResponse()->on(Response::EVENT_AFTER_SEND, [$this, 'afterResponse']);
     }
 
+    public function jsonResponse($data,$status=null,$message='')
+    {
+        $ret =['status'=>$status,'message'=>$message, 'data'=>$data];
+    
+        $response = \Yii::$app->response;
+        $response->format = Response::FORMAT_RAW;
+        $response->data=json_encode($ret,true);
+        return $response;
+    }
+    public function jsonSucceedResponse($data,$message='')
+    {
+        return $this->jsonResponse($data,'succeed',$message);
+    }
+    public function jsonFailedResponse($data,$message='')
+    {
+        return $this->jsonResponse($data,'failed',$message);
+    }
+    
     /**
 	 * 执行一个action
 	 * @param string $id
@@ -133,5 +162,40 @@ class BaseController extends Controller
         {
             return parent::findLayoutFile($view);
         }
+    }
+    
+    
+    
+    public function beginPage($event)
+    {
+        
+    }
+    public function beginBody($event)
+    {
+        
+    }
+    public function beforeRender($event)
+    {
+    
+    }
+    public function afterRender($event)
+    {
+    
+    }
+    public function endBody($event)
+    {
+        
+    }
+    public function endPage($event)
+    {
+        
+    }
+    public function afterPage($event)
+    {
+    
+    }
+    public function afterResponse($event)
+    {
+    
     }
 }

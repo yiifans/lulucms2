@@ -22,8 +22,19 @@ class BaseApplication extends \yii\web\Application
     public function init()
     {
         parent::init();
+        
+        
     }
-    
+    private function checkInstall()
+    {
+        $file = LuLu::getAlias('@data/install.lock');
+        if (file_exists($file))
+        {
+            return $this->redirect([
+                'stop'
+            ]);
+        }
+    }
     public function loadActiveModules($isAdmin)
     {
         $moduleManager = $this->modularityService;

@@ -1,14 +1,17 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\helpers\StringHelper;
+use yii\helpers\ArrayHelper;
 use source\LuLu;
 use source\libs\Common;
-use yii\helpers\ArrayHelper;
+use source\libs\Constants;
+use source\core\grid\GridView;
 use source\core\widgets\ActiveForm;
 use source\modules\install\models\Setting;
 
-/* @var $this source\core\front\FrontView */
-/* @var $generator yii\gii\generators\module\Generator */
+/* @var $this source\core\back\BackView */
 
 
 ?>

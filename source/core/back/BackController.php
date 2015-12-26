@@ -31,7 +31,7 @@ class BackController extends BaseController
             return $this->showMessage();
         }
         
-        return parent::beforeAction($action);
+        //return parent::beforeAction($action);
         
         if(in_array($action->uniqueID, $this->ingorePermission()))
         {

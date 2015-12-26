@@ -2,7 +2,13 @@
 
 namespace source\modules\install\home;
 
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\helpers\StringHelper;
+use yii\helpers\ArrayHelper;
 use source\LuLu;
+use source\libs\Common;
+use source\libs\Constants;
 
 class HomeModule extends \source\core\modularity\FrontModule
 {
@@ -12,6 +18,7 @@ class HomeModule extends \source\core\modularity\FrontModule
     public function init()
     {
         parent::init();
+        $this->layout='main';
 
         // custom initialization code goes here
     }

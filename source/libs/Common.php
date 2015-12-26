@@ -8,6 +8,13 @@ use source\models\Config;
 use source\LuLu;
 class Common 
 {
+    public static function checkInstall($config)
+    {
+        if(!isset($config['components']['db']['class']))
+        {
+            exit('<script>top.location.href="install.php"</script>');
+        }
+    }
     /**
      * 获取配置
      * @param string $id 配置ID

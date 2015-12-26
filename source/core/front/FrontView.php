@@ -61,4 +61,18 @@ class FrontView extends BaseView
     {
         return DataSource::getFragmentData($fid,$other);
     }
+    
+    
+    public function beginForm($options=[])
+    {
+        $class=\source\core\front\widgets\ActiveForm::className();
+        return $this->beginWidget($class,$options);
+    }
+    public function endForm()
+    {
+        $class=\source\core\front\widgets\ActiveForm::className();
+        return $this->endWidget($class);
+    }
+    
+    
 }

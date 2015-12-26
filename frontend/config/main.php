@@ -1,7 +1,7 @@
 <?php
 $params = array_merge(
-    require(__DIR__ . '/../../source/config/params.php'),
-    require(__DIR__ . '/../../source/config/params-local.php'),
+    require(__DIR__ . '/../../data/config/params.php'),
+    require(__DIR__ . '/../../data/config/params-local.php'),
     require(__DIR__ . '/params.php'),
     require(__DIR__ . '/params-local.php')
 );
@@ -35,6 +35,9 @@ return [
         
     ],
     'modules' => [
+        'install'=>[
+            'class'=>'source\modules\install\home\HomeModule',
+        ],
     ],
     'params' => $params,
 ];

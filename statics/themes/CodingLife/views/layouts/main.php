@@ -15,7 +15,7 @@ use source\LuLu;
     </div>
     <!--end: forFlow -->
 </div>
-<!--end: mainContent Ö÷ÌåÄÚÈÝÈÝÆ÷-->
+<!--end: mainContent ä¸»ä½“å†…å®¹å®¹å™¨-->
                 
                 <?php if(isset($this->blocks['sidebar'])):?>
                 <div class="col-md-4 site-sidebar" role="complementary">
