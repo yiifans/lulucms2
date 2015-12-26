@@ -18,6 +18,7 @@ use source\LuLu;
     </div>
     <!--end: home 自定义的最大容器 -->
 
+    <?php echo $this->getConfigValue('sys_stat');?>
 <?php $this->endBody() ?>
 </body>
 </html>

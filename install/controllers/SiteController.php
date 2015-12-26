@@ -483,9 +483,9 @@ class SiteController extends \source\core\front\FrontController
                 '使用MySql数据库必须支持'
             ],
             [
-                'Mcrypt 扩展模块',
-                false,
-                extension_loaded("mcrypt"),
+                'OpenSSL 扩展模块',
+                true,
+                extension_loaded('openssl'),
                 'Security',
                 '加密和解密方法'
             ],
