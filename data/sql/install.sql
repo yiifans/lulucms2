@@ -80,6 +80,7 @@ INSERT INTO `#@__auth_permission` (`id`, `category`, `name`, `description`, `for
 ('fragment/fragment-category', 'controller', '碎片分类', '', 5, NULL, 'index|首页\r\ncreate|录入\r\nupdate:get|编辑(GET)\r\nupdate:post|编辑(POST)\r\ndelete|删除', 'ControllerRule', 1437841665),
 ('fragment/fragment1-data', 'controller', '代码碎片内容管理', '', 5, NULL, 'index|首页\r\ncreate|录入\r\nupdate:get|编辑(GET)\r\nupdate:post|编辑(POST)\r\ndelete|删除', 'ControllerRule', 1437841615),
 ('fragment/fragment2-data', 'controller', '静态碎片内容管理', '', 5, NULL, 'index|首页\r\ncreate|录入\r\nupdate:get|编辑(GET)\r\nupdate:post|编辑(POST)\r\ndelete|删除', 'ControllerRule', 1437841620),
+('log/default', 'controller', '日志管理', '', 5, NULL, 'index|首页\r\ndelete|删除', 'ControllerRule', 1451203036),
 ('manager_admin', 'system', '管理后台', '', 1, NULL, '', 'BooleanRule', 0),
 ('menu/menu', 'controller', '菜单子项', '', 5, NULL, 'index|首页\r\ncreate|录入\r\nupdate:get|编辑(GET)\r\nupdate:post|编辑(POST)\r\ndelete|删除', 'ControllerRule', 15),
 ('menu/menu-category', 'controller', '菜单管理', '', 5, NULL, 'index|首页\r\ncreate|录入\r\nupdate:get|编辑(GET)\r\nupdate:post|编辑(POST)\r\ndelete|删除', 'ControllerRule', 10),
@@ -126,6 +127,7 @@ INSERT INTO `#@__auth_relation` (`role`, `permission`, `value`) VALUES
 ('administrator', 'fragment/fragment-category', 'index,create,update:get,update:post,delete'),
 ('administrator', 'fragment/fragment1-data', 'index,create,update:get,update:post,delete'),
 ('administrator', 'fragment/fragment2-data', 'index,create,update:get,update:post,delete'),
+('administrator', 'log/default', 'index,delete'),
 ('administrator', 'manager_admin', '1'),
 ('administrator', 'menu/menu', 'index,create,update:get,update:post,delete'),
 ('administrator', 'menu/menu-category', 'index,create,update:get,update:post,delete'),
@@ -278,6 +280,7 @@ INSERT INTO `#@__config` (`id`, `value`) VALUES
 ('sys_icp', 'aa'),
 ('sys_lang', 'zh-CN'),
 ('sys_seo_description', 'lulucms description'),
+('sys_seo_head', ''),
 ('sys_seo_keywords', 'lulucms,yiifans,yii2'),
 ('sys_seo_title', 'LuLu CMS'),
 ('sys_site_about', '<span>LuLuCMS是一款基于php5+mysql5开发的多功能开源的网站内容管理系统。</span><br />\r\n<span>使用高性能的PHP5web应用程序开发框架YII构建，具有操作简单、稳定、安全、高效、跨平台等特点。</span><br />\r\n<span>采用MVC设计模式，模板定制方便灵活，内置小挂工具，方便制作各类功能和效果。</span><br />\r\n<span>LuLuCMS可用于企业建站、个人博客、资讯门户、图片站等各类型站点</span>'),
@@ -616,6 +619,25 @@ INSERT INTO `#@__fragment_category` (`id`, `name`, `type`) VALUES
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `#@__log`
+--
+
+DROP TABLE IF EXISTS `#@__log`;
+CREATE TABLE IF NOT EXISTS `#@__log` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `level` int(11) DEFAULT NULL,
+  `category` varchar(255) DEFAULT NULL,
+  `log_time` double DEFAULT NULL,
+  `prefix` text,
+  `message` text,
+  PRIMARY KEY (`id`),
+  KEY `idx_log_level` (`level`),
+  KEY `idx_log_category` (`category`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `#@__menu`
 --
 
@@ -632,7 +654,7 @@ CREATE TABLE IF NOT EXISTS `#@__menu` (
   `status` tinyint(4) NOT NULL DEFAULT '1',
   `sort_num` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `#@__menu`
@@ -669,7 +691,7 @@ INSERT INTO `#@__menu` (`id`, `parent_id`, `category_id`, `name`, `url`, `target
 (43, 40, 'admin', '权限管理', '/rbac/permission', '_self', '', '', 1, 10),
 (46, 0, 'admin', '内容', '#', '_self', '', 'create_write.png', 1, 60),
 (47, 0, 'admin', '主题', '#', '_self', '', 'images_2.png', 1, 100),
-(48, 0, 'admin', '工具', '#', '_self', '', 'tools.png', 1, 120),
+(48, 0, 'admin', '其它', '#', '_self', '', 'tools.png', 1, 120),
 (49, 0, 'admin', '首页', '#', '_self', '', 'home.png', 1, 0),
 (50, 46, 'admin', '单面管理', '/page/page', '_self', '', '', 1, 1436444895),
 (51, 46, 'admin', '文章管理', '/post/post', '_self', '', '', 1, 40),
@@ -684,9 +706,9 @@ INSERT INTO `#@__menu` (`id`, `parent_id`, `category_id`, `name`, `url`, `target
 (60, 47, 'admin', '主题设置', '/theme/setting', '_self', '', '', 1, 1437875675),
 (61, 48, 'admin', '缓存管理', '/tools/cache', '_self', '', '', 1, 1438095271),
 (62, 48, 'admin', '数据库管理', '/tools/db', '_self', '', '', 1, 1438095412),
-(63, 48, 'admin', 's', 'd', '_self', '', '', 1, 1438095910),
 (64, 49, 'admin', '欢迎中心', '/site/welcome', '_self', '', '', 1, 1450457623),
-(65, 0, 'main', 'Git下载', 'https://github.com/yiifans/lulucms2/', '_blank', '', '', 1, 1450535821);
+(65, 0, 'main', 'Git下载', 'https://github.com/yiifans/lulucms2/', '_blank', '', '', 1, 1450535821),
+(66, 48, 'admin', '日志管理', '/log', '_self', '', '', 1, 1451192119);
 
 -- --------------------------------------------------------
 
@@ -741,6 +763,7 @@ INSERT INTO `#@__modularity` (`id`, `is_system`, `is_content`, `enable_admin`, `
 ('dsf', 0, 0, 1, 0),
 ('fragment', 0, 0, 1, 0),
 ('install', 0, 0, 1, 1),
+('log', 0, 0, 1, 0),
 ('menu', 0, 0, 1, 1),
 ('modularity', 0, 0, 1, 1),
 ('page', 0, 0, 1, 1),
@@ -855,7 +878,7 @@ DROP TABLE IF EXISTS `#@__user`;
 CREATE TABLE IF NOT EXISTS `#@__user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `auth_key` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -874,5 +897,4 @@ INSERT INTO `#@__user` (`id`, `username`, `auth_key`, `password_hash`, `password
 (1, 'admin111', '4PBB6MTWO0ZNhgM8da2jONmIIhapjSlu', '$2y$13$EgcZe15RcT6r3FwunLOg8.suXwPYHwkDHRNf0y4/6IP7Vjca/3Khu', NULL, 'admin111@admin.com', 1, 1422277168, 1437848160, 'administrator'),
 (3, 'test', '', '$2y$13$S8UW2MW4RGO/CJhqWNO7J.jjlyVnMuFBF7HGNjZMCdY5gm/6fpqaC', '2', 'test@admin.com', 1, 1436063932, 1450196715, 'editor'),
 (4, 'demo', '', '$2y$13$VLq8P/ITnShNwHozK3cKhehPTonWOZbO5qQPw2tLZZaE9vbzDG4rW', NULL, 'demo@lulucms.com', 1, 1437224909, 1450513069, 'demo');
-
 

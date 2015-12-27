@@ -134,3 +134,21 @@ form.da-form .da-form-col-12-12
 {
 	width:100%;
 }
+
+/*.da-form .da-form-row {
+padding: 23px 16px;
+border-bottom: 1px solid lightGrey;
+}
+.da-form fieldset {
+margin-bottom: 0;
+border-top: 1px solid lightGrey;
+}*/
+
+.da-form .da-form-row {
+padding: 18px 16px;
+border-bottom: 1px solid #f7f7f7;
+}
+.da-form fieldset {
+margin-bottom: 0;
+border-top: 1px solid #f7f7f7;
+}

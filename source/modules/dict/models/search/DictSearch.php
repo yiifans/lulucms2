@@ -16,9 +16,10 @@ class DictSearch extends Dict
     public function init()
     {
         parent::init();
-        
+        $this->userValidate = false;
         $this->category_id=LuLu::getGetValue('category');
     }
+ 
     /**
      * @inheritdoc
      */

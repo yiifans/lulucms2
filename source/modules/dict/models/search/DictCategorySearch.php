@@ -12,6 +12,12 @@ use source\modules\dict\models\DictCategory;
  */
 class DictCategorySearch extends DictCategory
 {
+    public function init()
+    {
+        parent::init();
+        $this->userValidate = false;
+    }
+    
     /**
      * @inheritdoc
      */

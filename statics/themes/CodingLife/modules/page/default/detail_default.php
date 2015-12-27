@@ -7,7 +7,8 @@ use source\models\Content;
 use yii\helpers\Url;
 use source\libs\Resource;
 use source\helpers\DateTimeHelper;
-/* @var $this yii\web\View */
+
+/* @var $this source\core\front\FrontView */
 /* @var $searchModel app\models\search\ContentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 

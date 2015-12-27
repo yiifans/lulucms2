@@ -12,6 +12,12 @@ use source\modules\menu\models\Menu;
  */
 class MenuSearch extends Menu
 {
+    public function init()
+    {
+        parent::init();
+        $this->userValidate = false;
+    }
+    
     /**
      * @inheritdoc
      */

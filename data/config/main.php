@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('PRC');
+
 $db = require(__DIR__ . '/db.php');
 
 return [
@@ -52,6 +54,16 @@ return [
             ],
         ],
         'db' => $db,
+        'log' => [
+            'targets' => [
+                'file' => [
+                    'class' => 'source\modules\log\DbTarget',
+                    'levels' => ['error', 'warning'],
+                    //'categories' => ['yii\'],
+                  ],
+               
+              ],
+          ],
         'modularityService' => [
             'class' => 'source\modules\modularity\ModularityService',
         ],

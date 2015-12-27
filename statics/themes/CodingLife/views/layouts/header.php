@@ -4,7 +4,7 @@ use source\libs\Resource;
 use source\models\Menu;
 use source\LuLu;
 
-
+/* @var $this source\core\front\FrontView */
 
 $title = $this->getConfigValue('sys_seo_title');
 if(empty($title))
@@ -13,9 +13,11 @@ if(empty($title))
 }
 
 
+$seoHead = $this->getConfigValue('sys_seo_head');
+
 ?>
 <?php $this->beginPage() ?>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
@@ -29,6 +31,7 @@ if(empty($title))
     <script type='text/javascript' src='<?php echo $this->getThemeUrl()?>/js/jquery.min.js?ver=1419744126'></script>
     <script type='text/javascript' src='<?php echo $this->getThemeUrl()?>/js/blog-common.js'></script>
     <?php $this->head() ?>
+    <?php $this->showConfigValue('sys_seo_head');?>
 </head>
 <body>
     <?php $this->beginBody() ?>

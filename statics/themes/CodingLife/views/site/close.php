@@ -4,7 +4,8 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use source\libs\Resource;
 use source\core\widgets\ListView;
-/* @var $this yii\web\View */
+
+/* @var $this source\core\front\FrontView */
 
 ?>
 

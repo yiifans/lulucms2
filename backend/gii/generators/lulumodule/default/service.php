@@ -25,6 +25,6 @@ class <?= $generator->getModuleClassName()?>Service extends \source\core\modular
     
     public function getServiceId()
     {
-        return '<?= $generator->moduleDir?>Serivce';
+        return '<?= $generator->moduleDir?>Service';
     }
 }

@@ -1066,3 +1066,9 @@ float: left;
 margin-right: 15px;
 margin-bottom: 6px;
 }
+
+
+
+#footer_menu{overflow: hidden; height: auto; text-align: center; border-top: 1px solid #138CCA;margin-left: -15px; margin-right: -15px;}
+#footer_menu ul{padding-left: 0;}
+#footer_menu ul li{display: inline; margin: 0 5px;}

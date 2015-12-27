@@ -111,8 +111,13 @@ class BaseActiveRecord extends \yii\db\ActiveRecord
         return $query;
     }
     
+    public $userValidate = true;
     public function beforeValidate()
     {
+        if(!$this->userValidate)
+        {
+            return parent::beforeValidate();
+        }
         if (parent::beforeValidate())
         {
             if ($this->hasAttribute('sort_num'))
@@ -157,7 +162,10 @@ class BaseActiveRecord extends \yii\db\ActiveRecord
         parent::afterValidate();
         if(!$this->hasErrors())
         {
-            $this->finalValidate();
+            if($this->userValidate)
+            {
+                $this->finalValidate();
+            }
         }
         if($this->hasErrors())
         {

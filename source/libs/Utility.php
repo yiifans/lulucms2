@@ -70,5 +70,31 @@ class Utility
         return 'GD or ImageMagick 均未安装';
     }
     
-	
+    public static function getUserAgent()
+    {
+        if(empty($_SERVER['HTTP_USER_AGENT']))
+        {
+            return 'unknown user agent';
+        }
+        return  $_SERVER['HTTP_USER_AGENT'];
+    }
+    
+    public static function getIp()
+    {
+        if(empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+        {
+            if(!empty($_SERVER['REMOTE_ADDR']))
+            {
+                return $_SERVER['REMOTE_ADDR'] ;
+            }
+            else
+            {
+                return  'unknown ip' ;
+            }
+        }
+        else
+        {
+            return $_SERVER['HTTP_X_FORWARDED_FOR'] ;
+        }
+    }
 }

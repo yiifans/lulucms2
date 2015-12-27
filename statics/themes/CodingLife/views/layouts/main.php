@@ -4,6 +4,7 @@ use source\libs\Resource;
 use source\models\Menu;
 use source\LuLu;
 
+/* @var $this source\core\front\FrontView */
 
 ?>
 

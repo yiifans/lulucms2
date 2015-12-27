@@ -15,6 +15,14 @@ class Common
             exit('<script>top.location.href="install.php"</script>');
         }
     }
+    
+    public static function setTimezone()
+    {
+        $timezone = Common::getConfigValue('sys_datetime_timezone');
+         
+        date_default_timezone_set($timezone);
+    }
+    
     /**
      * 获取配置
      * @param string $id 配置ID

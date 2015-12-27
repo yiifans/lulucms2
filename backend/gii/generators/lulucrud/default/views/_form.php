@@ -17,7 +17,12 @@ if (empty($safeAttributes)) {
 echo "<?php\n";
 ?>
 
+use yii\helpers\Inflector;
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\helpers\StringHelper;
+use yii\helpers\ArrayHelper;
+use source\LuLu;
 use source\core\widgets\ActiveForm;
 use source\libs\Common;
 use source\libs\Constants;

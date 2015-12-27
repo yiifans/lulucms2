@@ -43,6 +43,15 @@ trait  CommonTrait
     {
         return Common::getConfigValue($id);
     }
+    
+    public function showConfigValue($id)
+    {
+        $value = self::getConfigValue($id);
+        if(!empty($value))
+        {
+            echo $value;
+        }
+    }
 }
 
 

@@ -12,6 +12,12 @@ use source\modules\taxonomy\models\Taxonomy;
  */
 class TaxonomySearch extends Taxonomy
 {
+    public function init()
+    {
+        parent::init();
+        $this->userValidate = false;
+    }
+    
     /**
      * @inheritdoc
      */
