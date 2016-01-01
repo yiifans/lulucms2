@@ -101,10 +101,17 @@ $form = ActiveForm::begin([
 
         <div class="da-panel collapsible collapsed">
             <div class="da-panel-header">
-                <span class="da-panel-title">
+                <div class="da-panel-title">
                     <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/16/pencil.png" alt="">
                     属性设置
-                </span>
+                    <div>
+                        <ul>
+                            <li>新建</li>
+                            <li>返回</li>
+                        </ul>
+                    </div>
+                </div>
+                
             </div>
 
             <div class="da-panel-content">

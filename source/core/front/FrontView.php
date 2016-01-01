@@ -57,9 +57,9 @@ class FrontView extends BaseView
         echo $this->menuService->getMenuHtml($category, 0);
     }
     
-    public function getFragmentData($fid,$other=[])
+    public function getFragmentData($code,$options=[])
     {
-        return DataSource::getFragmentData($fid,$other);
+        return DataSource::getFragmentData($code,$options);
     }
     
     

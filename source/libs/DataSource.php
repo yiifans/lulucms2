@@ -159,9 +159,9 @@ class DataSource
 		return $query;
 	}
 	
-	public static function getFragmentData($fid, $other = [],$fromCache=true)
+	public static function getFragmentData($code, $options = [],$fromCache=true)
 	{
-	    return Fragment::getData($fid,$other,$fromCache);
+	    return Fragment::getData($code,$options,$fromCache);
 	}
 
 }

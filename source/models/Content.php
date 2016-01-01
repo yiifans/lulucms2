@@ -88,7 +88,7 @@ class Content extends \source\core\base\BaseActiveRecord
         $uploadedFile = Common::uploadFile('Content[thumb]');
         if($uploadedFile['message']==='ok')
         {
-            $this->thumb=$uploadedFile['url'].$uploadedFile['new_name'];
+            $this->thumb=$uploadedFile['full_name'];
         }
        
         return parent::beforeSave($insert);

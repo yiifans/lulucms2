@@ -128,6 +128,7 @@ class Common
 		$uploadedFile->saveAs($save_path . $new_file_name);
 	
 		return ['path' => $save_path, 'url' => $save_url, 'name' => $file_name, 'new_name' => $new_file_name, 'ext' => $file_ext,
+            'full_name'=>$save_url.$new_file_name,
 		    'temp_name'=>$uploadedFile->tempName,'type'=>$uploadedFile->type,'size'=>$uploadedFile->size,'message'=>'ok'];
 	}
 	
