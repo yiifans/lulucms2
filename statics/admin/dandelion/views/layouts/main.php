@@ -89,12 +89,21 @@ use yii\helpers\Url;
         <div class="grid_4">
             <div class="da-panel">
                 <div class="da-panel-header">
-                    <span class="da-panel-title">
+                    <div class="da-panel-title">
                         <img src="<?php echo Resource::getAdminUrl()?>/images/icons/black/16/pencil.png" alt="">
                         <?= $this->title ?>
-                    </span>
 
 
+                        <!--<?php if(($toolbars = LuLu::getViewParam('toolbars'))!==null):?>
+                        <div>
+                            <ul>
+                                <?php foreach ($toolbars as $bar):?>
+                                <li><?php echo $bar;?></li>
+                                <?php endforeach;?>
+                            </ul>
+                        </div>
+                        <?php endif;?>-->
+                    </div>
                 </div>
                 <?php if(($toolbars = LuLu::getViewParam('toolbars'))!==null):?>
                 <div class="da-panel-toolbar top">

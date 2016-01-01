@@ -42,9 +42,7 @@ $columns =  [
 <?php $this->toolbars([
     Html::a('新建权限', ['create','category'=>$categoryId], ['class' => 'btn btn-xs btn-primary mod-site-save'])
 ]);?>
-<style>
-.ui-tabs .ui-tabs-panel{padding:0px;}
-</style>
+
     <div class="da-ex-tabs">
         <ul>
             <!-- <li><a href="#tabs-<?php echo Permission::Category_Basic?>">基本权限</a></li> -->
