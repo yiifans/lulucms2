@@ -4,13 +4,15 @@ namespace source\core\base;
 use source\LuLu;
 use yii\helpers\FileHelper;
 use source\traits\CommonTrait;
+use yii\db\Command;
+use source\libs\Common;
 
 /**
  *
- * @property \source\modules\modularity\ModularityService $modularityService
- * @property \source\modules\rbac\RbacService $rbacService
+ * @property \source\modules\modularity\ModularityService $modularityService 
+ * @property \source\modules\rbac\RbacService $rbacService 
  * @property \source\modules\taxonomy\TaxonomyService $taxonomyService
- * @property \source\modules\menu\MenuService $menuService
+ * @property \source\modules\menu\MenuService $menuService 
  *
  */
 class BaseApplication extends \yii\web\Application
@@ -22,6 +24,7 @@ class BaseApplication extends \yii\web\Application
     public function init()
     {
         parent::init();
+        Common::setTimezone();
     }
     
     public function loadActiveModules($isAdmin)

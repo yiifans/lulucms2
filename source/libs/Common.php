@@ -8,6 +8,21 @@ use source\models\Config;
 use source\LuLu;
 class Common 
 {
+    public static function checkInstall($config)
+    {
+        if(!isset($config['components']['db']['class']))
+        {
+            exit('<script>top.location.href="install.php"</script>');
+        }
+    }
+    
+    public static function setTimezone()
+    {
+        $timezone = Common::getConfigValue('sys_datetime_timezone');
+         
+        date_default_timezone_set($timezone);
+    }
+    
     /**
      * 获取配置
      * @param string $id 配置ID
@@ -113,6 +128,7 @@ class Common
 		$uploadedFile->saveAs($save_path . $new_file_name);
 	
 		return ['path' => $save_path, 'url' => $save_url, 'name' => $file_name, 'new_name' => $new_file_name, 'ext' => $file_ext,
+            'full_name'=>$save_url.$new_file_name,
 		    'temp_name'=>$uploadedFile->tempName,'type'=>$uploadedFile->type,'size'=>$uploadedFile->size,'message'=>'ok'];
 	}
 	

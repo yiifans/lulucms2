@@ -29,16 +29,12 @@ class DateTimeHelper
             {
                 $format = 'Y-m-d H:i:s';
             }
-            date_default_timezone_set('PRC');
             return date($format, $datetime);
         }
         
-        $sys_datetime_timezone = Common::getConfigValue('sys_datetime_timezone');
         $sys_datetime_date_format = Common::getConfigValue('sys_datetime_date_format');
         $sys_datetime_time_format = Common::getConfigValue('sys_datetime_time_format');
         $sys_datetime_pretty_format = Common::getConfigValue('sys_datetime_pretty_format');
-        
-        date_default_timezone_set($sys_datetime_timezone);
         
         $format = $sys_datetime_date_format;
         if($showtime===true || $sys_datetime_time_format!=='0')

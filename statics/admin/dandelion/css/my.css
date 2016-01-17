@@ -1,0 +1,166 @@
+
+
+/* (4) Form Column
+================================================== */
+
+form.da-form .da-form-col-1-12 label, 
+form.da-form .da-form-col-2-12 label, 
+form.da-form .da-form-col-3-12 label, 
+form.da-form .da-form-col-4-12 label, 
+form.da-form .da-form-col-5-12 label, 
+form.da-form .da-form-col-6-12 label, 
+form.da-form .da-form-col-7-12 label, 
+form.da-form .da-form-col-8-12 label，
+form.da-form .da-form-col-9-12 label,
+form.da-form .da-form-col-10-12 label,
+form.da-form .da-form-col-11-12 label,
+form.da-form .da-form-col-12-12 label
+{
+	white-space: nowrap;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+form.da-form .da-form-col-1-12, 
+form.da-form .da-form-col-2-12, 
+form.da-form .da-form-col-3-12, 
+form.da-form .da-form-col-4-12, 
+form.da-form .da-form-col-5-12, 
+form.da-form .da-form-col-6-12, 
+form.da-form .da-form-col-7-12, 
+form.da-form .da-form-col-8-12，
+form.da-form .da-form-col-9-12，
+form.da-form .da-form-col-10-12，
+form.da-form .da-form-col-11-12，
+form.da-form .da-form-col-12-12，
+{
+	float:left;
+	padding:0 1%;
+
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-khtml-box-sizing: border-box;
+}
+
+form.da-form .da-form-col-1-12.alpha, 
+form.da-form .da-form-col-2-12.alpha, 
+form.da-form .da-form-col-3-12.alpha, 
+form.da-form .da-form-col-4-12.alpha, 
+form.da-form .da-form-col-5-12.alpha, 
+form.da-form .da-form-col-6-12.alpha, 
+form.da-form .da-form-col-7-12.alpha, 
+form.da-form .da-form-col-8-12.alpha,
+form.da-form .da-form-col-9-12.alpha,
+form.da-form .da-form-col-10-12.alpha,
+form.da-form .da-form-col-11-12.alpha,
+form.da-form .da-form-col-12-12.alpha
+{
+	padding-left:0;
+	clear:left;
+}
+
+form.da-form .da-form-col-1-12.omega, 
+form.da-form .da-form-col-2-12.omega, 
+form.da-form .da-form-col-3-12.omega, 
+form.da-form .da-form-col-4-12.omega, 
+form.da-form .da-form-col-5-12.omega, 
+form.da-form .da-form-col-6-12.omega, 
+form.da-form .da-form-col-7-12.omega, 
+form.da-form .da-form-col-8-12.omega,
+form.da-form .da-form-col-9-12.omega,
+form.da-form .da-form-col-10-12.omega,
+form.da-form .da-form-col-11-12.omega,
+form.da-form .da-form-col-12-12.omega
+{
+	padding-right:0;
+	clear:right;
+}
+
+form.da-form .da-form-col-1-12
+{
+	width:8.33%;
+}
+
+form.da-form .da-form-col-2-12
+{
+	width:16.67%;
+}
+
+form.da-form .da-form-col-3-12
+{
+	width:25%;
+}
+
+form.da-form .da-form-col-4-12
+{
+	width:33.33%;
+}
+
+form.da-form .da-form-col-5-12
+{
+	width:41.67%;
+}
+
+form.da-form .da-form-col-6-12
+{
+	width:50%;
+}
+
+form.da-form .da-form-col-7-12
+{
+	width:58.33%;
+}
+
+form.da-form .da-form-col-8-12
+{
+	width:66.67%;
+}
+form.da-form .da-form-col-9-12
+{
+	width:75%;
+}
+form.da-form .da-form-col-10-12
+{
+	width:83.33%;
+}
+form.da-form .da-form-col-11-12
+{
+	width:91.67%;
+}
+form.da-form .da-form-col-12-12
+{
+	width:100%;
+}
+
+/*.da-form .da-form-row {
+padding: 23px 16px;
+border-bottom: 1px solid lightGrey;
+}
+.da-form fieldset {
+margin-bottom: 0;
+border-top: 1px solid lightGrey;
+}*/
+
+.da-form .da-form-row {
+padding: 18px 16px;
+border-bottom: 1px solid #f7f7f7;
+}
+.da-form fieldset {
+margin-bottom: 0;
+border-top: 1px solid #f7f7f7;
+}
+
+.ui-tabs .ui-tabs-panel{padding:0px;}
+
+.da-panel-title div {
+float:right;
+}
+    .da-panel-title div ul li {
+        float:left;
+        list-style:none;
+        margin-left:5px;
+        margin-right:5px;
+    }

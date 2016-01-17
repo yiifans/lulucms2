@@ -5,7 +5,7 @@ class SortColumn extends DataColumn
 {
 
     public $attribute = 'sort_num';
-    public $headerOptions=['width'=>'25px'];
+    public $headerOptions=['width'=>'50px'];
 
     public function init()
     {

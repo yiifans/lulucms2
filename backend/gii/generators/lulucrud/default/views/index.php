@@ -1,7 +1,15 @@
 <?php
 
 use yii\helpers\Inflector;
+use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\helpers\StringHelper;
+use yii\helpers\ArrayHelper;
+use source\LuLu;
+use source\core\grid\GridView;
+use source\libs\Common;
+use source\libs\Constants;
+use source\libs\Resource;
 
 /* @var $this yii\web\View */
 /* @var $generator yii\gii\generators\crud\Generator */
@@ -12,11 +20,15 @@ $nameAttribute = $generator->getNameAttribute();
 echo "<?php\n";
 ?>
 
+use yii\helpers\Inflector;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\helpers\StringHelper;
+use yii\helpers\ArrayHelper;
 use source\LuLu;
-use source\libs\Constants;
 use source\core\grid\GridView;
+use source\libs\Common;
+use source\libs\Constants;
 use source\libs\Resource;
 
 
@@ -35,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= "<?= " ?>GridView::widget([
     'dataProvider' => $dataProvider,
     <?= "'columns' => [\n"; ?>
-        ['class' => 'yii\grid\IdColumn'],
+        ['class' => 'source\core\grid\IdColumn'],
 
 <?php
 $count = 0;

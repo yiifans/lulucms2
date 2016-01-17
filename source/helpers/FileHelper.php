@@ -38,7 +38,7 @@ class FileHelper extends \yii\helpers\BaseFileHelper
             $path = self::buildPath($path);
         }
         $path = self::normalizePath($path);
-        LuLu::info($path);
+        //LuLu::info($path);
         return file_exists($path);
     }
 
@@ -77,10 +77,7 @@ class FileHelper extends \yii\helpers\BaseFileHelper
     {
     }
 
-    public static function removeFile($filePath)
-    {
-    }
-
+  
     public static function readFile($filePath)
     {
         if (is_array($filePath))
@@ -109,5 +106,22 @@ class FileHelper extends \yii\helpers\BaseFileHelper
 
     public static function removeDir($dirPath)
     {
+    }
+    
+    public static function canWrite($file)
+    {
+        return is_writable($file);
+    }
+    
+    public static function removeFile($file)
+    {
+        @unlink();
+    }
+   
+    public static function writeArray($file, $array)
+    {
+        $str = var_export($array, TRUE);
+        $str = '<?php return ' . $str . ' ;?>';
+        file_put_contents($file, $str);
     }
 }

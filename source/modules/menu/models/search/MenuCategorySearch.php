@@ -12,6 +12,12 @@ use source\modules\menu\models\MenuCategory;
  */
 class MenuCategorySearch extends MenuCategory
 {
+    public function init()
+    {
+        parent::init();
+        $this->userValidate = false;
+    }
+    
     /**
      * @inheritdoc
      */

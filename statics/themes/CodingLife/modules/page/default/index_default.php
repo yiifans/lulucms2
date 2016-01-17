@@ -8,6 +8,7 @@ use source\core\widgets\LinkPager;
 use source\libs\DataSource;
 
 /* @var $this source\core\front\FrontView */
+
 $this->title = '页面';
 
 

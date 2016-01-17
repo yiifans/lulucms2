@@ -89,6 +89,9 @@ $rbacService = LuLu::getService('rbac');
         function toggleMenu(id) {
             $(".menu-item").hide();
             $("#menu-item-" + id).show();
+
+            $(".da-header-menu-item").removeClass("current");
+            $("#menu-" + id).addClass("current");
         }
     </script>
     <style type="text/css">
@@ -124,9 +127,16 @@ $rbacService = LuLu::getService('rbac');
                                 </div>
                             </div>
                             <div id="da-header-menu">
-                                <?php foreach($this->menuService->getChildren('admin') as $item):?>
-                                <div class="da-header-menu-item" id="menu-<?php echo $item['id']?>" onclick="toggleMenu(<?php echo $item['id']?>);"><?php echo $item['name']?></div>
-                                <?php endforeach;?>
+                                <?php 
+                                $isHome = true;
+                                foreach($this->menuService->getChildren('admin') as $item)
+                                {
+                                          
+                                ?>
+                                <div class="da-header-menu-item <?php if($isHome){ echo 'current';}?>" id="menu-<?php echo $item['id']?>" onclick="toggleMenu(<?php echo $item['id']?>);"><?php echo $item['name']?></div>
+                                <?php 
+                                $isHome = false;
+                                }?>
                             </div>
                             <!-- Header Toolbar Menu -->
                             <!-- Header Toolbar Menu -->

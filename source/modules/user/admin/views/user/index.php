@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use source\core\grid\GridView;
+use source\LuLu;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\search\UserSearch */
@@ -14,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php $this->toolbars([
     Html::a('新建', ['create'], ['class' => 'btn btn-xs btn-primary mod-site-save'])
 ]);?>
+
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

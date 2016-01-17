@@ -23,12 +23,11 @@ $type = LuLu::getGetValue('type');
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => 64]) ?>
+    <?= $form->field($model, 'code')->textInput(['maxlength' => 63]) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => 63]) ?>
     <?= $form->field($model, 'category_id')->dropDownList(FragmentCategory::getCategories($type)) ?>
 
     <?= $form->field($model, 'description')->textarea(['maxlength' => 256]) ?>
-
-    
 
     <?php  $form->defaultButtons() ?>
 

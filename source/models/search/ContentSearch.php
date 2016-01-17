@@ -12,6 +12,12 @@ use source\models\Content;
  */
 class ContentSearch extends Content
 {
+    public function init()
+    {
+        parent::init();
+        $this->userValidate = false;
+    }
+    
     /**
      * @inheritdoc
      */

@@ -36,6 +36,7 @@ $options = TreeHelper::buildTreeOptionsForSelf($taxonomies, $model);
     </div>                 
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => 64]) ?>
+    <?= $form->field($model, 'description')->textInput(['maxlength' => 512]) ?>
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => 512]) ?>
 
@@ -44,10 +45,7 @@ $options = TreeHelper::buildTreeOptionsForSelf($taxonomies, $model);
     
 
     <?= $form->field($model, 'thumb')->fileInput(['class'=>'da-custom-file']) ?>
-    <?= $form->field($model, 'description')->textarea(['maxlength' => 512]) ?>
-
     
-
     <?= $form->field($model, 'sort_num')->textInput() ?>
     
     <?= $form->field($model, 'status')->radioList(Constants::getStatusItems()) ?>

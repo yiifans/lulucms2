@@ -7,9 +7,10 @@ use source\libs\Constants;
 use source\core\grid\GridView;
 use source\modules\dict\models\DictCategory;
 
-/* @var $this yii\web\View */
+/* @var $this source\core\back\BackView */
 /* @var $searchModel source\models\search\DictSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
 
 $category=LuLu::getGetValue('category');
 $categoryModel = DictCategory::findOne(['id'=>$category]);

@@ -9,10 +9,19 @@ use yii\helpers\StringHelper;
 echo "<?php\n";
 ?>
 
+use yii\helpers\Inflector;
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\helpers\StringHelper;
+use yii\helpers\ArrayHelper;
+use source\LuLu;
+use source\core\grid\GridView;
+use source\libs\Common;
+use source\libs\Constants;
+use source\libs\Resource;
 
 
-/* @var $this yii\web\View */
+/* @var $this source\core\back\BackView */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
 
 $this->title = <?= $generator->generateString('Create ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>;

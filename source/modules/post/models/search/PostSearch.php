@@ -12,6 +12,12 @@ use app\Models\Post;
  */
 class PostSearch extends Post
 {
+    public function init()
+    {
+        parent::init();
+        $this->userValidate = false;
+    }
+    
     /**
      * @inheritdoc
      */

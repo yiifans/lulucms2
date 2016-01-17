@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\web\View;
 use components\widgets\InhritLayout;
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 
 $this->title = 'About';
 $this->params['breadcrumbs'][] = $this->title;

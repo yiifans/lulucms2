@@ -79,6 +79,7 @@ KindEditor.plugin('filemanager', function(K) {
 		}
 		var elList = [];
 		function bindEvent(el, result, data, createFunc) {
+		    //absolute,relative
 		    var fileUrl = K.formatUrl(result.current_url + data.filename, 'relative'),
 				dirPath = encodeURIComponent(result.current_dir_path + data.filename + '/');
 			if (data.is_dir) {

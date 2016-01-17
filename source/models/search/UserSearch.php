@@ -12,6 +12,12 @@ use source\models\User;
  */
 class UserSearch extends User
 {
+    public function init()
+    {
+        parent::init();
+        $this->userValidate = false;
+    }
+    
     /**
      * @inheritdoc
      */

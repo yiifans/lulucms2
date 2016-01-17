@@ -6,7 +6,9 @@ use source\libs\Resource;
 use source\models\Taxonomy;
 use source\libs\DataSource;
 use source\core\widgets\LinkPager;
-/* @var $this yii\web\View */
+
+/* @var $this source\core\front\FrontView */
+
 $this->title = '文章';
 
 ?>

@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'source\core\grid\IdColumn'],
+            'code',
             [
                 'attribute'=>'name',
                 'width'=>'250px',    

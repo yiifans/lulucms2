@@ -24,6 +24,7 @@ use source\traits\CommonTrait;
  */
 class BaseView extends View
 {
+    const EVENT_AFTER_PAGE = 'afterPage';
 
     use CommonTrait;
     
@@ -109,6 +110,15 @@ class BaseView extends View
         LoopData::end();
     }
 
+    public function beginWidget($name,$opitons=[])
+    {
+        return $name::begin($opitons);
+    }
+    public function endWidget($name)
+    {
+        $name::end();
+    }
+    
     public function showWidget($name,$params)
     {
         $currentTheme = Resource::checkHomeThemeFile('/misc/'.$name);
@@ -127,5 +137,15 @@ class BaseView extends View
     public function showPager($params)
     {
         $this->showWidget('LinkPager', $params);
+    }
+    
+    public function endPage($ajaxMode = false)
+    {
+        parent::endPage($ajaxMode);
+        $this->afterPage();
+    }
+    public function afterPage()
+    {
+        $this->trigger(self::EVENT_AFTER_PAGE);
     }
 }

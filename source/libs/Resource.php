@@ -156,5 +156,25 @@ class Resource
         }
         return $currentTheme;
     }
+    
+    public static function getInstallPath($path = null)
+    {
+        $ret = '@webroot/statics/install';
+        if ($path != null)
+        {
+            return $ret . $path;
+        }
+        return $ret;
+    }
+    
+    public static function getInstallUrl($url = null)
+    {
+        $ret = LuLu::getAlias('@web/statics/install');
+        if ($url != null)
+        {
+            return $ret . $url;
+        }
+        return $ret;
+    }
 }
 

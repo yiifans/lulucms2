@@ -24,9 +24,17 @@ echo "<?php\n";
 
 namespace <?= StringHelper::dirname(ltrim($generator->searchModelClass, '\\')) ?>;
 
-use Yii;
 use yii\base\Model;
-use yii\data\ActiveDataProvider;
+use yii\helpers\Inflector;
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\helpers\StringHelper;
+use yii\helpers\ArrayHelper;
+use source\LuLu;
+use source\core\data\ActiveDataProvider;
+use source\libs\Common;
+use source\libs\Constants;
+use source\libs\Resource;
 use <?= ltrim($generator->modelClass, '\\') . (isset($modelAlias) ? " as $modelAlias" : "") ?>;
 
 /**
@@ -35,6 +43,12 @@ use <?= ltrim($generator->modelClass, '\\') . (isset($modelAlias) ? " as $modelA
 class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $modelClass ?>
 
 {
+    public function init()
+    {
+        parent::init();
+        $this->userValidate = false;
+    }
+    
     /**
      * @inheritdoc
      */
@@ -67,6 +81,14 @@ class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $m
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+             //'pagination' => [
+             //    'pageSize' => 2,
+             //],
+            'sort'=>[
+                //'defaultOrder' => [
+                //    'created_at' => SORT_DESC
+                //]
+            ],
         ]);
 
         $this->load($params);

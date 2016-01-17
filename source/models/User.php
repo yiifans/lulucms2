@@ -42,8 +42,7 @@ class User extends \source\core\base\BaseActiveRecord  implements \yii\web\Ident
             [['password'], 'required','on'=>['login','create']],
             [['status', 'created_at', 'updated_at'], 'integer'],
             ['email','email'],
-            [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
-            [['auth_key'], 'string', 'max' => 32]
+            [['username', 'password_hash', 'password_reset_token', 'email','auth_key'], 'string', 'max' => 255],
         ];
     }
 
@@ -115,9 +114,13 @@ class User extends \source\core\base\BaseActiveRecord  implements \yii\web\Ident
     	return Yii::$app->security->validatePassword($password, $password_hash);
     }
     
-    public function generatePasswordHash()
+    public function generatePasswordHash($password=null)
     {
-        $this->password_hash = Yii::$app->getSecurity()->generatePasswordHash($this->password);
+        if(empty($password))
+        {
+            $password=$this->password;
+        }
+        $this->password_hash = Yii::$app->getSecurity()->generatePasswordHash($password);
     }
     
     /**
@@ -125,7 +128,7 @@ class User extends \source\core\base\BaseActiveRecord  implements \yii\web\Ident
      */
     public function generateAuthKey()
     {
-        $this->auth_key = Yii::$app->getSecurity()->generateRandomKey();
+        $this->auth_key = Yii::$app->getSecurity()->generateRandomString();
     }
     
     /**
@@ -162,18 +165,26 @@ class User extends \source\core\base\BaseActiveRecord  implements \yii\web\Ident
     	
     	return false;
     }
+    public function beforeValidate()
+    {
+        
+        return parent::beforeValidate();
+    }
     
     public function beforeSave($insert)
     {
-        if($insert)
+        if($this->isNewRecord)
         {
-            //$this->generateAuthKey();
+            $this->generateAuthKey();
             $this->generatePasswordHash();
             //$this->generatePasswordResetToken();
         }
-        if(!$insert && !empty($this->password))
+        else
         {
-            $this->generatePasswordHash();
+            if(!empty($this->password))
+            {
+                $this->generatePasswordHash();
+            }
         }
         return parent::beforeSave($insert);
     }

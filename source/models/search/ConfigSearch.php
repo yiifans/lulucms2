@@ -12,6 +12,12 @@ use source\models\Config;
  */
 class ConfigSearch extends Config
 {
+    public function init()
+    {
+        parent::init();
+        $this->userValidate = false;
+    }
+    
     /**
      * @inheritdoc
      */

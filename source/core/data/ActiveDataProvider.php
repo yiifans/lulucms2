@@ -1,10 +1,9 @@
 <?php
 
-namespace source\core\front;
+namespace source\core\data;
 
 use Yii;
 use app\Models\User;
-use source\models\search\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

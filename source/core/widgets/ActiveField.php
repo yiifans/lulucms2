@@ -14,6 +14,7 @@ class ActiveField extends \yii\widgets\ActiveField implements IBaseWidget
     public $template = "{label}\n<div class=\"da-form-item {size}\">{input}\n{error}</div>\n{hint}";
 
     public $size = 'small';
+    
 
     public $errorOptions = [
         'class' => 'errorMessage'

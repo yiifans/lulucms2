@@ -12,6 +12,12 @@ use source\modules\fragment\models\FragmentCategory;
  */
 class FragmentCategorySearch extends FragmentCategory
 {
+    public function init()
+    {
+        parent::init();
+        $this->userValidate = false;
+    }
+    
     /**
      * @inheritdoc
      */

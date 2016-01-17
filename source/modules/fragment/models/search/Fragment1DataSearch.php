@@ -13,6 +13,11 @@ use source\LuLu;
  */
 class Fragment1DataSearch extends Fragment1Data
 {
+    public function init()
+    {
+        parent::init();
+        $this->userValidate = false;
+    }
     /**
      * @inheritdoc
      */

@@ -25,7 +25,7 @@ use yii\helpers\StringHelper;
         <!-- 截图 -->
         <div class="thumbnail">
             <a href="<?php echo $row['url']?>" rel="bookmark" title="<?php echo $row['title']?>">
-                <img width="128" height="96" src="<?php echo $row['thumb']?>" class="attachment-thumbnail wp-post-image" alt="U9947P827DT20150402093723" /></a>
+                <img width="180" height="160" src="<?php echo $row['thumb']?>" class="attachment-thumbnail wp-post-image" alt="U9947P827DT20150402093723" /></a>
         </div>
         <?php endif;?>
 

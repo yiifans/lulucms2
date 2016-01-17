@@ -158,8 +158,8 @@ div#da-header {
                 float: left;
                 /*border-left:1px solid #161616;
 			border-left:1px solid rgba(0, 0, 0, 0.6);*/
-                border-left: 1px solid #535353;
-                border-left: 1px solid rgba(255, 255, 255, 0.2);
+                /*border-left: 1px solid #535353;
+                border-left: 1px solid rgba(255, 255, 255, 0.2);*/
                 /*border-right: 1px solid #161616;
                 border-right: 1px solid rgba(0, 0, 0, 0.6);*/
                 padding: 0 24px;
@@ -170,8 +170,17 @@ div#da-header {
                 /*padding:13px 0;*/
                 font-weight: bold;
                 position: relative;
+                color: #D8D8D8;
+                font: 18px "Microsoft YaHei","Microsoft JhengHei","ºÚÌå";
+                height: 56px;
+                line-height: 56px;
                 /*font: 12px 'Helvetica Neue', Arial, Helvetica, sans-serif;*/
             }
+                div#da-header #da-header-top #da-header-menu .da-header-menu-item.current {
+                    color: white;
+                    font-weight: bold;
+                    /*background-color: #252525;*/
+                }
         /* (5.1.1) Top Header Toolbar
 		================================================== */
 

@@ -285,7 +285,12 @@ class LuLu extends \Yii
     public static function getIdentity()
     {
         $app = self::getApp();
-        return $app->user->getIdentity();
+        $identity = $app->user->getIdentity();
+        if(empty($identity))
+        {
+            $identity = new \source\models\User();
+        }
+        return $identity;
     }
 
     public static function getIsGuest()

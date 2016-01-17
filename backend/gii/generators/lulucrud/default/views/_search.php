@@ -9,12 +9,20 @@ use yii\helpers\StringHelper;
 echo "<?php\n";
 ?>
 
+use yii\helpers\Inflector;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\helpers\Url;
+use yii\helpers\StringHelper;
+use yii\helpers\ArrayHelper;
+use source\LuLu;
+use source\core\grid\GridView;
+use source\libs\Common;
+use source\libs\Constants;
+use source\libs\Resource;
 
-/* @var $this yii\web\View */
+/* @var $this source\core\back\BackView */
 /* @var $model <?= ltrim($generator->searchModelClass, '\\') ?> */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form source\core\widgets\ActiveForm */
 ?>
 
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-search">

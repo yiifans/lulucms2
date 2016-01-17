@@ -10,6 +10,7 @@ use yii\helpers\ArrayHelper;
  *
  * @property integer $id
  * @property integer $category_id
+ * @property string $code
  * @property string $name
  * @property string $description
  * @property integer $type
@@ -42,9 +43,10 @@ class Fragment extends \source\core\base\BaseActiveRecord
     public function rules()
     {
         return [
-            [['name', 'category_id', 'type'], 'required'],
+            [['name', 'category_id', 'type', 'code'], 'required'],
             [['category_id', 'type'], 'integer'],
-            [['name'], 'string', 'max' => 64],
+            [['name','code'], 'string', 'max' => 63],
+            ['code','unique'],
             [['description'], 'string', 'max' => 128]
         ];
     }
@@ -62,6 +64,7 @@ class Fragment extends \source\core\base\BaseActiveRecord
         $items = [
             'id' => 'ID',
             'category_id'=>'碎片分类',
+            'code' => '标识',
             'name' => '名称',
             'description' => '描述',
             'type' => '类型',
@@ -69,29 +72,20 @@ class Fragment extends \source\core\base\BaseActiveRecord
         return ArrayHelper::getItems($items, $attribute);
     }
     
-    public static function getData($fid, $other = [],$fromCache = true)
+    public static function getData($code, $other = [],$fromCache = true)
     {
-        $cacheKey = self::CachePrefix.$fid;
+        $cacheKey = self::CachePrefix.$code;
         
         $values = $fromCache? LuLu::getCache($cacheKey):false;
         if($values === false)
         {
-            $fragment = self::findOne(['id'=>$fid]);
+            $fragment = self::findOne(['code'=>$code]);
             if($fragment == null)
             {
                 return [];
             }
-        
-            if($fragment->type === 1)
-            {
-                $query = Fragment1Data::find();
-            }
-            else
-            {
-                $query = Fragment2Data::find();
-            }
-        
-            $query->where(['fragment_id' => $fid,'status'=>1]);
+            $query = $fragment->type === 1 ? Fragment1Data::find() : Fragment2Data::find();
+            $query->where(['fragment_id' => $fragment->id,'status'=>1]);
             $query->orderBy('sort_num asc');
             $values = $query->all();
             
@@ -103,9 +97,14 @@ class Fragment extends \source\core\base\BaseActiveRecord
         return array_slice($values, $offset, $limit, true);
     }
    
-    public static function clearCachedData($fid)
+    public static function clearCachedData($id)
     {
-        $cacheKey = self::CachePrefix.$fid;
+        $fragment = self::findOne(['id'=>$id]);
+        if($fragment===null)
+        {
+            return;
+        }
+        $cacheKey = self::CachePrefix.$fragment->code;
         LuLu::deleteCache($cacheKey);
     }
 }

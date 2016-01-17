@@ -16,5 +16,6 @@ class DataColumn extends \yii\grid\DataColumn
         {
             $this->headerOptions['width'] = $this->width;
         }
+        $this->contentOptions=['style'=>'word-wrap: break-word; word-break: break-all;'];
     }
 }
