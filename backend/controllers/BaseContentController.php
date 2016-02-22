@@ -78,7 +78,7 @@ abstract class BaseContentController extends BackController
 
     public function actionDelete($id)
     {
-        $transaction = LuLu::getDB()->getTransaction();
+        $transaction = LuLu::getDB()->beginTransaction();
         try{
             $this->findModel($id)->delete();
             $this->findBodyModel($id)->delete();
