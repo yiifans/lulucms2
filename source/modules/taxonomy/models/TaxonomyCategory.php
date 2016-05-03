@@ -19,7 +19,9 @@ class TaxonomyCategory extends \source\core\base\BaseActiveRecord
      */
     public static function tableName()
     {
-        return 'lulu_taxonomy_category';
+        //return 'lulu_taxonomy_category';
+        return '{{%taxonomy_category}}';
+
     }
 
     /**
