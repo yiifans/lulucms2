@@ -50,7 +50,7 @@ class Utility
     {
         if(extension_loaded('imagick'))
         {
-            $imagick=new Imagick();
+            $imagick=new \Imagick();
             $imagickFormats = $imagick->queryFormats('PNG');
             if(in_array('PNG',$imagickFormats))
             {
