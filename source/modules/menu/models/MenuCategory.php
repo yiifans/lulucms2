@@ -19,7 +19,9 @@ class MenuCategory extends \source\core\base\BaseActiveRecord
      */
     public static function tableName()
     {
-        return 'lulu_menu_category';
+        //return 'lulu_menu_category';
+        return '{{%menu_category}}';
+
     }
 
     /**
