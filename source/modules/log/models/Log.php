@@ -22,7 +22,7 @@ class Log extends \source\core\base\BaseActiveRecord
      */
     public static function tableName()
     {
-        return 'lulu_log';
+        return '{{%log}}';
     }
 
     /**
